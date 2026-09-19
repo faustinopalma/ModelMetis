@@ -1,0 +1,284 @@
+{
+  "partition": "test",
+  "runs": [
+    {
+      "model": "laion/clap-htsat-unfused@8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a",
+      "partition": "test",
+      "samples": 16,
+      "accepted": 16,
+      "failed": 0,
+      "coverage": 1.0,
+      "accuracy": 0.0625,
+      "macro_f1": 0.015625,
+      "per_class_recall": {
+        "bowed_rotor": 0.0,
+        "broken_rotor_bars": 0.5,
+        "faulty_bearing": 0.0,
+        "healthy": 0.0,
+        "rotor_misalignment": 0.0,
+        "rotor_unbalance": 0.0,
+        "stator_winding": 0.0,
+        "voltage_unbalance": 0.0
+      },
+      "confusion_labels": [
+        "bowed_rotor",
+        "broken_rotor_bars",
+        "faulty_bearing",
+        "healthy",
+        "rotor_misalignment",
+        "rotor_unbalance",
+        "stator_winding",
+        "voltage_unbalance",
+        "__abstained__"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "inference_seconds_total": 23.815775599970948,
+      "inference_seconds_median": 1.3186250499929884,
+      "inference_seconds_p95": 3.1271165999969526,
+      "load_seconds": 30.629080200000317,
+      "prediction_sha256": "c0651592c5b7d7006ad8cf4b922fe04ceea0dce8cc6bd173f993f36509a6943a",
+      "variant": "acoustic",
+      "prompt_sha256": "25cbe12f81776e52478ca635df90b1ab88b8b6c867b9a428d318e01017022446"
+    },
+    {
+      "model": "logistic-regression-spectral-v1",
+      "partition": "test",
+      "samples": 16,
+      "accepted": 16,
+      "failed": 0,
+      "coverage": 1.0,
+      "accuracy": 0.125,
+      "macro_f1": 0.05952380952380952,
+      "per_class_recall": {
+        "bowed_rotor": 0.5,
+        "broken_rotor_bars": 0.5,
+        "faulty_bearing": 0.0,
+        "healthy": 0.0,
+        "rotor_misalignment": 0.0,
+        "rotor_unbalance": 0.0,
+        "stator_winding": 0.0,
+        "voltage_unbalance": 0.0
+      },
+      "confusion_labels": [
+        "bowed_rotor",
+        "broken_rotor_bars",
+        "faulty_bearing",
+        "healthy",
+        "rotor_misalignment",
+        "rotor_unbalance",
+        "stator_winding",
+        "voltage_unbalance",
+        "__abstained__"
+      ],
+      "confusion_matrix": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "inference_seconds_total": 1.146898399994825,
+      "inference_seconds_median": 0.08019079999940004,
+      "inference_seconds_p95": 0.10096317500210716,
+      "load_seconds": 0.02907039999263361,
+      "prediction_sha256": "8ad79cc5de2391b11a44dbb1701a42d3819e6ff658588b34574ac88262f2fed5",
+      "variant": null,
+      "prompt_sha256": null
+    }
+  ],
+  "promotion": "not_authorized"
+}

@@ -1,0 +1,13 @@
+{
+  "jin-one-shot-v1": {
+    "taxonomy": {
+      "healthy": "A normally operating electric motor without the listed defects.",
+      "magnet_fracture": "An electric motor with a fractured magnet.",
+      "excess_hall_adhesive": "An electric motor with excessive Hall adhesive on its stator.",
+      "tight_bearing": "An electric motor whose bearing is too tight."
+    },
+    "instructions": "Listen to the unlabeled microphone recording of an operating electric motor. Compare its audible periodicity, roughness, tonal structure and transients with the supplied labeled audio examples. Recording direction can differ between examples and query. Choose the best-supported category, or null if the sound does not distinguish the alternatives. Do not infer a specific defect merely because a motor sounds noisy. Separate observed sounds from uncertain mechanical causes. Do not invent inspection results, sensor values, motor identity or operating speed. No dataset lookup, filename inference or assumptions about class frequencies. Confidence is uncalibrated.",
+    "response_contract": "Return only one JSON object with exactly label (one taxonomy key or null), score (finite number between zero and one), and observations (array of brief strings distinguishing audible facts from uncertain causes). No markdown fences or extra fields.",
+    "message_layout": "system-instructions-v1"
+  }
+}

@@ -1,0 +1,1644 @@
+{
+  "schema": 1,
+  "promotion": "not_authorized",
+  "ledgers": [
+    {
+      "campaign": "ottawa-v2",
+      "requests": 37,
+      "accounted_usd": 4.262140000000001
+    },
+    {
+      "campaign": "ottawa-v3",
+      "requests": 32,
+      "accounted_usd": 0.17431749999999813
+    },
+    {
+      "campaign": "mechanic-v1",
+      "requests": 40,
+      "accounted_usd": 0.17497499999999988
+    },
+    {
+      "campaign": "mechanic-one-shot-v1",
+      "requests": 8,
+      "accounted_usd": 0.1398900000000003
+    }
+  ],
+  "runs": [
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "direct-v1",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 16,
+      "prompt_sha256": "46a2b1de8a685cb35bf77511e249ca5b05b6c46b908862369528e9cf59f8bc13",
+      "manifest_sha256": "7684406a5d6846b7ae6df0a494af4b385520fbb5383dafd220f2e31434b3c9f6",
+      "source_sha256": {
+        "simulation.py": "f8ada64b62283fe8afcb2925b85daf9bf7702291c1b4c9973031ed7ea883973a",
+        "audio_teacher.py": "b6d926e53b6c0ddffde79576196a395351369f652d0f0996eb24bd93ea86498b"
+      },
+      "started_utc": "2026-09-18T19:19:57.530569+00:00",
+      "ended_utc": "2026-09-18T19:21:16.675551+00:00",
+      "seconds": 79.14718840000569,
+      "artifact": "ottawa-v2/dev-direct/predictions.json",
+      "artifact_sha256": "6437fd7a6890e1e6133f4999483c2f39dadeaba6b6837a0e70650f21f55369ff",
+      "attempted": 16,
+      "statuses": {
+        "accepted": 16
+      },
+      "accepted_class_counts": {
+        "faulty_bearing": 15,
+        "rotor_unbalance": 1
+      },
+      "http_responses": 16,
+      "known_usage_requests": 16,
+      "known_estimated_usd": 0.07119
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "evidence-v1",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 16,
+      "prompt_sha256": "f6f04b0ba95b24b19ebb517c18804282b544a06666c838e7ffc69523bc5d3173",
+      "manifest_sha256": "7684406a5d6846b7ae6df0a494af4b385520fbb5383dafd220f2e31434b3c9f6",
+      "source_sha256": {
+        "simulation.py": "f8ada64b62283fe8afcb2925b85daf9bf7702291c1b4c9973031ed7ea883973a",
+        "audio_teacher.py": "b6d926e53b6c0ddffde79576196a395351369f652d0f0996eb24bd93ea86498b"
+      },
+      "started_utc": "2026-09-18T19:21:31.596210+00:00",
+      "ended_utc": "2026-09-18T19:22:47.228439+00:00",
+      "seconds": 75.63740899998811,
+      "artifact": "ottawa-v2/dev-evidence/predictions.json",
+      "artifact_sha256": "5338b5a54e3402ef1915a9a70bb863a017231e104c4ad6272a32a3208730e7ec",
+      "attempted": 16,
+      "statuses": {
+        "abstained": 11,
+        "accepted": 5
+      },
+      "accepted_class_counts": {
+        "faulty_bearing": 5
+      },
+      "http_responses": 16,
+      "known_usage_requests": 16,
+      "known_estimated_usd": 0.0743
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "synthetic-capability-v1",
+      "partition": "development",
+      "complete": false,
+      "termination": "teacher_failure",
+      "expected_count": 2,
+      "prompt_sha256": "51aa7335fcfb76ded726ffd4338da842ad24ad5e552780bf27a5858f2f2f4b51",
+      "manifest_sha256": "0380da2e7eccd7d3bfbc17d6c028daa5d35c0d601e6c2feca81d6b79fcbc833d",
+      "source_sha256": {
+        "simulation.py": "68a23d7d22f6c63ddd6eb1d34e1b81b478f2f098c4d694d3ef53a48b84af1e60",
+        "audio_teacher.py": "d232a1149a95fe12e07cd2d170f8705584faa31bec3f7c560d082911b190a106"
+      },
+      "started_utc": "2026-09-18T19:12:08.070879+00:00",
+      "ended_utc": "2026-09-18T19:12:14.430986+00:00",
+      "seconds": 6.359735900012311,
+      "artifact": "ottawa-v2/probe-01/predictions.json",
+      "artifact_sha256": "e9f7fcb4574ff819d8622ad7f66d539ab374971a610729abf73138224d092690",
+      "attempted": 1,
+      "statuses": {
+        "failed": 1
+      },
+      "accepted_class_counts": {},
+      "http_responses": 0,
+      "known_usage_requests": 0,
+      "known_estimated_usd": 0
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "synthetic-capability-v1",
+      "partition": "development",
+      "complete": false,
+      "termination": "teacher_failure",
+      "expected_count": 2,
+      "prompt_sha256": "51aa7335fcfb76ded726ffd4338da842ad24ad5e552780bf27a5858f2f2f4b51",
+      "manifest_sha256": "0380da2e7eccd7d3bfbc17d6c028daa5d35c0d601e6c2feca81d6b79fcbc833d",
+      "source_sha256": {
+        "simulation.py": "64c87f52d57f882dcc2c80bfcb92ba97466508989a9b2fa1e8977d689e55543d",
+        "audio_teacher.py": "d232a1149a95fe12e07cd2d170f8705584faa31bec3f7c560d082911b190a106"
+      },
+      "started_utc": "2026-09-18T19:13:44.294666+00:00",
+      "ended_utc": "2026-09-18T19:13:52.223148+00:00",
+      "seconds": 7.928180000017164,
+      "artifact": "ottawa-v2/probe-02/predictions.json",
+      "artifact_sha256": "a54c3af6e767896e10b957e024c86e1804aa57ff8798c3de26fe0d45c7156b99",
+      "attempted": 1,
+      "statuses": {
+        "failed": 1
+      },
+      "accepted_class_counts": {},
+      "http_responses": 1,
+      "known_usage_requests": 1,
+      "known_estimated_usd": 0.0016675
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "synthetic-capability-v1",
+      "partition": "development",
+      "complete": false,
+      "termination": "teacher_failure",
+      "expected_count": 2,
+      "prompt_sha256": "51aa7335fcfb76ded726ffd4338da842ad24ad5e552780bf27a5858f2f2f4b51",
+      "manifest_sha256": "0380da2e7eccd7d3bfbc17d6c028daa5d35c0d601e6c2feca81d6b79fcbc833d",
+      "source_sha256": {
+        "simulation.py": "64c87f52d57f882dcc2c80bfcb92ba97466508989a9b2fa1e8977d689e55543d",
+        "audio_teacher.py": "8cd0c0b91a629a78ce915e636f6370da0052216ac7c9e195bb7665eae4ffe417"
+      },
+      "started_utc": "2026-09-18T19:14:43.021485+00:00",
+      "ended_utc": "2026-09-18T19:14:50.584578+00:00",
+      "seconds": 7.562609899992822,
+      "artifact": "ottawa-v2/probe-03/predictions.json",
+      "artifact_sha256": "5b204be9cc5c45d167dee805fc6ad22ac1852088fc217c6de1df98755af273d0",
+      "attempted": 1,
+      "statuses": {
+        "failed": 1
+      },
+      "accepted_class_counts": {},
+      "http_responses": 1,
+      "known_usage_requests": 1,
+      "known_estimated_usd": 0.0016675
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "synthetic-capability-v1",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 2,
+      "prompt_sha256": "51aa7335fcfb76ded726ffd4338da842ad24ad5e552780bf27a5858f2f2f4b51",
+      "manifest_sha256": "0380da2e7eccd7d3bfbc17d6c028daa5d35c0d601e6c2feca81d6b79fcbc833d",
+      "source_sha256": {
+        "simulation.py": "f8ada64b62283fe8afcb2925b85daf9bf7702291c1b4c9973031ed7ea883973a",
+        "audio_teacher.py": "b6d926e53b6c0ddffde79576196a395351369f652d0f0996eb24bd93ea86498b"
+      },
+      "started_utc": "2026-09-18T19:17:08.767413+00:00",
+      "ended_utc": "2026-09-18T19:17:24.208952+00:00",
+      "seconds": 15.438146100001177,
+      "artifact": "ottawa-v2/probe-04/predictions.json",
+      "artifact_sha256": "978f58688492b93bea50f773390c79e913d3c33ed37511f6fa1dd0c41fc70df8",
+      "attempted": 2,
+      "statuses": {
+        "accepted": 2
+      },
+      "accepted_class_counts": {
+        "steady_tone": 1,
+        "broadband_noise": 1
+      },
+      "http_responses": 2,
+      "known_usage_requests": 2,
+      "known_estimated_usd": 0.0033150000000000002
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "context-v2",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 16,
+      "prompt_sha256": "92b0bec8ba22a31cc194b6d5bc1a10c7efec7282abbd1d2e1f1e5ac34d802b2a",
+      "manifest_sha256": "7684406a5d6846b7ae6df0a494af4b385520fbb5383dafd220f2e31434b3c9f6",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "cd485116f9c873c219a8aff2233b3b0b3885dddd1cdfa9e6d7fac975ac541479",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:26:17.668451+00:00",
+      "ended_utc": "2026-09-18T19:27:37.430663+00:00",
+      "seconds": 79.76347380000516,
+      "artifact": "ottawa-v3/dev-context/predictions.json",
+      "artifact_sha256": "d0e2125f497d26691ab0497845bcd558b3a82419b4914f5e86c448d969ff4d38",
+      "attempted": 16,
+      "statuses": {
+        "accepted": 16
+      },
+      "accepted_class_counts": {
+        "healthy": 16
+      },
+      "http_responses": 16,
+      "known_usage_requests": 16,
+      "known_estimated_usd": 0.07887
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "spectral-v2",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 16,
+      "prompt_sha256": "3ab6a0c4ddec143519e8dace8120de3a7ee6dc8a79f9d0366443bf4c81c3ae0e",
+      "manifest_sha256": "7684406a5d6846b7ae6df0a494af4b385520fbb5383dafd220f2e31434b3c9f6",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "cd485116f9c873c219a8aff2233b3b0b3885dddd1cdfa9e6d7fac975ac541479",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:27:54.541924+00:00",
+      "ended_utc": "2026-09-18T19:29:25.170526+00:00",
+      "seconds": 90.62969599998905,
+      "artifact": "ottawa-v3/dev-spectral/predictions.json",
+      "artifact_sha256": "63997dc1f769a4d640cc8d51f6c45f59043836092832a61de178dde9dadda31f",
+      "attempted": 16,
+      "statuses": {
+        "accepted": 16
+      },
+      "accepted_class_counts": {
+        "healthy": 16
+      },
+      "http_responses": 16,
+      "known_usage_requests": 16,
+      "known_estimated_usd": 0.0954475
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-differential-v2",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 8,
+      "prompt_sha256": "12d13d13fe5c5454c0023d92fad70645371134c33761ecec288073bab5574c5d",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "2a910e486927257368d99cccb9e8fcf335651274f9acb6d7c05c7ddef575dc88",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:41:53.430562+00:00",
+      "ended_utc": "2026-09-18T19:42:34.446436+00:00",
+      "seconds": 41.01666289998684,
+      "artifact": "mechanic-v1/mechanic-differential-v2/predictions.json",
+      "artifact_sha256": "9ba4dcf908cca48f7169fb7402385fc780421c95ec1319581f85fc25eca0c1a5",
+      "attempted": 8,
+      "statuses": {
+        "accepted": 8
+      },
+      "accepted_class_counts": {
+        "background_noise": 7,
+        "normal": 1
+      },
+      "http_responses": 8,
+      "known_usage_requests": 8,
+      "known_estimated_usd": 0.03585
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-direct-v1",
+      "partition": "development",
+      "complete": false,
+      "termination": "teacher_failure",
+      "expected_count": 8,
+      "prompt_sha256": "3d307077de5ef38a70d6c11fa5d7183bc62338e92ca1bf3f0242b1f4084d210b",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "cd485116f9c873c219a8aff2233b3b0b3885dddd1cdfa9e6d7fac975ac541479",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:35:53.632438+00:00",
+      "ended_utc": "2026-09-18T19:36:04.526218+00:00",
+      "seconds": 10.892793600010918,
+      "artifact": "mechanic-v1/mechanic-direct-v1/predictions.json",
+      "artifact_sha256": "1ef4aace95165795a05b521073466551f32d42025c20fdd5dfa7482f15c4ce6a",
+      "attempted": 1,
+      "statuses": {
+        "failed": 1
+      },
+      "accepted_class_counts": {},
+      "http_responses": 1,
+      "known_usage_requests": 1,
+      "known_estimated_usd": 0.00424
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-direct-v1",
+      "partition": "development",
+      "complete": false,
+      "termination": "teacher_failure",
+      "expected_count": 8,
+      "prompt_sha256": "3d307077de5ef38a70d6c11fa5d7183bc62338e92ca1bf3f0242b1f4084d210b",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "4d8e6c6084c0fcb693fd31fadc2a00afa2c8a83fe66143026c332d9458d82fe4",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:38:49.997698+00:00",
+      "ended_utc": "2026-09-18T19:39:13.648028+00:00",
+      "seconds": 23.636135999986436,
+      "artifact": "mechanic-v1/mechanic-direct-v1-attempt2/predictions.json",
+      "artifact_sha256": "7d1b50767de7d9a43de0daf22a2a2831e966918b52c6ca5cf694c42e8cddced3",
+      "attempted": 4,
+      "statuses": {
+        "accepted": 3,
+        "failed": 1
+      },
+      "accepted_class_counts": {
+        "normal": 2,
+        "air_leak": 1
+      },
+      "http_responses": 4,
+      "known_usage_requests": 4,
+      "known_estimated_usd": 0.01716
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-direct-v2",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 8,
+      "prompt_sha256": "0da9e03965fae44c6d28af980655a80a6626a8b7fc8c137ed05196a4fcb4d750",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "2a910e486927257368d99cccb9e8fcf335651274f9acb6d7c05c7ddef575dc88",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:41:06.748687+00:00",
+      "ended_utc": "2026-09-18T19:41:50.461498+00:00",
+      "seconds": 43.71256600000197,
+      "artifact": "mechanic-v1/mechanic-direct-v2/predictions.json",
+      "artifact_sha256": "9a2ce53df61f2564dacaf8c2699d0c7c749654454d105a860c43cc5740b97e2a",
+      "attempted": 8,
+      "statuses": {
+        "accepted": 8
+      },
+      "accepted_class_counts": {
+        "normal": 7,
+        "air_leak": 1
+      },
+      "http_responses": 8,
+      "known_usage_requests": 8,
+      "known_estimated_usd": 0.035570000000000004
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-normalized-v3",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 8,
+      "prompt_sha256": "5d5597723692f1a849083ea6443a77e91a0f539af912676569023b99a301aff1",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "70302b889f04511d86a6d567073ee539f5fcabc709127dd38c983ad9e8025274",
+        "audio_models.py": "1c4b6ec7e424d62e3c334b0e4f7832fa8197a53e03f7d9d6b9e001e8e4ff248c"
+      },
+      "started_utc": "2026-09-18T19:49:01.661712+00:00",
+      "ended_utc": "2026-09-18T19:49:41.953012+00:00",
+      "seconds": 40.291060599993216,
+      "artifact": "mechanic-v1/mechanic-normalized-v3/predictions.json",
+      "artifact_sha256": "3b29a34f9cf7e121d55399c0735112019a52cfe45c1803b1f9bc8ec491be0950",
+      "attempted": 8,
+      "statuses": {
+        "accepted": 8
+      },
+      "accepted_class_counts": {
+        "normal": 7,
+        "background_noise": 1
+      },
+      "http_responses": 8,
+      "known_usage_requests": 8,
+      "known_estimated_usd": 0.03631
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-direct-v2",
+      "partition": "train",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 11,
+      "prompt_sha256": "0da9e03965fae44c6d28af980655a80a6626a8b7fc8c137ed05196a4fcb4d750",
+      "manifest_sha256": "cb55fcd84243d3225b9fb1a5cc628bced9018caba3025a7fc5eb686860e2d436",
+      "source_sha256": {
+        "simulation.py": "40bf0199abf71767367b3ebde32b6bf2db7df87727e680e232a4c1041318bbe6",
+        "audio_teacher.py": "2a910e486927257368d99cccb9e8fcf335651274f9acb6d7c05c7ddef575dc88",
+        "audio_models.py": "675682e2741baad1d96113f4992d205232fdd05e065e1c4b15703c7fdf666f84"
+      },
+      "started_utc": "2026-09-18T19:42:54.087368+00:00",
+      "ended_utc": "2026-09-18T19:43:45.869190+00:00",
+      "seconds": 51.782306799985236,
+      "artifact": "mechanic-v1/train-silver/predictions.json",
+      "artifact_sha256": "f138ffe02be2c1c40d2812c36196c155b9c5010e90787871ca50b9e3e8ef2134",
+      "attempted": 11,
+      "statuses": {
+        "accepted": 11
+      },
+      "accepted_class_counts": {
+        "normal": 10,
+        "background_noise": 1
+      },
+      "http_responses": 11,
+      "known_usage_requests": 11,
+      "known_estimated_usd": 0.045845
+    },
+    {
+      "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+      "variant": "mechanic-one-shot-v1",
+      "partition": "development",
+      "complete": true,
+      "termination": "completed",
+      "expected_count": 8,
+      "prompt_sha256": "f0c0d4f7e8325615193de658ba9080d5768d1f1eff0c28286a16ef65b135ce39",
+      "manifest_sha256": "144bea29820193263a2650f8e57af1fa4462c2725edaa4e2fbde5ced457b83e3",
+      "source_sha256": {
+        "simulation.py": "28e4b46bc9d092b6858f499b5353511c142aa094a521abb705682e0312bd2c89",
+        "audio_teacher.py": "e73085ed9e9bad8bb8ce54a3f6cb35d2f5d9b00c9f067772cee2890e6abedc73",
+        "audio_models.py": "1c4b6ec7e424d62e3c334b0e4f7832fa8197a53e03f7d9d6b9e001e8e4ff248c"
+      },
+      "started_utc": "2026-09-18T20:11:46.376609+00:00",
+      "ended_utc": "2026-09-18T20:13:13.059601+00:00",
+      "seconds": 86.68291169998702,
+      "support": {
+        "manifest_sha256": "c75273727bdaa61753412b208df4c014b7c20ad099ecebbb34c1bd70e317beff",
+        "support_set_sha256": "a87e4cfd4513fec7077046db5d701baa40ae3340653da0f933d6beeaad406459",
+        "example_count": 4,
+        "shots_per_class": 1,
+        "label_source": "simulated_human_from_publisher"
+      },
+      "artifact": "mechanic-one-shot-v1/dev-one-shot/predictions.json",
+      "artifact_sha256": "7dcf37c0ba6ceb1943770fb23b6258b4a8ed0c16538c93f879bdab20604cf114",
+      "attempted": 8,
+      "statuses": {
+        "accepted": 8
+      },
+      "accepted_class_counts": {
+        "normal": 5,
+        "air_leak": 3
+      },
+      "http_responses": 8,
+      "known_usage_requests": 8,
+      "known_estimated_usd": 0.13989000000000001
+    }
+  ],
+  "evaluations": [
+    {
+      "artifact": "ottawa-v2/development.json",
+      "selected_variant": "evidence-v1",
+      "runs": [
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "direct-v1",
+          "partition": "development",
+          "samples": 16,
+          "accepted": 16,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.125,
+          "macro_f1": 0.029411764705882353,
+          "per_class_recall": {
+            "bowed_rotor": 0.0,
+            "broken_rotor_bars": 0.0,
+            "faulty_bearing": 1.0,
+            "healthy": 0.0,
+            "rotor_misalignment": 0.0,
+            "rotor_unbalance": 0.0,
+            "stator_winding": 0.0,
+            "voltage_unbalance": 0.0
+          },
+          "confusion_labels": [
+            "bowed_rotor",
+            "broken_rotor_bars",
+            "faulty_bearing",
+            "healthy",
+            "rotor_misalignment",
+            "rotor_unbalance",
+            "stator_winding",
+            "voltage_unbalance",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 72.3839363999723,
+          "inference_seconds_median": 4.507282099992153,
+          "inference_seconds_p95": 4.8657402000098955,
+          "load_seconds": 6.233614700002363,
+          "prediction_sha256": "6437fd7a6890e1e6133f4999483c2f39dadeaba6b6837a0e70650f21f55369ff",
+          "prompt_sha256": "46a2b1de8a685cb35bf77511e249ca5b05b6c46b908862369528e9cf59f8bc13"
+        },
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "evidence-v1",
+          "partition": "development",
+          "samples": 16,
+          "accepted": 5,
+          "failed": 0,
+          "coverage": 0.3125,
+          "accuracy": 0.0625,
+          "macro_f1": 0.03571428571428571,
+          "per_class_recall": {
+            "bowed_rotor": 0.0,
+            "broken_rotor_bars": 0.0,
+            "faulty_bearing": 0.5,
+            "healthy": 0.0,
+            "rotor_misalignment": 0.0,
+            "rotor_unbalance": 0.0,
+            "stator_winding": 0.0,
+            "voltage_unbalance": 0.0
+          },
+          "confusion_labels": [
+            "bowed_rotor",
+            "broken_rotor_bars",
+            "faulty_bearing",
+            "healthy",
+            "rotor_misalignment",
+            "rotor_unbalance",
+            "stator_winding",
+            "voltage_unbalance",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 68.61811590005527,
+          "inference_seconds_median": 4.309966300002998,
+          "inference_seconds_p95": 4.62548674998834,
+          "load_seconds": 6.501343899988569,
+          "prediction_sha256": "5338b5a54e3402ef1915a9a70bb863a017231e104c4ad6272a32a3208730e7ec",
+          "prompt_sha256": "f6f04b0ba95b24b19ebb517c18804282b544a06666c838e7ffc69523bc5d3173"
+        }
+      ]
+    },
+    {
+      "artifact": "ottawa-v3/development.json",
+      "selected_variant": "context-v2",
+      "runs": [
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "context-v2",
+          "partition": "development",
+          "samples": 16,
+          "accepted": 16,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.125,
+          "macro_f1": 0.027777777777777776,
+          "per_class_recall": {
+            "bowed_rotor": 0.0,
+            "broken_rotor_bars": 0.0,
+            "faulty_bearing": 0.0,
+            "healthy": 1.0,
+            "rotor_misalignment": 0.0,
+            "rotor_unbalance": 0.0,
+            "stator_winding": 0.0,
+            "voltage_unbalance": 0.0
+          },
+          "confusion_labels": [
+            "bowed_rotor",
+            "broken_rotor_bars",
+            "faulty_bearing",
+            "healthy",
+            "rotor_misalignment",
+            "rotor_unbalance",
+            "stator_winding",
+            "voltage_unbalance",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 74.03735739996773,
+          "inference_seconds_median": 4.585703699995065,
+          "inference_seconds_p95": 5.425449225003831,
+          "load_seconds": 5.417234099993948,
+          "prediction_sha256": "d0e2125f497d26691ab0497845bcd558b3a82419b4914f5e86c448d969ff4d38",
+          "prompt_sha256": "92b0bec8ba22a31cc194b6d5bc1a10c7efec7282abbd1d2e1f1e5ac34d802b2a"
+        },
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "spectral-v2",
+          "partition": "development",
+          "samples": 16,
+          "accepted": 16,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.125,
+          "macro_f1": 0.027777777777777776,
+          "per_class_recall": {
+            "bowed_rotor": 0.0,
+            "broken_rotor_bars": 0.0,
+            "faulty_bearing": 0.0,
+            "healthy": 1.0,
+            "rotor_misalignment": 0.0,
+            "rotor_unbalance": 0.0,
+            "stator_winding": 0.0,
+            "voltage_unbalance": 0.0
+          },
+          "confusion_labels": [
+            "bowed_rotor",
+            "broken_rotor_bars",
+            "faulty_bearing",
+            "healthy",
+            "rotor_misalignment",
+            "rotor_unbalance",
+            "stator_winding",
+            "voltage_unbalance",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 83.33080079994397,
+          "inference_seconds_median": 4.849698599995463,
+          "inference_seconds_p95": 6.832114874996478,
+          "load_seconds": 6.908017599984305,
+          "prediction_sha256": "63997dc1f769a4d640cc8d51f6c45f59043836092832a61de178dde9dadda31f",
+          "prompt_sha256": "3ab6a0c4ddec143519e8dace8120de3a7ee6dc8a79f9d0366443bf4c81c3ae0e"
+        }
+      ]
+    },
+    {
+      "artifact": "mechanic-v1/development-v2.json",
+      "selected_variant": "mechanic-direct-v2",
+      "runs": [
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-direct-v2",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.375,
+          "macro_f1": 0.2777777777777778,
+          "per_class_recall": {
+            "air_leak": 0.5,
+            "background_noise": 0.0,
+            "normal": 1.0,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 35.29810760001419,
+          "inference_seconds_median": 4.3250542000023415,
+          "inference_seconds_p95": 4.876930739993986,
+          "load_seconds": 8.260595900006592,
+          "prediction_sha256": "9a2ce53df61f2564dacaf8c2699d0c7c749654454d105a860c43cc5740b97e2a",
+          "prompt_sha256": "0da9e03965fae44c6d28af980655a80a6626a8b7fc8c137ed05196a4fcb4d750"
+        },
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-differential-v2",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.25,
+          "macro_f1": 0.1111111111111111,
+          "per_class_recall": {
+            "air_leak": 0.0,
+            "background_noise": 1.0,
+            "normal": 0.0,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 34.72974190002424,
+          "inference_seconds_median": 4.3172537999926135,
+          "inference_seconds_p95": 4.629087165015517,
+          "load_seconds": 6.119379599986132,
+          "prediction_sha256": "9ba4dcf908cca48f7169fb7402385fc780421c95ec1319581f85fc25eca0c1a5",
+          "prompt_sha256": "12d13d13fe5c5454c0023d92fad70645371134c33761ecec288073bab5574c5d"
+        }
+      ]
+    },
+    {
+      "artifact": "mechanic-v1/development-v3.json",
+      "selected_variant": "mechanic-direct-v2",
+      "runs": [
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-direct-v2",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.375,
+          "macro_f1": 0.2777777777777778,
+          "per_class_recall": {
+            "air_leak": 0.5,
+            "background_noise": 0.0,
+            "normal": 1.0,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 35.29810760001419,
+          "inference_seconds_median": 4.3250542000023415,
+          "inference_seconds_p95": 4.876930739993986,
+          "load_seconds": 8.260595900006592,
+          "prediction_sha256": "9a2ce53df61f2564dacaf8c2699d0c7c749654454d105a860c43cc5740b97e2a",
+          "prompt_sha256": "0da9e03965fae44c6d28af980655a80a6626a8b7fc8c137ed05196a4fcb4d750"
+        },
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-normalized-v3",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.375,
+          "macro_f1": 0.2777777777777778,
+          "per_class_recall": {
+            "air_leak": 0.0,
+            "background_noise": 0.5,
+            "normal": 1.0,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 34.27056140001514,
+          "inference_seconds_median": 4.255903199999011,
+          "inference_seconds_p95": 4.569254815010936,
+          "load_seconds": 5.875330599985318,
+          "prediction_sha256": "3b29a34f9cf7e121d55399c0735112019a52cfe45c1803b1f9bc8ec491be0950",
+          "prompt_sha256": "5d5597723692f1a849083ea6443a77e91a0f539af912676569023b99a301aff1"
+        }
+      ]
+    },
+    {
+      "artifact": "mechanic-one-shot-v1/development.json",
+      "selected_variant": "mechanic-direct-v2",
+      "runs": [
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-direct-v2",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.375,
+          "macro_f1": 0.2777777777777778,
+          "per_class_recall": {
+            "air_leak": 0.5,
+            "background_noise": 0.0,
+            "normal": 1.0,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 35.29810760001419,
+          "inference_seconds_median": 4.3250542000023415,
+          "inference_seconds_p95": 4.876930739993986,
+          "load_seconds": 8.260595900006592,
+          "prediction_sha256": "9a2ce53df61f2564dacaf8c2699d0c7c749654454d105a860c43cc5740b97e2a",
+          "prompt_sha256": "0da9e03965fae44c6d28af980655a80a6626a8b7fc8c137ed05196a4fcb4d750"
+        },
+        {
+          "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+          "variant": "mechanic-one-shot-v1",
+          "partition": "development",
+          "samples": 8,
+          "accepted": 8,
+          "failed": 0,
+          "coverage": 1.0,
+          "accuracy": 0.375,
+          "macro_f1": 0.27142857142857146,
+          "per_class_recall": {
+            "air_leak": 1.0,
+            "background_noise": 0.0,
+            "normal": 0.5,
+            "oil_cap_open": 0.0
+          },
+          "confusion_labels": [
+            "air_leak",
+            "background_noise",
+            "normal",
+            "oil_cap_open",
+            "__abstained__"
+          ],
+          "confusion_matrix": [
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "inference_seconds_total": 74.2857710000535,
+          "inference_seconds_median": 9.525606000010157,
+          "inference_seconds_p95": 10.406083725011557,
+          "load_seconds": 12.161455800000113,
+          "prediction_sha256": "7dcf37c0ba6ceb1943770fb23b6258b4a8ed0c16538c93f879bdab20604cf114",
+          "prompt_sha256": "f0c0d4f7e8325615193de658ba9080d5768d1f1eff0c28286a16ef65b135ce39"
+        }
+      ]
+    }
+  ],
+  "learning_curves": [
+    {
+      "artifact": "mechanic-v1/learning-curve/curve.json",
+      "complete": true,
+      "snapshots": [
+        {
+          "observed_examples": 4,
+          "status": "blocked",
+          "seconds": 2.7926652999885846,
+          "class_counts": {},
+          "metrics": {}
+        },
+        {
+          "observed_examples": 8,
+          "status": "evaluated",
+          "seconds": 7.98432769998908,
+          "class_counts": {
+            "normal": 7,
+            "background_noise": 1
+          },
+          "metrics": {
+            "model": "logistic-regression-spectral-v1",
+            "variant": null,
+            "partition": "development",
+            "samples": 8,
+            "accepted": 8,
+            "failed": 0,
+            "coverage": 1.0,
+            "accuracy": 0.25,
+            "macro_f1": 0.1111111111111111,
+            "per_class_recall": {
+              "air_leak": 0.0,
+              "background_noise": 0.0,
+              "normal": 1.0,
+              "oil_cap_open": 0.0
+            },
+            "confusion_labels": [
+              "air_leak",
+              "background_noise",
+              "normal",
+              "oil_cap_open",
+              "__abstained__"
+            ],
+            "confusion_matrix": [
+              [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "inference_seconds_total": 0.3072943000588566,
+            "inference_seconds_median": 0.034567500013508834,
+            "inference_seconds_p95": 0.05469965001248055,
+            "load_seconds": 0.010701099992729723,
+            "prediction_sha256": "d1f74c7ca21104d6e5ea82d12630c7893c96a1a8aff1c3ef2828963e1d890b96",
+            "prompt_sha256": null
+          }
+        },
+        {
+          "observed_examples": 11,
+          "status": "evaluated",
+          "seconds": 8.87051470001461,
+          "class_counts": {
+            "normal": 10,
+            "background_noise": 1
+          },
+          "metrics": {
+            "model": "logistic-regression-spectral-v1",
+            "variant": null,
+            "partition": "development",
+            "samples": 8,
+            "accepted": 8,
+            "failed": 0,
+            "coverage": 1.0,
+            "accuracy": 0.125,
+            "macro_f1": 0.0625,
+            "per_class_recall": {
+              "air_leak": 0.0,
+              "background_noise": 0.0,
+              "normal": 0.5,
+              "oil_cap_open": 0.0
+            },
+            "confusion_labels": [
+              "air_leak",
+              "background_noise",
+              "normal",
+              "oil_cap_open",
+              "__abstained__"
+            ],
+            "confusion_matrix": [
+              [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "inference_seconds_total": 0.3174305999709759,
+            "inference_seconds_median": 0.035917050001444295,
+            "inference_seconds_p95": 0.05802222999045624,
+            "load_seconds": 0.007798100006766617,
+            "prediction_sha256": "37ac13640fda947616180ef0b07650d30ffa2506e5a038fce1c11b2368c3d1dc",
+            "prompt_sha256": null
+          }
+        }
+      ]
+    }
+  ],
+  "reserved_requests": 117,
+  "http_responses": 116,
+  "known_usage_requests": 116,
+  "known_estimated_usd": 0.6413225,
+  "conservative_accounted_usd": 4.7513225,
+  "cost_note": "List-price token estimates, not invoices; unknown usage retains reservations"
+}

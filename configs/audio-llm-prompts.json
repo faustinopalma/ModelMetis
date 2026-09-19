@@ -1,0 +1,30 @@
+{
+  "direct-v1": {
+    "taxonomy": {
+      "healthy": "Motor operating without the listed faults.",
+      "rotor_unbalance": "An uneven distribution of mass about the rotor axis.",
+      "rotor_misalignment": "Misalignment between the motor shaft and the coupled shaft.",
+      "stator_winding": "An electrical fault in the stator winding.",
+      "voltage_unbalance": "Unbalanced supply voltages across the motor phases.",
+      "bowed_rotor": "A bent rotor or shaft.",
+      "broken_rotor_bars": "Broken conductor bars in the rotor.",
+      "faulty_bearing": "Damage to a rolling-element bearing."
+    },
+    "instructions": "Listen to this ten-second industrial motor recording. Select the single most plausible condition from the supplied taxonomy using only what is audible. This is provisional labeling, not a verified diagnosis. The recording may contain changing speed, load, background noise or overlapping signatures. Do not infer the condition from an assumed dataset, class frequency or expected answer. An unfamiliar or ambiguous sound is not evidence that the motor is healthy. Return null if you cannot support a distinction between the plausible categories. Report a self-assessed score between zero and one; it will not be treated as calibrated probability.",
+    "response_contract": "Return only one JSON object with exactly three fields: label (one taxonomy key or null), score (a finite number from 0 to 1), and observations (an array of brief descriptions of audible features). Do not use markdown fences. Describe sound, not an imagined inspection, measurement or source label."
+  },
+  "evidence-v1": {
+    "taxonomy": {
+      "healthy": "Motor operating without the listed faults.",
+      "rotor_unbalance": "An uneven distribution of mass about the rotor axis.",
+      "rotor_misalignment": "Misalignment between the motor shaft and the coupled shaft.",
+      "stator_winding": "An electrical fault in the stator winding.",
+      "voltage_unbalance": "Unbalanced supply voltages across the motor phases.",
+      "bowed_rotor": "A bent rotor or shaft.",
+      "broken_rotor_bars": "Broken conductor bars in the rotor.",
+      "faulty_bearing": "Damage to a rolling-element bearing."
+    },
+    "instructions": "Analyze only the supplied ten-second motor audio. First identify directly audible features: steady tones, broadband noise, impacts, periodic amplitude changes, roughness and changes over time. Do not invent exact frequencies, shaft speed, load or electrical measurements. Then assess whether those features discriminate any condition in the taxonomy. Periodicity alone does not distinguish imbalance, misalignment and a bent shaft. Hum alone does not establish winding damage or supply imbalance. Speed and load changes may alter sound without indicating a fault. Absence of a recognizable defect is not proof of healthy operation. Choose a category only when there is positive audible evidence favoring it over plausible alternatives; otherwise abstain with null. Use general engineering knowledge, but do not identify or retrieve a benchmark recording or use assumptions about class balance. The score is a self-assessment, not calibrated probability. Keep observations restricted to audible evidence; no hidden diagnostic facts are available.",
+    "response_contract": "Return only one JSON object with exactly three fields: label (one taxonomy key or null), score (a finite number from 0 to 1), and observations (an array of brief descriptions of audible features). Do not use markdown fences. Describe sound, not an imagined inspection, measurement or source label."
+  }
+}

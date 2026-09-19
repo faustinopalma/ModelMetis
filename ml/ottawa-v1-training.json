@@ -1,0 +1,20 @@
+{
+  "model": "logistic-regression-spectral-v1",
+  "label_source": "teacher",
+  "examples": 96,
+  "class_counts": {
+    "healthy": 48,
+    "bowed_rotor": 9,
+    "broken_rotor_bars": 39
+  },
+  "teacher": "laion/clap-htsat-unfused@8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a",
+  "prompt_sha256": "25cbe12f81776e52478ca635df90b1ab88b8b6c867b9a428d318e01017022446",
+  "train_manifest_sha256": "d8bfc2c0921180c5e8d5b38098e889055ebefc5145319be66855faa45929aa89",
+  "silver_sha256": "2b3f2fe46c60eb0f8d2a1b334a9b997e58f5068fa37f83b7b1771fadefb4930b",
+  "seconds": 13.07464040000923,
+  "parameters": {
+    "features": 48,
+    "max_iter": 1000,
+    "random_state": 17
+  }
+}

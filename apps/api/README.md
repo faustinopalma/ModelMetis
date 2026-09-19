@@ -1,7 +1,56 @@
 # API
 
-Directory reserved for the FastAPI application; code is not implemented yet. It exposes inference, feedback, request lookup, and authorized administrative operations. It reuses the [core](../../src/modelmetis/README.md) and [contracts](../../contracts/README.md), without containing training logic or hardcoded routing thresholds.
+The local FastAPI entry point is [modelmetis.api](../../src/modelmetis/api.py). It implements audio review only; there is no teacher invocation, specialist inference, training, or public authentication. Application code lives in the existing Python `src` layout, not in a second package under this directory.
 
-First increment: health/readiness checks, a testable authentication abstraction, image acquisition, `teacher_only` inference with a simulated provider, an idempotent ledger, and append-only feedback. Separate application status from the label: abstention is not a successful classification.
+## Local Setup
 
-HTTP endpoints and the choice between an immediate response and an asynchronous request will be defined in the v1 contract based on the SLO. Limit uploads and use references to authorized assets; no arbitrary URL downloads or secrets in the browser.
+Prerequisites: Python 3.12 or later. Create a virtual environment in the repository root and install the project with its `dev` extra. The September 17 validation used Python 3.13.13 ARM64 and an editable installation. Confirm that `modelmetis.api.__file__` points to this repository's source before starting the server; a regular installation can retain stale code while tests import newer sources.
+
+```powershell
+$timer = [Diagnostics.Stopwatch]::StartNew(); try { python -m venv .venv } finally { Write-Output "elapsed: $([math]::Round($timer.Elapsed.TotalSeconds, 1))s" }
+$timer = [Diagnostics.Stopwatch]::StartNew(); try { .\.venv\Scripts\python.exe -m pip install -e '.[dev]' } finally { Write-Output "elapsed: $([math]::Round($timer.Elapsed.TotalSeconds, 1))s" }
+$timer = [Diagnostics.Stopwatch]::StartNew(); try { .\.venv\Scripts\python.exe -m modelmetis.server } finally { Write-Output "elapsed: $([math]::Round($timer.Elapsed.TotalSeconds, 1))s" }
+```
+
+Run from the repository root. The server uses `http://127.0.0.1:8000`; API documentation is at `/docs`. [The environment sample](../../.env.sample) lists defaults. Environment files are not loaded automatically; set actual environment variables in the process when overriding defaults. `PORT` changes the backend port and must also be set in the console process so its proxy uses the same port. `MODELMETIS_DATA_DIR` is resolved relative to the working directory unless absolute. Storage is initialized at application startup, never during module import.
+
+## API Contract
+
+| Method | Route | Behavior |
+| --- | --- | --- |
+| GET | `/healthz` | Anonymous local liveness, direct `200 {"status":"ok"}` |
+| GET | `/readyz` | SQLite schema/write transaction and audio-directory write/read probe; `503` on dependency failure |
+| GET | `/api/status` | Actual database counts, upload limits, review taxonomy, and unavailable model states |
+| GET | `/api/recordings` | `search`, `label`, `limit` (1-100, default 50), `offset`; returns `items` and filtered `total` |
+| POST | `/api/recordings?synthetic=true` | Raw WAV body; explicit boolean provenance declaration; `201` with opaque sample name, metadata, and revision 0; do not send the source filename |
+| GET | `/api/recordings/{id}` | Recording metadata and current human review; `404` when absent |
+| GET | `/api/recordings/{id}/audio` | Canonical PCM WAV without ancillary metadata, with HTTP range support for playback |
+| PUT | `/api/recordings/{id}/review` | JSON `expected_revision`, `human_label`, optional `note`; returns the committed recording |
+
+Upload content types: `audio/wav`, `audio/wave`, `audio/x-wav`, or `application/octet-stream`. Multipart and compressed request bodies are not supported. The body is consumed incrementally with an actual byte limit, a 30-second receive timeout, and Content-Length consistency checks. Default limit: 16 MiB, configurable up to 32 MiB. Supported audio: standard RIFF/WAVE, integer PCM (format 1), 8/16/24/32-bit, mono/stereo, 8,000-192,000 Hz, nonempty complete sample frames, maximum 120 seconds. Floating-point PCM, WAVE extensible, RF64, unknown-length streaming headers, inconsistent chunks, and truncated audio are rejected. Browser playback support may be narrower than ingestion support.
+
+`synthetic` is user-declared provenance, not an authenticity check. No demo records or dataset assets are seeded. `healthy`, `fault_unspecified`, and `needs_review` are human-review labels only. A null human label means unreviewed; `needs_review` is an explicitly saved label, counted as reviewed. Publisher reference labels are absent from the operational contract and predictions remain `not_available`; reference labels cannot be supplied through the review mutation.
+
+New uploads are decoded and reconstructed as standard PCM WAV without RIFF metadata, preserving PCM samples, channels, rate, and bit depth. The original filename is neither needed nor stored; `sample-{opaque_id}.wav` is generated by the server and is the searchable display name. The stored SHA-256 covers the canonical audio, not the publisher's original container. A restricted future importer must record source checksums and reversible mappings outside this operational store. `RecordingRepository.model_input` produces only an opaque ID and sanitized WAV bytes, excluding human labels, notes, source names, and any legacy reference column. Separate process permissions and held-out dataset controls are still required before connecting models.
+
+Review example:
+
+```json
+{"expected_revision": 0, "human_label": "needs_review", "note": "Acquisition context needs confirmation."}
+```
+
+Successful mutations increment the revision and atomically append a history entry in SQLite. A stale revision returns `409` with `error.current_revision`; callers must reload and make a new decision, not retry automatically. Validation errors return `422`, oversized bodies `413`, unsupported media `415`, unavailable storage `503`. Errors have the shape `{"error":{"code":"...","message":"..."}}`; revision conflicts also include `current_revision`. Operational errors do not return storage paths or raw database exceptions.
+
+## Local-Only Boundary
+
+The launcher binds to `127.0.0.1` and disables proxy-header trust. Requests require a loopback peer and loopback Host; forwarding headers and unapproved browser origins are rejected. CORS allows only explicit configured local origins, without credentials. There is no bearer-token bypass and no client-controlled reviewer identity. This is a single-user development tool, not an authentication mechanism: do not expose it through tunnels, public reverse proxies, port forwarding, or a publicly bound Vite server. The local process, OS account, and data directory are trusted.
+
+Any `MODELMETIS_ENV` value other than `local` aborts startup. No configuration value currently unlocks production. Before cloud hosting, implement server-verified authentication/authorization, actor attribution, a private storage adapter, quotas, retention, and an approved deployment configuration. No deployment files are included here.
+
+Gunicorn is included as a Linux-only runtime dependency. After authentication is implemented and the guard is deliberately replaced, the intended Linux process shape is `gunicorn -w 4 -k uvicorn.workers.UvicornWorker modelmetis.api:app --bind 0.0.0.0:$PORT`. This is not a working or approved public deployment command for the current starter. The supplied launcher is the local development path; Windows uses Uvicorn directly.
+
+## Storage Limits
+
+Metadata, revision history, and canonical audio persist under `data/local`. Generated IDs determine all storage paths and display names. Audio is written and flushed before the metadata transaction commits, and normal failures remove pending files. SQLite WAL serializes writers with a five-second busy timeout; a busy database returns `503`, not a false revision conflict. A process crash between file creation and metadata commit can leave an unreferenced audio file; there is no cross-filesystem/database atomic transaction or automatic orphan deletion. Back up metadata and audio consistently. No disk quota, retention task, schema migration system, or tamper-proof audit is implemented yet.
+
+See [tests](../../tests/README.md) and the [working context](../../docs/CONTEXT.md) for validation evidence and remaining controls.

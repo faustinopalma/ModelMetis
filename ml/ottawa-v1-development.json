@@ -1,0 +1,287 @@
+{
+  "partition": "development",
+  "runs": [
+    {
+      "model": "laion/clap-htsat-unfused@8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a",
+      "partition": "development",
+      "samples": 16,
+      "accepted": 16,
+      "failed": 0,
+      "coverage": 1.0,
+      "accuracy": 0.125,
+      "macro_f1": 0.027777777777777776,
+      "per_class_recall": {
+        "bowed_rotor": 1.0,
+        "broken_rotor_bars": 0.0,
+        "faulty_bearing": 0.0,
+        "healthy": 0.0,
+        "rotor_misalignment": 0.0,
+        "rotor_unbalance": 0.0,
+        "stator_winding": 0.0,
+        "voltage_unbalance": 0.0
+      },
+      "confusion_labels": [
+        "bowed_rotor",
+        "broken_rotor_bars",
+        "faulty_bearing",
+        "healthy",
+        "rotor_misalignment",
+        "rotor_unbalance",
+        "stator_winding",
+        "voltage_unbalance",
+        "__abstained__"
+      ],
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "inference_seconds_total": 7.14452989998972,
+      "inference_seconds_median": 0.41660440000123344,
+      "inference_seconds_p95": 0.6048353999940446,
+      "load_seconds": 19.963947999989614,
+      "prediction_sha256": "3fd51ec8a29e90ef050708560280299fef769762a4ee0341c2d155040ca94289",
+      "variant": "literal",
+      "prompt_sha256": "748c588769dedaadf08f65c7d632d0d2a9632be1fea1a419edfc291bb172cb7a"
+    },
+    {
+      "model": "laion/clap-htsat-unfused@8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a",
+      "partition": "development",
+      "samples": 16,
+      "accepted": 16,
+      "failed": 0,
+      "coverage": 1.0,
+      "accuracy": 0.125,
+      "macro_f1": 0.038461538461538464,
+      "per_class_recall": {
+        "bowed_rotor": 0.0,
+        "broken_rotor_bars": 0.0,
+        "faulty_bearing": 0.0,
+        "healthy": 1.0,
+        "rotor_misalignment": 0.0,
+        "rotor_unbalance": 0.0,
+        "stator_winding": 0.0,
+        "voltage_unbalance": 0.0
+      },
+      "confusion_labels": [
+        "bowed_rotor",
+        "broken_rotor_bars",
+        "faulty_bearing",
+        "healthy",
+        "rotor_misalignment",
+        "rotor_unbalance",
+        "stator_winding",
+        "voltage_unbalance",
+        "__abstained__"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "inference_seconds_total": 9.01671200004057,
+      "inference_seconds_median": 0.4370595000073081,
+      "inference_seconds_p95": 1.1100241750100395,
+      "load_seconds": 13.125739299997804,
+      "prediction_sha256": "d8fd707eacdb9256abd4b7b67d2581f4ae851e27a774957cd099d7a0ef0fbe71",
+      "variant": "acoustic",
+      "prompt_sha256": "25cbe12f81776e52478ca635df90b1ab88b8b6c867b9a428d318e01017022446"
+    }
+  ],
+  "promotion": "not_authorized",
+  "selected_variant": "acoustic",
+  "selected_prompt_sha256": "25cbe12f81776e52478ca635df90b1ab88b8b6c867b9a428d318e01017022446",
+  "selection_rule": "Highest development macro-F1; input order breaks ties"
+}

@@ -1,0 +1,546 @@
+{
+  "schema": 1,
+  "protocol": "EXP-007-jin-directions-v1",
+  "promotion": "not_authorized",
+  "audit": {
+    "protocol": "EXP-007-jin-directions-v1",
+    "doi": "10.17632/9dpmkgpncw.1",
+    "license": "CC-BY-4.0",
+    "attribution": "Linjie Jin, Mendeley Data, 2025",
+    "source_url": "https://data.mendeley.com/datasets/9dpmkgpncw/1",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_catalog_sha256": "11967863b53136f1dfecdfb1a368bd56506e07d1596dca0359bae54419bfecca",
+    "importer_sha256": "4547ed272fe9c29081b0b90b1f8ea92fc21a63c52a8e74e0bb65d9f6f265682b",
+    "original_recordings": 12,
+    "source_groups_per_partition": 4,
+    "source_seconds": 7218.740907029478,
+    "partitions": {
+      "train": 120,
+      "development": 12,
+      "support": 4
+    },
+    "support": {
+      "manifest_sha256": "cc94ac642bb8de97c250a5e63c678c0847318d2875ea5a3692537499ecbbfda4",
+      "support_set_sha256": "fd61dca5b1dd025ca53882fb743bef40ea5c9148b6eab901b3305375fcfbafcb",
+      "example_count": 4,
+      "shots_per_class": 1,
+      "label_source": "simulated_human_from_publisher"
+    },
+    "taxonomy": [
+      "excess_hall_adhesive",
+      "healthy",
+      "magnet_fracture",
+      "tight_bearing"
+    ],
+    "split": "Front: support at 0s; left: train at 0..290s by 10s; right: dev at 0/120/240s",
+    "preprocessing": "10s mono 44.1kHz; DC removal, per-window peak 0.95, PCM16, metadata removed",
+    "limitations": [
+      "Same motor population; unit/session independence not documented",
+      "Four held-out source recordings, not twelve independent queries",
+      "Direction transfer only; no independent-machine or final evaluation",
+      "Source healthy PCM16 versus fault FLOAT encoding is a potential confound",
+      "Local file separation, not an OS-enforced security boundary"
+    ]
+  },
+  "controls": [
+    {
+      "regime": "one-shot",
+      "method": "welch-logistic",
+      "training": {
+        "kind": "publisher-supervised-diagnostic-control-not-operational-silver",
+        "method": "welch-logistic",
+        "training_samples": 4,
+        "training_groups": 4,
+        "provenance": {
+          "manifest_sha256": "cc94ac642bb8de97c250a5e63c678c0847318d2875ea5a3692537499ecbbfda4",
+          "support_set_sha256": "fd61dca5b1dd025ca53882fb743bef40ea5c9148b6eab901b3305375fcfbafcb",
+          "example_count": 4,
+          "shots_per_class": 1,
+          "label_source": "simulated_human_from_publisher"
+        },
+        "elapsed_seconds": 0.9208245000045281,
+        "artifact_sha256": "b008ee2733dfb8c6195d4a9bdca5c8c62857da85587d9f7512999f9f1ea529c6",
+        "script_sha256": "dbbb940f940f89974dd01f9ce9e43b09c9cc7bcf7de792d24b954d56a9b294df",
+        "parameters": {
+          "C": 1.0,
+          "class_weight": null,
+          "dual": false,
+          "fit_intercept": true,
+          "intercept_scaling": 1,
+          "l1_ratio": 0.0,
+          "max_iter": 1000,
+          "n_jobs": null,
+          "penalty": "deprecated",
+          "random_state": 17,
+          "solver": "lbfgs",
+          "tol": 0.0001,
+          "verbose": 0,
+          "warm_start": false
+        },
+        "promotion": "not_authorized"
+      },
+      "metrics": {
+        "model": "publisher-supervised-diagnostic-control-not-operational-silver:welch-logistic",
+        "partition": "development",
+        "samples": 12,
+        "accepted": 12,
+        "failed": 0,
+        "coverage": 1.0,
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "per_class_recall": {
+          "excess_hall_adhesive": 1.0,
+          "healthy": 1.0,
+          "magnet_fracture": 1.0,
+          "tight_bearing": 1.0
+        },
+        "confusion_labels": [
+          "excess_hall_adhesive",
+          "healthy",
+          "magnet_fracture",
+          "tight_bearing",
+          "__abstained__"
+        ],
+        "confusion_matrix": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "inference_seconds_total": 0.5011877999641001,
+        "inference_seconds_median": 0.0393645499862032,
+        "inference_seconds_p95": 0.056480629993893666,
+        "load_seconds": 0.0,
+        "prediction_sha256": "3ad03af30976841d403ff6623dd695e9a22cfc4a85c42d5404401d4511e7cd56",
+        "variant": null,
+        "prompt_sha256": null
+      },
+      "local_artifact": "artifacts/jin-directions-v1/controls/one-shot-welch-logistic"
+    },
+    {
+      "regime": "full",
+      "method": "welch-logistic",
+      "training": {
+        "kind": "publisher-supervised-diagnostic-control-not-operational-silver",
+        "method": "welch-logistic",
+        "training_samples": 120,
+        "training_groups": 4,
+        "provenance": {
+          "reference_sha256": "66f98875476d2c1bb4172f3a0f4e9587f01523809a6a60012a85a9cffb3561de"
+        },
+        "elapsed_seconds": 14.053593899996486,
+        "artifact_sha256": "8191a437eedd83a770ebb98d3248d002ea3d71de0686dee34a3ffe542a4cd5b8",
+        "script_sha256": "dbbb940f940f89974dd01f9ce9e43b09c9cc7bcf7de792d24b954d56a9b294df",
+        "parameters": {
+          "C": 1.0,
+          "class_weight": null,
+          "dual": false,
+          "fit_intercept": true,
+          "intercept_scaling": 1,
+          "l1_ratio": 0.0,
+          "max_iter": 1000,
+          "n_jobs": null,
+          "penalty": "deprecated",
+          "random_state": 17,
+          "solver": "lbfgs",
+          "tol": 0.0001,
+          "verbose": 0,
+          "warm_start": false
+        },
+        "promotion": "not_authorized"
+      },
+      "metrics": {
+        "model": "publisher-supervised-diagnostic-control-not-operational-silver:welch-logistic",
+        "partition": "development",
+        "samples": 12,
+        "accepted": 12,
+        "failed": 0,
+        "coverage": 1.0,
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "per_class_recall": {
+          "excess_hall_adhesive": 1.0,
+          "healthy": 1.0,
+          "magnet_fracture": 1.0,
+          "tight_bearing": 1.0
+        },
+        "confusion_labels": [
+          "excess_hall_adhesive",
+          "healthy",
+          "magnet_fracture",
+          "tight_bearing",
+          "__abstained__"
+        ],
+        "confusion_matrix": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "inference_seconds_total": 0.561109300062526,
+        "inference_seconds_median": 0.042603350011631846,
+        "inference_seconds_p95": 0.07652255501307079,
+        "load_seconds": 0.0,
+        "prediction_sha256": "54948ac1f90dbf0e70168f93f1f0f9d1fc62d8af6cb95bcd8ff21f92699ef178",
+        "variant": null,
+        "prompt_sha256": null
+      },
+      "local_artifact": "artifacts/jin-directions-v1/controls/full-welch-logistic"
+    },
+    {
+      "regime": "one-shot",
+      "method": "mfcc-svm",
+      "training": {
+        "kind": "publisher-supervised-diagnostic-control-not-operational-silver",
+        "method": "mfcc-svm",
+        "training_samples": 4,
+        "training_groups": 4,
+        "provenance": {
+          "manifest_sha256": "cc94ac642bb8de97c250a5e63c678c0847318d2875ea5a3692537499ecbbfda4",
+          "support_set_sha256": "fd61dca5b1dd025ca53882fb743bef40ea5c9148b6eab901b3305375fcfbafcb",
+          "example_count": 4,
+          "shots_per_class": 1,
+          "label_source": "simulated_human_from_publisher"
+        },
+        "elapsed_seconds": 88.45130119999521,
+        "artifact_sha256": "4d6e7eb0bebcbc722c4de3ce0da5586598fc3c809cd3ce97f4fdf874e671e976",
+        "script_sha256": "dbbb940f940f89974dd01f9ce9e43b09c9cc7bcf7de792d24b954d56a9b294df",
+        "parameters": {
+          "C": 10,
+          "break_ties": false,
+          "cache_size": 200,
+          "class_weight": "balanced",
+          "coef0": 0.0,
+          "decision_function_shape": "ovr",
+          "degree": 3,
+          "gamma": "scale",
+          "kernel": "rbf",
+          "max_iter": -1,
+          "probability": "deprecated",
+          "random_state": null,
+          "shrinking": true,
+          "tol": 0.001,
+          "verbose": false
+        },
+        "promotion": "not_authorized"
+      },
+      "metrics": {
+        "model": "publisher-supervised-diagnostic-control-not-operational-silver:mfcc-svm",
+        "partition": "development",
+        "samples": 12,
+        "accepted": 12,
+        "failed": 0,
+        "coverage": 1.0,
+        "accuracy": 0.5,
+        "macro_f1": 0.4464285714285714,
+        "per_class_recall": {
+          "excess_hall_adhesive": 1.0,
+          "healthy": 0.0,
+          "magnet_fracture": 0.3333333333333333,
+          "tight_bearing": 0.6666666666666666
+        },
+        "confusion_labels": [
+          "excess_hall_adhesive",
+          "healthy",
+          "magnet_fracture",
+          "tight_bearing",
+          "__abstained__"
+        ],
+        "confusion_matrix": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "inference_seconds_total": 6.957941600034246,
+        "inference_seconds_median": 0.1308469000068726,
+        "inference_seconds_p95": 2.5574357999910684,
+        "load_seconds": 0.0,
+        "prediction_sha256": "7b01c1cbd82c2069f7bee5e6f15c05d96be2c6b66ff4e54e55fb12e52ee4f760",
+        "variant": null,
+        "prompt_sha256": null
+      },
+      "local_artifact": "artifacts/jin-directions-v1/controls/one-shot-mfcc-svm"
+    },
+    {
+      "regime": "full",
+      "method": "mfcc-svm",
+      "training": {
+        "kind": "publisher-supervised-diagnostic-control-not-operational-silver",
+        "method": "mfcc-svm",
+        "training_samples": 120,
+        "training_groups": 4,
+        "provenance": {
+          "reference_sha256": "66f98875476d2c1bb4172f3a0f4e9587f01523809a6a60012a85a9cffb3561de"
+        },
+        "elapsed_seconds": 27.50181970000267,
+        "artifact_sha256": "ee5699d3bf1b869b209de29fbc5d8ce63a14e09fe8c7b418193708223273e893",
+        "script_sha256": "dbbb940f940f89974dd01f9ce9e43b09c9cc7bcf7de792d24b954d56a9b294df",
+        "parameters": {
+          "C": 10,
+          "break_ties": false,
+          "cache_size": 200,
+          "class_weight": "balanced",
+          "coef0": 0.0,
+          "decision_function_shape": "ovr",
+          "degree": 3,
+          "gamma": "scale",
+          "kernel": "rbf",
+          "max_iter": -1,
+          "probability": "deprecated",
+          "random_state": null,
+          "shrinking": true,
+          "tol": 0.001,
+          "verbose": false
+        },
+        "promotion": "not_authorized"
+      },
+      "metrics": {
+        "model": "publisher-supervised-diagnostic-control-not-operational-silver:mfcc-svm",
+        "partition": "development",
+        "samples": 12,
+        "accepted": 12,
+        "failed": 0,
+        "coverage": 1.0,
+        "accuracy": 0.6666666666666666,
+        "macro_f1": 0.5892857142857143,
+        "per_class_recall": {
+          "excess_hall_adhesive": 0.0,
+          "healthy": 0.6666666666666666,
+          "magnet_fracture": 1.0,
+          "tight_bearing": 1.0
+        },
+        "confusion_labels": [
+          "excess_hall_adhesive",
+          "healthy",
+          "magnet_fracture",
+          "tight_bearing",
+          "__abstained__"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "inference_seconds_total": 5.5657857000187505,
+        "inference_seconds_median": 0.19170360000862274,
+        "inference_seconds_p95": 1.7055950600071788,
+        "load_seconds": 0.0,
+        "prediction_sha256": "a0b4695c615e7fd9ccc9741a7ef6d623a693f7314f4ad361c8c0fba235638e87",
+        "variant": null,
+        "prompt_sha256": null
+      },
+      "local_artifact": "artifacts/jin-directions-v1/controls/full-mfcc-svm"
+    }
+  ],
+  "teacher_metrics": {
+    "model": "azure:gpt-audio-1.5@2026-02-23:modelmetis-audio-teacher",
+    "partition": "development",
+    "samples": 12,
+    "accepted": 12,
+    "failed": 0,
+    "coverage": 1.0,
+    "accuracy": 0.5,
+    "macro_f1": 0.375,
+    "per_class_recall": {
+      "excess_hall_adhesive": 1.0,
+      "healthy": 0.0,
+      "magnet_fracture": 1.0,
+      "tight_bearing": 0.0
+    },
+    "confusion_labels": [
+      "excess_hall_adhesive",
+      "healthy",
+      "magnet_fracture",
+      "tight_bearing",
+      "__abstained__"
+    ],
+    "confusion_matrix": [
+      [
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "inference_seconds_total": 105.04527859995142,
+    "inference_seconds_median": 8.550382349989377,
+    "inference_seconds_p95": 11.12063580999529,
+    "load_seconds": 8.640986499987775,
+    "prediction_sha256": "905d04b45dd60d43b643eb1018c2d314731eb4846a30b129a1bc4162555a93da",
+    "variant": "jin-one-shot-v1",
+    "prompt_sha256": "c2710501cab00996743abea39aa1afa212bc9c5e54a5e83821134b6671b436fd"
+  },
+  "teacher_accounting": {
+    "requests": 12,
+    "http_responses": 12,
+    "known_usage_requests": 12,
+    "estimated_usd": 0.21281,
+    "support": {
+      "manifest_sha256": "cc94ac642bb8de97c250a5e63c678c0847318d2875ea5a3692537499ecbbfda4",
+      "support_set_sha256": "fd61dca5b1dd025ca53882fb743bef40ea5c9148b6eab901b3305375fcfbafcb",
+      "example_count": 4,
+      "shots_per_class": 1,
+      "label_source": "simulated_human_from_publisher"
+    },
+    "prompt_sha256": "c2710501cab00996743abea39aa1afa212bc9c5e54a5e83821134b6671b436fd",
+    "manifest_sha256": "97825bd11018492f133a7efef2bad6486542c9446c1c137e34a22908a0ddd511"
+  },
+  "interpretation": "Spectral one-shot separability under direction transfer; generative teacher fails two classes. Not independent-machine diagnosis or a silver-trained specialist.",
+  "timing_note": "Local inference includes features and prediction; model/file loading and process startup excluded. Control load_seconds=0 is an unmeasured placeholder, not measured zero loading time. MFCC timings include lazy imports/JIT.",
+  "comparison_note": "One-shot uses front acquisition support; full uses left acquisition training. This changes acquisition direction as well as label count, so it is not a controlled n-shot learning curve."
+}

@@ -1,0 +1,32 @@
+{
+  "context-v2": {
+    "taxonomy": {
+      "healthy": "Operation without the listed faults; regular motor and drive noise can be present.",
+      "rotor_unbalance": "Uneven mass distribution around the rotor axis, potentially producing rotational-frequency vibration.",
+      "rotor_misalignment": "Misaligned motor and coupled shafts, potentially producing rotational harmonics and axial vibration.",
+      "stator_winding": "An electrical stator winding fault, potentially altering magnetic-force harmonics.",
+      "voltage_unbalance": "Unbalanced three-phase supply, potentially altering magnetic-force harmonics.",
+      "bowed_rotor": "A bent rotor or shaft, potentially producing rotational harmonics or rubbing.",
+      "broken_rotor_bars": "Broken rotor conductors, potentially producing slip-related modulation.",
+      "faulty_bearing": "Rolling-element bearing damage, potentially producing localized repeated impacts and broadband excitation."
+    },
+    "instructions": "Assess a microphone recording of a three-phase induction electric motor on a laboratory drive/load bench, not a combustion engine. Speed and load may differ between recordings or change within a recording. Shaft RPM, electrical supply frequency, slip and bearing geometry are unknown: do not invent them or assign measured peaks to fault orders without support. Normal operation can contain regular hum, fan noise, drive tones and background mechanical roughness; these alone do not prove a bearing defect. Consider spectral concentration, regularity, modulation and impulsiveness jointly. When measurements accompany the WAV, use them as audio-derived evidence; without them do not invent numerical measurements. Compare the plausible taxonomy categories using general engineering knowledge. Choose the best supported provisional category, not a definitive diagnosis; use null when alternatives cannot be discriminated. Do not look up a dataset, assume class balance, or infer a source label. Confidence is uncalibrated. Observations must distinguish measured or audible facts from uncertain causal interpretations.",
+    "response_contract": "Return only one JSON object with exactly label (one taxonomy key or null), score (finite number between zero and one), and observations (array of brief strings). No markdown fences, extra fields or unseen diagnostic facts.",
+    "representation": "audio-only"
+  },
+  "spectral-v2": {
+    "taxonomy": {
+      "healthy": "Operation without the listed faults; regular motor and drive noise can be present.",
+      "rotor_unbalance": "Uneven mass distribution around the rotor axis, potentially producing rotational-frequency vibration.",
+      "rotor_misalignment": "Misaligned motor and coupled shafts, potentially producing rotational harmonics and axial vibration.",
+      "stator_winding": "An electrical stator winding fault, potentially altering magnetic-force harmonics.",
+      "voltage_unbalance": "Unbalanced three-phase supply, potentially altering magnetic-force harmonics.",
+      "bowed_rotor": "A bent rotor or shaft, potentially producing rotational harmonics or rubbing.",
+      "broken_rotor_bars": "Broken rotor conductors, potentially producing slip-related modulation.",
+      "faulty_bearing": "Rolling-element bearing damage, potentially producing localized repeated impacts and broadband excitation."
+    },
+    "instructions": "Assess a microphone recording of a three-phase induction electric motor on a laboratory drive/load bench, not a combustion engine. Speed and load may differ between recordings or change within a recording. Shaft RPM, electrical supply frequency, slip and bearing geometry are unknown: do not invent them or assign measured peaks to fault orders without support. Normal operation can contain regular hum, fan noise, drive tones and background mechanical roughness; these alone do not prove a bearing defect. Consider spectral concentration, regularity, modulation and impulsiveness jointly. When measurements accompany the WAV, use them as audio-derived evidence; without them do not invent numerical measurements. Compare the plausible taxonomy categories using general engineering knowledge. Choose the best supported provisional category, not a definitive diagnosis; use null when alternatives cannot be discriminated. Do not look up a dataset, assume class balance, or infer a source label. Confidence is uncalibrated. Observations must distinguish measured or audible facts from uncertain causal interpretations.",
+    "response_contract": "Return only one JSON object with exactly label (one taxonomy key or null), score (finite number between zero and one), and observations (array of brief strings). No markdown fences, extra fields or unseen diagnostic facts.",
+    "representation": "audio-statistics-v1"
+  }
+}

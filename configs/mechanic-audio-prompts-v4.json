@@ -1,0 +1,13 @@
+{
+  "mechanic-one-shot-v1": {
+    "taxonomy": {
+      "normal": "An operating combustion engine without the listed induced faults.",
+      "air_leak": "An operating combustion engine with an intake air leak.",
+      "oil_cap_open": "An operating combustion engine with its oil filler cap removed.",
+      "background_noise": "Ambient sound without a clearly operating combustion engine."
+    },
+    "instructions": "Listen to this unlabeled microphone recording. It may be recorded from inside or outside a vehicle. Identify audible sources, rhythmic engine operation and irregularities before comparing the four categories. Use the best-supported provisional category or null if the recording does not distinguish the alternatives. Do not equate ordinary engine ticking, fan noise or microphone noise with a fault. A hiss or change in idle can support an air-system anomaly but may not distinguish intake leakage from an open oil cap. Do not invent sensor readings, mechanical inspection results or vehicle identity. No dataset lookup or assumptions about category frequencies. Confidence is uncalibrated.",
+    "response_contract": "Return only one JSON object with exactly label (one taxonomy key or null), score (finite number between zero and one), and observations (array of brief strings distinguishing audible facts from uncertain causes). No markdown fences or extra fields.",
+    "message_layout": "system-instructions-v1"
+  }
+}

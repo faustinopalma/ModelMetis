@@ -1,0 +1,22 @@
+{
+  "literal": {
+    "healthy": "The sound of a healthy electric motor.",
+    "rotor_unbalance": "The sound of an electric motor with rotor unbalance.",
+    "rotor_misalignment": "The sound of an electric motor with rotor misalignment.",
+    "stator_winding": "The sound of an electric motor with a stator winding fault.",
+    "voltage_unbalance": "The sound of an electric motor with voltage unbalance.",
+    "bowed_rotor": "The sound of an electric motor with a bowed rotor.",
+    "broken_rotor_bars": "The sound of an electric motor with broken rotor bars.",
+    "faulty_bearing": "The sound of an electric motor with a faulty bearing."
+  },
+  "acoustic": {
+    "healthy": "A healthy electric motor running smoothly with a steady hum.",
+    "rotor_unbalance": "An unbalanced electric motor rotor producing a rhythmic low vibration and rumble.",
+    "rotor_misalignment": "A misaligned electric motor producing periodic vibration and mechanical buzzing.",
+    "stator_winding": "An electric motor with a damaged stator winding producing a harsh electrical buzz.",
+    "voltage_unbalance": "An electric motor with unbalanced voltage producing an uneven electrical hum.",
+    "bowed_rotor": "An electric motor with a bent rotor producing periodic rubbing and vibration.",
+    "broken_rotor_bars": "An electric motor with broken rotor bars producing a pulsating modulated hum.",
+    "faulty_bearing": "An electric motor with a damaged bearing producing rough grinding and rattling."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "dataset": "10.17632/msxs4vj48g.2",
+  "license": "CC BY 4.0",
+  "attribution": "Mert Sehri and Patrick Dumond, University of Ottawa, 2026",
+  "archive_sha256": "9c5e67145400e3806c4deb9df28cf41f2ccae22b9a7c5f1e8ee1b1a4d38c0907",
+  "acquisitions": 128,
+  "csv_mat_pairs_verified": 128,
+  "classes": [
+    "healthy",
+    "rotor_unbalance",
+    "rotor_misalignment",
+    "stator_winding",
+    "voltage_unbalance",
+    "bowed_rotor",
+    "broken_rotor_bars",
+    "faulty_bearing"
+  ],
+  "partitions": {
+    "development": 16,
+    "train": 96,
+    "test": 16
+  },
+  "split": "Speed profile 1 development, 8 final test, 2-7 train; both loads",
+  "preprocessing": "Microphone column 2 only; per-record peak normalization to 0.95; PCM16",
+  "limitation": "Same physical motors across splits; no unseen-motor generalization claim",
+  "isolation": "Separate local inputs, not an OS-enforced security boundary"
+}
