@@ -1,14 +1,10 @@
 # DSP Evidence Packets For Reference Comparison
 
-Latest measured outcome: the user-authorized deployment retry succeeded, and the frozen reuse preparation was executed against `gpt-5.6-sol-2026-07-09`. [EXP-012 live results](DSP_LLM_RESULTS.md): 0/9 known trials recognized, 9/9 falsely rejected, 3/3 unknown trials rejected; no technical inference failures or retries. Total estimated consumption including the probe was USD 0.72875088. The readiness blockers below describe the earlier preserved attempts, not the current status of the reused Sol endpoint.
+This page preserves the historical interval-packet format. The restarted N-known-plus-one-unknown workflow sends complete generated reports and uses a binary similarity decision; see [Whole-Report DSP Similarity](DSP_REPORT_COMPARISON.md) for its implementation, inspectable output folder and first real response.
 
-## Initial Preparation History
+Each reference/query packet contains typed DSP measurements and two original images: FFT amplitude and STFT power density. Requests contain 16-22 KB of text, six or eight images and at most 1.07 MB total. [EXP-012](DSP_LLM_RESULTS.md) completed technically but recognized 0/9 known-condition trials. Image selection has not been optimized or independently validated for diagnosis.
 
-Initial infrastructure follow-up: the user authorized [reuse of the IVECO account](DSP_RESOURCE_REUSE.md) while the Global Standard quota request remains pending. The first Sol child creation failed with a parent RequestConflict; the existing models and resource group were preserved. The original preparation below is historical and unchanged; a separate reuse preparation was created. No successful model inference had occurred at this point.
-
-Use a compact, typed evidence packet per reference/query interval: precise scalar DSP measurements plus two original images, FFT amplitude and STFT power density. This format is implemented, tested and instantiated on the six frozen drone A/B clips. Twelve stateless requests are prepared at 16-22 KB of text and at most 1.07 MB total per request, with six or eight images. The Azure resource creation was submitted, but the service was still provisioning at the latest documented check; no inference or diagnostic result is claimed until a live readiness/probe gate passes.
-
-The [EXP-012 protocol](DSP_LLM_PROTOCOL.md) is the immutable experimental design. The [DSP generator](DSP_PIPELINE.md) remains purely analytical and does not call an LLM. Packaging, model invocation and sealed evaluation are separate modules. This is a first bounded packet format, not an empirically optimal image selection or a production classification service.
+The [protocol](DSP_LLM_PROTOCOL.md) defines the experiment. The [DSP generator](DSP_PIPELINE.md), packet builder, model worker and sealed evaluator are separate components.
 
 ## Packet Contract
 
@@ -62,37 +58,19 @@ The public Data Zone Standard short-context prices consulted September 29 are US
 
 ## Azure State
 
-The repo-local `.azure` credentials resolve to subscription `e2cb999b-d471-4148-9b22-1c4c8019cb4e`, tenant `937847db-d3f9-4c7b-9991-510e5c42f777`. The previous ModelMetis subscription `7ecf802f-04ac-4e81-8703-c3d39074f823` is not visible in that profile. Read-only discovery found no ModelMetis resources in the current subscription. Existing Lanternina and IVECO resources were excluded and not modified. The unrelated deployment plan in `.azure` was not reused.
+The original dedicated deployment in `rg-modelmetis-dev-dsp-swc` was still Creating/Running at its last saved read, with no model child or inference. Cancelling the 321-second local wait did not cancel ARM. A separate governance diagnostic deployment failed because its Log Analytics destination was absent; causality for the parent delay is unproven. The [readiness receipt](../ml/dsp-sol-exp012-status-v1.json) preserves that attempt. Obtain fresh state before further operations.
 
-Global Standard Sol quota is fully allocated in Sweden Central. DataZoneStandard showed 333 capacity/quota units available; the catalog reports 1,000 TPM and one RPM per unit. The user authorized autonomous decisions after the target/region/SKU confirmation prompt. The new dedicated RG `rg-modelmetis-dev-dsp-swc` was created and verified Succeeded. The [Bicep template](../infra/dsp-experiments.bicep) compiled with no diagnostics, passed ARM validation and produced a what-if with exactly three new resources: `aif-modelmetis-dsp-jxkma7rduph64`, its `modelmetis-dsp-sol` deployment, and a Cognitive Services OpenAI User role assignment scoped to the new resource.
-
-The intended resource disables local key authentication, uses firewall default Deny with no bypass and one execution-machine IPv4 allow rule, and pins Sol with NoAutoUpgrade at DataZoneStandard capacity 50. There is no new storage, VM, hosted agent, provisioned-throughput allocation or shared-project modification. Credentials and the execution IP are not stored in this document.
-
-The deployment command's local wait was cancelled after 321.040 seconds; this did not cancel ARM. Fresh reads showed the resource `Creating`, the deployment `Running`, no deployment-level error, and no model children at 16 minutes. At 19 minutes 48 seconds the same operation remained Running with correlation `e997e121-29fb-46bf-a727-656f4f9e5b92`. A separate automatic governance deployment, `PolicyDeployment_15917264444470485684`, failed: policy `CognitiveServices_Diagnostics_Enable` / `MCAPSGovDeployPolicies` attempted diagnostic settings whose destination `/resourcegroups/mcapsgovernance/providers/microsoft.operationalinsights/workspaces/mcaps41489b221c4c8019cb4e-la` does not exist. This is a confirmed governance error, not proof that it caused the primary resource's prolonged creation. No policy was disabled and no shared governance workspace was created to bypass the problem.
-
-The [final readiness receipt](../ml/dsp-sol-exp012-status-v1.json), observed at 14:09:52 UTC, records the same Creating/Running state after 26 minutes 6.7 seconds, zero model deployments, twelve prepared real requests, one prepared probe and zero submitted inference requests. Inference consumption is zero; no classifier outcome, token usage or model latency was fabricated. The subsequent service outcome remains to be checked live.
-
-Before inference, require fresh ARM Succeeded states for the resource and model, verify fixed identity/network configuration, and resolve the missing governance destination with its owner. Do not blindly replay the submitted deployment while it is still Running. The resource group and pending operation exist; a catalog entry, successful template validation or submitted deployment is not a live model endpoint. The exact latest state should be read again when resuming.
+The completed experiment used a separately frozen [reuse preparation](DSP_RESOURCE_REUSE.md), pinned Sol and DataZoneStandard capacity 50. [Global Standard quota](DSP_GLOBAL_QUOTA.md) is a separate submitted request with unverified approval. Model versions, settings and preparations cannot be exchanged silently.
 
 ## Reproduction And Evidence
 
-The native ARM64 environment is retained. No Azure SDK install or Python environment merge was required: the worker obtains a scoped Entra token through the existing CLI and uses installed HTTPX. A required Foundry dependency check failed while trying to install an azd extension because `azure.ai.agents` was missing; the verified direct CLI/REST/Bicep path does not depend on that extension, and azd was not upgraded.
+The native ARM64 worker uses HTTPX and an Entra token obtained through the existing CLI. It requires no Azure SDK installation or merge with the x64 ML runtime.
 
 ```powershell
 Measure-Command { & .\.venv\Scripts\python.exe -m scripts.dsp_experiment prepare --output artifacts/dsp-sol-exp012-prepared-replay | Out-Host }
 Measure-Command { & .\.venv\Scripts\python.exe -m scripts.preview_dsp_packet --job artifacts/dsp-sol-exp012-prepared-replay/jobs/01.json --output artifacts/dsp-sol-exp012-prepared-replay/preview.html | Out-Host }
 ```
 
-Only after Azure readiness and governance checks pass, the frozen probe and real phase can be executed. These commands deliberately refuse to overwrite an existing run; do not use a new output directory to evade a failed gate or request bound.
+These commands prepare offline evidence only. The live EXP-012 run is complete; further calls require a new protocol and readiness check. Preserve frozen code/settings and all earlier requests/responses. New output directories cannot bypass failed gates or request limits. Predictions do not enter reference sets or training automatically.
 
-```powershell
-Measure-Command { & .\.venv\Scripts\python.exe -m scripts.dsp_experiment probe --prepared artifacts/dsp-sol-exp012-prepared-v1 --output artifacts/dsp-sol-exp012-run-v1 | Out-Host }
-Measure-Command { & .\.venv\Scripts\python.exe -m scripts.dsp_experiment run --prepared artifacts/dsp-sol-exp012-prepared-v1 --output artifacts/dsp-sol-exp012-run-v1 | Out-Host }
-Measure-Command { & .\.venv\Scripts\python.exe -m scripts.dsp_experiment evaluate --prepared artifacts/dsp-sol-exp012-prepared-v1 --run artifacts/dsp-sol-exp012-run-v1 --output artifacts/dsp-sol-exp012-evaluation-v1 | Out-Host }
-```
-
-Do not alter frozen code/settings between preparation and execution. A necessary correction requires a separately documented preparation version and preserves every earlier request and response. The prepared folder, previews and local attempt logs remain ignored. Only reusable source, protocol, nonsecret deployment configuration and aggregate status are published. No accepted prediction is automatically inserted into a baseline, gold dataset, silver collection or training snapshot.
-
-Validation reached 171 passing tests, Ruff clean and no editor diagnostics. Tests cover original image hashes, source-metadata exclusion, seven-digit numeric preservation, mismatch/duplicate rejection, output identity/citations and token accounting including reasoning. Browser checks confirmed all eight original PNGs load at 1200 by 700 with no horizontal overflow at 1440 or 390 pixels. This is local readability validation; effective provider preprocessing and vision interpretation remain unverified until a successful live probe, and a synthetic classification cannot establish acoustic diagnosis quality.
-
-All command and failed-attempt logs are retained under `artifacts/dsp-*.log`: initial wrong-subscription lookup (3.262 s), scoped discovery (10.149 s), capacity checks (19.209, 11.022 and 10.097 s), ARM preflight (72.560 s), cancelled local deployment wait (321.040 s), readbacks (4.994 and 7.015 s), provisioning/policy diagnosis (7.034 and 4.646 s), preparation (30.657 s command / 26.719 s internal), packet test/format iterations, full test gate (26.999 s), and preview iterations (2.131 and 2.034 s). Windows `az.cmd` split a raw URL at `&`; using `--url-parameters` fixed it. Shell-sensitive JMESPath was replaced with structured PowerShell JSON selection. A settings serialization/hash mismatch was corrected before preparation. An interrupted test invocation was rerun; no inference was retried or hidden.
+Tests cover image hashes, source-metadata exclusion, numeric preservation, mismatch/duplicate rejection, identity/citations and token accounting. Browser checks verified eight original 1200 by 700 PNGs and no horizontal overflow at 1440/390 pixels. Live API acceptance is recorded in the [results](DSP_LLM_RESULTS.md); provider-internal resizing and the images' independent contribution remain unmeasured.

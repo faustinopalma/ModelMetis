@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "purpose": "One complete-report similarity example; not a fault-classification benchmark",
+  "selection": "Reuse the three frozen A reference WAVs and the first ordered B query; no reselection from model results",
+  "known_conditions": [
+    {
+      "condition_id": "C01",
+      "wav": "../data/visual-audio-exp011-v1/audio/2a1a4fc0edb8e810f1c8278c.wav",
+      "source_state": "original"
+    },
+    {
+      "condition_id": "C02",
+      "wav": "../data/visual-audio-exp011-v1/audio/730a9bbaf9f068168daffe72.wav",
+      "source_state": "original"
+    },
+    {
+      "condition_id": "C03",
+      "wav": "../data/visual-audio-exp011-v1/audio/80bbd536465c2f38cfb361bc.wav",
+      "source_state": "original"
+    }
+  ],
+  "unknown": {
+    "wav": "../data/visual-audio-exp011-v1/audio/48146dbdd29aea53f20494c5.wav",
+    "source_state": "original"
+  }
+}
