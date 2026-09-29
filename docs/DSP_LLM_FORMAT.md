@@ -1,6 +1,10 @@
 # DSP Evidence Packets For Reference Comparison
 
-Current infrastructure follow-up: the user authorized [reuse of the IVECO account](DSP_RESOURCE_REUSE.md) while the Global Standard quota request remains pending. The new Sol child creation failed with a parent RequestConflict; the existing models and resource group were preserved. The original preparation below is historical and unchanged; a separate reuse preparation exists. No successful model inference is claimed.
+Latest measured outcome: the user-authorized deployment retry succeeded, and the frozen reuse preparation was executed against `gpt-5.6-sol-2026-07-09`. [EXP-012 live results](DSP_LLM_RESULTS.md): 0/9 known trials recognized, 9/9 falsely rejected, 3/3 unknown trials rejected; no technical inference failures or retries. Total estimated consumption including the probe was USD 0.72875088. The readiness blockers below describe the earlier preserved attempts, not the current status of the reused Sol endpoint.
+
+## Initial Preparation History
+
+Initial infrastructure follow-up: the user authorized [reuse of the IVECO account](DSP_RESOURCE_REUSE.md) while the Global Standard quota request remains pending. The first Sol child creation failed with a parent RequestConflict; the existing models and resource group were preserved. The original preparation below is historical and unchanged; a separate reuse preparation was created. No successful model inference had occurred at this point.
 
 Use a compact, typed evidence packet per reference/query interval: precise scalar DSP measurements plus two original images, FFT amplitude and STFT power density. This format is implemented, tested and instantiated on the six frozen drone A/B clips. Twelve stateless requests are prepared at 16-22 KB of text and at most 1.07 MB total per request, with six or eight images. The Azure resource creation was submitted, but the service was still provisioning at the latest documented check; no inference or diagnostic result is claimed until a live readiness/probe gate passes.
 

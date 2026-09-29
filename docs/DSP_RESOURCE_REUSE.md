@@ -1,10 +1,14 @@
-# Reuse Decision And Current Blocker
+# Reuse Decision And Execution History
+
+Update after the user-authorized retry: the new deployment `modelmetis-sol-reuse-retry-20260929` completed Succeeded and pinned Sol served all thirteen registered calls. The [live results](DSP_LLM_RESULTS.md) are technically valid but diagnostically negative: every real query was rejected, including 9/9 known-condition trials. The original RequestConflict attempt below remains preserved as history; no resource group was deleted. The Global Standard quota request remains separate and was not rechecked.
+
+## Initial Attempt
 
 Reuse the existing healthy resource in `rg-iveco-agent-testing-troubleshooting`; do not delete and recreate its resource group. The user explicitly authorized reuse or cleanup because its previous workload is no longer needed. The account already has Entra-only authentication and an inference role, whereas the newly created dedicated ModelMetis account remained Creating after more than an hour. Reusing the parent avoids another parent-resource creation. However, the attempt to add pinned GPT-5.6 Sol failed with an Azure `RequestConflict`, so no new model endpoint or successful inference is claimed.
 
 The [machine-readable receipt](../ml/dsp-sol-reuse-status-v1.json) preserves the verified states. The previously submitted Global Standard quota request remains unchanged and will be reviewed on another day, as requested. This reuse path uses existing DataZoneStandard quota; it does not claim the requested Global Standard increase has been approved.
 
-## Verified Inventory
+## Verified Initial Inventory
 
 The resource group contains one `Microsoft.CognitiveServices/accounts` resource, `aif-iveco-safety-test-20260918`, in Sweden Central, subscription `e2cb999b-d471-4148-9b22-1c4c8019cb4e`, tenant `937847db-d3f9-4c7b-9991-510e5c42f777`. No resource-group locks were returned. The parent provisioning state is Succeeded and local key authentication is disabled. Public network access is enabled; there is no verified IP-restricted firewall on this inherited resource. The existing Cognitive Services OpenAI User role is available at the resource scope. No keys were requested or printed.
 
@@ -17,7 +21,7 @@ The resource group contains one `Microsoft.CognitiveServices/accounts` resource,
 
 None is Sol. Their upgrade policy is OnceNewDefaultVersionAvailable, so they are not silently relabeled as the pinned Sol target. These four deployments and their parent were preserved. No existing workload allocation was removed to make the new test succeed. No group deletion, governance change or modification of Lanternina was performed.
 
-## New Deployment Attempt
+## First Deployment Attempt
 
 The [existing-account Bicep template](../infra/dsp-existing-account.bicep) declares the parent `existing` and creates only `modelmetis-dsp-sol`, OpenAI `gpt-5.6-sol@2026-07-09`, DataZoneStandard capacity 50, Microsoft.DefaultV2 and NoAutoUpgrade. Exact model/SKU availability was checked on the account; available DataZoneStandard Sol quota was 333 units before submission. Bicep compilation passed without diagnostics. ARM validation passed. The what-if was programmatically required to contain exactly one Create for that child and no other modifications or deletions before submission.
 
