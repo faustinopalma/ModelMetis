@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "azure_config_dir": ".azure",
+  "subscription": "e2cb999b-d471-4148-9b22-1c4c8019cb4e",
+  "tenant": "937847db-d3f9-4c7b-9991-510e5c42f777",
+  "resource_group": "rg-iveco-agent-testing-troubleshooting",
+  "account": "aif-iveco-safety-test-20260918",
+  "endpoint": "https://aif-iveco-safety-test-20260918.openai.azure.com/",
+  "deployment": "modelmetis-dsp-sol",
+  "model": "gpt-5.6-sol",
+  "version": "2026-07-09",
+  "sku": "DataZoneStandard",
+  "reasoning_effort": "low",
+  "max_completion_tokens": 4096,
+  "request_process_timeout_seconds": 180,
+  "run_deadline_seconds": 2400,
+  "max_probe_requests": 1,
+  "max_real_requests": 12,
+  "prices_usd_per_million": {"input": 4.4, "cached_input": 0.44, "output": 22.0},
+  "price_source": "https://azure.microsoft.com/en-us/pricing/details/azure-openai/",
+  "price_checked": "2026-09-29",
+  "price_scope": "GPT-5.6 Sol short-context Data Zone Standard; no priority or pro mode; estimate only"
+}
