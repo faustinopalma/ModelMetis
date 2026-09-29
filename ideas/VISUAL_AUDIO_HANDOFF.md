@@ -1,5 +1,7 @@
 # Visual Audio Comparison: Session Handoff
 
+September 29 implementation update: [EXP-011 protocol and reproduction](../docs/VISUAL_AUDIO_EXPERIMENT.md) and [results and blocker](../docs/VISUAL_AUDIO_RESULTS.md). The STFT-only offline tool is verified (152 full-suite tests pass); the real-data Welch control abstained on 12/12 trials. No visual inference ran because no GPT-5.6 deployment was available in the authorized resource. Only STFT images are permitted in this experiment; all alternative visual representations below are superseded by the user's implementation-session constraint. No C access, silver collection, training or routing followed. The remainder preserves the original handoff.
+
 Prepared September 29, 2026. Start here for the next implementation session, in the existing ModelMetis workspace. This is a staged work specification, not a frozen experimental registration or a positive result. No visual-audio model experiment has run. The first deliverable is a bounded feasibility experiment, not a production system or a training service.
 
 ## Objective

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "sample_rate": 16000,
+  "channel_policy": "require_mono",
+  "resample_policy": "reject",
+  "window_seconds": 0.5,
+  "overlap_seconds": 0.0,
+  "tail": "zero_pad_with_valid_duration",
+  "stft_window": "hann_periodic",
+  "stft_boundary": "none",
+  "nfft": 512,
+  "hop": 64,
+  "frequency_min": 0.0,
+  "frequency_max": 8000.0,
+  "reference_power": 1.0,
+  "db_min": -110.0,
+  "db_max": -10.0,
+  "colormap": "cividis",
+  "width": 1024,
+  "height": 768,
+  "dpi": 128,
+  "scaling": "PSD_FS_squared_per_Hz"
+}
