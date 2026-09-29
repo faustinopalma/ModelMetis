@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "purpose": "DSP report demonstration only; no diagnostic evaluation or LLM inference",
+  "selection": "First filename in each declared local subset, fixed before DSP output inspection",
+  "recordings": [
+    {
+      "dataset": "Drone",
+      "recording_id": "R0001",
+      "input": "../data/visual-audio-exp011-v1/audio/2a1a4fc0edb8e810f1c8278c.wav",
+      "source_state": "original",
+      "source_note": "Original amplitude-preserving 0.5-second A clip, mic1. No C access. Yi, Choi and Lee, Zenodo 7779574 v1, CC BY 4.0."
+    },
+    {
+      "dataset": "Jin motor",
+      "recording_id": "R0002",
+      "input": "../data/raw/jin-v1/b1f10m_01.wav",
+      "source_state": "original",
+      "source_note": "Complete 600-second publisher FLOAT WAV at 44.1 kHz. Linjie Jin, Mendeley 9dpmkgpncw v1, CC BY 4.0. No segments selected from diagnoses."
+    },
+    {
+      "dataset": "AI Mechanic",
+      "recording_id": "R0003",
+      "input": "../data/mechanic-one-shot-v1/support/0433068314954fb8a43b17def4f50cc0.wav",
+      "source_state": "derived",
+      "source_note": "Previously exported first 10 seconds, PCM16/16 kHz with metadata removed; original gain history is not reconstructed. Eoin / AI Mechanic, Kaggle version 1, Apache-2.0."
+    },
+    {
+      "dataset": "Ottawa motor",
+      "recording_id": "R0004",
+      "input": "../data/ottawa-simulation-v1/development/0acb77bc527241f3864a2de204af0aee.wav",
+      "source_state": "derived_peak_normalized",
+      "source_note": "Existing 10-second development export, microphone column 2, 42 kHz PCM16, previously peak-normalized to 0.95. Mert Sehri and Patrick Dumond, Mendeley msxs4vj48g v2, CC BY 4.0. Protected test data is not used."
+    }
+  ]
+}
