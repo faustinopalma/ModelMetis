@@ -30,6 +30,23 @@ def test_variable_known_condition_count(count):
     assert context["unknown_report"] == "Q01"
 
 
+def test_all_eight_classes_and_figures_with_explicit_low_detail():
+    reports = [stub_report(f"R{index:02}") for index in range(1, 10)]
+    for report in reports:
+        report["figures"] = [{"id": f"I{index}", "bytes": b"fixture"} for index in range(8)]
+    known = {f"C{index:02}": report for index, report in enumerate(reports[:8], 1)}
+    labels = {identifier: f"Class {identifier}" for identifier in known}
+    with pytest.raises(ValueError, match="none omitted"):
+        messages_for(known, reports[8])
+    messages = messages_for(
+        known, reports[8], max_images=72, image_detail="low", condition_labels=labels
+    )
+    images = [part for part in messages[1]["content"] if part["type"] == "image_url"]
+    assert len(images) == 72
+    assert all(part["image_url"]["detail"] == "low" for part in images)
+    assert json.loads(messages[1]["content"][0]["text"])["known_condition_labels"] == labels
+
+
 def test_complete_report_keeps_all_intervals_and_all_generated_figures(tmp_path):
     source = tmp_path / "hidden-condition.wav"
     clock = np.arange(1280) / 16000
@@ -83,6 +100,56 @@ def test_binary_response_requires_each_reference_and_consistent_choice():
     result["comparisons"][0]["evidence_ids"] = ["Q01.M01"]
     with pytest.raises(ValueError, match="reference and the query"):
         validate_result(result, {"C01": ["R01.M01"]}, ["Q01.M01"])
+    result["comparisons"][0]["evidence_ids"] = ["COMPARISON.WELCH"]
+    with pytest.raises(ValueError, match="reference and the query"):
+        validate_result(
+            result, {"C01": ["R01.M01", "COMPARISON.WELCH"]}, ["Q01.M01", "COMPARISON.WELCH"]
+        )
+
+
+def test_labeled_score_distinguishes_wrong_class_rejection_and_failure():
+    from scripts.evaluate_dsp_similarity import score_rows
+
+    rows = [
+        {"expected_label": "healthy", "predicted_label": predicted}
+        for predicted in ("healthy", "fault", "different", "technical_failure")
+    ]
+    result = score_rows(rows, ["healthy", "fault"])
+    assert result["queries"] == 4 and result["correct"] == 1
+    assert result["accuracy"] == 0.25
+    assert result["wrong_known_labels"] == 1
+    assert result["false_rejections"] == 1
+    assert result["technical_failures"] == 1
+    with pytest.raises(ValueError, match="at least one"):
+        score_rows([], ["healthy"])
+
+
+def test_paired_figures_preserve_every_original_pixel():
+    import io
+
+    from PIL import Image
+
+    from modelmetis.dsp_similarity import pair_figures
+
+    report = {"model": {"id": "R01"}, "figures": [], "evidence_ids": []}
+    for index, color in enumerate(("blue", "yellow", "gray")):
+        stream = io.BytesIO()
+        Image.new("RGB", (20, 10), color).save(stream, format="PNG")
+        report["figures"].append(
+            {"id": f"R01.I{index}", "title": color, "bytes": stream.getvalue()}
+        )
+    originals = list(report["figures"])
+    packed = pair_figures(report)
+    assert len(packed["figures"]) == 2
+    for pair in packed["figures"]:
+        canvas = Image.open(io.BytesIO(pair["bytes"]))
+        for part in pair["components"]:
+            original = next(figure for figure in originals if figure["id"] == part["id"])
+            image = Image.open(io.BytesIO(original["bytes"]))
+            assert (
+                canvas.crop((0, part["y"], part["width"], part["y"] + part["height"])).tobytes()
+                == image.tobytes()
+            )
 
 
 def test_bundle_exposes_reports_prompt_exact_data_and_response_location(tmp_path, monkeypatch):
@@ -127,6 +194,33 @@ def test_bundle_exposes_reports_prompt_exact_data_and_response_location(tmp_path
     assert "hidden-known" not in json.dumps(body) and "hidden-query" not in json.dumps(body)
     assert manifest["image_count"] == 14
     assert len(list((output / "02_model/images").glob("*.png"))) == 14
+    from modelmetis.dsp_similarity import contact_sheet
+
+    packed = full_report(output / "01_dsp/R01", "R01")
+    from modelmetis.dsp_similarity import spectral_distances
+
+    spectral = spectral_distances(
+        [output / "01_dsp/R01", output / "01_dsp/Q01", output / "01_dsp/R01"],
+        ["C01", "C02"],
+    )
+    assert spectral["query_distance_db"]["C01"] == 0
+    assert spectral["query_distance_db"]["C02"] > 0
+    original_ids = [figure["id"] for figure in packed["figures"]]
+    sheet = contact_sheet(packed)
+    assert len(sheet["figures"]) == 1
+    assert [part["id"] for part in sheet["figures"][0]["components"]] == original_ids
+    assert all(
+        part["width"] <= 600 and part["height"] <= 350 for part in sheet["figures"][0]["components"]
+    )
+    spec["known_conditions"][0]["report"] = "bundle/01_dsp/R01"
+    spec["unknown"]["report"] = "bundle/01_dsp/Q01"
+    (tmp_path / "cached-spec.json").write_text(json.dumps(spec))
+    cached_output = tmp_path / "cached-bundle"
+    reused = prepare_comparison(
+        tmp_path / "cached-spec.json", tmp_path / "settings.json", cached_output
+    )
+    assert reused["request_sha256"] == manifest["request_sha256"]
+    assert verify_bundle(cached_output) == reused
     decision = valid_result()
     decision["comparisons"][0]["evidence_ids"] = [
         manifest["known_evidence"]["C01"][0],
@@ -168,7 +262,8 @@ def test_bundle_exposes_reports_prompt_exact_data_and_response_location(tmp_path
     assert (output / "03_response/result.html").exists()
     assert all(
         b"Bearer fixture" not in path.read_bytes() and b'"accessToken"' not in path.read_bytes()
-        for path in output.rglob("*") if path.is_file()
+        for path in output.rglob("*")
+        if path.is_file()
     )
     with pytest.raises(FileExistsError):
         dsp_similarity.invoke_once(output)
