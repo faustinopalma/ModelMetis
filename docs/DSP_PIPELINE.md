@@ -1,8 +1,6 @@
 # Deterministic Audio DSP Reports
 
-The first DSP reporting stage is implemented and tested on four local datasets. It produces numerical measurements, seven complementary analytical views, a self-contained HTML report and a JSON/Markdown evidence package without any LLM calls or fault diagnosis. The complete 600-second Jin recording was analyzed, not reduced to a short demonstration clip. All 125 interval measurements were identical between the two report versions; the second version improves display only. The final software gate is 165 passing tests and clean Ruff, with three unchanged dependency warnings.
-
-This September 29, 2026 direction follows EXP-011 but does not modify that experiment's frozen STFT-only protocol, renderer or results. The user explicitly requested a new multiview, purely analytical DSP pipeline and asked to include FFT. Stop at report generation and inspection on existing datasets: no model interpretation, reference promotion, silver collection, training or routing is performed.
+The DSP pipeline produces numerical measurements, seven analytical views, a self-contained HTML report and JSON/Markdown evidence. It analyzes every interval, including the complete 600-second Jin recording, without model calls or diagnostic labels. EXP-011's separate STFT-only renderer and frozen evidence remain unchanged.
 
 ## Generated Examples
 
@@ -71,7 +69,7 @@ Measure-Command { & .\.venv\Scripts\python.exe -m scripts.dsp_report --suite con
 
 Each report contains `report.html` (self-contained human view), `report.md` (deterministic measurement narrative), `evidence.json` (all interval metrics and limitations), `images/` (lossless 1200 by 700 RGB PNGs), `arrays/` (compressed numerical arrays for replay/inspection), `provenance.json` (restricted source identity/history), `manifest.json` (hashes, versions, configuration and timings) and `attempts.jsonl` (completion/failure ledger). The suite adds a linked browser index, registration and aggregate summary. Its four-example protected-data statement describes the supplied fixed example manifest, not an independent discovery of arbitrary custom source lineage.
 
-The future interpreter input is the report narrative, structured evidence and selected images. Keep provenance and raw filenames outside diagnostic prompts; do not treat the HTML interface, numerical archives or publisher truth as required prompt input. Before any future LLM comparison, freeze the packet selection, shared configuration, reference set and independent evaluation separately. The current step sends nothing to an LLM and makes no claim that the generated evidence is diagnostically sufficient.
+The [packet contract](DSP_LLM_FORMAT.md) selects measurements and images for model comparison. Source provenance, raw filenames and publisher truth stay outside model inputs.
 
 ## Validation And Attempts
 
@@ -79,21 +77,4 @@ Thirteen new tests cover FFT amplitude/bin spacing/Hann bandwidth, doubled-ampli
 
 Both real-data runs completed for all four datasets. The first set is retained at `artifacts/dsp-examples-v1/`; the second at `artifacts/dsp-examples-v2/`. Version 2 adds the fixed FFT detail, collapses long method notes in the browser and fixes single-frame/tiny-tail displays. All 125 numerical interval dictionaries, excluding image metadata, compare exactly across versions. All 212 files listed in the final manifests passed SHA-256 verification. No outcome-based parameter tuning or new source selection followed the first run.
 
-Browser verification checked all 67 final PNGs for native 1200 by 700 dimensions and nonblank pixels, loaded the four reports at 1440- and 390-pixel widths without horizontal overflow, and verified navigation to Jin's interval 120. The first graph begins at approximately 499 desktop pixels or 670 mobile pixels; method notes remain accessible. Browser checks took 5.340 seconds. No image attachment was reintroduced into the chat after the earlier Copilot upstream-download failures.
-
-| Attempt / gate | Outcome | Command wall time |
-| --- | --- | ---: |
-| Pre-edit Git, pytest and Ruff | 152 passed; clean lint; original dirty worktree preserved | 20.011 s |
-| DSP core v1 / v2 | Seven tests passed; three lint lengths repaired; clean rerun | 1.917 / 1.935 s |
-| Native decode v1 / v2 / v3 | Corrected a test's continuous-time peak assumption; nine tests passed; three lint lengths repaired | 1.732 / 2.058 / 1.973 s |
-| Report v1 / v2 / v3 | Replaced a false-positive NaN substring search through PNG base64 with JSON validation; ten tests passed; lint repaired | 5.152 / 4.711 / 4.061 s |
-| Actual source metadata inspection | Four existing files and limits verified before processing | 0.337 s |
-| Suite gate v1 / v2 | Thirteen tests passed; two CLI lint lengths repaired | 7.780 / 8.109 s |
-| Dataset reports v1 | Four successful reports, including complete 600-second Jin input | 222.151 s |
-| Readability gate v1 / v2 / v3 | HTML indentation defect caught and repaired; single-frame pixel test passed; one caption lint length repaired | 2.071 / 5.660 / 5.564 s |
-| Dataset reports v2 | Four successful reports with unchanged numerical results | 198.307 s |
-| First artifact-check command | Nested Python/PowerShell quoting failed before verification | 0.155 s |
-| Corrected structured artifact check | 125 identical interval measurements; 212 verified files | 9.632 s |
-| Final full pytest, Ruff and summary export | 165 passed in 33.99 s pytest time; clean Ruff; three unchanged dependency warnings | 36.265 s |
-
-Command transcripts remain under `artifacts/dsp-*.log`. Failures in this table are development/verification attempts, not failed diagnoses or hidden inference retries. Neither report set was overwritten. All plots and text are produced by deterministic signal operations and templates; no generative model supplies measurements, explanations or labels.
+Browser checks verified all 67 PNGs at 1200 by 700, nonblank pixels, navigation to Jin's final interval and no horizontal overflow at 1440/390-pixel widths. Development logs remain under `artifacts/dsp-*.log`; both report versions are preserved.

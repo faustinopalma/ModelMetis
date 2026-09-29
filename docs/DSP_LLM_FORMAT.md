@@ -54,7 +54,7 @@ The [orchestrator](../scripts/dsp_experiment.py) creates a new immutable prepara
 
 Prepared registration: `dc94774abfc050044cccd60a40e9d67cbfa9d9e405e85ada8729d85b1a4c1c4b`. Text size ranges from 16,383 to 21,545 UTF-8 bytes; the largest complete JSON body is 1,064,263 bytes. Actual token counts require a provider response and are not inferred from byte counts. The first prepared body hash is `cc7761f3c9a3efa2664bc5a69a1ffcddd59dbe30b29c40897b5f9649ef3ea2f9`.
 
-The public Data Zone Standard short-context prices consulted September 29 are USD 4.40 input, 0.44 cached input and 22 output per million tokens. The worker counts all completion tokens, including reasoning. Estimated cost is `(uncached_input * 4.40 + cached_input * 0.44 + completion * 22) / 1,000,000`; missing usage is not silently assigned zero. These are list-price estimates, not invoices or persisted private spending allowances. Source: https://azure.microsoft.com/en-us/pricing/details/azure-openai/.
+The public Data Zone Standard short-context prices consulted September 29 are USD 4.40 input, 0.44 cached input and 22 output per million tokens. The worker counts all completion tokens, including reasoning. Estimated cost is `(uncached_input * 4.40 + cached_input * 0.44 + completion * 22) / 1,000,000`; missing usage remains unknown. These are list-price estimates. [Price source](https://azure.microsoft.com/en-us/pricing/details/azure-openai/).
 
 ## Azure State
 

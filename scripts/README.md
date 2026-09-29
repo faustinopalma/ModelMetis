@@ -8,8 +8,15 @@ The local audio experiment separates reference-aware import/evaluation from teac
 | `prepare_mechanic.py` | Versioned AI Mechanic ZIP and source annotations | Constant-signal exclusions, duplicate checks, one canonical window per source and masked development/train partitions |
 | `prepare_mechanic.py --support-from` | Frozen masked source plus sealed references, explicit taxonomy | One simulated-human support example per class from training only; disjoint remaining train and unchanged development |
 | `prepare_jin.py` | Original Jin v1 PCB WAVs plus verified official catalog | Direction-grouped 4 support/120 train/12 development windows, canonical WAVs and isolated source/training references |
+| `audit_drone.py` | Three pinned drone v1 TAR archives, including publisher names/labels | Immutable restricted SQLite inventory and aggregate JSON; no TAR extraction, operational partition or model execution |
+| `python -m scripts.prepare_drone` | Completed audited inventory and verified A/B source TARs | Nine masked A supports, 54 B queries, separate sealed references and retained preparation evidence |
+| `python -m scripts.drone_experiment campaign` | Local pinned checkpoints; synthetic input or masked drone inputs plus explicit support | Bounded probe/inference workers, frozen geometry, separate forced/selective reports and fixed mixture |
+| `python -m scripts.evaluate_drone` | Complete campaign, masked dataset, sealed B references and retained probe attempts | Hash-checked aggregate metrics, selective coverage/error and annotation accounting; no per-query answers |
 | `supervised_control.py train` | Dedicated publisher training references or explicit one-shot support, fixed method | Clearly marked diagnostic control, not operational silver or a promoted specialist |
 | `supervised_control.py predict` | Held-out unlabeled partition and trusted local control artifact | Predictions after training audio/group overlap rejection; no query references |
+| `encoder_experiment.py campaign` | Masked Jin development audio and explicit one-shot support | Bounded frozen-encoder workers, hashes, timings, preserved failures and uniform mixture; no query references |
+| `encoder_experiment.py mixture` | Completed aligned distinct-encoder predictions | New immutable uniform mixture with member hashes and full inference costs |
+| `encoder_experiment.py report` | Evaluated predictions, model files, campaign and explicit execution notes | Hash-verified aggregate evidence without query-level outputs |
 | `python -m modelmetis.simulation infer` | One operational partition and a fixed prompt candidate | Teacher predictions with prompt/audio hashes, failures and timing |
 | `python -m modelmetis.simulation infer-audio` | Development/train partition, frozen prompt, endpoint, ledger and optional authorized support package | Bounded audio requests, conservative accounting, prompt/support provenance and safe progress |
 | `python -m modelmetis.simulation train` | Train partition and completed teacher silver collection | Specialist artifact and training provenance; no publisher reference input |
@@ -28,7 +35,62 @@ The importer generates new UUIDs when writing a new split. This preserves groupi
 
 Pending automation: process-enforced deadlines, resumable immutable collections, authenticated snapshot publication, ML job submission/termination verification, invoice reconciliation, strategy coordination and rollback testing. CLAP inference has no request limit or wall-clock timeout. The audio LLM path enforces a persistent request limit and records conservative consumption, plus a scheduling deadline but not a hard process deadline. Neither worker resumes into an existing output directory. Dedicated audio infrastructure was deployed through local Bicep templates; these locally modified templates are not included in this experimental-results publication. Inference requires a separately authorized compatible endpoint and identity; the recorded endpoint is not a public demonstration service.
 
+## Embedding Similarity And Larger Encoders
+
+[EXP-010](../docs/EXPERIMENTS.md#exp-010-similarity-geometry-and-larger-encoders) tests similarity without diagnostic naming. [The fixed protocol](../docs/EMBEDDING_SIMILARITY.md) defines the registered model revisions, cosine retrieval, HDBSCAN settings and limits. `scripts.larger_encoders` downloads, probes and extracts EAT-large20/Dasheng vectors using the existing x64 runtime. `scripts.embedding_geometry` computes all label-blind decisions before reading sealed B references, independently checks distances/rank-sum AUC, and publishes aggregate-only evidence. No model fitting, C access, cluster tuning or automatic gold propagation.
+
+The current local artifacts already contain the downloads, eight successful larger-model attempts and all five encoder vectors. To reproduce evaluation without new inference, use a new output location:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { .venv/Scripts/python.exe -m scripts.embedding_geometry --runs artifacts/drone-one-shot-v1/fisher artifacts/drone-one-shot-v1/echo artifacts/drone-one-shot-v1/eat artifacts/larger-extract-v1/eat_large artifacts/larger-extract-v1/dasheng_12b --output artifacts/geometry-reproduction --campaigns artifacts/larger-metadata-v1 artifacts/larger-download-v1 artifacts/larger-probe-v1 artifacts/larger-extract-v1 --publish artifacts/geometry-reproduction-aggregate.json; if ($LASTEXITCODE) { throw 'Geometry verification failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+A complete model replay uses the same masked dataset and reviewed pinned model sources, but separate immutable attempt folders. Metadata/source inspection must precede executing newly downloaded custom code; all four EAT source files matched the previously reviewed base version. The existing encoder runtime pins (`ml/requirements-encoder-windows-x64.txt`; local-only) suffice; no package upgrade was needed. Each child process has a 600-second deadline, and detailed progress is in its log. Campaign JSON, not merely the parent process exit code, records individual failures or timeouts; the evaluator refuses incomplete model attempts.
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.larger_encoders campaign --phase metadata --output artifacts/larger-metadata-reproduction } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.larger_encoders campaign --phase download --output artifacts/larger-download-reproduction } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.larger_encoders campaign --phase probe --downloads artifacts/larger-download-reproduction --output artifacts/larger-probe-reproduction } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.larger_encoders campaign --phase extract --downloads artifacts/larger-download-reproduction --output artifacts/larger-extract-reproduction } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+Replace the larger-model run/campaign locations in the evaluation command to evaluate a new extraction. Repeating the same consumed clips is a technical replay, not new scientific evidence. Query labels and original paths never enter encoder inputs; support labels are validated for package compatibility but not used for fitting or similarity. Source labels remain available to the separate evaluator/curator. The frozen protocol and artifact hashes remain essential; these local boundaries are not an OS sandbox.
+
+## Drone Source Audit
+
+Install the `audit` extra in the native application environment. The decoder recognizes WAV and FLAC content independently of `.wav` filenames, verifies format/sample count, and compares canonical decoded PCM. FFmpeg is used only after a libsndfile FLAC read failure; every FLAC decode must match its embedded PCM MD5. Archive size and publisher MD5 are mandatory; SHA-256 and decoder versions are recorded. Label-free filenames stay null, never guessed. Original paths, condition codes and PCM mappings in `restricted.sqlite` are source-audit information, not model inputs or public artifacts. Filesystem separation prevents accidental leakage, not arbitrary access by code running under the same user.
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { .venv/Scripts/python.exe -m pip install -e ".[audit]"; if ($LASTEXITCODE) { throw 'Audit dependency installation failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { .venv/Scripts/python.exe scripts/audit_drone.py --source data/drone-source-v1 --output artifacts/drone-audit-replay; if ($LASTEXITCODE) { throw 'Inspect retained drone audit failure' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+Use a new output directory; preserve successful and failed attempts. The command checks all 324,000 files without selecting supports or repairing annotations. Reuse existing source archives. [Audit results](../docs/AUDIO_DATASETS.md#drone-archive-audit) and the aggregate (`ml/drone-v1-audit.json`; local-only) retain all five attempts. Filename groups, channels and segments do not count independent drones. Preparation and inference are separate commands below.
+
+## Cross-Drone One-Shot Experiment
+
+[EXP-009](../docs/EXPERIMENTS.md#exp-009-cross-drone-one-shot-and-abstention) completed with negative results. The importer runs in the native environment with `audit` dependencies; the model campaign uses the existing x64 encoder runtime and local cache. Exactly nine A support labels and 54 B queries are permitted. Both support and query manifests identify entire physical drones, with explicitly allowed shared support grouping but no cross-role audio/group overlap. C is not a supported worker partition. This is a code-level input contract, not an OS sandbox or protection against deliberately supplying a different disguised dataset.
+
+Historical input preparation used `python -m scripts.prepare_drone --source data/drone-source-v1 --inventory artifacts/drone-audit-v5 --output data/drone-one-shot-v1`. Keep that frozen output for replay; regenerating produces new UUIDs, not independent statistical evidence. Two successful synthetic campaigns are retained as `artifacts/drone-probe-v1` and `artifacts/drone-probe-v2`. The second matches the final runner. For a new technical replay, use new output directories and the retained preregistration snapshot so subsequent results text does not change the protocol hash:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.drone_experiment campaign --phase probe --protocol artifacts/drone-one-shot-v1/registered-protocol.md --output artifacts/drone-probe-replay; if ($LASTEXITCODE) { throw 'Probe campaign failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { data/ml-runtime/Scripts/python.exe -m scripts.drone_experiment campaign --phase worker --input data/drone-one-shot-v1/development --support data/drone-one-shot-v1/support --probes artifacts/drone-probe-replay --protocol artifacts/drone-one-shot-v1/registered-protocol.md --output artifacts/drone-one-shot-replay; if ($LASTEXITCODE) { throw 'Inspect retained campaign attempts' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+Every candidate has a 600-second process deadline and an immutable log. Campaign completion means scheduling finished, not that every candidate passed; inspect each status. The worker requires a successful synthetic probe with matching runner, encoder, classifier, loader and protocol hashes before opening real inputs. Checkpoint source/weights must match EXP-008 registration. No network download, source reference lookup, additional support label, threshold fitting or n-shot mode occurs. Query embeddings remain ignored artifacts for arithmetic checks, not an adaptive training set. The mixture averages complete aligned encoder outputs and has no geometric rejection rule.
+
+The isolated evaluator reproduces the existing aggregate without model calls; it checks input/reference hashes, campaign/log/worker integrity, prediction hashes, mixture membership and sample coverage before reporting. Use a new output path:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { .venv/Scripts/python.exe -m scripts.evaluate_drone --dataset data/drone-one-shot-v1 --campaign artifacts/drone-one-shot-v1 --probes artifacts/drone-probe-v1 artifacts/drone-probe-v2 --output artifacts/drone-evaluation-replay.json; if ($LASTEXITCODE) { throw 'Drone evidence reconciliation failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+The aggregate (`ml/drone-one-shot-v1.json`; local-only) records nine model-visible support labels, 54 evaluator answers, full publisher-inventory use for source curation and zero added gold reviews. All three geometric policies had zero accepted cases; their accepted error is null, not zero. The review queue, reference versioning/updates, unknown-fault validation and reliable operational routing remain unimplemented.
+
 ## Generative Audio Experiment
+
+The newer non-generative track is documented under [Frozen Encoder Experiment](#frozen-encoder-experiment); the following sections retain the original teacher experiments.
 
 EXP-002 through EXP-005 use a deployed, authorized dedicated endpoint with a passed two-input real synthetic capability check. The [experiment history](../docs/EXPERIMENTS.md) records technical failures, frozen prompts, model/version, price assumptions, completed development comparisons and executed or blocked snapshots. The endpoint is `https://aoai-modelmetis-dev-iydoch6uxaxx6.openai.azure.com/`; set `MODELMETIS_AUDIO_ENDPOINT` to that dedicated resource, never an existing project. Do not record private spending ceilings in files or command arguments. All registered comparisons are finished; the following historical command is not an instruction to spend on an unregistered replay, and its output path already exists.
 
@@ -58,7 +120,7 @@ The report generator fails on empty attempts, duplicate roots or ledger mismatch
 
 ## One-Shot Experiment
 
-EXP-006 changes the visibility contract only for four explicit support examples. Their publisher annotations simulate the human labels authorized by the user; they are not real reviews or silver targets. Preparation selects the lowest canonical-audio SHA256 per class from the frozen training pool, exports only opaque IDs/group IDs, authorized labels and audio hashes, and leaves seven unlabeled training samples. All eight development WAVs and manifest bytes remain unchanged. The support loader enforces one example per class and rejects query ID, group or audio overlap before accounting or networking. No n-shot mode is implemented or run.
+EXP-006 discloses four support labels with `simulated_human_from_publisher` provenance. Lowest canonical-audio SHA256 per class selects supports from training, leaving seven unlabeled samples and eight unchanged development inputs. Export includes opaque IDs/groups, labels and audio hashes. The loader enforces one example per class and rejects query ID/group/audio overlap before accounting or networking. No n-shot mode is implemented.
 
 Historical commands below produced the preserved outputs and cannot be rerun over them. Repeating a paid experiment requires a separately registered attempt; do not replace the exhausted ledger or select different support samples to bypass the cap.
 
@@ -101,3 +163,33 @@ $timer=[Diagnostics.Stopwatch]::StartNew(); try { $env:PYTHONPATH='src'; & data/
 ```
 
 The [sixteen-attempt report](../ml/audio-experiments-20260918-jin.json) contains the paid campaigns only. The [Jin comparison](../ml/jin-directions-v1.json) additionally exports each of the four control directories' `training.json` and `evaluation.json` metrics, the aggregate importer audit and the teacher's aggregate metrics/accounting. Export checked control weight hashes against both training and prediction records and checked prediction hashes against evaluation before publishing aggregates. It contains no per-example predictions, IDs or source filenames. The earlier cumulative reports and all local evidence are preserved. No diagnostic control is promoted, and the teacher's failed threshold stopped further silver collection.
+
+## Frozen Encoder Experiment
+
+EXP-008 implements the first stage of the [adaptive-model protocol](../docs/ADAPTIVE_MODELS.md). Use the existing x64 ML runtime and encoder dependency extension (`ml/requirements-encoder-windows-x64.txt`; local-only), not the ARM64 application environment. The script is a registered Jin-specific experiment, not a general autonomous agent. It fixes four classes, one support per class, model revisions, seed 17, four torch threads, CPU float32, cosine centroids and uncalibrated temperature-1 softmax. No Azure SDK or metered endpoint is invoked. Each candidate is a separate process, with a 600-second hard timeout including download; timeout kills that worker. A completed campaign means all candidates have an outcome, not that all succeeded.
+
+Before executing downloaded Python, inspect the pinned model sources and configuration. Keep the reviewed files in `data/encoder-models/{fisher,echo,eat}`; the campaign downloads the matching safetensors, records hashes and loads from local files with offline flags. These flags are not an OS network sandbox. ECHO and EAT load safetensors with strict state matching; FISHER rejects missing/unexpected/mismatched keys through Transformers loading diagnostics. BEATs is explicitly blocked in this registration because its official Iter3 checkpoint returned HTTP 403; rerunning the campaign does not retest that URL or silently use a mirror. A recovered BEATs attempt needs a recorded source-verification change.
+
+The initial historical campaign command was:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { $env:PYTHONPATH='src'; $env:PYTHONUTF8='1'; $env:PYTHONIOENCODING='utf-8'; & data/ml-runtime/Scripts/python.exe scripts/encoder_experiment.py campaign --input data/jin-directions-v1/development --support data/jin-directions-v1/support --output artifacts/encoder-jin-v1; if ($LASTEXITCODE) { throw 'Inspect retained encoder campaign' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+That output exists and cannot be overwritten. FISHER and ECHO completed; EAT initially failed on a nested dynamic-module import, then completed with unchanged weights/preprocessing after direct local-package loading was implemented. Its recovery used the `worker --candidate eat` command with the same input/support and `--output artifacts/encoder-jin-v1/eat-retry`, inside Python `subprocess.run(..., timeout=600)` with stdout/stderr recorded in `eat-retry.log`. Direct `worker` invocations do not impose their own process timeout. The final code already contains this import repair, so a new campaign should not be expected to reproduce the old technical failure. Preserve original logs and explicit execution notes rather than rewriting them to match a replay.
+
+The final mixture and independent evaluation used:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { $env:PYTHONPATH='src'; & data/ml-runtime/Scripts/python.exe scripts/encoder_experiment.py mixture --members artifacts/encoder-jin-v1/fisher/predictions.json artifacts/encoder-jin-v1/echo/predictions.json artifacts/encoder-jin-v1/eat-retry/predictions.json --output artifacts/encoder-jin-v1/mixture-final.json; if ($LASTEXITCODE) { throw 'Mixture failed' }; & data/ml-runtime/Scripts/python.exe scripts/evaluate_audio.py --references data/jin-directions-v1/sealed/references.json --predictions artifacts/encoder-jin-v1/fisher/predictions.json artifacts/encoder-jin-v1/echo/predictions.json artifacts/encoder-jin-v1/eat-retry/predictions.json artifacts/encoder-jin-v1/mixture-final.json --partition development --output artifacts/encoder-jin-v1/evaluation.json; if ($LASTEXITCODE) { throw 'Evaluation failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+Those outputs also refuse overwrite. All three encoders and the final mixture scored 12/12, macro-F1 1.0. Equal weights were fixed before evaluation; the evaluator's historical tie-break selecting FISHER is not an implemented router. Mixture assembly requires different model IDs and identical support digests, classes, ordered sample IDs, audio hashes and complete accepted coverage. It sums member load/support/query costs and adds measured averaging time; it does not claim that mixing already cached probabilities alone is the inference cost.
+
+Offline aggregate replay uses a new output path and the preserved execution notes. Notes record the actual technical recovery and preliminary mixture, rather than assigning the original timings to new runs. The exporter is scoped to this four-support, twelve-query Jin study. It verifies every prediction/provenance/evaluation hash and every model/configuration/source file hash before exporting:
+
+```powershell
+$timer=[Diagnostics.Stopwatch]::StartNew(); try { $env:PYTHONPATH='src'; & data/ml-runtime/Scripts/python.exe scripts/encoder_experiment.py report --members artifacts/encoder-jin-v1/fisher/predictions.json artifacts/encoder-jin-v1/echo/predictions.json artifacts/encoder-jin-v1/eat-retry/predictions.json artifacts/encoder-jin-v1/mixture-final.json --evaluation artifacts/encoder-jin-v1/evaluation.json --campaign artifacts/encoder-jin-v1/campaign.json --notes artifacts/encoder-jin-v1/execution-notes.json --output artifacts/encoder-jin-v1/aggregate-reproduction.json; if ($LASTEXITCODE) { throw 'Evidence export failed' } } finally { Write-Output "elapsed: $($timer.Elapsed.TotalSeconds)s" }
+```
+
+The preserved aggregate (`ml/encoder-jin-v1.json`; local-only) was reproduced byte-for-byte. No query-level outputs are exported. Centroid heads are supervised from `simulated_human_from_publisher` support, never registered as teacher silver or sent to operational training. The already examined Jin set cannot validate future learned model selection. No n increase, confidence tuning, autonomous decision agent, online update or production promotion occurred.

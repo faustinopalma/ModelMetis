@@ -1,12 +1,14 @@
 # Azure Architecture
 
-Date: September 7, 2026. Proposal for the PoC described in the [plan](PIANO.md). The listed resources have not been created; SKUs, region, networking, and identities must be confirmed before generating deployable infrastructure.
+Proposed cloud architecture for the [audio lifecycle](PIANO.md). Only the model endpoints described in [infra](../infra/README.md) have been exercised; the full application/AML topology is pending. [Current state](CONTEXT.md) and [data boundaries](CONTEXT.md#data-boundaries) distinguish implementation from proposal.
+
+Use IaC and dedicated ModelMetis groups, except for the documented DSP reuse. Storage requires disabled public access, private endpoints and private DNS. Authenticated VNet-connected services mediate uploads, playback and job access. Preserve unrelated resources and Lanternina.
 
 ## Mapping the Diagram to Components
 
 | PNG block | Application component | Proposed Azure service |
 | --- | --- | --- |
-| 1. Input | Image acquisition and validation API | Container Apps and private Blob Storage |
+| 1. Input | Audio acquisition and validation API | Container Apps and private Blob Storage |
 | 2. Foundation model | Multimodal teacher adapter | Model deployment in Microsoft Foundry |
 | 3. Data engine | Worker, review, snapshots, and lineage | Container Apps, Service Bus, PostgreSQL, Blob Storage |
 | 4. Train & evaluate | ML pipelines and release registry | Azure Machine Learning, on-demand compute, and MLflow |
@@ -16,14 +18,12 @@ Date: September 7, 2026. Proposal for the PoC described in the [plan](PIANO.md).
 
 ## Stack and Boundaries
 
-Python is proposed to share contracts and logic across the API, worker, and ML, avoiding duplicate implementations of preprocessing and metrics. FastAPI handles HTTP transport; the domain does not depend on FastAPI or Azure clients. React and TypeScript are proposed for the review console. Azure dependencies and heavy training dependencies will be separated from the core and pinned in lockfiles after verifying the installed APIs.
-
-A monorepo contains a modular core and a few deployable processes: API, worker, and console. A separate microservice is not needed for every block in the diagram. The router controls inference; the coordinator manages snapshots, experiments, and promotion requests. The language model may explain results or propose experiments, but it does not authorize privileged operations.
+Python shares contracts across API, worker and ML; FastAPI handles transport, and React/TypeScript implements the local console. Heavy ML and cloud dependencies remain separate from the core. The router controls inference; the coordinator manages snapshots, experiments and promotion requests. LLM proposals cannot authorize privileged operations.
 
 ## Inference Flow
 
-1. An authenticated client submits a reference to an image acquired through the API. The server checks asset ownership, actual file type, size, decoding, task, and idempotency key. It does not accept arbitrary URLs for server-side download.
-2. The API records the input and acquires an immutable policy version. Initially, every valid input goes to the teacher; unusable images or cases requiring mandatory review may trigger immediate abstention.
+1. An authenticated client submits an audio asset acquired through the API. Validate ownership, content type, size, decoding, task and idempotency key; reject arbitrary download URLs.
+2. Record input and immutable policy version. Initially, valid audio goes to the teacher; unusable input or mandatory-review cases may trigger abstention.
 3. In hybrid mode, the router checks preliminary eligibility, invokes the specialist, and applies subsequent checks on calibrated score, novelty, and predicted class. A suspected critical defect requires the review specified by the task.
 4. If the specialist is ineligible or abstains, the runtime tries the teacher within the timeout and budget. The teacher must comply with the schema; its self-reported score is not treated as a calibrated probability. If it cannot resolve the case, the outcome is `pending_review` or `abstained`.
 5. The result, routing decision, and outbox record are written in the same transaction. The response distinguishes `completed`, `pending_review`, `abstained`, and `failed` and never returns an old label as a successful result for the current request.
@@ -33,7 +33,7 @@ Blob Storage and the database do not share a transaction. Uploads have a tempora
 
 ## Persistence and Data
 
-- Blob Storage holds inputs, manifests, reports, and artifacts. Messages contain identifiers and authorized references, not images or credentials.
+- Blob Storage holds inputs, manifests, reports and artifacts. Messages contain identifiers and authorized references; audio payloads and credentials stay out of messages.
 - PostgreSQL holds tasks, requests, predictions, label revisions, the review queue, outbox, experiments, and releases. Transactions and unique constraints simplify lineage, concurrency, and approvals.
 - Service Bus decouples processes with bounded retries and a dead-letter queue. The application does not rely solely on broker deduplication.
 - An Azure ML data asset points to a snapshot with hash-addressed content and a manifest. Versioning a reference does not make the underlying file immutable: do not overwrite referenced blobs.
@@ -62,7 +62,7 @@ Each transition records preconditions, author, evidence, timestamp, and previous
 - GitHub Actions with OIDC federation for future pipelines; no persistent credentials in the repository. Key Vault is reserved for unavoidable secrets from external integrations.
 - Private Container Registry for application images; no admin passwords in the runtime. Pin images by digest and scan dependencies before promotion.
 - Private data, TLS, access control, and dev/prod separation. For sensitive data, design the VNet, private endpoints, DNS, and runner connectivity before provisioning. Some options require more expensive SKUs: do not promise private networking on every tier.
-- Do not store images, full prompts, sensitive outputs, or tokens in logs. Record identifiers, structured reasons, versions, and measurements. Image content and OCR text are untrusted inputs, never administrative instructions.
+- Keep audio, full prompts, sensitive outputs and tokens out of logs. Record identifiers, reasons, versions and measurements. Audio and derived text/images are untrusted data, never administrative instructions.
 - Define retention by category, deletion of originals and copies, lineage of derived models, and retirement/retraining assessment. Backup and soft-delete retention must be compatible with deletion obligations.
 
 ## Observability and Continuity
@@ -75,11 +75,11 @@ Timeouts, retries with backoff, and circuit breakers are bounded by the request 
 
 ## Costs and Alternatives
 
-A reliable monetary estimate requires the region, models, traffic, image sizes, serving hours, and review workload. Each estimate item must include its date, currency, rate, quantity, and source.
+A cost estimate requires region, models, traffic, audio duration, image sizes, serving hours and review workload. Each item records price date, currency, rate, quantity and source.
 
 | Item | Drivers to measure or estimate |
 | --- | --- |
-| Foundry | Requests, image/text tokens, outputs, retries, validations, and fallback |
+| Foundry | Requests, audio/image/text tokens, outputs, retries, validations and fallback |
 | Specialist serving | SKU, replicas, operating hours, peaks, and idle capacity |
 | Training | CPU/GPU SKU, hours per job, number of experiments and evaluations |
 | Runtime and data | Container Apps, PostgreSQL, Service Bus, ACR, storage, transactions, and networking |

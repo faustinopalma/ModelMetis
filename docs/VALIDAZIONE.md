@@ -1,10 +1,10 @@
 # Validation Protocol
 
-Status: the protocol must be completed with domain input and baseline requirements during phase F0 of the [plan](PIANO.md). No experimental results or approved thresholds are claimed. A gate without an approved value or sufficient evidence blocks promotion.
+Define operational thresholds and required evidence during F0 of the [plan](PIANO.md). Missing thresholds or insufficient evidence block promotion. [Experimental results](EXPERIMENTS.md) do not supply approved operating limits.
 
 ## Data and Independence
 
-Separate training, development, calibration, and the final gold test set by physical component, batch, and time. Images of the same component, transformations, and near-duplicates belong to the same group. Test data must not appear in few-shot examples, labels used for training, or threshold selection. For rare defects, plan targeted sampling and state the prevalence; do not report an average from artificially balanced classes as a production estimate.
+Separate training, development, calibration and final gold data by physical unit, original acquisition and time. Windows, channels, transformations and duplicates of a recording stay together. Test data cannot enter supports, training or threshold selection. Report sampling prevalence; balanced development classes do not estimate production prevalence.
 
 Use independent gold labels for promotion, with qualified annotators, disagreement review, and versioned instructions. Measure human disagreement as well. Subsequent industrial outcomes may update ground truth while preserving revisions and provenance.
 
@@ -25,7 +25,7 @@ Use the same inputs and segments, record pairings by request, and report confide
 | --- | --- | --- |
 | Overall quality | Macro-F1 and confusion matrix | Lower confidence bound of the difference from the teacher exceeds the allowed negative margin |
 | Critical defects | Recall and false-negative rate by class | Absolute minimum and margin against the baseline approved by domain experts |
-| Segments | Metrics by line, batch, lighting, and image quality | No required segment below its minimum; insufficient support blocks that segment |
+| Segments | Metrics by machine, operating regime, acquisition and signal quality | No required segment below its minimum; insufficient support blocks that segment |
 | Calibration | Brier score, reliability curve, and ECE with specified bins | Thresholds selected on the calibration set, then frozen |
 | Routing | Coverage, selective risk, and fallback | Quality on accepted and escalated cases, without hiding abstentions from the denominator |
 | Novelty | Incorrect acceptance on out-of-taxonomy sets | Agreed limit on documented scenarios, without a promise to detect all OOD inputs |
@@ -46,9 +46,9 @@ For a preliminary estimate: if `F` is the incremental fixed cost over the same p
 
 ## Mandatory Negative Tests
 
-- Corrupted input, unsupported type, oversized image, or reference to another user's asset: verifiable rejection.
+- Corrupted input, unsupported type, oversized recording or another identity's asset: verifiable rejection.
 - Teacher 429, timeout, invalid schema, or uncertain response: bounded retries and abstention/review, never a default label.
-- Student with a high score on a novel image: the test measures OOD detector error without assuming the confidence score resolves it.
+- Specialist with a high score on novel audio: measure unknown-condition acceptance independently of confidence.
 - Duplicate event delivery and a crash between commit and publication: no logical duplicates; attempt costs are retained.
 - The same group appears in training and test: snapshot validation fails.
 - Teacher/student agreement alone, without gold labels: promotion is denied.
@@ -63,4 +63,4 @@ For a preliminary estimate: if `F` is the incremental fixed cost over the same p
 
 Prepare a reproducible sequence of authorized inputs: teacher cold start, collection, review, snapshot, training, offline report, shadow, canary, a novel case triggering fallback, and rollback. Show versions, reasons, review status, and metric changes in the console.
 
-Demonstrating fallback on a selected image does not establish general robustness. The report separates functional tests, statistical benchmarks, and load tests, and states what has not been verified. The final criterion is passing the gates for the complete system, not merely completing the demo successfully.
+Report functional checks, statistical benchmarks and load tests separately, including unverified requirements. A selected fallback example cannot establish general robustness; promotion requires the complete system's gates.

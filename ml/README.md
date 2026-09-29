@@ -1,16 +1,10 @@
 # ML Lifecycle
 
-## Latest Result: New Motor Source
+This guide reproduces the local CLAP/silver-specialist baseline. [Experiment History](../docs/EXPERIMENTS.md) owns diagnostic results, including later generative, encoder and DSP comparisons. [Scripts](../scripts/README.md) covers their commands. The review API/console is separate from these experiments.
 
-EXP-007, September 18, 2026, follows the [supervised literature review](../docs/AUDIO_DATASETS.md#september-18-supervised-literature-review). Jin v1 provides twelve verified microphone acquisitions of four motor conditions. Direction-based splitting yields four front one-shot supports, 120 left training windows and twelve right development queries. [The aggregate comparison](jin-directions-v1.json) records all four isolated publisher-supervised controls, actual GPT Audio one-shot results, provenance and caveats. Spectral/logistic regression scored 12/12 with either four or 120 labels; MFCC/SVM scored 6/12 and 8/12; GPT Audio with the same four supports scored 6/12, macro-F1 0.375, missing all healthy and tight-bearing cases. The teacher's quality threshold failed. No operational silver collection, specialist promotion or routing change followed.
+## CLAP Baseline
 
-Usable class-discriminating signal exists under this split; causal fault diagnosis and unseen-motor transfer are not established. Windows share only four held-out source acquisitions, motor/session independence is unknown, and normal/fault source encoding differs. The two supervised regimes also change recording direction, so their difference is not a controlled n-shot curve. These controls are not replacements for the requested silver-only specialists. [The full protocol](../docs/EXPERIMENTS.md#exp-007-new-motor-data-with-supervised-diagnostic-controls) states their separate visibility contract and stopping rule; [commands](../scripts/README.md#jin-direction-transfer-controls) preserve reproducibility without rerunning paid calls implicitly.
-
-The new [cumulative audio evidence](audio-experiments-20260918-jin.json) preserves sixteen live attempts, 129 reservations and 128 responses with known usage; total estimated consumption is 0.8541325 USD, including this experiment's 0.21281 USD. Historical unknown usage retains a 4.11 USD reservation, so conservative accounting is 4.9641325 USD, not a measured invoice. Prior reports are unchanged. No new Azure resources or GPU jobs were created. Latest local checks: 104 Python tests and Ruff passed. The review API/console, autonomous strategy coordinator, private AML execution and adaptive routing remain separate pending work. The sections below retain EXP-001's historical protocol and measurements.
-
-## September 18, 2026 Experiment
-
-The first real local experiment completed source audit, two development prompt candidates, sequential teacher labeling of 96 unlabeled acquisitions, specialist training on those silver labels, and one final evaluation of both frozen models. The diagnostic result is negative. Neither model is suitable for promotion. CLAP is a pretrained general audio-text similarity model, not a generative LLM or an established mechanical diagnostician. At that point, an audio-capable LLM teacher, automated strategy coordinator, live routing and Azure execution were unimplemented; later teacher experiments are recorded above and in the chronological report. The review API and console are not connected to this command-line experiment.
+CLAP labeled 96 acquisitions for specialist training. Both models failed final evaluation; neither is eligible for promotion.
 
 | Final test, 16 recordings | CLAP teacher | Spectral specialist |
 | --- | ---: | ---: |
@@ -47,7 +41,7 @@ Versioned aggregate evidence: [source audit](ottawa-v1-audit.json), [development
 
 Individual predictions and weights remain under ignored `artifacts/ottawa-v1/`; the archive, sanitized partitions, sealed references, runtime and model cache remain under ignored `data/`. The importer and evaluator can read references. The teacher and specialist functions cannot accept a reference manifest through their declared operational interfaces. Tests deliberately invert reference truth and intercept the actual classifier `fit`, as well as reject reference fields, development/test input, altered prompt/audio hashes, duplicate or missing predictions, and unknown statuses before fitting. Empty or incomplete evaluations fail; abstentions count as errors rather than disappearing from metrics.
 
-This is application-level separation, not OS-enforced isolation: an unrestricted process running as the same local user can still read the sealed directory. Hashes detect mismatches but do not authenticate a forged teacher record. Cloud identities, separately scoped stores, immutable access logs and enforced partition permissions remain required. Public-benchmark exposure during foundation-model pretraining is unknown. No automatic collection schedule, experiment budget enforcer, retry controller, promotion, fallback router or rollback has been implemented.
+Local input contracts do not enforce OS isolation. Hashes detect mismatches without authenticating provenance; cloud execution requires scoped identities/stores and access logs. Pretraining exposure is unknown. Automatic collection, promotion, routing and rollback remain unimplemented.
 
 ## Verified Runtime
 
@@ -79,4 +73,4 @@ See [automation](../scripts/README.md) for import and [tests](../tests/README.md
 
 No Azure ML job or GPU node was started; GPU shutdown has therefore not been tested. Future GPU execution must use minimum zero/maximum one nodes, a 120-second idle scale-down interval, bounded job duration and a final check of actual zero nodes, as specified in the [AML safety contract](../docs/AML_INFRASTRUCTURE.md#job-termination-contract). IaC, private data access and cloud smoke tests remain pending. Do not create a public storage workaround or reuse existing project resources to run this baseline on a GPU.
 
-The next scientific question is whether a genuinely audio-capable generative teacher, given only the sanitized signal and defensible task context, can produce useful labels on a bounded development protocol. Better hardware does not establish that capability. Revisit teacher competence and label coverage before larger specialist training. Any subsequent strategy must preserve the [visibility contract](../docs/CONTEXT.md#data-visibility-contract), the already consumed final-set boundary and the [promotion protocol](../docs/VALIDAZIONE.md).
+Further training remains gated on teacher quality and label coverage. Preserve the [data boundaries](../docs/CONTEXT.md#data-boundaries), consumed final-set status and [promotion protocol](../docs/VALIDAZIONE.md).

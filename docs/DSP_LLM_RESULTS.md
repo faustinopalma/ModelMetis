@@ -2,7 +2,7 @@
 
 The live DSP-to-Sol pipeline works technically, but the registered cross-drone classification result is negative: **0/9 known-condition trials were recognized, and all 9/9 were falsely rejected as outside-reference**. All 3/3 unknown-condition trials were also rejected. Thus every one of the twelve real decisions was outside-reference. Zero unknown false acceptance does not demonstrate useful open-set classification when no known case is accepted. No model promotion, extra reference labeling, prompt revision, silver collection, specialist training or routing followed.
 
-The existing Azure resource was successfully reused after one user-authorized deployment retry. The exact responding model was `gpt-5.6-sol-2026-07-09`, DataZoneStandard, with NoAutoUpgrade. One synthetic gate and all twelve real calls completed without transport/parser failures or inference retries. Total estimated list-price consumption was **USD 0.72875088**, including the synthetic gate. This is an exploratory result on three repeated query clips from one query drone, not independent-acquisition population evidence.
+The existing Azure resource was reused after one deployment retry. The responding model was `gpt-5.6-sol-2026-07-09`, DataZoneStandard, with NoAutoUpgrade. One synthetic gate and twelve real calls completed without transport/parser failures or inference retries. Estimated list-price consumption was **USD 0.72875088**, including the gate. This exploratory result uses three repeated query clips from one drone.
 
 See the [frozen protocol](DSP_LLM_PROTOCOL.md), [packet contract](DSP_LLM_FORMAT.md), [infrastructure history](DSP_RESOURCE_REUSE.md), and [exact evaluator aggregate](../ml/dsp-sol-exp012-reuse-results-v1.json).
 
@@ -74,14 +74,8 @@ Three publisher annotations simulated the initial confirmed references. No addit
 
 ## Retry And Provenance
 
-The first reuse deployment failed with RequestConflict and remains recorded unchanged. On the user's explicit retry request, fresh reads found a Succeeded parent, no Sol child, and no active ARM deployment in the group. Free Data Zone Sol quota was rechecked. One new deployment, `modelmetis-sol-reuse-retry-20260929`, was submitted and completed Succeeded in 5.499 seconds, correlation `e8f22f47-77b4-493d-afde-62bcb4ddcb66`. Its child is `modelmetis-dsp-sol` on `aif-iveco-safety-test-20260918` in `rg-iveco-agent-testing-troubleshooting`, with DataZoneStandard capacity 50 and NoAutoUpgrade. No group or old model was deleted. The Global Standard quota request was not checked or resubmitted.
+The first reuse deployment failed with RequestConflict. Fresh reads before the retry found a Succeeded parent, no Sol child and no active ARM deployment; free Data Zone Sol quota was rechecked. Deployment `modelmetis-sol-reuse-retry-20260929` succeeded in 5.499 seconds, correlation `e8f22f47-77b4-493d-afde-62bcb4ddcb66`. The child is `modelmetis-dsp-sol` on `aif-iveco-safety-test-20260918` in `rg-iveco-agent-testing-troubleshooting`, DataZoneStandard capacity 50, NoAutoUpgrade. Existing models were preserved; the Global Standard quota request was unchanged.
 
 The preparation remained `artifacts/dsp-sol-exp012-reuse-prepared-v1/`, registration hash `fe297154c5fb966d069df7fd399ce0523ae1f0481621159f884e692d4144af37`. The live run is `artifacts/dsp-sol-exp012-reuse-run-v1/`; sealed evaluation is `artifacts/dsp-sol-exp012-reuse-evaluation-v1/`. The versioned aggregate is an exact byte-for-byte copy of the evaluator's aggregate, while request/response bodies and evaluated per-query rows remain ignored locally.
 
-Preserved logs include deployment retry submission (21.223 s), exact frozen-input and credential checks (14.955 s), Succeeded model readback (4.343 s), synthetic probe (16.186 s), real run (192.289 s), evaluator, result accounting and live-evidence audit. The first additional audit command failed before execution because nested Python/PowerShell quoting produced a syntax error (0.154 s); the corrected structured PowerShell audit verified all thirteen calls (0.911 s). This verification-command failure did not trigger another model request.
-
-GitHub DNS recovered during this retry. The prior credential-checked commit `15f85c9` was pushed and its remote SHA verified. Credential caches, keys, bearer tokens, raw artifacts and personal quota receipts remained outside the publication set. No attempt was deleted or rewritten to hide a technical failure or negative result.
-
-## Decision
-
-The reusable DSP packet, exact-version Azure endpoint, strict response parser and independent evaluator are operational. The current one-reference cross-drone method is not useful for recognizing the represented conditions in this bounded screen. Stop here: retain the negative evidence and do not expand human reference work, start silver collection or train a specialist to imitate these rejections. A different comparison hypothesis or data design requires a new explicit protocol; none was run automatically.
+No further reference labeling, silver collection or specialist training followed. Another comparison requires a new hypothesis and protocol.

@@ -1,9 +1,9 @@
 # Local Data and Artifacts
 
-Do not add production images, operational labels, gold datasets, weights, dumps, or sensitive exports to the repository. The original project sources remain in the root; this directory covers data from future executions.
+Local source archives, sanitized audio, sealed references, model caches and ML runtimes live here and are ignored by Git. Raw recordings, sample-level labels, weights, credentials and sensitive exports must remain unpublished.
 
-Real data resides in authorized storage and is referenced through versioned manifests with hashes and lineage. Local working artifacts are ignored by Git. Small synthetic or redistributable fixtures may be added under tests with their license and provenance, after review.
+Preserve versioned manifests, hashes and acquisition lineage. Small synthetic or redistributable test fixtures require explicit license/provenance. Cloud storage remains subject to private-access requirements.
 
 Before ingestion, define retention, permissions, and permitted training use. A public dataset is not automatically suitable for the task or unrestricted in use. Do not use an anomaly-detection collection as evidence for multiclass classification without verifying its taxonomy and annotations.
 
-See the [public audio dataset assessment](../docs/AUDIO_DATASETS.md) for motor-fault sources, access and licensing constraints, and a recommended starting dataset. No dataset has been downloaded or approved for training yet.
+Ottawa, AI Mechanic, Jin and drone sources have been downloaded and audited. See [dataset evidence](../docs/AUDIO_DATASETS.md) for rights and limitations. Existing splits and artifacts are immutable; consumed evaluation data is not fresh confirmation data.

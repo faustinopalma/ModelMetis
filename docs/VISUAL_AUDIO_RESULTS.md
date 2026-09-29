@@ -1,8 +1,8 @@
 # EXP-011 Results: Visual Access Blocked
 
-The STFT tool is verified offline. The real-data numerical control returned indeterminate on all 12 registered trials, providing zero coverage. The visual comparison did not run: the authorized ModelMetis Azure resource has no GPT-5.6 deployment. The feasibility verdict is **inconclusive**, with no model promotion, silver collection, specialist training or routing. The next requirement is an explicitly authorized, fixed-version image-capable endpoint, not more human reference labels.
+The numerical control returned indeterminate on all 12 registered trials, providing zero coverage. Visual inference was not executed because the inspected resource had no GPT-5.6 deployment. EXP-011's visual verdict is **inconclusive**. The later [DSP-to-Sol experiment](DSP_LLM_RESULTS.md) uses a different protocol and does not complete this STFT-only comparison.
 
-Completed September 29, 2026, from handoff commit `03418cfd6907752726b1b904de3daa30523df63e`. The original dirty worktree was preserved. See the [preregistered protocol](VISUAL_AUDIO_EXPERIMENT.md), [renderer](../src/modelmetis/visual_audio.py), [CLI](../scripts/visual_audio.py), [32 focused tests](../tests/test_visual_audio.py), and [unmodified aggregate](../ml/visual-audio-exp011-v1.json). This is the handoff's permitted offline fallback, not completion of a real visual feasibility experiment.
+Evidence: [protocol](VISUAL_AUDIO_EXPERIMENT.md), [renderer](../src/modelmetis/visual_audio.py), [CLI](../scripts/visual_audio.py), [signal/contract tests](../tests/test_visual_audio.py) and [aggregate](../ml/visual-audio-exp011-v1.json).
 
 ## Measured Results
 
@@ -63,38 +63,7 @@ No resource, model deployment, firewall or role assignment was created or modifi
 
 These are single local timings, not controlled throughput measurements. Visual latency and tokens are unmeasured. Inference expenditure is zero because no inference was requested; this is not a price estimate for the proposed model. No billing claim includes resource inventory operations or local compute. Candidate price provenance is explicitly not verified.
 
-Three publisher reference annotations simulate the initial human references. There were zero new human diagnoses, extra calibration labels, query corrections or physical verifications. Human minutes were not measured and are not inferred from automation wall time. Visual inspection by the user is not a physical diagnosis.
-
-## Attempt Ledger
-
-All experimental attempts are retained in new ignored directories, with `attempts.jsonl` operation timing and immutable registrations. The following includes failed development/discovery commands; none was treated as a model result.
-
-| Attempt | Outcome | Wall time |
-| --- | --- | ---: |
-| Initial Git status/HEAD | Dirty worktree recorded; expected handoff commit | 0.151 s |
-| Full pre-edit pytest | 120 passed, three existing warnings; pytest 13.18 s | 14.522 s |
-| Ruff and initial runtime inventory | Ruff passed; package metadata probe stopped on missing Pillow; x64 Python checked | 1.202 s |
-| Initial STFT tests | 13 passed | 1.649 s |
-| Corrected package inventory | ARM64 NumPy/SciPy/SoundFile/PyAV present; Pillow/Matplotlib absent | 0.772 s |
-| Renderer dependencies | Installed Matplotlib 3.10.8 and Pillow 12.3.0 in existing ARM64 environment | 71.238 s measured tool interval, including orchestration |
-| Existing deployment discovery | Only gpt-audio-1.5 deployed | 4.629 s |
-| Decoder/PNG tests | 19 passed | 7.960 s |
-| First GPT-5.6 catalog query | Failed: query assumed a nested model object | 5.422 s |
-| Corrected catalog query | Three exact GPT-5.6 IDs and versions returned | 4.650 s |
-| Numerical/contract tests | 26 passed | 3.040 s |
-| Initial runner gate | 28 passed; Ruff rejected one 102-character line | 3.915 s |
-| Repaired runner gate | 31 passed; Ruff clean | 3.426 s |
-| Source preparation v1 | Completed; no data fallback or reselection | 50.483 s |
-| Offline comparison v1 | Completed; 12 abstentions, zero model calls | 3.927 s |
-| Evaluation v1 | Completed; inconclusive visual verdict | 1.269 s |
-| Local image QA generation | Original signal, resized signal and six-image overview generated | 1.850 s |
-| Focused end-to-end gate | 32 passed; Ruff clean | 5.340 s |
-| Chat-error log search with rg | Failed because rg is not installed; PowerShell fallback used | 0.187 s |
-| PowerShell log search | Reported request ID absent from available session log | 0.028 s |
-| Self-contained gallery generation | Six original PNGs; Ruff clean | 0.384 s |
-| Final full pytest and Ruff | 152 passed, three unchanged warnings; pytest 13.50 s; Ruff clean | 14.883 s |
-
-The user also reported a Copilot HTTP 400 `invalid_request_body` with an upstream file-download 404 after chat image-preview attempts. Request identifiers were not found in the available session debug log, so a specific backend root cause is unconfirmed. This is not an Azure model inference failure: there were no Azure inference calls. The local HTML viewer avoids attaching images to chat and was verified to load. No editor settings or logs were reset.
+Three publisher annotations simulate initial human references. New diagnoses, calibration labels, query corrections and physical verifications were zero; human time was unmeasured. Attempt logs retain preparation, offline comparison and evaluation. Model discovery initially failed on an incorrect response-shape assumption; the corrected query returned three GPT-5.6 catalog entries, but no deployed endpoint for this run.
 
 ## Evidence Locations
 

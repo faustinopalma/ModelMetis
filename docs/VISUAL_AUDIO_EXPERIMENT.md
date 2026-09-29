@@ -2,11 +2,11 @@
 
 ## Registration
 
-Registered September 29, 2026, before numerical predictions or visual inference. This is an exploratory, bounded development experiment with no agreed deployment error or coverage targets. It cannot authorize promotion. Only STFT power spectrograms may be shown to the visual model. Welch is a numerical control only. Earlier representation alternatives in the handoff are superseded for this experiment.
+Registered before numerical predictions or visual inference. This exploratory experiment has no deployment error/coverage targets and cannot support promotion. The visual model receives only STFT power spectrograms; Welch is a numerical control.
 
 Hypothesis: one publisher-confirmed reference per known condition can support recognition on a different physical drone and rejection when an entire condition is absent from the visible references. Publisher annotations simulate human references; they are not new physical diagnoses. A known condition may itself be a fault. Outside-reference does not establish a fault.
 
-Dataset: Yi, Choi and Lee, Sound-Based Drone Fault Classification Using Multitask Learning, Zenodo version 1, DOI 10.5281/zenodo.7779574, CC BY 4.0. Use original, amplitude-preserving WAV/FLAC content from the previously audited A/B archives, never the historically peak-normalized exports. Recheck A/B archive SHA-256 against the September 19 audit, selected source PCM against the restricted inventory, and each selected file's decoder integrity. Do not read the C archive or query C rows.
+Dataset: Yi, Choi and Lee, Sound-Based Drone Fault Classification Using Multitask Learning, Zenodo v1, DOI 10.5281/zenodo.7779574, CC BY 4.0. Use original amplitude-preserving A/B WAV/FLAC content. Recheck archive SHA-256 against the source audit, PCM against the restricted inventory and decoder integrity. Exclude C archives and inventory rows.
 
 Split whole drone groups before selecting clips or creating images: A supplies references, B supplies queries. Include exactly N (healthy), MF1 (motor-cap dent at position 1), PC1 (propeller cut at position 1), maneuver F, mic1, with an exact mic2 counterpart in the existing inventory. Select the lowest PCM SHA-256, then source path, per drone/condition. Selection is deterministic and independent of prediction outcomes. Assign opaque C01/C02/C03 IDs to these three conditions. Keep source filenames, labels, physical identities, hashes and offsets outside model messages.
 
@@ -26,7 +26,7 @@ Report correct-known, wrong-known, known false rejection, unknown false acceptan
 
 ## Reproduction
 
-The native ARM64 application runtime is used; the separate x64 ML runtime is unchanged. The exact additional renderer dependency snapshot is [requirements-visual-audio-windows-arm64.txt](../ml/requirements-visual-audio-windows-arm64.txt). Baseline: 120 tests passed in 13.18 s pytest time, 14.522 s wall time; Ruff clean. Three preexisting dependency warnings remain. All attempt outputs must use new directories and must never overwrite historical artifacts.
+Use the native ARM64 runtime with [renderer dependency pins](../ml/requirements-visual-audio-windows-arm64.txt). The separate x64 ML runtime is unchanged. Write each attempt to a new directory and preserve historical artifacts.
 
 The [results report](VISUAL_AUDIO_RESULTS.md) records the offline outcome, all experimental attempts and the exact live-access blocker. The committed aggregate contains no sample-level source answers, credentials or private spending limits.
 
@@ -44,8 +44,8 @@ For other recordings, use the reusable renderer with a JSON list containing exac
 
 ```json
 [
-	{"path": "audio/opaque-01.wav", "recording_id": "R01", "group_id": "G01", "split": "support"},
-	{"path": "audio/opaque-02.wav", "recording_id": "R02", "group_id": "G02", "split": "query"}
+    {"path": "audio/opaque-01.wav", "recording_id": "R01", "group_id": "G01", "split": "support"},
+    {"path": "audio/opaque-02.wav", "recording_id": "R02", "group_id": "G02", "split": "query"}
 ]
 ```
 

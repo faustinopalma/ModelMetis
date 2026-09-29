@@ -1,6 +1,6 @@
 # Azure Machine Learning Foundation
 
-Status: draft, pending explicit infrastructure-plan and Bicep approval. Evidence collected September 18, 2026. No ModelMetis resource group, workspace, compute cluster, role assignment, or private endpoint has been created. A GPU quota request was submitted and declined. This document is the versioned handoff; it does not depend on ignored CLI state.
+Draft: the private AML environment is not deployed. Its execution path, validated templates and deployment approval remain pending. The optional A100 quota request failed. Quota and price observations below are historical and require refresh before provisioning.
 
 ## Scope And Destination
 
@@ -15,7 +15,7 @@ Provide isolated specialist training, experiment tracking, artifact storage, and
 | IaC, proposed | Subscription-scope Bicep creates the new group; resource-group modules create its resources |
 | Execution | Parameterized PowerShell locally; the same validation and deployment entry points from GitHub Actions or Azure DevOps later |
 
-Live ARM authentication succeeded. The current identity has subscription Owner and inherited administrative roles. Discovery found no existing ModelMetis resource group. This does not reserve names or authorize reuse of other resources. Every Azure command must specify the subscription. Do not modify existing groups, policies, resources, or Lanternina. Do not register providers or grant subscription-wide CI roles without reviewing their effects.
+Use an explicit subscription and verify target ownership before each operation. Preserve unrelated resources, policies and Lanternina. Review provider registrations and CI role scopes before applying them.
 
 ## Resource Proposal
 
@@ -42,7 +42,7 @@ The initial clusters should return to zero after a short, parameterized idle int
 
 ## Job Termination Contract
 
-The September 18 local CLAP/specialist experiment used CPU only; no Azure job or GPU node was started. The user requested automatic GPU shutdown after work and offered later manual remediation as a fallback. That fallback does not replace automatic controls. The settings below are requirements for the pending IaC and orchestrator, not deployed or verified behavior.
+Local experiments used CPU only. Automatic job termination and GPU scale-down require the controls and live checks below; neither has been verified in Azure.
 
 - Set AML compute `min_instances: 0`, `max_instances: 1`, and `idle_time_before_scale_down: 120` seconds. Disable public SSH and node public IPs. Do not use a persistent compute instance or online endpoint for the batch experiment.
 - Set each initial command job's `limits.timeout` to 1800 seconds. Expose it as a bounded parameter; increasing it requires an explicit experiment budget. Runtime timeout is not a queue/provisioning deadline.
@@ -77,9 +77,7 @@ Source: the provider-specific AML regional `usages` API, API version `2024-10-01
 
 West Europe permits the proposed four-vCPU CPU and four-vCPU T4 clusters within current quota. Italy North already has A100 quota but the inspected dedicated CPU families have zero quota. No second regional environment is proposed. Regional VM-size listing was verified for Italy North; West Europe `vmSizes` availability still needs verification before generation. Neither quota nor a listed SKU guarantees physical capacity or successful scale-up.
 
-The authorized request for 24 dedicated AML A100 vCPUs in West Europe was submitted at `2026-09-18T08:41:01Z`. Request ID: `1bdc471e-ce36-46a2-a266-b0757a88c386`. Final service state: `Failed`; error: `QuotaNotAvailableForResource`. A separate AML usage read confirmed the limit remained zero. The API did not provide a more specific reason. Do not report this as approved, pending, or a hardware-capacity diagnosis.
-
-Prepared justification for a support escalation: "I am a Cloud Solution Architect building customer proofs of concept and demonstrations that require GPU compute." The submitted `az quota update` request had no free-text justification field, so this text was not transmitted with that request. No support ticket has been opened. A100 is optional; do not resubmit the same request repeatedly or block initial T4 work on its approval.
+Request `1bdc471e-ce36-46a2-a266-b0757a88c386` for 24 West Europe AML A100 vCPUs failed with `QuotaNotAvailableForResource`; a separate usage read confirmed zero quota. The API supplied no more specific cause. No support ticket exists. A100 is optional and does not block initial T4 work.
 
 The inherited `VirtualMachine_SKU_Deny` rule inspected targets `Microsoft.Compute/virtualMachines` and `Microsoft.Compute/virtualMachineScaleSets`, includes T4/A100 sizes, and exempts Spot priority. It does not directly match `Microsoft.MachineLearningServices/workspaces/computes`. This is not proof that an AML scale-up will succeed under all inherited policies. Do not bypass, modify, or exempt the policy. What-if and a real bounded scale-up remain necessary. The assignment displayed as "Block Azure RM Resource Creation" inspected here restricts classic resource types; its title alone must not be treated as a blanket ARM prohibition. Storage must remain private regardless of whether the exact inherited storage-enforcement rule has been fully traced.
 
@@ -105,7 +103,7 @@ Public USD consumption prices retrieved September 18, 2026 through Azure Retail 
 
 For illustration, 20 CPU node-hours and 20 T4 node-hours add 18.60 USD to the fixed subtotal, before all other charges. Provisioning, image builds and idle nodes before scale-down consume billable time too. A100 is excluded; its West Europe price has not been included in this estimate.
 
-Private DNS, storage capacity/transactions, File shares, disks, registry storage over the included allowance, private-endpoint data processing, bandwidth, Key Vault operations, and log ingestion/retention are additional. The first DNS pricing lookup returned no records and is not evidence of a zero price. The previously discussed 120-160 USD/month range was preliminary; the verified fixed subtotal is already about 131 USD/month before these additions. Use that subtotal plus explicit usage allowances for approval, not the bottom of the preliminary range. Minimum-zero compute does not remove these fixed costs. Budgets and alerts do not automatically stop spending.
+Private DNS, storage, File shares, disks, excess registry storage, private-endpoint traffic, bandwidth, Key Vault operations and logs are additional. DNS pricing was unresolved. Minimum-zero compute leaves these fixed costs in place; budgets and alerts do not stop spending.
 
 ## Automation And Private Access
 
@@ -117,8 +115,8 @@ Validate current resource schemas, API versions, providers, region/SKU support, 
 
 ## Next Actions And Acceptance
 
-1. Obtain explicit approval for the resource list, the fixed subtotal plus usage allowances, and Bicep generation. General resource-creation authorization exists, but the exact-plan question did not receive an explicit approval; the user was unavailable. No cost-bearing resource creation followed.
-2. Resolve the private execution/access path, remaining prices, West Europe VM-size availability, full applicable policy checks, exact schemas, and least-privilege role matrix. Keep the failed A100 request optional; a support escalation needs the brief justification above and any required factual contact details.
+1. Finalize the resource list and fixed/variable cost estimate before deployment approval.
+2. Resolve the private execution path, remaining prices, West Europe VM-size availability, policies, schemas and least-privilege role matrix. A100 remains optional.
 3. Generate Bicep and parameterized scripts. Immediately build/lint the touched templates; validate parameters, permissions and scope; obtain an ARM what-if preview. Do not treat a successful compile as evidence that private datastore access works.
 4. Present the validated destination, cost and risks and obtain the required deployment approval. Deploy only dedicated ModelMetis resources. Record deployment outputs, IDs, region and exact commands without secrets.
 5. Verify positive and negative boundaries with nonempty synthetic test data: authorized private read/write succeeds; public data-plane access fails; training cannot read reference storage; evaluator cannot write training data. Verify keys/public access remain disabled and DNS resolves to private addresses from the execution environment.

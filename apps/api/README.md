@@ -4,7 +4,7 @@ The local FastAPI entry point is [modelmetis.api](../../src/modelmetis/api.py). 
 
 ## Local Setup
 
-Prerequisites: Python 3.12 or later. Create a virtual environment in the repository root and install the project with its `dev` extra. The September 17 validation used Python 3.13.13 ARM64 and an editable installation. Confirm that `modelmetis.api.__file__` points to this repository's source before starting the server; a regular installation can retain stale code while tests import newer sources.
+Use Python 3.12 or later and an editable installation with the `dev` extra. Before starting the server, verify that `modelmetis.api.__file__` points to this repository's source; a regular installation can retain stale code while tests import newer sources.
 
 ```powershell
 $timer = [Diagnostics.Stopwatch]::StartNew(); try { python -m venv .venv } finally { Write-Output "elapsed: $([math]::Round($timer.Elapsed.TotalSeconds, 1))s" }

@@ -1,6 +1,24 @@
-# Initial Backlog
+# Backlog
 
-All items are not started. Order and dependencies follow the [plan](PIANO.md). Roles represent responsibilities to assign, not people already committed.
+The tested configurations have not met the diagnostic objective. Further experiments need a defined operating domain, error limits, useful coverage and a bounded human-review workload. Drone C remains reserved for confirmation.
+
+## Candidate Audio Objectives
+
+The maintained definition is [Audio Objectives By Ambition](AUDIO_OBJECTIVES.md): diagnosis across different machine types, diagnosis within one machine family, anomaly detection within that scope, and change monitoring within that scope. It states what each level gives up, its required data and its verification criteria.
+
+The target remains open. Reference collection and independent evaluation require separately accounted data and annotation effort.
+
+## Deferred Video Task
+
+MM-021, deferred: evaluate teacher-to-silver-to-specialist learning on a defined video task. Before execution, establish data rights, physical-object/scene splits and teacher accuracy against independent references. Specialist training depends on a useful teacher result. Dataset, model and evaluation protocol remain unspecified.
+
+## Audio Follow-Up
+
+Long-recording comparison needs real multi-regime acquisitions and independently checked boundaries. Evaluate fixed windows against label-blind change-point detection, retaining short events, transitions and file tails. Measure boundary error, downstream classification, coverage and call count. Half-second drone clips cannot validate this behavior. Silver collection and specialist training remain blocked on teacher quality.
+
+## Original Implementation Backlog
+
+The table below preserves the initial plan and dependencies; it is not a current all-not-started status report. Consult [working context](CONTEXT.md) and [experiment history](EXPERIMENTS.md) for executed work. Roles represent responsibilities to assign, not people already committed.
 
 | ID | Priority | Activity | Role | Depends on | Completion criterion |
 | --- | --- | --- | --- | --- | --- |
@@ -24,10 +42,6 @@ All items are not started. Order and dependencies follow the [plan](PIANO.md). R
 | MM-018 | P1 | Run complete demo and final report | Team | MM-016, MM-017 | Gates verified or non-promotion justified |
 | MM-019 | P2 | Benchmark teacher portfolio | ML | MM-018 | Least expensive model/configuration within the same gates |
 | MM-020 | P2 | Evaluate CPU serving and possible edge export | ML, platform | MM-018 | Exported model parity and measured economic benefit |
-
-## First Increment
-
-Complete MM-001 through MM-006. The expected result is a testable local flow and a measurement protocol, not a collection of empty Azure services. MM-007 can proceed in parallel once a workload profile and budget are available.
 
 ## Shared Definition of Done
 
