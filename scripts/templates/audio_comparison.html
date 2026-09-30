@@ -29,6 +29,8 @@ button.primary:hover{background:var(--cp-accent-hover)}select{padding:8px;max-wi
 .pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
 .pane{min-width:0}.panel-title{min-height:82px;justify-content:space-between;align-content:center;flex-wrap:nowrap}
 .panel-title>div{min-width:0}.panel-title h2{overflow-wrap:anywhere}.ref-tools{display:flex;gap:6px;flex-shrink:0}
+.match-status{display:block;min-height:20px;margin-top:4px;font-size:12px;font-weight:600;color:var(--cp-link)}
+.match-status.different{color:var(--cp-accent)}
 .kicker{font-size:11px;text-transform:uppercase;letter-spacing:0;color:var(--cp-text-muted);margin-bottom:6px}
 .plot{position:relative;border:1px solid var(--cp-border);background:var(--cp-surface-soft);aspect-ratio:12/7;overflow:hidden}
 .plot img{width:100%;height:100%;object-fit:contain;background:var(--cp-surface)}
@@ -54,30 +56,30 @@ dialog::backdrop{background:var(--cp-overlay)}dialog .dialog-top{display:flex;ju
 dialog img{width:auto;max-width:100%;max-height:78vh;object-fit:contain}dialog table{font-size:13px}dialog th{white-space:nowrap}
 [hidden]{display:none!important}.badge{color:var(--cp-accent);font-size:12px;white-space:nowrap}
 @media(max-width:760px){header,main,footer{padding:12px}h1{font-size:18px}.header-actions{gap:6px}.header-actions button{padding:8px}
-.pair{gap:10px}.panel-title{min-height:110px;display:block}.panel-title h2{font-size:15px;min-height:36px}.ref-tools{margin-top:6px}.ref-tools .icon{width:40px;height:40px}
+.pair{gap:10px}.panel-title{min-height:144px;display:block}.panel-title h2{font-size:15px;min-height:36px}.ref-tools{margin-top:6px}.ref-tools .icon{width:40px;height:40px}
 .pane-footer{flex-wrap:wrap}.pane-footer button{width:100%;min-width:0;padding:8px 4px}.pane-footer .subtle{font-size:11px}.plot .zoom{width:32px;height:32px;padding:6px;bottom:4px;right:4px}
 .transport{gap:10px}.timeline{flex-basis:100%}.decisions select{flex-basis:100%}.decisions button{flex:1}.reveal{grid-template-columns:1fr}.filters{gap:12px}.reference-picker{flex-basis:100%}.header-actions .export-label{display:none}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand"><span data-icon="Headphones"></span><div><h1>Audio comparison</h1><div class="subtle">ModelMetis / Human assessment</div></div></div>
-  <div class="header-actions"><button id="results">Results <span id="progress" class="badge"></span></button><button id="export" title="Export your answers" aria-label="Export your answers"><span data-icon="Download"></span><span class="export-label">Export</span></button></div>
+  <div class="brand"><span data-icon="Headphones"></span><div><h1>Audio comparison</h1><div class="subtle">ModelMetis / Reference review</div></div></div>
+  <div class="header-actions"><button id="results">Review notes <span id="progress" class="badge"></span></button><button id="export" title="Export review notes" aria-label="Export review notes"><span data-icon="Download"></span><span class="export-label">Export</span></button></div>
 </header>
 <main>
   <div class="filters">
     <div class="tools"><label>Dataset <select id="dataset"></select></label><label>Set <select id="group"></select></label></div>
-    <div class="navigation"><button class="icon" id="previous-sample" title="Previous sample" aria-label="Previous sample" data-icon="ChevronLeft"></button><span id="counter" class="counter"></span><button class="icon" id="next-sample" title="Next sample" aria-label="Next sample" data-icon="ChevronRight"></button><button id="next-unanswered">Next unanswered</button></div>
+    <div class="navigation"><button class="icon" id="previous-sample" title="Previous sample" aria-label="Previous sample" data-icon="ChevronLeft"></button><span id="counter" class="counter"></span><button class="icon" id="next-sample" title="Next sample" aria-label="Next sample" data-icon="ChevronRight"></button><button id="next-unreviewed">Next unreviewed</button></div>
   </div>
   <nav class="tabs" role="tablist" aria-label="Evidence view" id="views"></nav>
   <div class="pair">
     <div class="pane" id="query-pane">
-      <div class="panel-title"><div><div class="kicker">Input to classify</div><h2 id="query-name"></h2><div id="query-state" class="subtle"></div></div></div>
-      <div class="plot"><img id="query-image" alt="Unknown input DSP figure"><span class="missing" id="query-missing" hidden>Unavailable</span><button class="icon zoom" data-zoom="query" title="Enlarge unknown figure" aria-label="Enlarge unknown figure" data-icon="Maximize2"></button></div>
+      <div class="panel-title"><div><div class="kicker">Input / Correct class (publisher)</div><h2 id="query-name"></h2><div id="query-state" class="subtle"></div></div></div>
+      <div class="plot"><img id="query-image" alt="Input DSP figure"><span class="missing" id="query-missing" hidden>Unavailable</span><button class="icon zoom" data-zoom="query" title="Enlarge input figure" aria-label="Enlarge input figure" data-icon="Maximize2"></button></div>
       <div class="pane-footer"><button id="play-query" class="primary"><span data-icon="Play"></span>Play input</button><span id="query-metadata" class="subtle"></span></div>
     </div>
     <div class="pane" id="reference-pane">
-      <div class="panel-title"><div><div class="kicker" id="reference-counter">Reference</div><h2 id="reference-name"></h2></div><div class="ref-tools"><button class="icon" id="previous-reference" title="Previous reference" aria-label="Previous reference" data-icon="ChevronLeft"></button><button class="icon" id="next-reference" title="Next reference" aria-label="Next reference" data-icon="ChevronRight"></button></div></div>
+      <div class="panel-title"><div><div class="kicker" id="reference-counter">Reference</div><h2 id="reference-name"></h2><span id="reference-match" class="match-status" aria-live="polite"></span></div><div class="ref-tools"><button class="icon" id="previous-reference" title="Previous reference" aria-label="Previous reference" data-icon="ChevronLeft"></button><button class="icon" id="next-reference" title="Next reference" aria-label="Next reference" data-icon="ChevronRight"></button><button class="icon" id="correct-reference" title="Select reference for the correct class" aria-label="Select reference for the correct class" data-icon="Check"></button></div></div>
       <div class="plot"><img id="reference-image" alt="Selected reference DSP figure"><span class="missing" id="reference-missing" hidden>Unavailable</span><button class="icon zoom" data-zoom="reference" title="Enlarge reference figure" aria-label="Enlarge reference figure" data-icon="Maximize2"></button></div>
       <div class="pane-footer"><button id="play-reference"><span data-icon="Play"></span>Play reference</button><span id="reference-metadata" class="subtle"></span></div>
     </div>
@@ -93,24 +95,23 @@ dialog img{width:auto;max-width:100%;max-height:78vh;object-fit:contain}dialog t
     <label>Volume <input id="volume" class="volume" type="range" min="0" max="1" step="0.05" value="0.7"></label>
   </div>
   <section class="assessment">
-    <div class="assessment-title"><h3>Your classification</h3><span id="save-state" class="subtle" aria-live="polite"></span></div>
-    <div class="decisions"><select id="choice" aria-label="Your classification"></select><button id="use-reference">Choose current reference</button><button id="record" class="primary"><span data-icon="Check"></span>Record choice</button><button id="reveal" disabled><span data-icon="Eye"></span>Reveal result</button></div>
-    <textarea id="notes" placeholder="Observations" aria-label="Your observations"></textarea>
-    <div id="answer" class="reveal" hidden><div><h3>Publisher label</h3><p id="truth"></p><p id="verdict" class="verdict"></p></div><div><h3>Model decisions</h3><div id="models" class="model-lines"></div></div></div>
+    <div class="assessment-title"><h3>Observations</h3><label><input type="checkbox" id="reviewed"> Reviewed</label><span id="save-state" class="subtle" aria-live="polite"></span></div>
+    <textarea id="notes" placeholder="Observations (optional)" aria-label="Your observations"></textarea>
+    <details id="model-details"><summary>Model decisions</summary><div id="models" class="model-lines"></div></details>
     <div id="notice" role="status"></div>
   </section>
 </main>
 <footer>10-second microphone windows / Original comparison WAVs / Per-record peak normalization / <span id="attribution"></span></footer>
 <audio id="player" preload="metadata"></audio>
 <dialog id="image-dialog"><div class="dialog-top"><h2 id="image-title"></h2><button class="icon" data-close="image-dialog" title="Close figure" aria-label="Close figure" data-icon="X"></button></div><img id="large-image" alt="Enlarged DSP figure"></dialog>
-<dialog id="results-dialog"><div class="dialog-top"><h2>Your results</h2><button class="icon" data-close="results-dialog" title="Close results" aria-label="Close results" data-icon="X"></button></div><p id="result-summary"></p><div class="table-scroll"><table><thead><tr><th>Dataset</th><th>Sample</th><th>Your choice</th><th>Publisher label</th><th>Status</th></tr></thead><tbody id="result-rows"></tbody></table></div></dialog>
+<dialog id="results-dialog"><div class="dialog-top"><h2>Review notes</h2><button class="icon" data-close="results-dialog" title="Close notes" aria-label="Close notes" data-icon="X"></button></div><p id="result-summary"></p><div class="table-scroll"><table><thead><tr><th>Dataset</th><th>Sample</th><th>Correct class</th><th>Observations</th><th>Status</th></tr></thead><tbody id="result-rows"></tbody></table></div></dialog>
 <script id="comparison-data" type="application/json">__DATA__</script>
 <script>
 'use strict';
 const DATA = JSON.parse(document.getElementById('comparison-data').textContent);
 const byId = id => document.getElementById(id);
 const player = byId('player');
-const storageKey = 'modelmetis-human-comparison-' + (new URLSearchParams(location.search).has('test')?'test-':'') + DATA.fingerprint;
+const storageKey = 'modelmetis-reference-review-' + (new URLSearchParams(location.search).has('test')?'test-':'') + DATA.fingerprint;
 let stored = {};
 try { stored = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch { stored = {}; }
 if (!stored || typeof stored !== 'object' || Array.isArray(stored)) stored = {};
@@ -126,7 +127,7 @@ const humanize = label => label.replaceAll('_',' ').replace(/\b\w/g, letter => l
 const labelFor = (condition, source=dataset()) => condition === 'different' ? 'Different from all' : condition === 'unsure' ? 'Unsure' : humanize(source.references.find(item => item.condition === condition)?.label || condition || 'Unanswered');
 const icon = name => DATA.icons[name];
 document.querySelectorAll('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); });
-function persist() { try { localStorage.setItem(storageKey, JSON.stringify(stored)); byId('save-state').textContent = 'Saved locally'; } catch { byId('save-state').textContent = 'Session only'; byId('notice').textContent = 'Local storage unavailable. Export preserves your answers.'; } }
+function persist() { try { localStorage.setItem(storageKey, JSON.stringify(stored)); byId('save-state').textContent = 'Saved locally'; } catch { byId('save-state').textContent = 'Session only'; byId('notice').textContent = 'Local storage unavailable. Export preserves your notes.'; } }
 function option(value,text) { const element=document.createElement('option');element.value=value;element.textContent=text;return element; }
 function populateDataset() {
   byId('group').replaceChildren(option('all','All evaluated'));
@@ -134,9 +135,6 @@ function populateDataset() {
   byId('group').append(option('development','Development'));
   byId('group').value=dataset().queries.some(item=>item.group==='final')?'final':'all';
   sampleIndex=0;referenceIndex=0;
-  byId('choice').replaceChildren(option('','Select a condition'));
-  dataset().references.forEach(item=>byId('choice').append(option(item.condition,labelFor(item.condition))));
-  byId('choice').append(option('different','Different from all'),option('unsure','Unsure'));
   byId('attribution').textContent=dataset().name==='Jin'?'Linjie Jin / CC BY 4.0':'Mert Sehri and Patrick Dumond / CC BY 4.0';
   changeSample(0,true);
 }
@@ -145,32 +143,27 @@ function renderPlots() {
     const item=role==='query'?query():reference(); const image=byId(role+'-image');
     if(item.figures[view]) { image.src=item.figures[view];image.hidden=false;byId(role+'-missing').hidden=true; }
     else { image.removeAttribute('src');image.hidden=true;byId(role+'-missing').hidden=false; }
-    image.alt=(role==='query'?'Unknown input':labelFor(item.condition))+' / '+views.find(item=>item[0]===view)[1];
+    image.alt=(role==='query'?'Input / '+labelFor(item.truth):'Reference / '+labelFor(item.condition))+' / '+views.find(item=>item[0]===view)[1];
   }
   document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-selected',String(button.dataset.view===view)));
 }
 function renderReference() {
   byId('reference-name').textContent=labelFor(reference().condition);
   byId('reference-counter').textContent='Reference '+(referenceIndex+1)+' / '+dataset().references.length;
+  const matches=reference().condition===query().truth;
+  byId('reference-match').textContent=matches?'Matches correct class':'Different class';
+  byId('reference-match').classList.toggle('different',!matches);
+  byId('correct-reference').disabled=matches;
   byId('reference-metadata').textContent=reference().duration.toFixed(1)+' s / '+(reference().rate/1000)+' kHz';
   renderPlots();
 }
-function renderAnswer() {
-  const entry=stored[recordKey()];const locked=Boolean(entry?.submitted);
-  byId('choice').value=entry?.choice||'';byId('notes').value=entry?.notes||'';
-  byId('choice').disabled=locked;byId('notes').readOnly=locked;byId('use-reference').disabled=locked;
-  byId('record').disabled=locked||!byId('choice').value;byId('reveal').disabled=!locked||Boolean(entry?.revealed);
-  byId('query-state').textContent=entry?.revealed?'Result revealed':locked?'Choice recorded':'Label hidden';
-  byId('answer').hidden=!entry?.revealed;
-  byId('truth').textContent='';byId('models').replaceChildren();byId('verdict').textContent='';
-  if(entry?.revealed) {
-    byId('truth').textContent=labelFor(query().truth);
-    byId('verdict').textContent=entry.choice==='unsure'?'You marked this sample unsure':entry.choice===query().truth?'Correct classification':'Incorrect classification';
-    byId('verdict').classList.toggle('error',entry.choice!=='unsure'&&entry.choice!==query().truth);
-    query().models.forEach(model=>{const line=document.createElement('p');line.textContent=model.round+' / '+model.phase+': '+(model.status==='completed'?(model.outcome==='different'?'Different from all':labelFor(model.condition)):'Technical failure');byId('models').append(line);});
-  }
-  const answered=dataset().queries.filter(item=>stored[dataset().key+'/'+item.id]?.submitted).length;
-  byId('progress').textContent=answered+'/'+dataset().queries.length;
+function renderReview() {
+  const entry=stored[recordKey()];
+  byId('notes').value=entry?.notes||'';byId('reviewed').checked=Boolean(entry?.reviewed);
+  byId('models').replaceChildren();
+  query().models.forEach(model=>{const line=document.createElement('p');line.textContent=model.round+' / '+model.phase+': '+(model.status==='completed'?(model.outcome==='different'?'Different from all':labelFor(model.condition)):'Technical failure');byId('models').append(line);});
+  const reviewed=dataset().queries.filter(item=>stored[dataset().key+'/'+item.id]?.reviewed).length;
+  byId('progress').textContent=reviewed+'/'+dataset().queries.length;
 }
 function playbackButtons() {
   for(const role of ['query','reference']) {const running=active===role&&!player.paused;
@@ -202,21 +195,25 @@ function changeReference(delta) {
 }
 function changeSample(delta,absolute=false) {
   stop();sampleIndex=absolute?delta:(sampleIndex+delta+samples().length)%samples().length;
+  referenceIndex=dataset().references.findIndex(item=>item.condition===query().truth);
+  if(referenceIndex<0)throw new Error('Correct-class reference is missing.');
   position=0;const prior=stored[recordKey()];seen=new Set([...(prior?.views||[]),view]);auditions={query:0,reference:0,...prior?.auditions};byId('seek').value=0;byId('start').value=0;byId('end').value=query().duration;
   byId('seek').max=query().duration;byId('end').max=query().duration;byId('start').max=query().duration-0.1;
   byId('counter').textContent=(sampleIndex+1)+' / '+samples().length;
-  byId('query-name').textContent='Sample '+String(dataset().queries.indexOf(query())+1).padStart(3,'0');
+  byId('query-name').textContent=labelFor(query().truth);
+  byId('query-state').textContent='Sample '+String(dataset().queries.indexOf(query())+1).padStart(3,'0')+' / '+query().truth;
   byId('query-metadata').textContent=query().duration.toFixed(1)+' s / '+(query().rate/1000)+' kHz';
   byId('clock').textContent='0.00 / '+query().duration.toFixed(2)+' s';
-  renderReference();renderAnswer();
+  byId('model-details').open=false;renderReference();renderReview();
 }
 DATA.datasets.forEach((item,index)=>byId('dataset').append(option(index,item.name)));
 views.forEach(([key,title])=>{const button=document.createElement('button');button.type='button';button.textContent=title;button.dataset.view=key;button.setAttribute('role','tab');button.addEventListener('click',()=>{view=key;seen.add(key);saveEvidence();renderPlots();});byId('views').append(button);});
 byId('dataset').onchange=()=>{datasetIndex=Number(byId('dataset').value);populateDataset();};
 byId('group').onchange=()=>changeSample(0,true);
 byId('previous-reference').onclick=()=>changeReference(-1);byId('next-reference').onclick=()=>changeReference(1);
+byId('correct-reference').onclick=()=>changeReference(dataset().references.findIndex(item=>item.condition===query().truth)-referenceIndex);
 byId('previous-sample').onclick=()=>changeSample(-1);byId('next-sample').onclick=()=>changeSample(1);
-byId('next-unanswered').onclick=()=>{for(let step=1;step<=samples().length;step++){const index=(sampleIndex+step)%samples().length;if(!stored[dataset().key+'/'+samples()[index].id]?.submitted){changeSample(index,true);return;}}byId('notice').textContent='All samples in this set have a recorded choice.';};
+byId('next-unreviewed').onclick=()=>{for(let step=1;step<=samples().length;step++){const index=(sampleIndex+step)%samples().length;if(!stored[dataset().key+'/'+samples()[index].id]?.reviewed){changeSample(index,true);return;}}byId('notice').textContent='All samples in this set are reviewed.';};
 byId('play-query').onclick=()=>play('query');byId('play-reference').onclick=()=>play('reference');
 byId('restart').onclick=()=>{position=limits().start;if(active)player.currentTime=position;byId('seek').value=position;};
 byId('seek').oninput=()=>{position=Number(byId('seek').value);if(active)player.currentTime=position;byId('clock').textContent=position.toFixed(2)+' / '+query().duration.toFixed(2)+' s';};
@@ -228,24 +225,21 @@ player.ontimeupdate=()=>{position=player.currentTime;byId('seek').value=position
   const interval=limits();if(!switching&&!player.paused&&position>=interval.end-0.025){if(byId('loop').checked){position=interval.start;if(byId('alternate').checked)play(active==='query'?'reference':'query',false,interval.start);else player.currentTime=position;}else{player.pause();playbackButtons();}}};
 player.onended=()=>{position=limits().start;if(byId('loop').checked)play(byId('alternate').checked?(active==='query'?'reference':'query'):active,false);else playbackButtons();};
 player.onpause=playbackButtons;player.onplay=playbackButtons;
-function saveEvidence(){if(stored[recordKey()]?.submitted)return;stored[recordKey()]={...stored[recordKey()],views:[...seen],auditions:{...auditions}};persist();}
-function saveDraft(){if(stored[recordKey()]?.submitted)return;stored[recordKey()]={...stored[recordKey()],choice:byId('choice').value,notes:byId('notes').value,views:[...seen],auditions:{...auditions}};persist();byId('record').disabled=!byId('choice').value;}
-byId('choice').onchange=saveDraft;byId('notes').oninput=saveDraft;
-byId('use-reference').onclick=()=>{byId('choice').value=reference().condition;saveDraft();};
-byId('record').onclick=()=>{if(!byId('choice').value)return;stored[recordKey()]={choice:byId('choice').value,notes:byId('notes').value,submitted:true,revealed:false,submittedAt:new Date().toISOString(),views:[...seen],auditions:{...auditions}};persist();renderAnswer();};
-byId('reveal').onclick=()=>{if(!stored[recordKey()]?.submitted)return;stored[recordKey()].revealed=true;persist();renderAnswer();};
+function saveEvidence(){stored[recordKey()]={...stored[recordKey()],views:[...seen],auditions:{...auditions}};persist();}
+function saveReview(){stored[recordKey()]={notes:byId('notes').value,reviewed:byId('reviewed').checked,reference:reference().condition,updatedAt:new Date().toISOString(),views:[...seen],auditions:{...auditions}};persist();}
+byId('notes').oninput=saveReview;byId('reviewed').onchange=()=>{saveReview();renderReview();};
 document.addEventListener('keydown',event=>{if(document.querySelector('dialog[open]')||event.altKey||event.ctrlKey||event.metaKey||event.target.closest('input,select,textarea,[contenteditable]'))return;
   if(event.key==='ArrowLeft'){event.preventDefault();changeReference(-1);}if(event.key==='ArrowRight'){event.preventDefault();changeReference(1);}
   if(event.key==='PageDown'){event.preventDefault();changeSample(1);}if(event.key==='PageUp'){event.preventDefault();changeSample(-1);}
   if(event.code==='Space'&&event.target===document.body){event.preventDefault();play(active||'query');}});
 document.querySelectorAll('[data-zoom]').forEach(button=>button.onclick=()=>{const role=button.dataset.zoom;const image=byId(role+'-image');if(image.hidden)return;byId('large-image').src=image.src;byId('image-title').textContent=image.alt;byId('image-dialog').showModal();});
 document.querySelectorAll('[data-close]').forEach(button=>button.onclick=()=>byId(button.dataset.close).close());
-function answerRows(){return DATA.datasets.flatMap(source=>source.queries.map((item,index)=>({source,item,index,entry:stored[source.key+'/'+item.id]})).filter(row=>row.entry?.submitted));}
-byId('results').onclick=()=>{stop();const rows=answerRows();const verified=rows.filter(row=>row.entry.revealed);const correct=verified.filter(row=>row.entry.choice===row.item.truth);const unsure=rows.filter(row=>row.entry.choice==='unsure');
-  byId('result-summary').textContent=rows.length+' recorded / '+verified.length+' revealed / '+correct.length+' correct among '+verified.length+' revealed / '+unsure.length+' unsure';
-  byId('result-rows').replaceChildren();rows.forEach(({source,item,index,entry})=>{const tr=document.createElement('tr');[source.name,'Sample '+String(index+1).padStart(3,'0'),labelFor(entry.choice,source),entry.revealed?labelFor(item.truth,source):'Hidden',entry.revealed?(entry.choice==='unsure'?'Unsure':entry.choice===item.truth?'Correct':'Incorrect'):'Recorded'].forEach(text=>{const td=document.createElement('td');td.textContent=text;tr.append(td);});byId('result-rows').append(tr);});byId('results-dialog').showModal();};
-byId('export').onclick=()=>{const exported={schema:1,fingerprint:DATA.fingerprint,answers:answerRows().map(({source,item,entry})=>({dataset:source.name,id:item.id,group:item.group,audio_sha256:item.audioHash,...entry,expected:entry.revealed?item.truth:null}))};
-  const url=URL.createObjectURL(new Blob([JSON.stringify(exported,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='human-audio-comparison.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+function reviewRows(){return DATA.datasets.flatMap(source=>source.queries.map((item,index)=>({source,item,index,entry:stored[source.key+'/'+item.id]})).filter(row=>row.entry?.reviewed||row.entry?.notes));}
+byId('results').onclick=()=>{stop();const rows=reviewRows();
+  byId('result-summary').textContent=rows.filter(row=>row.entry.reviewed).length+' reviewed / '+rows.filter(row=>row.entry.notes).length+' with observations';
+  byId('result-rows').replaceChildren();rows.forEach(({source,item,index,entry})=>{const tr=document.createElement('tr');[source.name,'Sample '+String(index+1).padStart(3,'0'),labelFor(item.truth,source),entry.notes||'',entry.reviewed?'Reviewed':'In progress'].forEach(text=>{const td=document.createElement('td');td.textContent=text;tr.append(td);});byId('result-rows').append(tr);});byId('results-dialog').showModal();};
+byId('export').onclick=()=>{const exported={schema:2,mode:'reference-review',fingerprint:DATA.fingerprint,reviews:reviewRows().map(({source,item,entry})=>({dataset:source.name,id:item.id,group:item.group,audio_sha256:item.audioHash,...entry,expected:item.truth,label:labelFor(item.truth,source)}))};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(exported,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='audio-reference-review.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 populateDataset();
 </script>
 </body>

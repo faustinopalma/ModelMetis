@@ -81,3 +81,31 @@ def test_model_comparison_uses_the_same_reference_set(tmp_path, monkeypatch):
         )
     packed = load_dataset(tmp_path, "Fixture")
     assert [model["phase"] for model in packed["queries"][0]["models"]] == ["final", "replay-known"]
+
+
+def test_generated_page_is_direct_reference_review(tmp_path, monkeypatch):
+    from scripts import audio_comparison
+
+    monkeypatch.setattr(
+        audio_comparison,
+        "load_dataset",
+        lambda folder, name: {
+            "name": name,
+            "key": name,
+            "protocolHash": "fixture",
+            "references": [{"audioHash": "reference"}],
+            "queries": [{"audioHash": "query"}],
+        },
+    )
+    monkeypatch.setattr(audio_comparison, "load_icons", lambda: {})
+    output = tmp_path / "review"
+    audio_comparison.build(output)
+    manifest = json.loads((output / "manifest.json").read_text())
+    page = (output / "index.html").read_text()
+    assert manifest["mode"] == "reference-review"
+    assert "always visible" in manifest["labels"]
+    assert 'id="correct-reference"' in page
+    assert 'id="reference-match"' in page
+    assert all(f'id="{identifier}"' not in page for identifier in ("choice", "record", "reveal"))
+    assert "modelmetis-reference-review-" in page
+    assert "modelmetis-human-comparison-" not in page

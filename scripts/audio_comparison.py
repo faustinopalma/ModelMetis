@@ -178,8 +178,8 @@ def build(output):
             }
             for item in datasets
         ],
-        "blinding": "Labels hidden in the interface until a choice is recorded and revealed; "
-        "the local HTML source contains labels and model decisions",
+        "mode": "reference-review",
+        "labels": "Publisher labels always visible; matching reference selected for each query",
     }
     (output / "manifest.json").write_bytes(canonical_json(manifest))
     return {
