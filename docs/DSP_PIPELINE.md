@@ -58,6 +58,26 @@ For a periodic Hann window $w$, one-sided FFT amplitude is $|\mathrm{FFT}(xw)|/\
 
 Absolute sound-pressure levels, SNR, causal mechanical diagnoses, order tracking and component-specific fault frequencies are intentionally absent. They require additional calibration, trustworthy noise/reference measurements, tachometer/RPM data or machine geometry that these files do not provide. No mel/wavelet rendering is added merely to increase image count.
 
+## Prioritize Shape-Comparison Extensions
+
+The existing seven views provide a reproducible baseline. Their diagnostic usefulness and robustness are still being evaluated; the [labeled comparison](DSP_LABELED_RESULTS.md) supports enriching the comparison representation before further inference. The following extensions are proposed and have not been implemented or validated.
+
+| Priority | Extension | Information gained | Required check |
+| --- | --- | --- | --- |
+| 1 | Multiresolution Welch and STFT, with frame lengths specified in seconds and explicit bandwidth | Fine harmonic/sideband structure alongside fast transients | Synthetic neighboring tones, amplitude modulation and impulses; consistent physical resolution across native rates |
+| 1 | Pairwise normalized spectral overlays, difference curves and per-band distance contributions | Identifies the regions responsible for a match or disagreement | Gain-change invariance within the linear range; explicit floors and low-energy handling; compare with the current uniformly weighted log-PSD distance |
+| 1 | Within-recording distributions of shape features and regime stability | Median, quantiles, persistence and transient occupancy expose variability hidden by a whole-window average | Known synthetic transitions and same-source window dependence; quality indicators remain distinct from validated regime labels |
+| 1 | Multi-reference class comparison with separate representative regimes | Measures proximity to several valid forms, within-class variation and the competing-class margin | Separate acquisitions for references, calibration and evaluation; disclose labeled-example counts and control unequal reference-bank sizes |
+| 2 | Harmonic-family and sideband relationships; cepstrum, the inverse transform of the log-magnitude spectrum | Quantifies repeated spectral spacing and relative line patterns | Known harmonic fixtures and ambiguous fundamentals; retain absolute-frequency evidence and state uncertainty about mechanical interpretation |
+| 2 | Band-specific envelope spectra and normalized modulation features | Separates modulation in distinct carrier bands and exposes repeated impacts | Predetermined or development-selected bands; distinguish modulation from beating; retain edge/filter transients and an unavailable state |
+| 3 | Spectral kurtosis, measuring temporal impulsiveness per frequency band, and cyclic spectral coherence, measuring periodic relationships between spectral components | Candidate localization of transient or periodically modulated fault signatures | Evaluate only when earlier analyses leave a concrete gap; account for record duration, computation and nonspecific background impulses |
+
+The fixed 1,024-sample Welch/STFT frame currently gives bin spacing of about 43.07 Hz at 44.1 kHz and 41.02 Hz at 42 kHz. With a periodic Hann window, equivalent noise bandwidth is approximately 1.5 times that spacing. The full-interval FFT already has much finer bin spacing, so the proposed improvement concerns stable spectral estimates and time-frequency evidence at several resolutions. Zero padding does not provide additional physical resolving power.
+
+For a linear acquisition gain, mean-centering the log PSD already removes the constant level shift, subject to flooring and numerical limits. Position, microphone frequency response, reverberation and changed speed/load can modify the spectral shape itself. Evaluate robustness using actual acquisition variation and controlled gain/filter/noise perturbations, with clean baselines, bounded perturbations and clipping checks. Synthetic perturbations exercise the method; evidence about real acquisition transfer requires real recordings. Preserve features that discriminate fault classes when introducing invariances. Order tracking, which expresses frequencies relative to rotational speed, requires trustworthy speed information or a separately validated estimate.
+
+The target comparative report should contain every candidate class and reference ID, quality/coverage flags, several independent shape comparisons, per-band contributions, time consistency, within-class ranges, the closest competing class and an explicit record of conflicting evidence. Provide typed numerical evidence plus a small set of aligned plots. Compare numerical-only classification with AI interpretation of the same evidence. Recognition errors, false rejections, wrong acceptances and human review load must be reported separately. Report completeness and model schema compliance remain technical checks.
+
 ## Outputs And Use
 
 The command below processes a file already present in the workspace; it does not require a model endpoint. Use a fresh output name. The CLI prints its elapsed time, and each report records decode/analysis/plot/total durations.

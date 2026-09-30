@@ -1,6 +1,6 @@
 # Current State
 
-**No tested configuration supports reliable operational fault diagnosis.** Command-line experiments cover teacher labeling, specialist training, frozen encoders, numerical controls and DSP-to-image comparison. The local review application is separate from those pipelines. Autonomous coordination, adaptive routing and private cloud training remain unimplemented.
+**Shape-based comparison on Jin is promising, while joint recognition and exception handling remain unresolved.** Reports plus numerical distances achieved 11/12 correct known labels and 2/4 correct excluded-class rejections. A calibrated replay achieved 9/12 and 4/4 respectively; Ottawa achieved 4/16 known labels. The next step is to improve deterministic DSP comparison before running further model experiments. Autonomous human-loop enrichment, adaptive routing and private cloud training remain unimplemented.
 
 ## Evidence
 
@@ -12,8 +12,25 @@
 | Larger encoders, EXP-010 | Dasheng P@5 27.41%; within-cluster condition agreement 90/751 pairs | Better retrieval, impure clusters |
 | STFT-only comparison, EXP-011 | Welch control abstained on 12/12; visual inference not executed | Model deployment unavailable for that run |
 | DSP-to-Sol, EXP-012 | 0/9 known trials recognized; 9/9 falsely rejected; 3/3 unknown trials correctly rejected | Three repeated query clips; zero technical failures |
+| Labeled DSP comparison, Jin | Development improved from 5/8 to 8/8 with numerical evidence; reserved-direction recognition 11/12, excluded-class rejection 2/4 | Twelve query windows share four previously consumed acquisitions; numerical control already achieved 8/8 on development |
+| Class-calibrated Jin replay | Known recognition 9/12, excluded-class rejection 4/4 | Eight additional labeled calibration windows; all three magnet-fracture queries falsely rejected; exploratory replay |
+| Labeled DSP comparison, Ottawa | Known recognition 4/16, twelve wrong-class assignments | One reference per class across operating-profile changes |
 
-Protocols, failed attempts and measurements belong in [Experiment History](EXPERIMENTS.md), [STFT Results](VISUAL_AUDIO_RESULTS.md) and [DSP-to-Sol Results](DSP_LLM_RESULTS.md). Dataset rights, grouping and confounds belong in [Audio Datasets](AUDIO_DATASETS.md). Existing data, registrations and artifacts remain immutable. Drone C was source-audited but has no model evaluation; B is consumed development data.
+Protocols, failed attempts and measurements belong in [Experiment History](EXPERIMENTS.md), [STFT Results](VISUAL_AUDIO_RESULTS.md), [DSP-to-Sol Results](DSP_LLM_RESULTS.md) and [Labeled DSP Results](DSP_LABELED_RESULTS.md). The labeled run retained 68 HTTP attempts: 64 completed classifications, one paid truncation and three service rejections with missing usage. Known list-price consumption was USD 8.43773744. Dataset rights, grouping and confounds belong in [Audio Datasets](AUDIO_DATASETS.md). Existing data, registrations and artifacts remain immutable. Drone C was source-audited but has no model evaluation; B is consumed development data.
+
+The local labeled-results index is `outputs/dsp-labeled-results-v1/index.html`. The [human comparison page](HUMAN_AUDIO_COMPARISON.md), `outputs/audio-comparison-v8/index.html`, exposes correct publisher labels, selects the matching reference, supports keyboard reference switching and A/B listening, and highlights wrong-class assignments and false rejections separately from technical failures. It contains 36 query windows and 12 references; these are a selected subset of the available data. Label-free human testing is outside the current review-page workflow.
+
+## Strengthen DSP Before Adaptive Experiments
+
+The next work should implement and validate a comparative DSP report, following the [prioritized DSP extensions](DSP_PIPELINE.md#prioritize-shape-comparison-extensions). Preserve the existing measured results as baselines. The current comparison compensates uniform gain by mean-centering log spectra; its dB thresholds measure spectral-shape distance. Microphone response, position, reverberation and operating regime can still alter the shape. Diagnostic similarity should emphasize stable structural evidence while recording amplitude as acquisition-quality context.
+
+Represent a class with multiple complementary examples and retain distinct acoustic regimes. The comparative report should expose per-reference and per-class evidence, within-class variability, competing-class margins and disagreements between diagnostics. Every added representation needs an isolated development comparison against the existing baseline and against a numerical-only decision rule, so the contribution of model interpretation is measurable.
+
+The intended operational behavior is `different` triggering human investigation. A reviewer may assign the exception to an existing class or establish a new class; the confirmed example then enriches a versioned reference bank. The proposed simulation uses publisher labels as a disclosed human oracle, revealing a stream sample's label only after recording the model's rejection. Score the original decision before enrichment, and measure improvement on subsequent inputs. Track accepted-label errors, automatic coverage, human interventions and reference-bank growth together. Samples assigned to a wrong known class will not trigger this rejection-only loop, so their errors must remain visible in evaluation.
+
+There are 346 prepared WAVs across Ottawa (128), Jin (136), AI Mechanic (19) and the A/B drone package (63). The local Jin sources comprise 12 original recordings and permit 721 nonoverlapping ten-second windows. The A/B archives contain 215,974 labeled half-second clips before dependency-aware selection; paired microphones and noise variants require grouping. A proposed Ottawa pilot uses eight seed references, 104 sequential acquisitions and 16 separate evaluation acquisitions. This allocation is a proposal, and the data already have project exposure. No enrichment experiment has been executed or authorized by the completed registrations.
+
+For a fresh working session, start with this file, [DSP Pipeline](DSP_PIPELINE.md), [Labeled DSP Results](DSP_LABELED_RESULTS.md) and [Human Audio Comparison](HUMAN_AUDIO_COMPARISON.md). Establish the DSP design and offline validation first. Any later inference campaign requires a new bounded registration and explicit separation of reference, enrichment-stream and evaluation data. Existing request limits are exhausted or belong to completed experiments.
 
 ## Data Boundaries
 
@@ -48,7 +65,7 @@ The local FastAPI API and React console support sanitized WAV upload/playback an
 
 The native Windows ARM64 application runtime is `.venv/Scripts/python.exe`; ML uses the separate x64 runtime under `data/ml-runtime`. Reproduction and dependency snapshots are in the [ML guide](../ml/README.md) and [scripts guide](../scripts/README.md). Do not merge runtimes or overwrite frozen data to reproduce a run.
 
-The deterministic [DSP pipeline](DSP_PIPELINE.md) generates measurements and multiview reports without model calls. [EXP-012](DSP_LLM_PROTOCOL.md) uses exact FFT/STFT images and typed measurements. It completed against pinned Sol on the reused resource; its negative classification result is recorded separately from infrastructure success.
+The deterministic [DSP pipeline](DSP_PIPELINE.md) generates measurements and multiview reports without model calls. [EXP-012](DSP_LLM_PROTOCOL.md) uses exact FFT/STFT images and typed measurements. The later [whole-report comparison](DSP_REPORT_COMPARISON.md) includes all generated figures, declared compact image derivatives, typed measurements and optional numerical distances. Labeled experiment results are separate from transport success. The offline human-review generator uses the same source WAVs and original report figures, with source and artifact hash checks.
 
 Infrastructure state and target identifiers are maintained in [infra](../infra/README.md), [DSP resource reuse](DSP_RESOURCE_REUSE.md) and [AML infrastructure](AML_INFRASTRUCTURE.md). The Global Standard quota request was submitted; approval remains unverified. Its status is independent of the completed DataZoneStandard experiment. Check live state before further operations; never replay a pending deployment or duplicate a quota request.
 
