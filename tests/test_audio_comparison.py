@@ -1,5 +1,7 @@
 import base64
 import json
+import subprocess
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -109,3 +111,34 @@ def test_generated_page_is_direct_reference_review(tmp_path, monkeypatch):
     assert all(f'id="{identifier}"' not in page for identifier in ("choice", "record", "reveal"))
     assert "modelmetis-reference-review-" in page
     assert "modelmetis-human-comparison-" not in page
+    assert 'id="model-status"' in page
+    assert 'id="errors-only"' in page
+    assert 'id="trial"' in page
+
+
+def test_model_error_categories_exclude_technical_failures():
+    from scripts.audio_comparison import TEMPLATE
+
+    source = TEMPLATE.read_text(encoding="utf-8")
+    helpers = source.split("function modelResult(model,truth) {", 1)[1].split("const trialKey", 1)[
+        0
+    ]
+    program = (
+        "function modelResult(model,truth) {"
+        + helpers
+        + """
+const assert = require('node:assert/strict');
+const cases = [
+    [{status:'completed',outcome:'similar',condition:'C01'}, 'correct', false],
+    [{status:'completed',outcome:'similar',condition:'C02'}, 'wrong_class', true],
+    [{status:'completed',outcome:'different',condition:null}, 'false_rejection', true],
+    [{status:'technical_failure',outcome:'similar',condition:'C02'}, 'technical_failure', false],
+    [{status:'completed',outcome:null,condition:null}, 'technical_failure', false],
+];
+for(const [model, expected, error] of cases){
+    assert.equal(modelResult(model,'C01'),expected);
+    assert.equal(isModelError(model,'C01'),error);
+}
+"""
+    )
+    subprocess.run(["node", "-e", program], cwd=Path(__file__).resolve().parents[1], check=True)
