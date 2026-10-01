@@ -64,14 +64,16 @@ EXAMPLES = (
      "does not represent the profile change."),
 )
 LIMITS = (
-    "Previously consumed public recordings; no fresh or blind final evaluation.",
+    "The recordings come from two public datasets already studied by the project; fresh "
+    "recordings and blind listening comparisons are the next validation steps.",
     "Jin reserved windows come from four right-microphone acquisitions, three windows each.",
     "Ottawa uses eight motors; motor identity can be confounded with condition.",
     "Configuration C was designed after inspecting configuration B's reserved result.",
     "Configuration C thresholds use eight additional labeled left-microphone windows.",
-    "Excluded-class tests remove a known reference; they are not new fault mechanisms.",
-    "Forced nearest-reference distance alone labels all Jin reserved windows correctly; "
-    "an added model benefit is not demonstrated.",
+    "Excluded-class tests withhold a known reference; genuinely new fault mechanisms are a "
+    "separate future test.",
+    "Forced nearest-reference distance alone labels all Jin reserved windows correctly; the "
+    "next comparisons measure what the model adds beyond these numbers.",
 )
 
 
@@ -87,6 +89,9 @@ PAGE_WORDING = (
     ("expected response: Other.'", "expected response: different.'"),
     ("item.dataset==='Jin'?", "item.dataset.startsWith('Jin')?"),
     ('>Raw response</a>', '>Published decision</a>'),
+    ('<footer>Recorded AI decisions / Original audio / Publisher labels / '
+     'Human intervention not executed / ',
+     '<footer>Recorded model decisions / Original audio / Publisher labels / '),
 )
 
 
@@ -492,12 +497,12 @@ def build(output):
         "pageTitle": "ModelMetis / Simple method comparison", "compact": False,
         "defaultView": "welch", "deepLinks": True, "defaultCollection": "Jin: reports + distances",
         "defaultFilter": "all",
-        "studyNotice": "Recorded decisions of the simple method: one DSP report per known "
-        "condition, one unknown report, recognize or answer different. Choose a collection; "
-        "configurations are reported separately and never pooled.",
-        "displayScope": "All eight figures shown here were supplied to the model as resized "
-        "contact-sheet cells together with the numerical measurements. "
-        "The model received no audio.",
+        "studyNotice": "Recorded decisions of the simple method. The system analyzes each "
+        "recording into a DSP report; a general multimodal model studies the unknown report "
+        "beside one report per known condition and names a condition or answers different. "
+        "Each collection is one configuration with its own counts.",
+        "displayScope": "The model studied these eight figures as contact-sheet cells together "
+        "with the numerical measurements of each report.",
     }
     page = (TEMPLATES / "audio_comparison_simple.html").read_text(encoding="utf-8")
     page = page.replace("__THEME__", THEME).replace("__BASE_STYLE__", STYLE)

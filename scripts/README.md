@@ -4,7 +4,7 @@
 
 ## Inspect The Committed Snapshot
 
-Use the [hosted comparison](https://faustinopalma.github.io/ModelMetis/audio-comparison/) or the [local static-server quick start](../README.md#verify-without-cloud-access). Python 3.12 or later can verify the snapshot and staged publication boundaries using only the standard library:
+Use the [hosted comparison](https://faustinopalma.github.io/ModelMetis/audio-comparison/) or the [local static-server quick start](../README.md#verify-a-clone-locally). Python 3.12 or later can verify the snapshot and staged publication boundaries using only the standard library:
 
 ```console
 python -m scripts.check_examples

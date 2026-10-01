@@ -6,8 +6,8 @@
 
 | Responsibility | Owner |
 | --- | --- |
-| Method: inputs, comparison, reference selection, abstention and failure modes | [Method](METHOD.md) |
-| Results: verified counts, explanations, selected decisions and limits | [Results](RESULTS.md) |
+| Method: inputs, comparison, reference selection, review and error patterns | [Method](METHOD.md) |
+| Results: verified counts, explanations, selected decisions and scope | [Results](RESULTS.md) |
 | Examples: audio, figures, exact model inputs and decisions | [Public examples](../examples/README.md) |
 | Reproduction: verification, regeneration and paid-inference boundaries | [Reproduction guide](../scripts/README.md) |
 
@@ -23,9 +23,9 @@
 | Rights, acquisition grouping and external scores | [Datasets](AUDIO_DATASETS.md), [benchmark status](DSP_BENCHMARK_STATUS.md) |
 | Released and withheld material | [Publication policy](PUBLICATION.md) |
 
-## Archived Variants And Earlier Studies
+## Other Directions And Earlier Studies
 
-The first six rows came after the simple method and did not improve safety; the last row preceded it. All keep their protocols, measurements and negative findings.
+The first six rows explored other inputs and reference representations after the simple method; the last row preceded it. All keep their protocols, measurements and findings.
 
 | Variant | Protocol | Measured result |
 | --- | --- | --- |

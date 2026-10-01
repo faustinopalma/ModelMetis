@@ -357,12 +357,12 @@
     "meaning": "Repository file whose content, up to line endings, has the recorded hash. Null means that exact version was not preserved; the exact transmitted requests and responses remain the evidence."
   },
   "limits": [
-    "Previously consumed public recordings; no fresh or blind final evaluation.",
+    "The recordings come from two public datasets already studied by the project; fresh recordings and blind listening comparisons are the next validation steps.",
     "Jin reserved windows come from four right-microphone acquisitions, three windows each.",
     "Ottawa uses eight motors; motor identity can be confounded with condition.",
     "Configuration C was designed after inspecting configuration B's reserved result.",
     "Configuration C thresholds use eight additional labeled left-microphone windows.",
-    "Excluded-class tests remove a known reference; they are not new fault mechanisms.",
-    "Forced nearest-reference distance alone labels all Jin reserved windows correctly; an added model benefit is not demonstrated."
+    "Excluded-class tests withhold a known reference; genuinely new fault mechanisms are a separate future test.",
+    "Forced nearest-reference distance alone labels all Jin reserved windows correctly; the next comparisons measure what the model adds beyond these numbers."
   ]
 }

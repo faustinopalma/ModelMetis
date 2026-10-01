@@ -90,7 +90,7 @@ code { font-family: Consolas, "Courier New", Courier, monospace; overflow-wrap: 
 
 header,main,footer{max-width:1120px;padding:20px 24px}header{border-bottom:1px solid var(--cp-border)}
 h1{font-size:30px;margin:0 0 8px}h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:0 0 6px}p,li{max-width:80ch}
-.lead{font-size:17px}.status{border-left:4px solid var(--cp-accent);padding:8px 12px;background:var(--cp-accent-soft)}
+.lead{font-size:17px}.status{border-left:4px solid var(--cp-link);padding:8px 12px;background:var(--cp-surface-soft)}
 nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px}section{padding:24px 0;border-top:0;border-bottom:1px solid var(--cp-border)}
 .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0;margin:0;list-style:none;counter-reset:step}
 .flow li{border:1px solid var(--cp-border);border-radius:6px;padding:12px;background:var(--cp-surface-soft);counter-increment:step}
@@ -109,31 +109,31 @@ footer{font-size:13px;color:var(--cp-text-muted)}
 <body>
 <header>
 <h1>ModelMetis</h1>
-<p class="lead">A multimodal model compares the signal-processing report of an unknown machine recording with reports of recordings whose condition is known. It names the matching condition or answers <em>different</em>.</p>
-<p class="status"><strong>Research evidence, not an approved diagnostic.</strong> The method recognized 11 of 12 reserved Jin windows but rejected only 2 of 4 excluded-class tests. It failed on Ottawa, where one reference per class did not represent a changed operating profile: 4 of 16 correct.</p>
-<nav><a href="audio-comparison/index.html">Listen and compare decisions</a><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/METHOD.md">Method</a><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/RESULTS.md">Results and limits</a><a href="archive/index.html">Archived variants</a><a href="https://github.com/faustinopalma/ModelMetis">Repository</a></nav>
+<p class="lead">ModelMetis receives a machine recording, turns it into signal-processing diagrams and measurements, and asks a general multimodal model to study them beside recordings of known conditions. The model names the matching condition or hands the case to a person.</p>
+<p class="status"><strong>On reserved Jin motor recordings the method recognized 11 of 12 windows</strong> and correctly set aside 2 of 4 cases whose condition had no reference. On Ottawa motors, whose references come from another speed and load profile, it recognized 4 of 16; references for every operating regime are the current focus.</p>
+<nav><a href="audio-comparison/index.html">Listen and compare decisions</a><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/METHOD.md">Method</a><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/RESULTS.md">Results</a><a href="archive/index.html">Other directions explored</a><a href="https://github.com/faustinopalma/ModelMetis">Repository</a></nav>
 </header>
 <main>
-<section><h2>The model reads evidence, not audio</h2>
+<section><h2>From audio to a decision in four steps</h2>
 <ol class="flow">
-<li><h3>Measure</h3><p>Each ten-second recording becomes a deterministic DSP report: waveform, FFT, Welch spectrum, spectrogram, band power, envelope and autocorrelation diagrams, plus their numerical measurements.</p></li>
-<li><h3>Supply references</h3><p>One report per known condition, from a recording whose label was chosen before testing. The unknown report has no label.</p></li>
-<li><h3>Compare</h3><p>The model compares the unknown report with every reference and must cite evidence from both sides. One configuration also supplies Welch spectral distances.</p></li>
-<li><h3>Decide or abstain</h3><p>It returns the best-supported known condition, or <em>different</em> when no reference is similar. <em>Different</em> sends the case to a person; it is not a new diagnosis.</p></li>
+<li><h3>Analyze</h3><p>The system receives the audio and computes a deterministic DSP report for each ten-second recording: waveform, FFT, Welch spectrum, spectrogram, band power, envelope and autocorrelation diagrams with their measurements.</p></li>
+<li><h3>Supply references</h3><p>Each known condition contributes one report, from a recording chosen before testing. The unknown report carries no label.</p></li>
+<li><h3>Compare</h3><p>A general multimodal model studies the unknown report beside every reference and cites evidence from both. One configuration adds Welch spectral distances.</p></li>
+<li><h3>Decide</h3><p>The model returns the best-supported known condition, or <em>different</em> so that a person reviews the case.</p></li>
 </ol>
-<p class="note">Audio is published so people can listen to each recording beside its reference. The model received only diagrams and measurements.</p></section>
-<section><h2>Representative references are a condition of the method</h2>
-<p>A reference must look like the condition as it will be met: the same kind of microphone position, speed and load. Select references before testing and never from test outcomes.</p>
-<p>When two recordings with the same label behave very differently, the label covers more than one acoustic family or operating regime. Keep both as separate references instead of averaging them. Such a difference does not by itself prove two distinct physical faults.</p>
-<p>On Jin, front-microphone references transferred to right-microphone recordings of the same four conditions. On Ottawa, profile-1 references did not represent profile-2 acquisitions of the same motors.</p></section>
+<p class="note">Every recording is published with its diagrams, so you can listen to an unknown sample and each reference side by side.</p></section>
+<section><h2>Good references make good decisions</h2>
+<p>A reference should resemble its condition as it will be recorded: microphone position, speed and load. References are fixed before testing, by rules that use no test outcome.</p>
+<p>When recordings with the same label behave very differently, the label covers several acoustic families or operating regimes, and each gets its own reference. Such differences can come from speed, load or mounting as well as from the fault itself.</p>
+<p>On Jin, front-microphone references carried over to right-microphone recordings of the same four conditions. On Ottawa, references from operating profile 1 now need companions from the other profiles.</p></section>
 <section><h2>Recorded results</h2>
-<p>Each row is a separate configuration. Do not add rows or combine their best numbers. Publisher labels are the ground truth. Excluded-class tests remove the correct reference, so the right answer is <em>different</em>.</p>
+<p>Each row is one configuration with its own counts. Publisher labels are the ground truth. In excluded-class tests the matching reference is withheld, so the right answer is <em>different</em>.</p>
 <div class="table-scroll"><table><thead><tr><th>Collection</th><th>Configuration</th><th>Correct class</th><th>Wrong class</th><th>False rejection</th><th>Correct rejection, class excluded</th><th>Wrong acceptance, class excluded</th></tr></thead><tbody>
 <tr><td>Jin: reports + distances</td><td>Reports plus Welch spectral distances</td><td>11/12</td><td>0/12</td><td>1/12</td><td>2/4</td><td>2/4</td></tr>
 <tr><td>Ottawa: reports only</td><td>Reports only</td><td>4/16</td><td>12/16</td><td>0/16</td><td>Not tested</td><td>Not tested</td></tr>
 <tr><td>Jin: calibrated replay</td><td>Calibrated distance rule (exploratory replay)</td><td>9/12</td><td>0/12</td><td>3/12</td><td>4/4</td><td>0/4</td></tr>
 </tbody></table></div>
-<p class="note">The calibrated replay was designed after inspecting the reserved Jin result and uses eight extra labeled windows; it is exploratory. Nearest Welch distance alone labels all 12 reserved Jin windows correctly when forced to choose, so an added benefit of the model is not demonstrated. On Ottawa the same distance labels 2 of 16 correctly. <a href="results/simple-method-summary.json">Summary</a> / <a href="results/simple-method-outcomes.json">all 68 recorded attempts</a></p></section>
+<p class="note">The calibrated replay is an exploratory variant tuned on eight extra labeled windows. Nearest Welch distance alone also labels all 12 reserved Jin windows, and 2 of 16 Ottawa recordings; the next comparisons measure what the model adds beyond these numbers. <a href="results/simple-method-summary.json">Summary</a> / <a href="results/simple-method-outcomes.json">all 68 recorded attempts</a></p></section>
 <section><h2>Six decisions worth inspecting</h2>
 <div class="examples">
 <a class="example" data-direction="correct" href="audio-comparison/index.html#jin-distances-reserved-T01"><span class="tag">Correct class</span><strong>Recognition</strong><span>An unseen right-microphone window of excess Hall adhesive matches its front-microphone reference at 3.15 dB; every other reference is at least 7.6 dB away.</span></a>
@@ -143,16 +143,16 @@ footer{font-size:13px;color:var(--cp-text-muted)}
 <a class="example" data-direction="correct" href="audio-comparison/index.html#ottawa-reports-development-D01"><span class="tag">Correct class</span><strong>Recognition across operating profile</strong><span>A healthy profile-2 acquisition matches the healthy profile-1 reference.</span></a>
 <a class="example" data-direction="wrong" href="audio-comparison/index.html#ottawa-reports-development-D03"><span class="tag">Wrong class</span><strong>Wrong assignment across operating profile</strong><span>Rotor unbalance at profile 2 is assigned to stator winding; one reference per class does not represent the profile change.</span></a>
 </div></section>
-<section><h2>Where the method fails</h2>
+<section><h2>What we are improving</h2>
 <ul>
-<li><strong>References miss the regime.</strong> By Welch distance, 14 of 16 Ottawa profile-2 recordings lay closer to another class's profile-1 reference than to their own.</li>
-<li><strong>References lie close together.</strong> Jin magnet fracture and tight bearing differ by 3.04 dB; magnet-fracture windows were missed, and an excluded magnet-fracture window was accepted as tight bearing.</li>
-<li><strong>The model can argue past the numbers.</strong> In the healthy excluded-class test it accepted a reference 6.35 dB away.</li>
-<li><strong>A stricter rule moves the error.</strong> Calibrated thresholds rejected all four excluded windows but also all three magnet-fracture windows.</li>
+<li><strong>References for every operating regime.</strong> By Welch distance, 14 of 16 Ottawa profile-2 recordings lie closer to another class's profile-1 reference; references from each profile and load address this directly.</li>
+<li><strong>Separating close classes.</strong> The Jin magnet-fracture and tight-bearing references lie 3.04 dB apart, which explains the one missed magnet-fracture window and one wrong acceptance.</li>
+<li><strong>Explanations that follow the numbers.</strong> In one excluded-class test the model accepted a reference 6.35 dB away on the strength of similar levels and a shared 16 kHz ridge.</li>
+<li><strong>Balancing recognition and review.</strong> Calibrated thresholds set aside all four excluded-class windows together with the three magnet-fracture windows.</li>
 </ul>
-<p>Two public datasets, few acquisitions and previously used recordings limit every number above. No general reliability, state-of-the-art or human-parity claim is made. Published scores from other models use different sensors, splits or label budgets and are context, not a comparison.</p></section>
-<section><h2>Later variants did not improve safety</h2>
-<p>Removing diagram types and adding adaptive class memory were tested afterwards. On 72 Ottawa acquisitions, fixed memory gave 16 correct, 11 wrong and 45 review; adaptive memory gave 18 correct, 41 wrong and 13 review. These measured limits are kept in the <a href="archive/index.html">archive</a>.</p></section>
+<p>The current evidence comes from two public motor datasets, few acquisitions and recordings the project has already studied. Fresh recordings and blind listening comparisons are the next validation steps. Published scores from other models use their own sensors, splits and label budgets and serve as context.</p></section>
+<section><h2>Other directions explored</h2>
+<p>We also tested a wider set of 26 diagrams, the removal of selected diagram types and an adaptive class memory built from aggregated references. On 72 Ottawa acquisitions, fixed memory gave 16 correct, 11 wrong and 45 reviewed decisions; adaptive memory gave 18 correct, 41 wrong and 13 reviewed. The <a href="archive/index.html">archive</a> keeps every measurement and guides the current focus on references.</p></section>
 </main>
-<footer>Original audio: Linjie Jin; Mert Sehri and Patrick Dumond. Selected derivatives distributed under CC BY 4.0. This static site makes no model calls and needs no credentials.</footer>
+<footer>Original audio: Linjie Jin; Mert Sehri and Patrick Dumond. Selected derivatives distributed under CC BY 4.0. Every published file is listed with its SHA-256 hash in the snapshot manifest.</footer>
 </body></html>

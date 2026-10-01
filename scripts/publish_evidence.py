@@ -99,7 +99,13 @@ def public_payload(payload, output):
                 "figures": record["figures"], "figure_sha256": record["figureHashes"],
                 "sample_rate": record["rate"], "duration_seconds": record["duration"],
             })
-    result["pageTitle"] = "ModelMetis / Archived pruning candidate"
+    result["pageTitle"] = "ModelMetis / Pruning comparison"
+    result["studyNotice"] = ("Band power, autocorrelation and dominant-frequency tracking removed "
+                             "/ 8 primary decisions + 2 repeats / exploratory candidate")
+    result["displayScope"] = "Four of the 23 retained diagram types are shown here."
+    for case in result["cases"]:
+        if case.get("repeatWarning"):
+            case["repeatWarning"] = "Identical requests returned different answers."
     return result, records
 
 
@@ -240,9 +246,10 @@ def publish(source, output, refresh=False):
         export_decision(case, source, output)
     page = page.replace(encoded, canonical_json(public).decode().replace("<", "\\u003c"), 1)
     page = page.replace('>Raw response</a>', '>Published decision</a>')
+    page = page.replace(' / Human intervention not executed / ', ' / ', 1)
     page = page.replace(
         '<div class="header-actions"></div>',
-        '<div class="header-actions"><a href="../index.html">Archive</a>'
+        '<div class="header-actions"><a href="../index.html">Other directions</a>'
         '<a href="../../index.html">Current method</a>'
         '<a href="https://github.com/faustinopalma/ModelMetis/blob/main/examples/'
         'archive/pruning-candidate/README.md">Sources and scope</a></div>',
