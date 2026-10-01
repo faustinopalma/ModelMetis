@@ -1,0 +1,3 @@
+-r requirements-visual-audio-windows-arm64.txt
+PyWavelets==1.8.0
+jsonschema==4.25.1

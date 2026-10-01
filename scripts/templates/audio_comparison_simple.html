@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audio comparison v14 / ModelMetis</title>
+__THEME__
+<style>
+__BASE_STYLE__
+body{font-size:14px;background:var(--cp-surface)}
+header,main,footer{max-width:1560px;padding:16px 24px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--cp-border)}
+h1{font-size:22px;margin:0}h2{font-size:18px;margin:0;overflow-wrap:anywhere}
+button,select{font:inherit;color:var(--cp-text);background:var(--cp-surface);border:1px solid var(--cp-border-strong);border-radius:6px;min-height:40px}
+button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;cursor:pointer}
+button:hover{background:var(--cp-surface-soft)}button:disabled{opacity:.6;cursor:default}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--cp-link);outline-offset:3px}
+button svg{flex-shrink:0}button.icon{width:40px;min-width:40px;padding:8px}select{padding:8px;max-width:100%;min-width:0}
+.header-actions,.toolbar,.navigation,.reference-navigation,.transport{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.header-actions{font-size:13px}.toolbar{padding-bottom:14px;justify-content:space-between}
+.filters{display:flex;gap:12px;flex-wrap:wrap;min-width:0}.filters label{display:flex;align-items:center;gap:8px;min-width:0}
+.navigation{gap:6px}#case-counter{min-width:65px;text-align:center;font-variant-numeric:tabular-nums}
+#filter-count{font-size:13px;color:var(--cp-text-muted);margin:0 0 12px}
+.outcome{border-left:4px solid var(--cp-link);background:var(--cp-surface-soft);padding:10px 14px;margin-bottom:16px}
+.outcome[data-direction=wrong]{border-color:var(--cp-accent);background:var(--cp-accent-soft)}
+.outcome p{margin:4px 0;overflow-wrap:anywhere}.outcome h2{font-size:17px}
+#case-context{color:var(--cp-text-muted);font-size:13px}.diagram-control{display:flex;align-items:center;gap:10px;padding-bottom:12px}
+.study-notice{font-size:13px;color:var(--cp-text-muted);margin:0 0 12px}
+.repeat-warning{color:var(--cp-accent);font-weight:600}
+.compact-review .pane-title{min-height:0}.compact-review #query-metadata,.compact-review #expected-decision{display:none}
+.compact-review .choices button{min-height:52px}.compact-review .choice-row{min-height:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;column-gap:24px;row-gap:0}
+.pane{display:grid;grid-row:1/span 4;grid-template-rows:subgrid;min-width:0}
+.pane-title{min-height:66px;padding-bottom:10px}.eyebrow{font-size:12px;color:var(--cp-text-muted);margin-bottom:4px}
+.choice-row{min-height:144px;padding-bottom:12px;min-width:0}.choices{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.choices button{display:flex;flex-wrap:wrap;align-content:center;min-height:64px;padding:6px;min-width:0}
+.choices .choice-label{flex-basis:100%;font-size:12px;overflow-wrap:anywhere}
+.choices button[aria-pressed=true]{border:2px solid var(--cp-link);background:var(--cp-surface-soft)}
+.choices button:disabled{border-style:dashed;background:var(--cp-surface-soft)}
+#model-choice-reason{font-size:13px;color:var(--cp-text-muted);margin:6px 0;min-height:20px;overflow-wrap:anywhere}
+.reference-navigation{justify-content:space-between;gap:6px}.reference-navigation>div{display:flex;gap:6px}
+#reference-state{font-size:12px;overflow-wrap:anywhere;flex:1;min-width:0}.withheld{color:var(--cp-accent);font-weight:600}
+.query-facts{font-size:13px;line-height:1.6;color:var(--cp-text-muted)}.query-facts strong{display:block;color:var(--cp-text);font-size:15px}
+.plot{position:relative;aspect-ratio:12/7;border:1px solid var(--cp-border);background:var(--cp-surface-soft);overflow:hidden}
+.plot img{width:100%;height:100%;object-fit:contain}.plot .zoom{position:absolute;bottom:6px;right:6px;background:var(--cp-panel-strong)}
+.plot .missing{position:absolute;inset:0;display:grid;place-items:center;padding:12px;text-align:center}
+.pane-footer{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 0;min-width:0}
+.pane-footer small{font-size:12px;color:var(--cp-text-muted);overflow-wrap:anywhere}
+.playing .plot{box-shadow:inset 0 0 0 2px var(--cp-link)}
+.transport{padding:12px 0;border-top:1px solid var(--cp-border);border-bottom:1px solid var(--cp-border)}
+.transport audio{width:min(600px,100%);height:40px}.transport label{display:flex;align-items:center;gap:6px}.transport input{accent-color:var(--cp-link)}
+#playing-label{min-width:110px;font-size:13px;color:var(--cp-text-muted)}
+details{margin:12px 0;padding:10px 0}summary{font-size:14px}details p{font-size:13px}
+footer{font-size:12px;color:var(--cp-text-muted)}#notice{color:var(--cp-accent)}#notice:empty{display:none}
+dialog{max-width:min(1250px,96vw);max-height:94vh;background:var(--cp-surface);color:var(--cp-text);border:1px solid var(--cp-border);padding:12px;border-radius:6px}
+dialog::backdrop{background:var(--cp-overlay)}.dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+dialog img{max-height:80vh;object-fit:contain}a{overflow-wrap:anywhere}[hidden]{display:none!important}
+@media(max-width:760px){header,main,footer{padding:12px}header{align-items:flex-start;flex-wrap:wrap}h1{font-size:20px}.header-actions{gap:12px}
+.toolbar{gap:10px}.filters{width:100%;gap:8px}.filters label{flex:1}.filters select{flex:1}.navigation{margin-left:auto}
+.pair{column-gap:10px}h2{font-size:16px}.pane-title{min-height:82px}.choices{grid-template-columns:minmax(0,1fr);gap:4px}
+.choices button{min-height:58px;font-size:13px}.choice-row{min-height:218px}#model-choice-reason{font-size:12px}
+.reference-navigation{align-items:flex-start;flex-wrap:wrap}.reference-navigation>div{margin-left:auto}.pane-footer{flex-wrap:wrap}
+.pane-footer button{width:100%;padding:8px 4px;font-size:13px}.pane-footer small{font-size:11px}.zoom.icon{width:32px;min-width:32px;min-height:32px;padding:5px}
+.query-facts{font-size:12px}.query-facts strong{font-size:14px}.transport audio{flex-basis:100%;width:100%}}
+</style>
+</head>
+<body>
+<header><h1 id="page-title">Audio error review <small class="eyebrow">v14</small></h1><div class="header-actions"></div></header>
+<main>
+  <p class="study-notice" id="study-notice" hidden></p>
+  <div class="toolbar">
+    <div class="filters"><label>Collection <select id="dataset"><option value="all">All</option></select></label><label>Show <select id="case-filter"><option value="errors">All errors</option><option value="wrong">Wrong assignments</option><option value="review">Other / review errors</option><option value="all">All decisions</option></select></label></div>
+    <div class="navigation"><button class="icon" id="previous-case" title="Previous case" aria-label="Previous case" data-icon="ChevronLeft"></button><span id="case-counter"></span><button class="icon" id="next-case" title="Next case" aria-label="Next case" data-icon="ChevronRight"></button></div>
+  </div>
+  <p id="filter-count" aria-live="polite"></p>
+  <p id="empty-state" role="status" hidden>No cases match this filter.</p>
+  <div id="comparison-content">
+    <div class="outcome" id="decision-top" aria-live="polite"><h2 id="decision-outcome"></h2><p id="decision-values"></p><p id="case-context"></p><p class="repeat-warning" id="repeat-warning" hidden></p></div>
+    <div class="diagram-control"><label for="diagram">Diagram</label><select id="diagram"></select></div>
+    <div class="pair">
+      <div class="pane" id="query-pane">
+        <div class="pane-title"><div class="eyebrow">Input / Correct publisher class</div><h2 id="query-name"></h2></div>
+        <div class="choice-row query-facts"><strong id="query-case"></strong><div id="query-metadata"></div><div id="expected-decision"></div></div>
+        <div class="plot"><img id="query-image" alt="Input diagram"><span class="missing" id="query-missing" hidden>Diagram unavailable</span><button class="icon zoom" data-zoom="query" title="Enlarge input diagram" aria-label="Enlarge input diagram" data-icon="Maximize2"></button></div>
+        <div class="pane-footer"><button id="play-query"><span data-icon="Play"></span>Play input</button><small id="query-view-status"></small></div>
+      </div>
+      <div class="pane" id="reference-pane">
+        <div class="pane-title"><div class="eyebrow" id="reference-counter">Reference</div><h2 id="reference-name"></h2></div>
+        <div class="choice-row">
+          <div class="choices" role="group" aria-label="Reference choice"><button id="correct-reference" aria-pressed="false" title="Show the correct publisher-class reference"><span data-icon="Check"></span>Correct reference<span class="choice-label" id="correct-choice-label"></span></button><button id="model-reference" aria-pressed="false" aria-describedby="model-choice-reason" title="Show the reference selected by the model"><span data-icon="Eye"></span>Model choice<span class="choice-label" id="model-choice-label"></span></button></div>
+          <p id="model-choice-reason" aria-live="polite"></p>
+          <div class="reference-navigation"><span id="reference-state" aria-live="polite"></span><div><button class="icon" id="previous-reference" title="Previous reference" aria-label="Previous reference" data-icon="ChevronLeft"></button><button class="icon" id="next-reference" title="Next reference" aria-label="Next reference" data-icon="ChevronRight"></button></div></div>
+        </div>
+        <div class="plot"><img id="reference-image" alt="Reference diagram"><span class="missing" id="reference-missing" hidden>Diagram unavailable</span><button class="icon zoom" data-zoom="reference" title="Enlarge reference diagram" aria-label="Enlarge reference diagram" data-icon="Maximize2"></button></div>
+        <div class="pane-footer"><button id="play-reference"><span data-icon="Play"></span>Play reference</button><small id="reference-view-status"></small></div>
+      </div>
+    </div>
+    <div class="transport"><audio id="player" controls preload="metadata"></audio><span id="playing-label">Not playing</span><label><input type="checkbox" id="loop">Loop</label><label><input type="checkbox" id="alternate">A/B</label></div>
+    <p id="notice" role="status"></p>
+    <details id="guide-details"><summary>Diagram interpretation</summary><p id="diagram-guide"></p></details>
+    <details id="decision-details" hidden><summary>Recorded explanation</summary><p id="decision-explanation"></p><p><a id="raw-response">Raw response</a></p><p class="study-notice" id="display-scope"></p></details>
+  </div>
+</main>
+<footer>Recorded AI decisions / Original audio / Publisher labels / Human intervention not executed / <span id="attribution"></span></footer>
+<dialog id="image-dialog"><div class="dialog-heading"><h2 id="image-title"></h2><button class="icon" id="close-image" title="Close diagram" aria-label="Close diagram" data-icon="X"></button></div><img id="large-image" alt="Enlarged comparison diagram"></dialog>
+<script id="comparison-data" type="application/json">__DATA__</script>
+<script>
+'use strict';
+const DATA=JSON.parse(document.getElementById('comparison-data').textContent);
+const byId=id=>document.getElementById(id);
+const player=byId('player');
+let caseIndex=0,referenceIndex=0,preferredReference='model',displayedCaseId=null,view=DATA.defaultView||'levels';
+let active=null,position=0,generation=0;
+if(DATA.pageTitle){document.title=DATA.pageTitle;byId('page-title').textContent=DATA.pageTitle;}
+if(DATA.compact){document.body.classList.add('compact-review');byId('guide-details').hidden=true;}
+if(DATA.studyNotice){byId('study-notice').textContent=DATA.studyNotice;byId('study-notice').hidden=false;}
+function visibleCases(){return DATA.cases.filter(item=>(byId('dataset').value==='all'||item.dataset===byId('dataset').value)&&(byId('case-filter').value==='all'||(byId('case-filter').value==='errors'?item.direction!=='correct':item.direction===byId('case-filter').value)));}
+function selectedCase(){return visibleCases()[caseIndex];}
+function currentDataset(){return DATA.datasets.find(item=>item.name===selectedCase()?.dataset);}
+function currentQuery(){return currentDataset()?.queries.find(item=>item.id===selectedCase().queryId);}
+function reference(){return currentDataset()?.references[referenceIndex];}
+function label(record){return record.label.replaceAll('_',' ').replace(/\b\w/g,letter=>letter.toUpperCase());}
+function referenceChoice(caseItem,references,mode){
+  const identifier=mode==='model'?caseItem.modelReferenceId:caseItem.correctReferenceId;
+  if(mode==='model'&&caseItem.modelOutcome==='other')return {index:-1,reason:'Other: the model selected no reference.'};
+  const index=references.findIndex(item=>item.id===identifier);
+  return {index,reason:index<0?'Reference unavailable.':''};
+}
+function addOption(select,value,text){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);}
+document.querySelectorAll('[data-icon]').forEach(element=>element.innerHTML=DATA.icons[element.dataset.icon]);
+DATA.datasets.forEach(dataset=>addOption(byId('dataset'),dataset.name,dataset.name));
+for(const [groupName,keys] of [['Core',['levels','fft','welch','stft']],['More diagrams',DATA.views.map(item=>item[0]).filter(key=>!['levels','fft','welch','stft'].includes(key))]]){
+  const group=document.createElement('optgroup');group.label=groupName;
+  keys.filter(key=>DATA.views.some(item=>item[0]===key)).forEach(key=>addOption(group,key,DATA.views.find(item=>item[0]===key)[1]));if(group.children.length)byId('diagram').append(group);
+}
+byId('diagram').value=view;
+function renderPlots(){
+  const title=DATA.views.find(item=>item[0]===view)[1];
+  for(const role of ['query','reference']){
+    const record=role==='query'?currentQuery():reference();const image=byId(role+'-image');const payload=record.figures[view];
+    image.hidden=!payload;byId(role+'-missing').hidden=Boolean(payload);
+    if(payload)image.src=payload;else image.removeAttribute('src');
+    image.alt=(role==='query'?'Input':'Reference')+' / '+title;
+    const metadata=record.viewMetadata?.[view];byId(role+'-view-status').textContent=metadata?.status==='unavailable'?metadata.reason:'';
+  }
+  byId('diagram-guide').textContent=DATA.guide[view]||'';
+}
+function renderReference(){
+  const item=selectedCase();const references=currentDataset().references;const correct=referenceChoice(item,references,'correct');const model=referenceChoice(item,references,'model');
+  byId('reference-name').textContent=label(reference());byId('reference-counter').textContent='Reference '+(referenceIndex+1)+' / '+references.length;
+  byId('correct-choice-label').textContent=label(references[correct.index]);byId('model-choice-label').textContent=model.index<0?'Other':label(references[model.index]);
+  byId('correct-reference').disabled=false;byId('model-reference').disabled=model.index<0;
+  byId('correct-reference').setAttribute('aria-pressed',String(referenceIndex===correct.index));
+  byId('model-reference').setAttribute('aria-pressed',String(model.index>=0&&referenceIndex===model.index));
+  byId('model-choice-reason').textContent=model.reason;byId('model-reference').title=model.reason||'Show '+label(references[model.index]);
+  const visible=item.visibleReferenceIds.includes(reference().id);
+  byId('reference-state').textContent=visible?'Shown to model':'Correct reference withheld from model';byId('reference-state').classList.toggle('withheld',!visible);
+  byId('previous-reference').disabled=false;byId('next-reference').disabled=false;
+  renderPlots();
+}
+function stop(){generation++;player.pause();active=null;position=0;player.removeAttribute('src');player.load();renderPlayback();}
+function showCase(index){
+  stop();const cases=visibleCases();caseIndex=cases.length?(index+cases.length)%cases.length:0;
+  byId('comparison-content').hidden=!cases.length;byId('empty-state').hidden=Boolean(cases.length);
+  byId('case-counter').textContent=cases.length?(caseIndex+1)+' / '+cases.length:'0 / 0';
+  for(const identifier of ['previous-case','next-case','correct-reference','model-reference','previous-reference','next-reference'])byId(identifier).disabled=!cases.length;
+  const datasetCases=DATA.cases.filter(item=>byId('dataset').value==='all'||item.dataset===byId('dataset').value);
+  byId('filter-count').textContent=cases.length+' / '+datasetCases.length+' decisions shown | '+datasetCases.filter(item=>item.direction==='wrong').length+' wrong assignments | '+datasetCases.filter(item=>item.direction==='review').length+' Other / review errors';
+  if(!cases.length){displayedCaseId=null;for(const identifier of ['decision-outcome','decision-values','case-context','reference-name','model-choice-reason','repeat-warning','decision-explanation'])byId(identifier).textContent='';byId('decision-details').hidden=true;return;}
+  const item=selectedCase();displayedCaseId=item.id;const dataset=currentDataset();const correct=referenceChoice(item,dataset.references,'correct');const model=referenceChoice(item,dataset.references,'model');
+  referenceIndex=preferredReference==='model'&&model.index>=0?model.index:correct.index;
+  byId('query-name').textContent=label(dataset.references[correct.index]);byId('query-case').textContent=item.dataset+' / '+item.queryId;
+  byId('query-metadata').textContent=currentQuery().duration.toFixed(1)+' s / '+(currentQuery().rate/1000)+' kHz';
+  byId('expected-decision').textContent='Expected response: '+(item.expected==='different'?'Other':label(dataset.references[correct.index]));
+  byId('decision-top').dataset.direction=item.direction;
+  byId('decision-outcome').textContent=item.direction==='wrong'?item.category+' / Unacceptable':item.direction==='review'?'Other / Human review needed':item.category;
+  byId('decision-values').textContent='Correct class: '+label(dataset.references[correct.index])+' | Model: '+(model.index<0?'Other (no reference selected)':label(dataset.references[model.index]));
+  byId('case-context').textContent=(item.attemptLabel?item.attemptLabel+' / ':'')+(item.correctClassExcluded?'Correct reference was withheld from the model; expected response: Other.':'All class references were supplied to the model.');
+  byId('repeat-warning').textContent=item.repeatWarning||'';byId('repeat-warning').hidden=!item.repeatWarning;
+  byId('decision-details').hidden=!item.explanation;byId('decision-details').open=false;
+  byId('decision-explanation').textContent=item.explanation||'';byId('display-scope').textContent=DATA.displayScope||'';
+  if(item.responseLink)byId('raw-response').setAttribute('href',item.responseLink);else byId('raw-response').removeAttribute('href');
+  byId('attribution').textContent=item.dataset==='Jin'?'Linjie Jin / CC BY 4.0':'Mert Sehri and Patrick Dumond / CC BY 4.0';
+  renderReference();
+}
+function filterCases(){const index=visibleCases().findIndex(item=>item.id===displayedCaseId);showCase(Math.max(0,index));}
+function selectReference(index,mode){
+  if(!selectedCase()||index<0)return;
+  const resume=active==='reference'&&!player.paused;if(active==='reference')position=player.currentTime;
+  preferredReference=mode;referenceIndex=(index+currentDataset().references.length)%currentDataset().references.length;
+  renderReference();if(resume)play('reference',false,position);else if(active==='reference'){generation++;player.removeAttribute('src');player.load();active=null;renderPlayback();}
+}
+function renderPlayback(){for(const role of ['query','reference']){const playing=active===role&&!player.paused;byId('play-'+role).innerHTML=DATA.icons[playing?'Pause':'Play']+(playing?'Pause ':'Play ')+(role==='query'?'input':'reference');byId(role+'-pane').classList.toggle('playing',playing);}byId('playing-label').textContent=active?(active==='query'?'Input':'Reference'):'Not playing';}
+async function play(role,toggle=true,startAt=null){
+  if(!selectedCase())return;
+  if(toggle&&active===role&&!player.paused){position=player.currentTime;generation++;player.pause();return;}
+  const target=startAt??(!player.paused?player.currentTime:position);const ticket=++generation;
+  player.pause();active=role;const record=role==='query'?currentQuery():reference();player.src=record.audio;
+  player.onloadedmetadata=()=>{if(ticket===generation)player.currentTime=target>=0&&target<record.duration?target:0;};
+  try{await player.play();if(ticket===generation)byId('notice').textContent='';}catch(error){if(ticket===generation)byId('notice').textContent='Playback unavailable: '+error.message;}
+  renderPlayback();
+}
+byId('dataset').onchange=filterCases;byId('case-filter').onchange=filterCases;
+byId('previous-case').onclick=()=>showCase(caseIndex-1);byId('next-case').onclick=()=>showCase(caseIndex+1);
+byId('correct-reference').onclick=()=>{if(selectedCase())selectReference(referenceChoice(selectedCase(),currentDataset().references,'correct').index,'correct');};
+byId('model-reference').onclick=()=>{if(selectedCase())selectReference(referenceChoice(selectedCase(),currentDataset().references,'model').index,'model');};
+byId('previous-reference').onclick=()=>selectReference(referenceIndex-1+currentDataset().references.length,'manual');
+byId('next-reference').onclick=()=>selectReference(referenceIndex+1,'manual');
+byId('diagram').onchange=()=>{view=byId('diagram').value;if(selectedCase())renderPlots();};
+byId('play-query').onclick=()=>play('query');byId('play-reference').onclick=()=>play('reference');
+player.onplay=renderPlayback;player.onpause=renderPlayback;player.ontimeupdate=()=>position=player.currentTime;
+player.onended=()=>{position=0;if(byId('alternate').checked)play(active==='query'?'reference':'query',false,0);else if(byId('loop').checked)play(active,false,0);else renderPlayback();};
+byId('alternate').onchange=()=>{if(byId('alternate').checked)byId('loop').checked=true;};
+document.addEventListener('keydown',event=>{if(!selectedCase()||event.target.closest('input,select,textarea,audio')||event.altKey||event.ctrlKey||event.metaKey||byId('image-dialog').open)return;if(event.key==='ArrowLeft'){event.preventDefault();byId('previous-reference').click();}if(event.key==='ArrowRight'){event.preventDefault();byId('next-reference').click();}if(event.key==='PageDown'){event.preventDefault();showCase(caseIndex+1);}if(event.key==='PageUp'){event.preventDefault();showCase(caseIndex-1);}});
+document.querySelectorAll('[data-zoom]').forEach(button=>button.onclick=()=>{const image=byId(button.dataset.zoom+'-image');if(image.hidden)return;byId('large-image').src=image.src;byId('image-title').textContent=image.alt;byId('image-dialog').showModal();});
+byId('close-image').onclick=()=>byId('image-dialog').close();showCase(0);
+</script>
+</body>
+</html>

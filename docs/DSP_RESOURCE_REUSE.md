@@ -10,11 +10,13 @@
 | Resource group | `rg-iveco-agent-testing-troubleshooting` |
 | Foundry resource | `aif-iveco-safety-test-20260918`, Sweden Central |
 | Added deployment | `modelmetis-dsp-sol`, `gpt-5.6-sol@2026-07-09` |
-| SKU / capacity / upgrade | DataZoneStandard / 50 / NoAutoUpgrade |
+| Current SKU / capacity / upgrade | DataZoneStandard / 100 kTPM / NoAutoUpgrade |
 | Authentication | Entra-only; resource-scoped Cognitive Services OpenAI User |
 | Network | Public access enabled; no verified IP-restricted firewall on the inherited resource |
 
 The existing Terra, Luna, GPT-5.1 and GPT-4.1 deployments were preserved. The [Bicep template](../infra/dsp-existing-account.bicep) declares the parent `existing` and creates only the Sol child. Compilation, ARM validation and an exact one-Create what-if passed. No resource group was deleted or governance policy changed.
+
+The [all-diagram DSP experiment](DSP_EXTENSIONS.md) increased only the Sol capacity from 50 to 100 kTPM using this template with `capacity=100`, after quota and one-Modify what-if checks. ARM deployment `modelmetis-dsp-throughput-100` succeeded; a fresh read verified capacity 100 and the same pinned model/version/SKU. The historical preparations below remain bound to their original settings and receipts. The template default is still 50, so later deployments must pass the intended capacity explicitly.
 
 ## Attempts
 

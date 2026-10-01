@@ -1,11 +1,5 @@
-# Planned CI/CD
+# Public Evidence CI
 
-No workflows are configured. Planned checks:
+[The Pages workflow](workflows/pages.yml) verifies the curated static snapshot and the indexed publication boundary using Python's standard library. Pull requests run validation only. A successful `main` build publishes only `examples/` to GitHub Pages, using short-lived workflow identity; it does not run model inference, training, Azure deployment or the application backend.
 
-- Pull requests: contract validation, lint, typecheck, and fast tests; image builds and scans when available; no access to real data or secrets from untrusted contributions.
-- Main: reproducible builds and image publication by digest; dev deployment only with an approved destination and budget.
-- Training: explicit or coordinator-controlled execution, with a snapshot, budget, and maximum job count; no GPU training on every commit.
-- Model release: offline reports, shadow evaluation, and canary rollout with gates independent of the code release.
-- Production: protected environment, approval, least-privilege OIDC identity, and verified rollback.
-
-The first implemented pipeline must actually run the tests from MM-004 and MM-005. Training permissions do not authorize model promotion.
+Application lifecycle tests, image builds, private-cloud deployment, training orchestration and operational promotion are separate planned workflows. Their acceptance criteria remain in the project validation and backlog documents. Publishing research evidence does not authorize or promote a diagnostic model.

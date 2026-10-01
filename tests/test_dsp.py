@@ -173,3 +173,183 @@ def test_optional_bandpass_envelope_and_invalid_band():
     assert metrics["envelope"]["filter"] == "butterworth_order4_zero_phase_sos"
     with pytest.raises(ValueError, match="Envelope band"):
         replace(config, envelope_band_hz=(1500, 9000)).validate(16000)
+
+
+def test_physical_shape_resolution_gain_invariance_and_band_accounting():
+    from modelmetis.dsp_comparison import compare_shapes, shape_features
+
+    samples = sine(frequency=1000, seconds=2) + sine(frequency=1040, seconds=2)
+    original = shape_features(samples, 16000)
+    louder = shape_features(samples * 3, 16000)
+    for comparison in compare_shapes(original, louder):
+        assert comparison["distance_db"] < 1e-9
+        assert sum(band["squared_distance_contribution_db2"] for band in comparison["bands"]) == (
+            pytest.approx(comparison["distance_db"] ** 2, abs=1e-18))
+    assert louder["quality"]["rms_fs"] == pytest.approx(original["quality"]["rms_fs"] * 3)
+    for rate in (8000, 42000, 44100):
+        other = shape_features(sine(frequency=1000, seconds=2, rate=rate)
+                               + sine(frequency=1040, seconds=2, rate=rate), rate)
+        for view, comparison in zip(other["resolutions"], compare_shapes(original, other),
+                                    strict=True):
+            assert view["bin_spacing_hz"] == pytest.approx(1 / view["requested_frame_seconds"])
+            assert view["hann_enbw_hz"] == pytest.approx(1.5 * view["bin_spacing_hz"])
+            assert comparison["distance_db"] < 0.15
+        fine = other["resolutions"][-1]
+        from scipy.signal import find_peaks
+
+        peaks, _ = find_peaks(fine["median_db"], prominence=10)
+        assert {fine["frequencies_hz"][position] for position in peaks} == {1000, 1040}
+
+
+def test_shape_unavailable_tails_silence_and_temporal_transition():
+    from modelmetis.dsp_comparison import compare_shapes, shape_features
+
+    quiet = shape_features(np.zeros(16000), 16000)
+    assert all(view["status"] == "unavailable" for view in quiet["resolutions"])
+    assert all(row["status"] == "unavailable" for row in compare_shapes(quiet, quiet))
+    samples = np.concatenate([sine(frequency=1000), sine(frequency=2000), [0.0]])
+    changing = shape_features(samples, 16000)
+    for view in changing["resolutions"]:
+        assert view["available_segments"] == 2
+        assert view["total_segments"] == 3
+        assert view["segments"][-1]["status"] == "unavailable"
+        assert view["segments"][-1]["end_sample_exclusive"] == 32001
+        assert min(view["temporal_distance_db"]) > 1
+        assert np.max(np.subtract(view["q90_db"], view["q10_db"])) > 10
+    with pytest.raises(ValueError, match="finite"):
+        shape_features([float("nan")], 16000)
+
+
+def test_comparison_baseline_matches_existing_labeled_calculation():
+    from modelmetis.dsp_comparison import shape_features
+
+    samples = sine(seconds=2) + np.random.default_rng(13).normal(0, 0.01, 32000)
+    _, arrays = analyze_segment(samples, 16000, DspConfig())
+    expected = 10 * np.log10(np.maximum(arrays["welch_psd"], 1e-30))
+    expected -= expected.mean()
+    np.testing.assert_allclose(shape_features(samples, 16000)["baseline"]["shape_db"], expected)
+    controls = shape_features(samples, 16000)["controls"]
+    selected = (arrays["welch_frequencies"] >= 20) & (arrays["welch_frequencies"] <= 4000)
+    band = expected[selected]
+    np.testing.assert_allclose(controls["band_1024"]["shape_db"], band - band.mean())
+    gain_controls = shape_features(samples * 2, 16000)["controls"]
+    for name in controls:
+        np.testing.assert_allclose(controls[name]["shape_db"], gain_controls[name]["shape_db"],
+                                   atol=1e-10)
+
+
+def test_multi_reference_regimes_groups_duplicates_and_unavailable():
+    from modelmetis.dsp_comparison import compare_bank, shape_features
+
+    def recording(identifier, frequency, class_id, regime="M01", group=None):
+        return {"id": identifier, "class_id": class_id, "regime_id": regime,
+                "group_id": group or identifier, "content_sha256": identifier,
+                "features": shape_features(sine(frequency=frequency), 16000)}
+
+    references = [recording("R01", 900, "C01"), recording("R02", 1100, "C01", "M02"),
+                  recording("R03", 2000, "C02"), recording("R04", 2200, "C02", "M02")]
+    query = recording("Q01", 1101, None)
+    result = compare_bank(query, references)
+    assert result["decision"] is None
+    assert result["diagnostic_correctness"] == "unmeasured"
+    assert not result["unequal_bank_sizes"]
+    for ranking in result["rankings"]:
+        assert ranking["forced_candidate"] == "C01"
+        assert ranking["classes"][0]["closest_regime"] == "M02"
+        assert ranking["margin_db"] > 0
+    assert all(row["pairs"] == 1 for row in result["within_class_variability"]
+               if row["scope"] == "across_regimes")
+    duplicated_window = {**references[0], "id": "R05", "content_sha256": "different_window"}
+    repeated = compare_bank(query, [*references, duplicated_window])
+    assert [row["margin_db"] for row in repeated["rankings"]] == [
+        row["margin_db"] for row in result["rankings"]]
+    assert compare_bank(query, references[:-1])["unequal_bank_sizes"]
+    with pytest.raises(ValueError, match="Duplicate"):
+        compare_bank(query, [*references, references[0]])
+    with pytest.raises(ValueError, match="overlap"):
+        compare_bank({**query, "group_id": "R01"}, references)
+    quiet = {**query, "features": shape_features(np.zeros(16000), 16000)}
+    missing = compare_bank(quiet, references)
+    assert missing["incomplete_rankings"]
+    assert all(row["forced_candidate"] is None for row in missing["rankings"])
+
+
+def test_shape_modulation_impulse_filter_noise_and_clipping_controls():
+    from scipy import signal
+
+    from modelmetis.dsp_comparison import compare_shapes, shape_features
+
+    clock = np.arange(32000) / 16000
+    modulated = 0.1 * (1 + 0.5 * np.cos(2 * np.pi * 40 * clock)) * np.sin(2 * np.pi * 2000 * clock)
+    features = shape_features(modulated, 16000)
+    fine = features["resolutions"][-1]
+    peaks, _ = signal.find_peaks(fine["median_db"], prominence=10)
+    assert {fine["frequencies_hz"][position] for position in peaks} == {1960, 2000, 2040}
+    impulse = sine(seconds=2)
+    impulse[8000] += 0.8
+    transient = shape_features(impulse, 16000)
+    assert transient["resolutions"][0]["segments"][0]["transient_frame_fraction"] > 0
+    noisy = shape_features(modulated + np.random.default_rng(14).normal(0, 0.01, 32000), 16000)
+    assert all(row["distance_db"] > 1 for row in compare_shapes(features, noisy))
+    broadband = np.random.default_rng(15).normal(0, 0.1, 32000)
+    filtered = signal.sosfilt(signal.butter(4, 700, fs=16000, output="sos"), broadband)
+    assert compare_shapes(shape_features(broadband, 16000), shape_features(filtered, 16000))[
+        -1]["distance_db"] > 5
+    clipped = shape_features(np.clip(modulated * 20, -1, 1), 16000)
+    assert clipped["quality"]["near_full_scale_fraction"] > 0.1
+
+
+def test_offline_comparison_report_integrity_privacy_and_failed_attempt(tmp_path):
+    import hashlib
+    import json
+
+    from scripts.dsp_compare_offline import execute
+
+    records = []
+    for identifier, frequency in (("R01", 1000), ("R02", 1200), ("Q01", 1010)):
+        path = tmp_path / f"hidden-label-{identifier}.wav"
+        sf.write(path, sine(frequency=frequency), 16000, subtype="PCM_24")
+        records.append({"id": identifier, "wav": path.name, "group_id": f"private-{identifier}",
+                        "audio_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                        "channel": 0})
+    spec = {"schema": 1, "references": [
+        {**records[0], "class_id": "C01", "regime_id": "M01"},
+        {**records[1], "class_id": "C01", "regime_id": "M02"}], "query": records[2]}
+    output = tmp_path / "report"
+    evidence = execute(spec, output, tmp_path)
+    assert len(evidence["comparisons"]) == 2
+    assert len(list((output / "images").glob("*.png"))) == 6
+    for name in ("report.html", "evidence.json", "features.json"):
+        text = (output / name).read_text(encoding="utf-8")
+        assert "hidden-label" not in text
+        assert "private-" not in text
+        if name.endswith(".json"):
+            json.dumps(json.loads(text), allow_nan=False)
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert manifest["files"]
+    for name, expected in manifest["files"].items():
+        assert hashlib.sha256((output / name).read_bytes()).hexdigest() == expected
+    with pytest.raises(FileExistsError):
+        execute(spec, output, tmp_path)
+    bad = {**spec, "query": {**spec["query"], "audio_sha256": "wrong"}}
+    with pytest.raises(ValueError, match="hash mismatch"):
+        execute(bad, tmp_path / "failed", tmp_path)
+    assert json.loads((tmp_path / "failed/attempt.json").read_text())["status"] == "failed"
+
+
+def test_shape_invalid_configuration_and_unavailable_frequency_grid():
+    from dataclasses import replace
+
+    from modelmetis.dsp_comparison import ShapeConfig, compare_shapes, shape_features
+
+    for config in (replace(ShapeConfig(), band_edges_hz=()),
+                   replace(ShapeConfig(), frame_seconds=()),
+                   replace(ShapeConfig(), relative_floor_db=0)):
+        with pytest.raises(ValueError, match="configuration"):
+            shape_features(sine(), 16000, config)
+    config = replace(ShapeConfig(), frame_seconds=(0.023,))
+    first = shape_features(sine(), 16000, config)
+    second = shape_features(sine(rate=44100), 44100, config)
+    assert compare_shapes(first, second)[0]["reason"] == "physical_frequency_grid_mismatch"
+    outside = shape_features(sine(frequency=6000), 16000)
+    assert outside["resolutions"][-1]["status"] == "unavailable"

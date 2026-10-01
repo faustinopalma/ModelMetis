@@ -60,7 +60,7 @@ Absolute sound-pressure levels, SNR, causal mechanical diagnoses, order tracking
 
 ## Prioritize Shape-Comparison Extensions
 
-The existing seven views provide a reproducible baseline. Their diagnostic usefulness and robustness are still being evaluated; the [labeled comparison](DSP_LABELED_RESULTS.md) supports enriching the comparison representation before further inference. The following extensions are proposed and have not been implemented or validated.
+The existing seven views provide a reproducible baseline. Their diagnostic usefulness and robustness are still being evaluated; the [labeled comparison](DSP_LABELED_RESULTS.md) supports enriching the comparison representation before further inference. A separate [offline comparison and enrichment protocol](DSP_OFFLINE_PROTOCOL.md) implements physical-resolution shape summaries, aligned pairwise evidence and grouped multi-reference rankings with synthetic checks. Diagnostic superiority and calibrated acceptance/rejection remain unestablished; the table describes the broader priorities, including extensions beyond the current implementation.
 
 | Priority | Extension | Information gained | Required check |
 | --- | --- | --- | --- |
@@ -76,7 +76,11 @@ The fixed 1,024-sample Welch/STFT frame currently gives bin spacing of about 43.
 
 For a linear acquisition gain, mean-centering the log PSD already removes the constant level shift, subject to flooring and numerical limits. Position, microphone frequency response, reverberation and changed speed/load can modify the spectral shape itself. Evaluate robustness using actual acquisition variation and controlled gain/filter/noise perturbations, with clean baselines, bounded perturbations and clipping checks. Synthetic perturbations exercise the method; evidence about real acquisition transfer requires real recordings. Preserve features that discriminate fault classes when introducing invariances. Order tracking, which expresses frequencies relative to rotational speed, requires trustworthy speed information or a separately validated estimate.
 
-The target comparative report should contain every candidate class and reference ID, quality/coverage flags, several independent shape comparisons, per-band contributions, time consistency, within-class ranges, the closest competing class and an explicit record of conflicting evidence. Provide typed numerical evidence plus a small set of aligned plots. Compare numerical-only classification with AI interpretation of the same evidence. Recognition errors, false rejections, wrong acceptances and human review load must be reported separately. Report completeness and model schema compliance remain technical checks.
+The target comparative report should contain every candidate class and reference ID, quality/coverage flags, several complementary shape comparisons, per-band contributions, time consistency, within-class ranges, the closest competing class and an explicit record of conflicting evidence. Provide typed numerical evidence plus a small set of aligned plots. Compare numerical-only classification with AI interpretation of the same evidence. Recognition errors, false rejections, wrong acceptances and human review load must be reported separately. Report completeness and model schema compliance remain technical checks.
+
+The [offline results](DSP_OFFLINE_RESULTS.md) preserve the first multi-reference replay: baseline forced labels 12/12; added representations 9-12/12, with some expanded-bank regressions. The implemented resolutions are correlated measurements. Their agreement is not independent evidence, and no acceptance/rejection thresholds or human-enrichment outcomes have been validated.
+
+The separate [extended DSP implementation and all-diagram experiment](DSP_EXTENSIONS.md) now covers band envelopes, cepstrum, persistence, multitaper, harmonic-spacing evidence, impulsiveness banks, cyclic coherence, reassigned STFT, wavelets and RPM-dependent order/synchronous analyses. The latter two remain unavailable on the current real files. Transparent estimator variants are distinguished from the published Fast Kurtogram and Fast-SC algorithms. All nineteen extension panels and their limitations are included in the new prompt and v9 workbench; measured recognition/rejection remains inadequate.
 
 ## Outputs And Use
 

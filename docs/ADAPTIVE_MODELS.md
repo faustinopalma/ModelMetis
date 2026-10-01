@@ -50,7 +50,7 @@ BEATs official Iter3 weights returned HTTP 403. EAT first failed on a missing ne
 
 Runtime was x64 Python 3.13.13 under Windows ARM64 emulation. Timings are single observations; query time combines preprocessing, extraction and classification, while mixture time sums member costs and cached averaging. No GPU or paid endpoint was used. Jin's four query recordings have unknown motor/session independence and encoding confounds. No support expansion or promotion followed.
 
-The aggregate (`ml/encoder-jin-v1.json`; local-only) retains revisions, hashes, dimensions, attempts, metrics and package versions. [Reproduction commands](../scripts/README.md#frozen-encoder-experiment) and runtime pins (`ml/requirements-encoder-windows-x64.txt`; local-only) describe execution. Frozen local registrations retain the exact pre-inference protocol.
+The aggregate (`ml/encoder-jin-v1.json`; local-only) retains revisions, hashes, dimensions, attempts, metrics and package versions. [Reproduction commands](LEGACY_COMMANDS.md#frozen-encoder-experiment) and runtime pins (`ml/requirements-encoder-windows-x64.txt`; local-only) describe execution. Frozen local registrations retain the exact pre-inference protocol.
 
 ## Next Stages And Acceptance Conditions
 

@@ -23,20 +23,33 @@ button.primary:hover{background:var(--cp-accent-hover)}select{padding:8px;max-wi
 .header-actions,.tools,.navigation,.filters,.panel-title,.transport,.decisions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .filters{padding:16px 0;justify-content:space-between}.filters label{display:flex;align-items:center;gap:8px}
 .navigation{gap:8px}.counter{font-variant-numeric:tabular-nums;min-width:76px;text-align:center}
-.tabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--cp-border);margin-bottom:16px}
+.tabs{display:flex;flex-wrap:nowrap;gap:0;overflow-x:auto;border-bottom:1px solid var(--cp-border);margin-bottom:16px}
 .tabs button{white-space:nowrap;border:0;border-radius:0;border-bottom:3px solid transparent;min-height:44px;background:transparent}
 .tabs button[aria-selected=true]{border-bottom-color:var(--cp-accent);color:var(--cp-accent);font-weight:600}
-.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
-.pane{min-width:0}.panel-title{min-height:108px;justify-content:space-between;align-content:center;flex-wrap:nowrap}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:24px;row-gap:0}
+.pane{min-width:0;display:grid;grid-row:1/span 3;grid-template-rows:subgrid}.panel-title{min-height:108px;justify-content:space-between;align-content:center;flex-wrap:nowrap}
 .panel-title>div{min-width:0}.panel-title h2{overflow-wrap:anywhere}.ref-tools{display:flex;gap:6px;flex-shrink:0}
+.ref-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;max-width:100%}
+.reference-choices{display:flex;gap:6px}.reference-choices button{min-height:38px;padding:6px 8px;font-size:13px}
+.reference-choices button[aria-pressed=true]{background:var(--cp-accent);color:var(--cp-accent-fg);border-color:var(--cp-accent)}
+#reference-choice-status{font-size:12px;color:var(--cp-text-muted);max-width:230px;text-align:right;overflow-wrap:anywhere}
 .match-status{display:block;min-height:20px;margin-top:4px;font-size:12px;font-weight:600;color:var(--cp-link)}
 .match-status.different{color:var(--cp-accent)}
 .model-status{display:block;font-size:12px;font-weight:600;min-height:20px;margin-top:4px;color:var(--cp-link)}
 .model-status.error{color:var(--cp-accent)}.query-error .plot{border-color:var(--cp-accent);box-shadow:inset 0 0 0 1px var(--cp-accent)}
 .model-line{padding:8px 12px;border-left:3px solid var(--cp-border-strong);margin:8px 0;color:var(--cp-text)}
 .model-line.error{border-color:var(--cp-accent);background:var(--cp-accent-soft)}
+.model-line.review{border-color:var(--cp-link);background:var(--cp-surface-soft)}
+.decision-top{margin:0 0 16px;padding:12px 0;border-top:1px solid var(--cp-border);border-bottom:1px solid var(--cp-border)}
+.decision-top h2{font-size:18px;margin:0 0 8px}.decision-top p{margin:6px 0;overflow-wrap:anywhere}
+.decision-top .model-status{font-size:15px;margin:0}.decision-top details{margin:8px 0 0;padding:8px 0 0}
+.decision-top summary{font-size:14px}
+#decision-outcome{font-weight:600}#selection-summary{font-size:13px;color:var(--cp-text-muted);margin:6px 0 12px}
+#campaign-summary{margin:0;padding:12px 0;border-top:0;border-bottom:1px solid var(--cp-border)}
+#campaign-summary h2{font-size:17px}#campaign-summary p{margin:6px 0;font-size:13px}
 .model-line.correct{border-color:var(--cp-link)}.error-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:0 0 12px}
 .error-tools label{display:flex;gap:8px;align-items:center}.error-tools input{accent-color:var(--cp-accent)}
+.error-tools label{min-width:0;max-width:100%}.error-tools select{min-width:0;flex:1}
 #error-count{color:var(--cp-text-muted);font-size:13px}#empty-state{padding:24px 0;color:var(--cp-text-muted)}
 .kicker{font-size:11px;text-transform:uppercase;letter-spacing:0;color:var(--cp-text-muted);margin-bottom:6px}
 .plot{position:relative;border:1px solid var(--cp-border);background:var(--cp-surface-soft);aspect-ratio:12/7;overflow:hidden}
@@ -63,7 +76,10 @@ dialog::backdrop{background:var(--cp-overlay)}dialog .dialog-top{display:flex;ju
 dialog img{width:auto;max-width:100%;max-height:78vh;object-fit:contain}dialog table{font-size:13px}dialog th{white-space:nowrap}
 [hidden]{display:none!important}.badge{color:var(--cp-accent);font-size:12px;white-space:nowrap}
 @media(max-width:760px){header,main,footer{padding:12px}h1{font-size:18px}.header-actions{gap:6px}.header-actions button{padding:8px}
-.pair{gap:10px}.panel-title{min-height:164px;display:block}.panel-title h2{font-size:15px;min-height:36px}.ref-tools{margin-top:6px}.ref-tools .icon{width:40px;height:40px}
+.pair{column-gap:10px}.panel-title{min-height:164px;display:block}.panel-title h2{font-size:15px;min-height:36px}.ref-tools{margin-top:6px}.ref-tools .icon{width:40px;height:40px}
+.panel-title{min-height:290px}.ref-actions{align-items:stretch;gap:4px}.ref-actions .ref-tools{justify-content:flex-end}
+.reference-choices{flex-direction:column;gap:4px}.reference-choices button{width:100%;min-width:0;padding:6px 4px;min-height:34px}
+#reference-choice-status{text-align:left;min-height:30px}
 .pane-footer{flex-wrap:wrap}.pane-footer button{width:100%;min-width:0;padding:8px 4px}.pane-footer .subtle{font-size:11px}.plot .zoom{width:32px;height:32px;padding:6px;bottom:4px;right:4px}
 .transport{gap:10px}.timeline{flex-basis:100%}.decisions select{flex-basis:100%}.decisions button{flex:1}.reveal{grid-template-columns:1fr}.filters{gap:12px}.reference-picker{flex-basis:100%}.header-actions .export-label{display:none}}
 </style>
@@ -74,22 +90,30 @@ dialog img{width:auto;max-width:100%;max-height:78vh;object-fit:contain}dialog t
   <div class="header-actions"><button id="results">Review notes <span id="progress" class="badge"></span></button><button id="export" title="Export review notes" aria-label="Export review notes"><span data-icon="Download"></span><span class="export-label">Export</span></button></div>
 </header>
 <main>
+  <section id="campaign-summary" hidden><h2>AI campaign result</h2><p id="campaign-outcome"></p><p>Known and excluded-class trials; human routing is inferred from the decision, not executed. <a href="results.html">All AI errors and exact responses</a></p></section>
   <div class="filters">
     <div class="tools"><label>Dataset <select id="dataset"></select></label><label>Set <select id="group"></select></label></div>
     <div class="navigation"><button class="icon" id="previous-sample" title="Previous sample" aria-label="Previous sample" data-icon="ChevronLeft"></button><span id="counter" class="counter"></span><button class="icon" id="next-sample" title="Next sample" aria-label="Next sample" data-icon="ChevronRight"></button><button id="next-unreviewed">Next unreviewed</button></div>
   </div>
-  <div class="error-tools"><label>Trial <select id="trial" aria-label="Model trial"></select></label><label><input id="errors-only" type="checkbox">Model errors only</label><button id="next-error">Next model error</button><span id="error-count" aria-live="polite"></span></div>
+  <div class="error-tools"><label>Trial <select id="trial" aria-label="Model trial"></select></label><label><input id="errors-only" type="checkbox">Errors only</label><label>Error type <select id="error-kind"><option value="all">All errors</option><option value="wrong">Wrong classification (unacceptable)</option><option value="review">Rejection for review (acceptable direction)</option></select></label><button id="next-error">Next error</button><span id="error-count" aria-live="polite"></span></div>
+  <p id="selection-summary" aria-live="polite"></p>
   <p id="empty-state" role="status" hidden>No samples with model errors in this selection.</p>
   <div id="comparison-content">
+  <div class="decision-top" id="decision-top" role="status" aria-live="polite">
+    <h2>Result</h2><span id="model-status" class="model-status"></span><p id="decision-outcome"></p><p id="decision-values"></p>
+    <details id="model-details"><summary>Trial details <span id="model-detail-count" class="badge"></span></summary><div id="models" class="model-lines"></div></details>
+  </div>
+  <div class="tools" id="diagram-selector" hidden><label>Diagram <select id="diagram"></select></label><span id="diagram-status" class="subtle"></span></div>
   <nav class="tabs" role="tablist" aria-label="Evidence view" id="views"></nav>
+  <details id="diagram-guide" hidden><summary>Diagram interpretation</summary><p id="diagram-guide-text"></p></details>
   <div class="pair">
     <div class="pane" id="query-pane">
-      <div class="panel-title"><div><div class="kicker">Input / Correct class (publisher)</div><h2 id="query-name"></h2><div id="query-state" class="subtle"></div><span id="model-status" class="model-status" aria-live="polite"></span></div></div>
+      <div class="panel-title"><div><div class="kicker">Input / Correct class (publisher)</div><h2 id="query-name"></h2><div id="query-state" class="subtle"></div></div></div>
       <div class="plot"><img id="query-image" alt="Input DSP figure"><span class="missing" id="query-missing" hidden>Unavailable</span><button class="icon zoom" data-zoom="query" title="Enlarge input figure" aria-label="Enlarge input figure" data-icon="Maximize2"></button></div>
       <div class="pane-footer"><button id="play-query" class="primary"><span data-icon="Play"></span>Play input</button><span id="query-metadata" class="subtle"></span></div>
     </div>
     <div class="pane" id="reference-pane">
-      <div class="panel-title"><div><div class="kicker" id="reference-counter">Reference</div><h2 id="reference-name"></h2><span id="reference-match" class="match-status" aria-live="polite"></span></div><div class="ref-tools"><button class="icon" id="previous-reference" title="Previous reference" aria-label="Previous reference" data-icon="ChevronLeft"></button><button class="icon" id="next-reference" title="Next reference" aria-label="Next reference" data-icon="ChevronRight"></button><button class="icon" id="correct-reference" title="Select reference for the correct class" aria-label="Select reference for the correct class" data-icon="Check"></button></div></div>
+      <div class="panel-title"><div><div class="kicker" id="reference-counter">Reference</div><h2 id="reference-name"></h2><span id="reference-match" class="match-status" aria-live="polite"></span></div><div class="ref-actions"><div class="reference-choices" role="group" aria-label="Reference choice"><button id="model-reference" title="Select the reference chosen by the selected model trial" aria-pressed="false"><span data-icon="Eye"></span>Model choice</button><button id="correct-reference" title="Select reference for the correct class" aria-pressed="true"><span data-icon="Check"></span>Correct class</button></div><span id="reference-choice-status" aria-live="polite"></span><div class="ref-tools"><button class="icon" id="previous-reference" title="Previous reference" aria-label="Previous reference" data-icon="ChevronLeft"></button><button class="icon" id="next-reference" title="Next reference" aria-label="Next reference" data-icon="ChevronRight"></button></div></div></div>
       <div class="plot"><img id="reference-image" alt="Selected reference DSP figure"><span class="missing" id="reference-missing" hidden>Unavailable</span><button class="icon zoom" data-zoom="reference" title="Enlarge reference figure" aria-label="Enlarge reference figure" data-icon="Maximize2"></button></div>
       <div class="pane-footer"><button id="play-reference"><span data-icon="Play"></span>Play reference</button><span id="reference-metadata" class="subtle"></span></div>
     </div>
@@ -107,7 +131,6 @@ dialog img{width:auto;max-width:100%;max-height:78vh;object-fit:contain}dialog t
   <section class="assessment">
     <div class="assessment-title"><h3>Observations</h3><label><input type="checkbox" id="reviewed"> Reviewed</label><span id="save-state" class="subtle" aria-live="polite"></span></div>
     <textarea id="notes" placeholder="Observations (optional)" aria-label="Your observations"></textarea>
-    <details id="model-details"><summary>Model decisions <span id="model-detail-count" class="badge"></span></summary><div id="models" class="model-lines"></div></details>
     <div id="notice" role="status"></div>
   </section>
   </div>
@@ -129,21 +152,41 @@ if (!stored || typeof stored !== 'object' || Array.isArray(stored)) stored = {};
 let datasetIndex = 0, sampleIndex = 0, referenceIndex = 0, view = 'levels', active = null, position = 0, generation = 0, switching = false;
 let seen = new Set(['levels']), auditions = {query:0, reference:0};
 let displayedQueryId = null;
-const views = [['levels','Audio / waveform'],['fft','FFT'],['welch','Welch PSD'],['stft','Spectrogram'],['bands','Bands'],['envelope','Envelope'],['autocorrelation','Autocorrelation']];
+let referenceMode = 'correct';
+const views = DATA.views || [['levels','Audio / waveform'],['fft','FFT'],['welch','Welch PSD'],['stft','Spectrogram'],['bands','Bands'],['envelope','Envelope'],['autocorrelation','Autocorrelation']];
+const resultNoun = DATA.resultNoun || 'Model';
 const dataset = () => DATA.datasets[datasetIndex];
 function modelResult(model,truth) {
+  if(model.status==='unavailable')return 'unavailable';
   if(model.status!=='completed')return 'technical_failure';
-  if(model.outcome==='different')return 'false_rejection';
-  if(model.outcome!=='similar'||!model.condition)return 'technical_failure';
+  if(model.outcome==='different')return truth==='different'?'correct_rejection':'false_rejection';
+  if(!['similar','forced'].includes(model.outcome)||!model.condition)return 'technical_failure';
+  if(truth==='different')return 'wrong_acceptance';
   return model.condition===truth?'correct':'wrong_class';
 }
-function isModelError(model,truth) {return ['wrong_class','false_rejection'].includes(modelResult(model,truth));}
+function isModelError(model,truth) {return ['wrong_class','wrong_acceptance','false_rejection'].includes(modelResult(model,truth));}
+function errorMatches(model,truth,kind) {
+  const result=modelResult(model,truth);
+  if(kind==='wrong')return ['wrong_class','wrong_acceptance'].includes(result);
+  if(kind==='review')return result==='false_rejection';
+  return isModelError(model,truth);
+}
+function modelReferenceChoice(models,references) {
+  if(models.length!==1)return {index:-1,reason:'Select one trial for the model choice.'};
+  const model=models[0];
+  if(model.status!=='completed')return {index:-1,reason:'No usable model decision.'};
+  if(model.outcome==='different')return {index:-1,reason:'Model rejected: no reference selected.'};
+  if(!['similar','forced'].includes(model.outcome)||!model.condition)return {index:-1,reason:'No class selected by the model.'};
+  const index=references.findIndex(item=>item.condition===model.condition);
+  return {index,reason:index<0?'Model reference is unavailable.':''};
+}
 const trialKey = model => model.round+' / '+model.phase;
 const selectedModels = item => item.models.filter(model=>byId('trial').value==='all'||trialKey(model)===byId('trial').value);
 const hasModelError = item => selectedModels(item).some(model=>isModelError(model,item.truth));
+const hasSelectedError = item => selectedModels(item).some(model=>errorMatches(model,item.truth,byId('error-kind').value));
 const groupSamples = () => dataset().queries.filter(item => byId('group').value === 'all' || item.group === byId('group').value);
 const trialSamples = () => groupSamples().filter(item=>selectedModels(item).length>0);
-const samples = () => trialSamples().filter(item=>!byId('errors-only').checked||hasModelError(item));
+const samples = () => trialSamples().filter(item=>!byId('errors-only').checked||hasSelectedError(item));
 const query = () => samples()[sampleIndex];
 const reference = () => dataset().references[referenceIndex];
 const recordKey = () => dataset().key + '/' + query().id;
@@ -164,7 +207,7 @@ function populateDataset() {
   changeSample(0,true);
 }
 function populateTrials() {
-  const prior=byId('trial').value;
+  const prior=byId('trial').value||DATA.defaultTrial||'all';
   const trials=[...new Set(groupSamples().flatMap(item=>item.models.map(trialKey)))].sort();
   byId('trial').replaceChildren(option('all','All trials (any error)'),...trials.map(key=>option(key,key)));
   byId('trial').value=trials.includes(prior)?prior:'all';
@@ -177,6 +220,10 @@ function renderPlots() {
     image.alt=(role==='query'?'Input / '+labelFor(item.truth):'Reference / '+labelFor(item.condition))+' / '+views.find(item=>item[0]===view)[1];
   }
   document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-selected',String(button.dataset.view===view)));
+  byId('diagram').value=view;
+  byId('diagram-guide').hidden=!DATA.guide;
+  byId('diagram-guide-text').textContent=DATA.guide?.[view]||'';
+  byId('diagram-status').textContent=DATA.guide?['query','reference'].map(role=>{const item=role==='query'?query():reference();const metadata=item.viewMetadata?.[view];return role+': '+(metadata?.status||'available')+(metadata?.reason?' ('+metadata.reason+')':'');}).join(' | '):'';
 }
 function renderReference() {
   byId('reference-name').textContent=labelFor(reference().condition);
@@ -184,7 +231,14 @@ function renderReference() {
   const matches=reference().condition===query().truth;
   byId('reference-match').textContent=matches?'Matches correct class':'Different class';
   byId('reference-match').classList.toggle('different',!matches);
-  byId('correct-reference').disabled=matches;
+  const modelChoice=modelReferenceChoice(selectedModels(query()),dataset().references);
+  byId('model-reference').disabled=modelChoice.index<0;
+  byId('model-reference').setAttribute('aria-pressed',String(referenceMode==='model'));
+  byId('model-reference').title=modelChoice.reason||'Model choice: '+labelFor(dataset().references[modelChoice.index].condition);
+  byId('correct-reference').disabled=false;
+  byId('correct-reference').setAttribute('aria-pressed',String(referenceMode==='correct'));
+  byId('correct-reference').title='Correct class: '+labelFor(query().truth);
+  byId('reference-choice-status').textContent=modelChoice.reason||(referenceMode==='model'?'Showing model choice':referenceMode==='correct'?'Showing correct class':'Manual reference');
   byId('reference-metadata').textContent=reference().duration.toFixed(1)+' s / '+(reference().rate/1000)+' kHz';
   renderPlots();
 }
@@ -193,18 +247,24 @@ function renderReview() {
   byId('notes').value=entry?.notes||'';byId('reviewed').checked=Boolean(entry?.reviewed);
   byId('models').replaceChildren();
   const selected=selectedModels(query()), errors=selected.filter(model=>isModelError(model,query().truth));
-  const completed=selected.filter(model=>modelResult(model,query().truth)!=='technical_failure');
+  const completed=selected.filter(model=>!['technical_failure','unavailable'].includes(modelResult(model,query().truth)));
   const failures=selected.length-completed.length;
-  byId('model-status').textContent=errors.length?'Model error: '+errors.length+'/'+completed.length+' completed trials':completed.length?'Correct in '+completed.length+'/'+completed.length+' completed trials':'No completed trial';
-  if(failures)byId('model-status').textContent+='; '+failures+' technical failure'+(failures===1?'':'s');
-  byId('model-status').classList.toggle('error',errors.length>0);
-  byId('query-pane').classList.toggle('query-error',errors.length>0);
+  const wrong=selected.filter(model=>errorMatches(model,query().truth,'wrong')).length;
+  const reviews=selected.filter(model=>errorMatches(model,query().truth,'review')).length;
+  byId('model-status').textContent=wrong?wrong+'/'+completed.length+' unacceptable wrong classifications':reviews?reviews+'/'+completed.length+' review-directed rejections':completed.length?'Correct in '+completed.length+'/'+completed.length+' completed trials':'No completed trial';
+  if(failures)byId('model-status').textContent+='; '+failures+' unavailable/failed';
+  byId('model-status').classList.toggle('error',wrong>0);
+  byId('query-pane').classList.toggle('query-error',wrong>0);
+  byId('decision-top').dataset.outcome=wrong?'wrong':reviews?'review':completed.length?'correct':'unavailable';
+  byId('decision-outcome').textContent=wrong?'Unacceptable: a wrong class was assigned.':reviews?'Acceptable direction: rejection would route to human review.':completed.length?'Correct classification.':'No usable decision; human routing is unverified.';
+  const observed=[...new Set(completed.map(model=>model.outcome==='different'?'Different from all':labelFor(model.condition)))];
+  byId('decision-values').textContent='Expected: '+labelFor(query().truth)+' | Observed: '+(observed.join('; ')||'No valid classification')+(selected.some(model=>model.outcome==='forced')?' | Numerical forced labels do not test rejection.':'')+(reviews?' | Human intervention was not executed.':'');
   byId('model-detail-count').textContent=errors.length?errors.length+' error'+(errors.length===1?'':'s'):'';
-  const names={correct:'Correct',wrong_class:'Wrong class',false_rejection:'False rejection',technical_failure:'Technical failure'};
-  selected.forEach(model=>{const result=modelResult(model,query().truth);const line=document.createElement('p');line.className='model-line '+(isModelError(model,query().truth)?'error':result==='correct'?'correct':'technical');line.dataset.result=result;
-    line.textContent=trialKey(model)+' - '+names[result]+' | Expected: '+labelFor(query().truth)+' | Observed: '+(result==='technical_failure'?'No valid classification':model.outcome==='different'?'Different from all':labelFor(model.condition));byId('models').append(line);});
+  const names={correct:'Correct',correct_rejection:'Correct rejection',wrong_class:'Wrong class (unacceptable)',wrong_acceptance:'Wrong acceptance (unacceptable)',false_rejection:'Rejection for review (acceptable direction)',technical_failure:'Technical failure',unavailable:'Unavailable'};
+  selected.forEach(model=>{const result=modelResult(model,query().truth);const line=document.createElement('p');line.className='model-line '+(errorMatches(model,query().truth,'wrong')?'error':result==='false_rejection'?'review':result==='correct'?'correct':'technical');line.dataset.result=result;
+    line.textContent=trialKey(model)+' - '+names[result]+' | Expected: '+labelFor(query().truth)+' | Observed: '+(['technical_failure','unavailable'].includes(result)?'No valid classification':model.outcome==='different'?'Different from all':labelFor(model.condition))+(model.outcome==='forced'?' | Forced label; rejection untested':'');byId('models').append(line);});
   if(!selected.length){const line=document.createElement('p');line.textContent='This sample has no result for the selected trial.';byId('models').append(line);}
-  byId('model-details').open=errors.length>0;
+  byId('model-details').open=false;
   const reviewed=dataset().queries.filter(item=>stored[dataset().key+'/'+item.id]?.reviewed).length;
   byId('progress').textContent=reviewed+'/'+dataset().queries.length;
 }
@@ -231,23 +291,32 @@ async function play(role,toggle=true,startAt=null) {
   try {await player.play();if(ticket!==generation)return;switching=false;byId('notice').textContent='';} catch(error){if(ticket===generation){switching=false;byId('notice').textContent='Playback unavailable: '+error.message;}}
   playbackButtons();
 }
-function changeReference(delta) {
+function changeReference(delta,mode='manual') {
   if(!query())return;
   const resume=active==='reference'&&!player.paused;if(resume)position=player.currentTime;
+  referenceMode=mode;
   referenceIndex=(referenceIndex+delta+dataset().references.length)%dataset().references.length;
   renderReference();if(resume)play('reference',false);
 }
 function changeSample(delta,absolute=false) {
-  stop();const count=samples().length;const grouped=trialSamples();const errors=grouped.filter(hasModelError).length;
-  byId('error-count').textContent=errors+' / '+grouped.length+' samples with model errors';
+  stop();const count=samples().length;const grouped=trialSamples();const errors=grouped.filter(hasSelectedError).length;
+  const completed=grouped.flatMap(item=>selectedModels(item).map(model=>modelResult(model,item.truth)));
+  const wrong=completed.filter(result=>['wrong_class','wrong_acceptance'].includes(result)).length;
+  const review=completed.filter(result=>result==='false_rejection').length;
+  const valid=completed.filter(result=>!['technical_failure','unavailable'].includes(result)).length;
+  byId('selection-summary').textContent='Selected trial decisions: '+wrong+'/'+valid+' wrong classifications; '+review+'/'+valid+' rejections that would route to human review. '+(completed.length-valid)+' unavailable/failed. Reference bank: complete known-class set.';
+  byId('error-count').textContent=errors+' / '+grouped.length+' samples with selected errors';
   byId('next-error').disabled=errors===0;
   byId('comparison-content').hidden=count===0;byId('empty-state').hidden=count!==0;
   ['previous-sample','next-sample','next-unreviewed'].forEach(id=>byId(id).disabled=count===0);
-  if(!count){sampleIndex=0;displayedQueryId=null;byId('counter').textContent='0 / 0';return;}
+  if(!count){sampleIndex=0;displayedQueryId=null;byId('counter').textContent='0 / 0';byId('decision-outcome').textContent='';byId('decision-values').textContent='';byId('model-status').textContent='';byId('models').replaceChildren();return;}
   sampleIndex=absolute?delta:(sampleIndex+delta+count)%count;
   displayedQueryId=query().id;
   referenceIndex=dataset().references.findIndex(item=>item.condition===query().truth);
   if(referenceIndex<0)throw new Error('Correct-class reference is missing.');
+  const modelChoice=modelReferenceChoice(selectedModels(query()),dataset().references);
+  if(referenceMode==='model'&&modelChoice.index>=0)referenceIndex=modelChoice.index;
+  else referenceMode='correct';
   position=0;const prior=stored[recordKey()];seen=new Set([...(prior?.views||[]),view]);auditions={query:0,reference:0,...prior?.auditions};byId('seek').value=0;byId('start').value=0;byId('end').value=query().duration;
   byId('seek').max=query().duration;byId('end').max=query().duration;byId('start').max=query().duration-0.1;
   byId('counter').textContent=(sampleIndex+1)+' / '+samples().length;
@@ -258,14 +327,21 @@ function changeSample(delta,absolute=false) {
   byId('model-details').open=false;renderReference();renderReview();
 }
 DATA.datasets.forEach((item,index)=>byId('dataset').append(option(index,item.name)));
+if(DATA.campaignSummary){const summary=DATA.campaignSummary;byId('campaign-summary').hidden=false;byId('campaign-outcome').textContent=summary.unsafeErrors+'/'+summary.total+' unacceptable wrong classifications; '+summary.reviewErrors+'/'+summary.total+' review-directed errors; '+summary.correct+'/'+summary.total+' correct decisions. Of '+summary.errors+' errors, '+summary.reviewErrors+' would route to human review and '+summary.unsafeErrors+' assign a wrong class.';}
+views.forEach(([key,title])=>byId('diagram').append(option(key,title)));
+byId('diagram-selector').hidden=!DATA.views;
+byId('diagram').onchange=()=>{view=byId('diagram').value;seen.add(view);if(query()){saveEvidence();renderPlots();}};
+if(DATA.resultNoun){byId('next-error').textContent='Next error';byId('errors-only').parentElement.lastChild.textContent='Errors only';byId('empty-state').textContent='No samples with errors in this selection.';}
 views.forEach(([key,title])=>{const button=document.createElement('button');button.type='button';button.textContent=title;button.dataset.view=key;button.setAttribute('role','tab');button.addEventListener('click',()=>{view=key;seen.add(key);saveEvidence();renderPlots();});byId('views').append(button);});
 byId('dataset').onchange=()=>{datasetIndex=Number(byId('dataset').value);populateDataset();};
 byId('group').onchange=()=>{populateTrials();changeSample(0,true);};
 function applyModelFilter(){const filtered=samples();const index=filtered.findIndex(item=>item.id===displayedQueryId);changeSample(Math.max(0,index),true);}
 byId('trial').onchange=applyModelFilter;byId('errors-only').onchange=applyModelFilter;
-byId('next-error').onclick=()=>{for(let step=1;step<=samples().length;step++){const index=(sampleIndex+step)%samples().length;if(hasModelError(samples()[index])){changeSample(index,true);return;}}};
+byId('error-kind').onchange=()=>{byId('errors-only').checked=true;applyModelFilter();};
+byId('next-error').onclick=()=>{for(let step=1;step<=samples().length;step++){const index=(sampleIndex+step)%samples().length;if(hasSelectedError(samples()[index])){changeSample(index,true);return;}}};
 byId('previous-reference').onclick=()=>changeReference(-1);byId('next-reference').onclick=()=>changeReference(1);
-byId('correct-reference').onclick=()=>changeReference(dataset().references.findIndex(item=>item.condition===query().truth)-referenceIndex);
+byId('correct-reference').onclick=()=>{if(query())changeReference(dataset().references.findIndex(item=>item.condition===query().truth)-referenceIndex,'correct');};
+byId('model-reference').onclick=()=>{if(!query())return;const choice=modelReferenceChoice(selectedModels(query()),dataset().references);if(choice.index>=0)changeReference(choice.index-referenceIndex,'model');};
 byId('previous-sample').onclick=()=>changeSample(-1);byId('next-sample').onclick=()=>changeSample(1);
 byId('next-unreviewed').onclick=()=>{for(let step=1;step<=samples().length;step++){const index=(sampleIndex+step)%samples().length;if(!stored[dataset().key+'/'+samples()[index].id]?.reviewed){changeSample(index,true);return;}}byId('notice').textContent='All samples in this set are reviewed.';};
 byId('play-query').onclick=()=>play('query');byId('play-reference').onclick=()=>play('reference');

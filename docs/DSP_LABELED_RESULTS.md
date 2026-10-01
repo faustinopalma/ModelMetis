@@ -2,6 +2,8 @@
 
 **The complete known-match-or-different requirement remains unmet.** On Jin, adding explicit spectral distances to full DSP reports produced 11/12 correct known labels and 2/4 correct excluded-class rejections. A class-calibrated replay produced 9/12 and 4/4 respectively. Ottawa produced 4/16 correct labels. The useful signal is spectral separability on Jin; reliable simultaneous recognition and rejection requires broader representative labeled acquisitions and a fresh evaluation set.
 
+The separate [offline multi-reference replay](DSP_OFFLINE_RESULTS.md) evaluates deterministic forced-label controls on previously consumed Jin inputs, without further AI calls. Its baseline achieves 12/12, while added representations achieve 9-12/12; acceptance/rejection remains unmeasured there. These results do not alter the historical decisions, gates or costs below.
+
 ## Inspect Every Input And Answer
 
 Open `outputs/dsp-labeled-results-v1/index.html` for the expected label, actual prediction and outcome of every request. Each row links to its complete reports, exact prompt, transmitted JSON, image derivatives and raw model response. The index also links to both reference-audio galleries and case lists. Source WAV copies match the registered hashes; embedded playback uses the same bytes. Outputs, source mappings and credential caches remain local and ignored by Git.

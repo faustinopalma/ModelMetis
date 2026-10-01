@@ -5,6 +5,7 @@ import subprocess
 import time
 
 SECRET_PATTERNS = {
+    "openai_token": re.compile(r"(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{24,}"),
     "private_key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"),
     "jwt": re.compile(r"eyJ[A-Za-z0-9_-]{12,}\.[A-Za-z0-9_-]{12,}\.[A-Za-z0-9_-]{12,}"),
     "github_token": re.compile(r"(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})"),
@@ -21,12 +22,17 @@ def findings(path, payload):
     normalized = path.replace("\\", "/").lower()
     parts = normalized.split("/")
     filename = parts[-1]
-    forbidden = any(part in {".azure", ".copilot-azure", "artifacts", "data"} for part in parts)
+    forbidden = any(part in {".azure", ".copilot-azure", "artifacts", "data", "outputs"}
+                    for part in parts)
     if normalized in {"data/readme.md"}:
         forbidden = False
     forbidden |= (filename.startswith(".env") and filename not in {".env.sample", ".env.example"})
     forbidden |= filename.endswith((".pem", ".key", ".pfx", ".p12"))
     forbidden |= "msal_" in filename or filename == "azureprofile.json"
+    if filename.endswith((".wav", ".flac", ".mp3", ".mp4", ".pt", ".pth", ".onnx")):
+        forbidden |= not bool(re.fullmatch(
+            r"examples/audio-comparison/media/[0-9a-f]{64}\.wav", normalized
+        ))
     result = ["forbidden_artifact_path"] if forbidden else []
     text = payload.decode("utf-8", errors="replace")
     result.extend(name for name, pattern in SECRET_PATTERNS.items() if pattern.search(text))

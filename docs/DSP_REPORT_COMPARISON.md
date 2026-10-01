@@ -4,6 +4,10 @@ The labeled experiments show useful recognition on Jin and an unresolved recogni
 
 The workflow generates one deterministic DSP report per WAV, supplies N labeled reference reports and one unknown report, and returns a matching known condition or `different`. The local result index is `outputs/dsp-labeled-results-v1/index.html`; reference audio is available under `outputs/dsp-jin-v1/reference-audio` and `outputs/dsp-ottawa-v1/reference-audio`.
 
+The separate [offline multi-reference report](DSP_OFFLINE_PROTOCOL.md) adds physical-resolution shape comparisons, reference/acquisition/regime aggregation, per-band contributions and temporal variability without any model call. It produces uncalibrated rankings, not `similar`/`different` decisions, and does not change this historical AI contract. Its progressive human-enrichment workflow is a proposed protocol requiring a new registration.
+
+The [all-diagram experiment](DSP_EXTENSIONS.md) uses a separate runner and registration with a reading guide for all 26 original/extended panels. Its completed outcomes and v9 review are distinct from the historical whole-report examples below; model citation compliance remains separate from measured class/rejection correctness.
+
 ## Inspect The Example
 
 The local output is `outputs/dsp-report-comparison-v1/index.html`. Open it to inspect all four reports, the exact prompt, all transmitted measurements and images, and the actual service response. The output directory is ignored by Git. The public [result record](../ml/dsp-similarity-example-v1-results.json) contains nonsecret execution metadata only.
