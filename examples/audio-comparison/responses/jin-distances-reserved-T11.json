@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is much more high-frequency weighted: 82.58% of Welch power is above 8 kHz versus 33.03% for C01; its centroid is 13.291 kHz versus 5.701 kHz.",
+          "The principal high-frequency line shifts downward from 16034.6 Hz in C01 to 15982.2 Hz in Q01 (-52.4 Hz), and Q01 lacks C01's dominant 5.3 Hz component; this shift exceeds one 43.07 Hz Welch bin but is resolved by the 0.1 Hz FFT."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I004"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a persistent narrow feature near 16 kHz across the full 10 s and broadband, impulsive-looking envelopes without clipping.",
+          "Both retain low-frequency periodic content and comparable gain-uncertain FS levels, although Q01 is higher at 0.211 FS RMS versus 0.137 FS RMS."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Band balance differs strongly: Q01 places 82.58% above 8 kHz and 11.33% below 100 Hz, versus 39.23% and 59.72% respectively for C02.",
+          "C02 is led by 5.3 Hz at 0.125 FS peak, whereas Q01 is led by a cluster at 15982.2–15984.8 Hz and has 50 Hz at only 0.0396 FS peak; this is a change in harmonic emphasis, not a small uniform frequency shift."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stationary over the reported 10 s, share a high-frequency ridge near 16 kHz, and have no clipping.",
+          "Both have the same strongest autocorrelation lag, 0.2494 ms, with high coefficients of 0.944 for C02 and 0.932 for Q01."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated, with 94.13% below 100 Hz and a 637.7 Hz centroid, while Q01 has 11.33% below 100 Hz and a 13.291 kHz centroid.",
+          "C03 has a dominant 5.3 Hz tone at 0.452 FS peak and smooth slow periodic evolution; Q01 instead has dominant 15.982 kHz lines and a noise-like, rapidly decorrelating waveform, so no plausible small frequency shift reconciles them."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.I007"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both cover 10 s at 44.1 kHz with identical 0.1 Hz FFT and 43.07 Hz Welch-bin resolution and show persistent spectral structure throughout.",
+          "Both include a broad feature near 16 kHz and low-frequency envelope modulation, although their relative strengths differ greatly."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01's main high-frequency cluster is 15982.2–15984.8 Hz, while C04's strongest line is 16024.8 Hz with related lines at 16005.0–16038.0 Hz; the principal shift is -42.6 Hz, approximately one 43.07 Hz Welch bin but clearly resolved by the 0.1 Hz FFT.",
+          "Q01 is more high-frequency weighted and higher in digital level: 82.58% above 8 kHz, centroid 13.291 kHz and RMS 0.211 FS, versus 61.07%, 9.927 kHz and 0.195 FS for C04; gain is unknown."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": true,
+        "similarities": [
+          "Both show the closest gain-centered Welch shape, dominated by a persistent narrow ridge near 16 kHz plus a 50 Hz line; Q01-to-C04 distance is 2.262 dB, below C04's 3.038 dB nearest-other-reference distance.",
+          "Their 10 s waveforms and envelopes are similarly stationary and broadband, with comparable crest factors (13.09 versus 13.78 dB), kurtosis (3.19 versus 3.30), no clipping, and the same 0.2494 ms strongest autocorrelation lag."
+        ]
+      }
+    ],
+    "condition_id": "C04",
+    "explanation": "Q01 is broadly similar to C04 (tight_bearing). C04 ranks first by spectral-shape distance at 2.262 dB, materially ahead of C03 at 3.897 dB and far ahead of C01/C02 near 6 dB; it also uniquely combines the same persistent ~16 kHz ridge, 50 Hz component, stationary 10 s evolution, and similar envelope/periodicity statistics. The ~42.6 Hz downward carrier shift explains much of the remaining mismatch. All reports use one channel, 10 s duration, 44.1 kHz sampling, identical physical axes and spectral resolution; absolute FS amplitudes are secondary because acquisition gain is unknown and the sources are peak-normalized.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "3e2caf18d49240962e75c1ff35892bbdbd89ebf9e91b611292a54049e53fcb86",
+  "source_response_sha256": "9c747b2520f53e830d9dade7300bd024dc3bf12952b27c3210ba4772b122a41d",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

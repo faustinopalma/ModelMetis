@@ -1,0 +1,143 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 shifts more power into 500-4000 Hz: 54.27% versus C01's 22.29%, including a strong 934.8-984.2 Hz cluster; C01 instead has more 0-100 Hz power (37.71% versus 20.19%) and more 8-22.05 kHz power (33.03% versus 17.67%).",
+          "The corresponding mid-frequency line is slightly shifted upward from 169.2 Hz in C01 to 172.9 Hz in Q01 (+3.7 Hz, resolvable at the 0.1 Hz FFT spacing), while Q01's approximately 942 Hz family has no comparably prominent listed C01 line.",
+          "Q01 has lower digital RMS (0.1199 FS versus 0.1366 FS), lower autocorrelation peak coefficient (0.8125 versus 0.8705), higher kurtosis (8.01 versus 3.62), and stronger regularly spaced envelope bursts; unknown acquisition gain prevents treating the level difference alone as diagnostic."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "R01.I002",
+          "R01.I003",
+          "R01.I004",
+          "R01.I005",
+          "R01.I006",
+          "R01.I007",
+          "R01.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": true,
+        "similarities": [
+          "Nearest gain-centered spectral shape: 3.149683 dB, within C01's calibrated 3.377359 dB threshold.",
+          "Both retain the same 5.3 Hz principal low-frequency line, a broad low-frequency harmonic/sideband comb, a persistent approximately 16 kHz ridge, and a deep 4-8 kHz trough in the FFT, Welch PSD, and STFT.",
+          "Both are periodic throughout the full 10 s interval, have the identical strongest autocorrelation lag of 68.03 microseconds, and show repeated broadband envelope peaks without clipping.",
+          "Duration, sampling rate, Nyquist coverage, and resolution are identical: 10 s at 44.1 kHz, 0.1 Hz FFT spacing and 43.07 Hz Welch bins, so the shape comparison is direct rather than a sampling-rate artifact."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "The calibrated distance is 10.596420 dB, far above C02's 3.623526 dB threshold.",
+          "C02 concentrates 59.72% below 100 Hz and only 0.83% from 100-8000 Hz, whereas Q01 has 20.19% and 62.14% respectively; Q01's approximately 942 Hz cluster and stronger 500-4000 Hz structure are absent from C02.",
+          "Although both have a 5.3 Hz fundamental and an approximately 16 kHz ridge, their relative harmonic structures differ: C02 has listed 8.2, 8.7, 10.4 and 17.6 Hz lines, while Q01 is dominated beyond 5.3 Hz by 172.9 Hz and the 934.8-984.2 Hz family. Thus matching the 5.3 Hz absolute frequency does not offset the large spectral-shape difference.",
+          "Q01 is more impulsive and periodically burst-like (kurtosis 8.01; autocorrelation 0.8125) than C02 (3.23; 0.9445), and its strongest lag is 68.03 microseconds rather than 249.43 microseconds. RMS is 0.1199 versus 0.1580 FS, but gain is unknown."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "R02.I002",
+          "R02.I003",
+          "R02.I004",
+          "R02.I005",
+          "R02.I006",
+          "R02.I007",
+          "R02.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both cover 10 s at 44.1 kHz with identical FFT/Welch resolution, contain a 5.3 Hz component and a persistent approximately 16 kHz band, and show activity across the complete interval without clipping."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "The calibrated distance is 7.822059 dB, above C03's 3.227635 dB threshold.",
+          "C03 is overwhelmingly low-frequency dominated: 94.13% of Welch power lies below 100 Hz and its centroid is 637.7 Hz, versus 20.19% and 3736.0 Hz for Q01. Q01 instead places 54.27% in 500-4000 Hz and has the distinct approximately 942 Hz line family.",
+          "Both contain 5.3 Hz, but C03's line is much more dominant (-6.89 dB FS peak versus -23.74 dB FS peak) and produces a smooth near-sinusoidal waveform and slowly varying autocorrelation; Q01 has a broadband impulsive comb and envelope bursts. This is a relative-structure difference, not merely an overall frequency shift.",
+          "C03 has RMS 0.3434 FS, kurtosis 1.84 and autocorrelation 0.9689 at 181.41 microseconds; Q01 has 0.1199 FS, 8.01 and 0.8125 at 68.03 microseconds. Unknown gain qualifies amplitude comparisons, but not the contrasting periodic shape and power fractions."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "R03.I002",
+          "R03.I003",
+          "R03.I004",
+          "R03.I005",
+          "R03.I006",
+          "R03.I007",
+          "R03.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stationary across the same 10 s/44.1 kHz coverage, are unclipped, contain a 5.3 Hz line, and retain a visible approximately 16 kHz ridge; identical physical frequency axes make those correspondences direct."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The calibrated distance is 7.616570 dB, well above C04's 2.463183 dB threshold.",
+          "C04 is high-frequency dominated, with 61.07% of power at 8-22.05 kHz and centroid 9926.9 Hz, versus 17.67% and 3736.0 Hz for Q01. Q01 instead has 54.27% at 500-4000 Hz and the prominent approximately 942 Hz family.",
+          "C04's strongest listed components are 50.0 Hz and a 16005-16038 Hz cluster; Q01's are 5.3 Hz, 172.9 Hz and 934.8-984.2 Hz. These are large absolute-frequency relocations, not small speed shifts, and they materially alter the Welch/STFT shape despite both retaining an approximately 16 kHz ridge.",
+          "C04 has a 249.43 microsecond autocorrelation lag and envelope modulation led by 13.23 Hz; Q01 has 68.03 microseconds and a harmonic modulation sequence at 3.535, 7.071 and 10.606 Hz. Q01 is also more impulsive (kurtosis 8.01 versus 3.30), while its RMS is lower (0.1199 versus 0.1945 FS; gain unknown)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "R04.I002",
+          "R04.I003",
+          "R04.I004",
+          "R04.I005",
+          "R04.I006",
+          "R04.I007",
+          "R04.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both span the full 10 s at 44.1 kHz without clipping and show a persistent approximately 16 kHz spectral ridge plus broadband time-domain activity; identical resolution rules out sampling differences as the source of the mismatch."
+        ]
+      }
+    ],
+    "condition_id": "C01",
+    "explanation": "Outcome is similar to C01 (excess_hall_adhesive). Under the required calibrated rule, C01 is the nearest supplied condition at 3.149683 dB and is inside its 3.377359 dB threshold; all other query distances exceed their own thresholds. The figures support this choice through the shared 5.3 Hz component, low-frequency comb, approximately 16 kHz ridge, 4-8 kHz trough, 68.03 microsecond autocorrelation lag, and persistent 10 s evolution. Q01's upward-shifted 169.2-to-172.9 Hz feature and added approximately 942 Hz family explain residual distance and its altered band powers, but do not overturn the threshold decision. Absolute FS levels are secondary because acquisition gain is unknown.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "39d78cc73f41640b2833f32ab1b338171d43c4d60f7b1069c426e5fda7800f67",
+  "source_response_sha256": "29c1bb2d8dfb33f66ff8b2363595c8a0eb1f204ffd4f1e9e698209e09e400469",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

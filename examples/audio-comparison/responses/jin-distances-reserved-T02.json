@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 shifts the strongest mid-frequency cluster upward to 935.7–981.4 Hz, whereas C01 reports 169.2–193.4 Hz; this raises Q01's 500–1000 Hz share to 23.29% versus C01's 7.13%, despite similar overall comb-like shape.",
+          "Q01 has lower digital RMS (0.1193 versus 0.1366 FS RMS), stronger impulsiveness (kurtosis 7.51 versus 3.62), and more pronounced periodic envelope spikes; unknown acquisition gain limits amplitude interpretation."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Best gain-centered spectral-shape match: 2.98 dB, much smaller than C01's 5.94 dB nearest-other-reference distance; both show a 5.3 Hz fundamental, repeated broadband transients, a high-frequency feature near 16 kHz, and stable 10 s evolution.",
+          "Periodicity agrees exactly at the reported strongest autocorrelation lag of 68.03 microseconds; both distribute appreciable power across low, mid, and 8–22.05 kHz bands rather than being dominated by one band."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "The 10.48 dB shape distance exceeds C02's 6.11 dB nearest-other-reference distance; Q01 has 23.29% in 500–1000 Hz versus 0.21% for C02 and only 18.31% above 8 kHz versus 39.23%.",
+          "Q01's shifted 935.7–981.4 Hz cluster and regular transient envelope are absent from C02's principal low-frequency set; autocorrelation lags also differ, 68.03 versus 249.43 microseconds."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10 s, 44.1 kHz recordings with the same 0.1 Hz FFT and 43.07 Hz Welch-bin resolutions, and both contain a 5.3 Hz peak plus a persistent feature near 16 kHz.",
+          "Their digital levels are moderately close (0.1193 versus 0.1580 FS RMS), and both envelopes contain low-rate modulation around 3 Hz, subject to the stated broadband-Hilbert limitation."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "The 7.70 dB shape distance is far above C03's 3.04 dB nearest-other-reference distance; C03 places 94.13% of power below 100 Hz, versus only 22.09% for Q01, whose centroid is 3771.7 versus 637.7 Hz.",
+          "C03 is a smooth, strongly periodic 5.3 Hz-dominated waveform (0.3434 FS RMS, kurtosis 1.84), while Q01 is lower-level and impulsive (0.1193 FS RMS, kurtosis 7.51) with a shifted cluster near 0.94–0.98 kHz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both contain the same absolute 5.3 Hz principal low-frequency component and remain active throughout the complete 10 s interval without clipping.",
+          "Both show harmonic/broadband energy extending to a feature near 16 kHz and low-rate envelope modulation, although these components have very different relative strengths."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The 7.48 dB shape distance exceeds C04's 3.04 dB nearest-other-reference distance; C04 concentrates 61.07% above 8 kHz versus Q01's 18.31%, while Q01 concentrates 23.29% at 500–1000 Hz versus C04's 0.78%.",
+          "C04 is led by 50.0 Hz and 16.005–16.038 kHz lines with a 249.43-microsecond autocorrelation lag; Q01 instead has 5.3 Hz and shifted 935.7–981.4 Hz lines with a 68.03-microsecond lag and more regular transient evolution."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "R04.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both exhibit a persistent narrow feature around 16 kHz over the full 10 s and broadband energy on either side, with identical sampling rate, duration, Nyquist coverage, and spectral resolution.",
+          "Both have nonstationary envelopes and similar order digital RMS (0.1945 versus 0.1193 FS RMS), though unknown gain prevents treating that amplitude difference as decisive."
+        ]
+      }
+    ],
+    "condition_id": "C01",
+    "explanation": "Q01 is broadly similar to C01 (excess_hall_adhesive). C01 ranks first by a wide margin in gain-centered Welch shape (2.98 dB versus 7.48–10.48 dB for the others), and uniquely combines the matching 5.3 Hz component, identical 68.03-microsecond periodicity, repeated impulsive time pattern, and persistent approximately 16 kHz feature. The main conflict is a frequency shift of C01's roughly 170–193 Hz cluster to Q01's roughly 936–981 Hz cluster, which transfers relative power into the 500–1000 Hz band and changes harmonic spacing without erasing the broader pattern. All reports have equal 44.1 kHz sampling, 10 s coverage, and matched resolution, so this shift is physical in the reported axes rather than a sampling artifact; absolute FS levels remain secondary because acquisition gain is unknown.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "9c807c8b8ccfab37a3a26666777e0d1acb5d4c823104d09ba60915e4d55a3c83",
+  "source_response_sha256": "aaf3f74b7e539dc94ea0563fcfa06dbf748bb91b3136791c92fca746b9c48ac8",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

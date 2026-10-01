@@ -1,0 +1,67 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 concentrates 81.60% of Welch power above 8 kHz (38.82% at 8–16 kHz and 42.78% at 16–22.05 kHz), versus C01's 33.03%; its centroid is consequently 13.125 kHz versus 5.701 kHz.",
+          "The principal high-frequency feature is shifted from C01's 16.0346 kHz peak to Q01's 15.9827 kHz peak (−51.9 Hz, near one 43.07-Hz Welch bin), while Q01 lacks C01's dominant 5.3-Hz component and has stronger 16.46/49.49-Hz envelope modulation."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10-s, 44.1-kHz records show a persistent narrow ridge near 16 kHz on the STFT, with broadband background and no clipping.",
+          "Both have the same 0.1-Hz FFT resolution and broadly stationary full-interval envelopes/time evolution, plus nearby high-frequency peaks around 16 kHz despite the modest frequency shift."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 is much more high-frequency weighted: 81.60% above 8 kHz versus C02's 39.23%, with centroid 13.125 kHz versus 6.441 kHz; C02 instead assigns 59.72% below 100 Hz versus Q01's 13.91%.",
+          "C02's strongest FFT component is 5.3 Hz and its low-frequency harmonic family is prominent, whereas Q01 is dominated by 15.9827 kHz and 50.0 Hz; Q01 also has stronger, more line-like envelope modulation at 16.46 and 49.49 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I004"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10-s, 44.1-kHz records contain a persistent spectral ridge around 16 kHz and have nearly identical short-lag periodicity: strongest autocorrelation lag 0.0002494331 s and coefficient about 0.945.",
+          "Their waveform/envelope levels remain broadly steady through the reported interval, with no clipping, and both retain a low-frequency 50-Hz-region component."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01's dominant energy is high-frequency (81.60% above 8 kHz; centroid 13.125 kHz), while C03 is overwhelmingly low-frequency (94.13% below 100 Hz; centroid 637.7 Hz), so the absolute band-power distribution differs strongly despite the best gain-centered shape distance.",
+          "C03 has a dominant 5.3-Hz periodic waveform (0.452 FS peak), 0.343 FS RMS and smooth long-lag autocorrelation, whereas Q01 is dominated by a 15.9827-kHz ridge, has 0.218 FS RMS, and shows dense short-period autocorrelation; these are not explained by a small frequency shift."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I007"
+        ],
+        "similar": false,
+        "similarities": [
+          "C03 is the closest gain-centered Welch-shape candidate at 3.916 dB, substantially below its 6.197-dB nearest-other-reference distance and below Q01's distances to C01/C02 (6.081/6.235 dB).",
+          "Both 10-s, 44.1-kHz records show persistent full-interval tonal structure including a ridge near 16 kHz, no clipping, and modulation content in the tens-of-hertz range."
+        ]
+      }
+    ],
+    "condition_id": null,
+    "explanation": "Different from every known condition. The distance ranking initially favors C03, and 3.916 dB versus C03's 6.197-dB separation from other references is supportive. However, the measurements and physical-frequency figures conflict decisively: Q01 is an approximately 16-kHz-dominated, high-band signal, whereas C03 is a strongly 5.3-Hz-dominated low-band periodic signal. C01 and C02 share the near-16-kHz ridge but have much lower high-band fractions and centroids and stronger low-frequency structures. All reports have identical 10-s duration, 44.1-kHz sampling, 0.1-Hz FFT spacing and 43.07-Hz Welch spacing, so these differences are not coverage, sampling-rate, or resolution artifacts. Unknown acquisition gain limits interpretation of absolute FS levels, but gain cannot account for the markedly different normalized band-power distributions, harmonic emphasis, periodicity, or time-frequency patterns.",
+    "outcome": "different"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "67d10186b0c312050d234976404bc581774940a762b0e8d06ee17dd5092e3705",
+  "source_response_sha256": "2ba8729b56ae67b69cedc32038f1bcd7ebfa5ef0cb1d57f4d82c5ba295aa17c5",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

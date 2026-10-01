@@ -1,0 +1,67 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 redistributes much more power into 100–4000 Hz (61.4% versus C02’s 0.83%) and has a strong ≈942 Hz cluster absent from C02; its gain-centered Welch-shape distance is 10.60 dB.",
+          "Q01 is more impulsively periodic, with a 68.0 µs autocorrelation peak and envelope lines spaced ≈3.535 Hz, versus C02’s 249.4 µs peak and less regular modulation; Q01 also has lower RMS (0.1199 versus 0.1580 FS RMS)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both contain the same resolved 5.3 Hz component and persistent spectral activity near 16 kHz across the full 10 s.",
+          "Both are unclipped, peak-normalized near 0.950 FS, and show broadband envelopes with repeated level fluctuations."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated (94.13% below 100 Hz), whereas Q01 has only 20.19% there and concentrates 54.3% in 500–4000 Hz; the shape distance is 7.82 dB.",
+          "Although both resolve 5.3 Hz, Q01 adds a ≈942 Hz harmonic cluster and regular ≈3.535 Hz envelope comb, while C03 has no corresponding cluster and its main envelope peaks are irregular (2.42, 0.20, 1.72 and 43.23 Hz); RMS also differs, 0.1199 versus 0.3434 FS."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have a dominant resolved 5.3 Hz line and repetitive waveform/envelope behavior throughout the same 10 s interval.",
+          "Both retain a stationary high-frequency ridge near 16 kHz and are unclipped at approximately 0.950 FS peak."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01’s principal resolved cluster is ≈934.8–984.2 Hz, while C04’s is ≈16.005–16.038 kHz; this absolute frequency shift moves power from C04’s 16–22.05 kHz-dominant distribution (41.59%) into Q01’s 500–1000 Hz band (25.30%).",
+          "Q01 has stronger regular impulsive modulation at ≈3.535 Hz multiples and a 68.0 µs autocorrelation peak, whereas C04’s strongest envelope line is 13.23 Hz with a 249.4 µs peak; the 7.62 dB shape distance remains large despite being the smallest query distance."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show broadband impulsive waveforms, high crest factors (18.0 and 13.8 dB), and persistent narrowband activity near 16 kHz over 10 s.",
+          "Both distribute appreciable power above 8 kHz and have low-frequency envelope modulation, with nearby components around 3.3–3.5 and 10–13 Hz."
+        ]
+      }
+    ],
+    "condition_id": null,
+    "explanation": "Different from every known condition. C04 is numerically nearest (7.62 dB), narrowly ahead of C03 (7.82 dB), but neither is a supported match: both query distances greatly exceed the 3.04 dB C03–C04 reference separation, while C02 is still farther at 10.60 dB. The common 44.1 kHz sampling rate, 10 s duration, 0.1 Hz FFT spacing, 43.07 Hz Welch spacing, full 0–22.05 kHz coverage and identical peak-normalized digital scale make the frequency and duration comparisons direct; unknown acquisition gain prevents interpreting RMS differences as calibrated physical amplitude. Q01’s distinctive ≈942 Hz cluster, broad 100–4000 Hz power, regular ≈3.535 Hz impulsive evolution and shifted periodicity conflict with all three references.",
+    "outcome": "different"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "c20f875b0dc4c6b28b228b029cbc8ddb66def8f66414ca5722c54f63e425bb93",
+  "source_response_sha256": "68bdf9971228fd09b75e990417c3ed67971016c956d91ab6a0d7f96085a7ec67",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is much more low-frequency dominated (0–100 Hz: 64.93% versus 37.71%) and has higher RMS (0.2501 versus 0.1366 FS), although unknown acquisition gain limits level interpretation.",
+          "Q01 shifts the high-frequency cluster upward to about 16.159–16.230 kHz from C01’s 16.035 kHz line and adds strong 183.1 Hz/2.018 kHz components; its envelope is correspondingly dominated by 177.88 Hz rather than C01’s 3.43 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "R01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s, 44.1 kHz records show a persistent broadband pattern with a strong 5.3 Hz component and a stationary ridge near 16 kHz.",
+          "Both have the same short-lag periodicity peak (68.03 µs) and substantial power at both 0–100 Hz and 8–22.05 kHz."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 has more intermediate-band structure and power, including peaks at 183.1 Hz and 2.018/2.039 kHz, whereas C02 is comparatively depleted from 100 Hz to 8 kHz.",
+          "The high-frequency enhancement is shifted upward and more line-like in Q01 at 16.159–16.230 kHz; C02’s figure shows a broader feature around 16 kHz. Their periodicity also differs: 68.03 versus 249.43 µs."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have a 5.3 Hz fundamental, persistent low-frequency rhythmic time evolution, and a stationary high-frequency ridge near 16 kHz over the full 10 s.",
+          "Both distribute most power between 0–100 Hz and 8–22.05 kHz, with relatively little power in the middle bands."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01 is less extremely low-frequency dominated: 0–100 Hz contributes 64.93% versus 94.13%, while 8–22.05 kHz contributes 30.32% versus 3.39%; its centroid is consequently 4.958 kHz versus 0.638 kHz.",
+          "Q01 contains distinct 2.018/2.039 kHz and 16.159–16.230 kHz lines and has a shorter autocorrelation peak lag (68.03 versus 181.41 µs); these frequency shifts add faster structure absent or weaker in C03."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "This is the nearest gain-centered spectral-shape match (3.680 dB): both show a dominant 5.3 Hz component, low-frequency harmonic structure, and strongly periodic, nearly stationary 10 s waveforms.",
+          "Their envelopes and autocorrelations both evolve smoothly without a sustained regime change, and both retain weaker persistent spectral ridges above the dominant low-frequency motion."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "C04 is high-frequency dominated (8–22.05 kHz: 61.07%; centroid 9.927 kHz), whereas Q01 is low-frequency dominated (0–100 Hz: 64.93%; centroid 4.958 kHz).",
+          "Q01’s main low-frequency line is 5.3 Hz rather than C04’s 50.0 Hz, and its high cluster is shifted upward to 16.159–16.230 kHz from 16.005–16.038 kHz; periodicity differs at 68.03 versus 249.43 µs."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "R04.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a persistent broadband envelope and a strong, time-stable ridge near 16 kHz throughout the same 10 s, 44.1 kHz coverage.",
+          "Both contain appreciable power at the two spectral extremes and relatively limited 4–8 kHz power, with no clipping and the same 0.95 FS peak after peak normalization."
+        ]
+      }
+    ],
+    "condition_id": "C03",
+    "explanation": "Q01 is broadly most similar to C03 (magnet_fracture). Welch-shape distances rank C03 first at 3.680 dB and C04 second at 3.763 dB, but neither query distance is smaller than the 3.038 dB nearest-other spacing of those references, so the ranking alone is not decisive. The figures and measurements favor C03 because Q01 and C03 share the dominant 5.3 Hz periodic waveform and low-frequency-led spectrum; C04 instead has a 50 Hz lead component and much stronger high-band weighting. Q01’s upward-shifted approximately 16.2 kHz cluster and added approximately 2.02 kHz lines explain residual mismatch. Absolute FS levels are supportive only, because acquisition gain is unknown; duration, sampling rate, axes, FFT resolution (0.1 Hz), Welch resolution (43.07 Hz), and full reported coverage are matched across all reports.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "f1b0703f42f948ea9a3cdb8a2fb99cbb7798f058ebf31774871720635286477e",
+  "source_response_sha256": "27ee582b6c63eb550dedf5eddd790766a80717f7fb1855fb55927fc63d3d618c",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

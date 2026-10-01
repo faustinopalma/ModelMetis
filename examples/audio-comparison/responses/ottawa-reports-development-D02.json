@@ -1,0 +1,157 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Absolute dominant lines differ: Q01 peaks at 30.7, 61.4, 92.2, 109.8 and 215.0 Hz, whereas C01 peaks at 45.9, 85.9, 101.2, 109.4 and 211.7 Hz; this is not a uniform frequency shift, although the ≈110 and ≈212–215 Hz components align closely.",
+          "Q01 is more periodic (autocorrelation 0.837 at 64.36 ms) and has less >4 kHz power than C01 (0.109% versus 1.068%), while C01's strongest reported peak lag is only 0.381 ms."
+        ],
+        "evidence_ids": [
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "R01.P001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "The absolute digital levels and impulsiveness closely match despite unknown gain: RMS is 0.246 FS versus 0.241 FS, peak is 0.950 FS in both, and crest factor is 11.72 versus 11.93 dB.",
+          "Both have broad, irregular spectra and visibly time-varying envelopes rather than the highly stable sinusoidal records; low-band fractions are also close (0–100 Hz: 72.7% versus 68.3%; 100–500 Hz: 23.3% versus 26.6%)."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 lacks C02's dominant 45.1 Hz component (0.610 FS) and instead is led by 30.7/61.4/92.2 Hz (0.179/0.154/0.115 FS); this changes the harmonic hierarchy and cannot be explained by one frequency shift.",
+          "Q01 is much less sinusoidal and stable: RMS 0.246 versus 0.463 FS, autocorrelation 0.837 versus 0.979, and only 72.7% versus 97.2% of Welch power lies below 100 Hz."
+        ],
+        "evidence_ids": [
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both contain approximately 15 Hz-spaced low-frequency structure and persistent low-frequency energy over the same 10 s, 42 kHz acquisition.",
+          "Their envelope spectra share components near 30 Hz, but Q01's 30.7 Hz feature is shifted upward by about 0.6 Hz from C02's 30.1 Hz."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01 is dominated by the 30.7/61.4/92.2 Hz progression, while C03 is dominated by 45.0 Hz with 30.0 Hz secondary; a ≈2.3% shift maps C03's 30/60 Hz pair toward Q01's 30.7/61.4 Hz but does not account for the missing dominant 45 Hz line.",
+          "Q01 has lower RMS (0.246 versus 0.420 FS), weaker periodicity (0.837 versus 0.979), and far more power above 100 Hz (27.3% versus 3.81%), with visible amplitude evolution around 2–5 s."
+        ],
+        "evidence_ids": [
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show low-frequency harmonic families and envelope components near 15/30/60/150–185 Hz.",
+          "Both cover 10 s at 42 kHz with identical 0.1 Hz FFT spacing, so the reported frequency differences exceed spectral resolution."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "C04's two strongest lines are 44.9 and 74.8 Hz, whereas Q01's are 30.7 and 61.4 Hz; no single shift preserves these relative spacings or harmonic ranking.",
+          "Q01 has lower RMS (0.246 versus 0.398 FS), weaker periodicity (0.837 versus 0.983), and more broadly distributed power (72.7% versus 92.5% below 100 Hz)."
+        ],
+        "evidence_ids": [
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "R04.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both include substantial 100–500 Hz content and lines near 30, 60, 90–110 and 210–215 Hz.",
+          "Both show envelope modulation around 30 and 60 Hz, although Q01's 30.7/61.4 Hz values are shifted upward from C04's 29.9/59.9 Hz."
+        ]
+      },
+      {
+        "condition_id": "C05",
+        "differences": [
+          "C05 is dominated by 43.9 Hz at 0.607 FS, unlike Q01's 30.7 Hz at 0.179 FS and harmonic sequence through 61.4/92.2 Hz; shifting C05's ≈29.3 Hz family to 30.7 Hz does not align its dominant 43.9 Hz line.",
+          "Q01 is lower-level and less periodic (RMS 0.246 versus 0.456 FS; autocorrelation 0.837 versus 0.972) and has 27.3% rather than 4.14% of power above 100 Hz."
+        ],
+        "evidence_ids": [
+          "R05.C01.S0001",
+          "Q01.C01.S0001",
+          "R05.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have 10 s stationary coverage overall and low-frequency harmonic/envelope structure near 30 and 60 Hz.",
+          "Their full-band figures share a low-frequency-weighted spectrum with weaker broad high-frequency resonances."
+        ]
+      },
+      {
+        "condition_id": "C06",
+        "differences": [
+          "Although a ≈2.7% upward shift maps C06's 29.9/59.8 Hz components near Q01's 30.7/61.4 Hz, C06 retains a dominant 44.9 Hz line and strong 104.7 Hz component absent from Q01's leading hierarchy.",
+          "Q01 has lower RMS (0.246 versus 0.338 FS), weaker periodicity (0.837 versus 0.971), and much more power above 100 Hz (27.3% versus 7.88%)."
+        ],
+        "evidence_ids": [
+          "R06.C01.S0001",
+          "Q01.C01.S0001",
+          "R06.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show harmonically related low-frequency peaks and envelope modulation around 15/30/60–75 Hz.",
+          "Both exhibit some time-domain amplitude variability, unlike the most uniformly sinusoidal references."
+        ]
+      },
+      {
+        "condition_id": "C07",
+        "differences": [
+          "C07's dominant line is 45.9 Hz at 0.488 FS, whereas Q01 is dominated by 30.7 Hz at 0.179 FS; Q01's 30.7/61.4 Hz pair closely aligns with C07's 30.6/61.2 Hz without a material shift, but the dominant-order structure differs.",
+          "Q01 is less periodic and more broadband: autocorrelation is 0.837 versus 0.979, and power above 100 Hz is 27.3% versus 4.87%; its RMS is also lower (0.246 versus 0.382 FS)."
+        ],
+        "evidence_ids": [
+          "R07.C01.S0001",
+          "Q01.C01.S0001",
+          "R07.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "The closest absolute low-frequency alignment among the fault references occurs here: 30.7 versus 30.6 Hz, 61.4 versus 61.2 Hz, and 215.0 versus 214.3 Hz, all within 0.7 Hz.",
+          "Both have a roughly 64–65 ms recurrence and envelope peaks near 30.6, 61 and 153 Hz."
+        ]
+      },
+      {
+        "condition_id": "C08",
+        "differences": [
+          "C08 is dominated by 44.6 Hz at 0.579 FS and has 74.4/89.3 Hz secondaries, while Q01 is led by 30.7/61.4/92.2 Hz; shifting C08's 29.8/59.5 Hz family upward aligns those minor components but not the dominant 44.6 Hz structure.",
+          "Q01 has lower RMS (0.246 versus 0.468 FS), lower autocorrelation (0.837 versus 0.980), and far more power above 100 Hz (27.3% versus 3.00%), alongside stronger 2–5 s envelope evolution."
+        ],
+        "evidence_ids": [
+          "R08.C01.S0001",
+          "Q01.C01.S0001",
+          "R08.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both retain low-frequency periodic content and envelope peaks near 30, 45–48, 60 and approximately 150 Hz.",
+          "Both use the same 10 s duration, 42 kHz sampling rate and 0.1 Hz FFT resolution, so amplitudes and physical frequency axes are directly comparable, subject to unknown acquisition gain."
+        ]
+      }
+    ],
+    "condition_id": "C01",
+    "explanation": "Q01 best matches C01 (healthy): their FS RMS, peak, crest factor, broad spectral shape, band-power split and visibly nonstationary envelope are substantially closer than any fault reference. Q01 adds a clearer ≈30.7 Hz harmonic family and stronger 64 ms periodicity, but the fault references are uniformly much more low-frequency-concentrated and sinusoidal, generally with a dominant ≈45 Hz line. Because gain is unknown, the decision emphasizes relative structure while noting the unusually close digital-level agreement.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "f072800e8fa0422f8e9e9c446ac5e9fc176ccb388db25b668a57d2a98cb3c475",
+  "source_response_sha256": "13d40ede516ab8d7a51e0ab07a6fc5f1f210681bd0b3dab53e6b059bcaf4c9bc",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

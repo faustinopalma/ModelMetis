@@ -31,7 +31,8 @@ def findings(path, payload):
     forbidden |= "msal_" in filename or filename == "azureprofile.json"
     if filename.endswith((".wav", ".flac", ".mp3", ".mp4", ".pt", ".pth", ".onnx")):
         forbidden |= not bool(re.fullmatch(
-            r"examples/audio-comparison/media/[0-9a-f]{64}\.wav", normalized
+            r"examples/(?:audio-comparison|archive/pruning-candidate)/media/[0-9a-f]{64}\.wav",
+            normalized,
         ))
     result = ["forbidden_artifact_path"] if forbidden else []
     text = payload.decode("utf-8", errors="replace")

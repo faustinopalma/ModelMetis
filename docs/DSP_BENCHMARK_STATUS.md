@@ -31,6 +31,6 @@ For a human pilot, recruit multiple domain experts, hide query labels and model 
 
 ## The Essential Review Shows The Tested Candidate Without Promoting It
 
-[The v15 comparison](../examples/audio-comparison/index.html) shows the recorded triple-removal candidate: band power, autocorrelation and dominant-frequency tracking were removed from its inference inputs. It includes all eight primary decisions and both candidate repeats, including the wrong C06 assignment on D03. Correct-reference and model-choice buttons remain independent; Other disables model choice with an explicit reason while reference browsing remains available.
+[The archived v15 comparison](../examples/archive/pruning-candidate/index.html) shows the recorded triple-removal candidate: band power, autocorrelation and dominant-frequency tracking were removed from its inference inputs. It includes all eight primary decisions and both candidate repeats, including the wrong C06 assignment on D03. Correct-reference and model-choice buttons remain independent; Other disables model choice with an explicit reason while reference browsing remains available.
 
 The interface shows only Welch, FFT, spectrogram and cepstrum plus the original audio and recorded outcome. The model received 23 retained diagram types; displaying four is an interface simplification, not a new four-diagram inference experiment. The candidate remains unapproved, its conflicting repeat is visible, and no new inference or clean final evaluation was performed to create the page.

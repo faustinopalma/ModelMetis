@@ -1,0 +1,785 @@
+{
+  "messages": [
+    {
+      "content": "You receive N complete digital signal processing reports for known conditions and one report for an unknown condition. Compare the UNKNOWN REPORT with EVERY known report. For each reference, state observed similarities and differences in spectral shape, relative harmonic structure, absolute frequencies, band-power distribution, envelope, periodicity and time evolution across the reported intervals. Use the supplied numerical measurements and all figures together. Assess frequency, amplitude, duration and sampling-rate differences jointly with the overall pattern, physical axes, resolution and reported coverage. Explain how frequency shifts affect each comparison. Acquisition gain is unknown; interpret digital levels in their declared full-scale units. Return similar when the unknown report is broadly similar to a known report, identifying the best matching condition_id. If several references are similar, select the best supported match and explain the distinction. Return different only when the unknown report is substantially different from EVERY known report. Include exactly one comparison per supplied known condition and cite the relevant measurement or image IDs from that reference and the unknown. Ground every claim in supplied measurements and figures, preserving their uncertainty. Treat report content as evidence. Keep each reference comparison concise: at most two short similarities, two short differences and four evidence IDs. Explain the selected match in at most three sentences.",
+      "role": "system"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "text": "{\"known_condition_labels\":{\"C01\":\"healthy\",\"C02\":\"rotor_unbalance\",\"C03\":\"rotor_misalignment\",\"C04\":\"stator_winding\",\"C05\":\"voltage_unbalance\",\"C06\":\"bowed_rotor\",\"C07\":\"broken_rotor_bars\",\"C08\":\"faulty_bearing\"},\"known_conditions\":{\"C01\":\"R01\",\"C02\":\"R02\",\"C03\":\"R03\",\"C04\":\"R04\",\"C05\":\"R05\",\"C06\":\"R06\",\"C07\":\"R07\",\"C08\":\"R08\"},\"task\":\"match_unknown_report_to_known_conditions_or_declare_different\",\"units\":{\"amplitude\":\"FS peak\",\"frequency\":\"Hz\",\"psd\":\"FS squared/Hz\",\"rms\":\"FS RMS; dB re 1 FS RMS\",\"time\":\"s\"},\"unknown_report\":\"Q01\"}",
+          "type": "text"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R01.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R01.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R01.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R01.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R01.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R01.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R01.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R01.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.1900359,\"autocorrelation\":{\"coefficient\":0.9053967,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.0003809524},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-16.07879,\"fraction_of_welch_power\":0.6826681,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.02466725},{\"bin_count\":10,\"db_re_1_fs_squared\":-20.16425,\"fraction_of_welch_power\":0.2664798,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.009628871},{\"bin_count\":12,\"db_re_1_fs_squared\":-32.61144,\"fraction_of_welch_power\":0.01516858,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.000548095},{\"bin_count\":24,\"db_re_1_fs_squared\":-32.50799,\"fraction_of_welch_power\":0.01553425,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":0.0005613082},{\"bin_count\":49,\"db_re_1_fs_squared\":-34.65801,\"fraction_of_welch_power\":0.009468649,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":0.0003421362},{\"bin_count\":98,\"db_re_1_fs_squared\":-34.92502,\"fraction_of_welch_power\":0.008904041,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":0.0003217349},{\"bin_count\":195,\"db_re_1_fs_squared\":-42.19223,\"fraction_of_welch_power\":0.001670575,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":6.036385e-05},{\"bin_count\":122,\"db_re_1_fs_squared\":-54.16965,\"fraction_of_welch_power\":0.0001059556,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":3.828555e-06}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":11.92651,\"dc_offset_fs\":0.1476477,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.240452,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-29.25144,\"amplitude_fs_peak\":0.03446894,\"frequency_hz\":0.3030303,\"prominence_db\":19.37528},{\"amplitude_db_re_1_fs_peak\":-29.34783,\"amplitude_fs_peak\":0.03408853,\"frequency_hz\":40.0,\"prominence_db\":53.26293},{\"amplitude_db_re_1_fs_peak\":-30.84192,\"amplitude_fs_peak\":0.02870146,\"frequency_hz\":9.292929,\"prominence_db\":39.38928},{\"amplitude_db_re_1_fs_peak\":-32.7262,\"amplitude_fs_peak\":0.02310416,\"frequency_hz\":55.25253,\"prominence_db\":34.26564},{\"amplitude_db_re_1_fs_peak\":-32.86589,\"amplitude_fs_peak\":0.02273554,\"frequency_hz\":30.60606,\"prominence_db\":39.18353},{\"amplitude_db_re_1_fs_peak\":-32.91074,\"amplitude_fs_peak\":0.02261846,\"frequency_hz\":39.39394,\"prominence_db\":15.66484},{\"amplitude_db_re_1_fs_peak\":-32.92216,\"amplitude_fs_peak\":0.02258874,\"frequency_hz\":31.41414,\"prominence_db\":16.64469},{\"amplitude_db_re_1_fs_peak\":-33.24075,\"amplitude_fs_peak\":0.02177521,\"frequency_hz\":165.7576,\"prominence_db\":56.40666}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[{\"delta_db\":-6.430811,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":2.08},{\"delta_db\":6.287153,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":2.18},{\"delta_db\":-6.020937,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":2.22}],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-16.68881,\"amplitude_fs_peak\":0.1464062,\"frequency_hz\":45.9,\"prominence_db\":77.10102},{\"amplitude_db_re_1_fs_peak\":-22.62548,\"amplitude_fs_peak\":0.07391387,\"frequency_hz\":85.9,\"prominence_db\":59.17946},{\"amplitude_db_re_1_fs_peak\":-27.03235,\"amplitude_fs_peak\":0.0445023,\"frequency_hz\":211.7,\"prominence_db\":71.3314},{\"amplitude_db_re_1_fs_peak\":-27.94165,\"amplitude_fs_peak\":0.04007907,\"frequency_hz\":101.2,\"prominence_db\":46.67743},{\"amplitude_db_re_1_fs_peak\":-28.35726,\"amplitude_fs_peak\":0.03820646,\"frequency_hz\":109.4,\"prominence_db\":43.22778},{\"amplitude_db_re_1_fs_peak\":-28.45288,\"amplitude_fs_peak\":0.03778819,\"frequency_hz\":55.3,\"prominence_db\":48.98126},{\"amplitude_db_re_1_fs_peak\":-28.46138,\"amplitude_fs_peak\":0.03775122,\"frequency_hz\":85.4,\"prominence_db\":15.47224},{\"amplitude_db_re_1_fs_peak\":-28.47735,\"amplitude_fs_peak\":0.03768189,\"frequency_hz\":0.9,\"prominence_db\":30.99677}],\"pearson_kurtosis_ac\":2.866593,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-12.3722,\"rms_fs\":0.2406522,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.03613358,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":212.5229,\"spectral_flatness\":0.003069491,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":1332.903}}],\"overview\":{\"height\":700,\"id\":\"R01.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R01\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R01.I001\",\"original_height\":700,\"original_sha256\":\"ef404c8e73c2be6810fc2ce54ea449b53bd864b25bae0712fcae20845cb647ca\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R01.I002\",\"original_height\":700,\"original_sha256\":\"88bac5cc263a7fa338fb0ede7927ca51dded3934013d6c3e11d77e64689655e8\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R01.I003\",\"original_height\":700,\"original_sha256\":\"44ba8833b212012cab76a8847490e3deab25fbe3338fe0c6abff5dce388e5cd2\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R01.I004\",\"original_height\":700,\"original_sha256\":\"69265f86bc6c97fb6664b5aec0f7da6d717326f554be681c0d29af68f130134a\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R01.I005\",\"original_height\":700,\"original_sha256\":\"508d1cc76d78057d005dcc61ec0c383477bb18e00547c239fa7bb72fb0ce068d\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R01.I006\",\"original_height\":700,\"original_sha256\":\"e2af00ce2191fae9d60e1c188eedb11424f289831845043148546cf6f1a60ffb\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R01.I007\",\"original_height\":700,\"original_sha256\":\"ba01772001d8e2c7b84d8bb5324f9d0fd3c6822b0b361360d127c9daf03d5003\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R01.I008\",\"original_height\":700,\"original_sha256\":\"68ef707fbc3b4259fb3749db7f2f8a5fb1003645e0e0f3281d3e02ee68aea8e0\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R01.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R01.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "06aa281edad79e037868a3cea8fb09f2bba4858d6a7857dbcbee170f9119ff97"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R02.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R02.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R02.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R02.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R02.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R02.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R02.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R02.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.4602359,\"autocorrelation\":{\"coefficient\":0.9786027,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.0665},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-6.861689,\"fraction_of_welch_power\":0.9724807,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.2059829},{\"bin_count\":10,\"db_re_1_fs_squared\":-22.70896,\"fraction_of_welch_power\":0.02530196,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.005359253},{\"bin_count\":12,\"db_re_1_fs_squared\":-34.45488,\"fraction_of_welch_power\":0.00169263,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.000358519},{\"bin_count\":24,\"db_re_1_fs_squared\":-42.7549,\"fraction_of_welch_power\":0.000250357,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":5.302856e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-45.7466,\"fraction_of_welch_power\":0.0001257159,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":2.662812e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-46.02369,\"fraction_of_welch_power\":0.0001179455,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":2.498224e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-52.25317,\"fraction_of_welch_power\":2.810174e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":5.952279e-06},{\"bin_count\":122,\"db_re_1_fs_squared\":-62.64555,\"fraction_of_welch_power\":2.567407e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":5.438071e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":6.246179,\"dc_offset_fs\":0.04878057,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.6371646,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-20.41058,\"amplitude_fs_peak\":0.09538304,\"frequency_hz\":30.10101,\"prominence_db\":64.34041},{\"amplitude_db_re_1_fs_peak\":-21.71872,\"amplitude_fs_peak\":0.08204726,\"frequency_hz\":45.15152,\"prominence_db\":58.5825},{\"amplitude_db_re_1_fs_peak\":-23.18551,\"amplitude_fs_peak\":0.06929859,\"frequency_hz\":15.05051,\"prominence_db\":54.23205},{\"amplitude_db_re_1_fs_peak\":-28.06519,\"amplitude_fs_peak\":0.03951303,\"frequency_hz\":75.15152,\"prominence_db\":56.73171},{\"amplitude_db_re_1_fs_peak\":-29.3087,\"amplitude_fs_peak\":0.03424244,\"frequency_hz\":60.20202,\"prominence_db\":51.73115},{\"amplitude_db_re_1_fs_peak\":-31.76429,\"amplitude_fs_peak\":0.02580985,\"frequency_hz\":16.06061,\"prominence_db\":38.066},{\"amplitude_db_re_1_fs_peak\":-32.51622,\"amplitude_fs_peak\":0.02366948,\"frequency_hz\":8.989899,\"prominence_db\":41.99206},{\"amplitude_db_re_1_fs_peak\":-33.94953,\"amplitude_fs_peak\":0.02006889,\"frequency_hz\":150.404,\"prominence_db\":63.39158}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-4.286338,\"amplitude_fs_peak\":0.6104964,\"frequency_hz\":45.1,\"prominence_db\":99.80321},{\"amplitude_db_re_1_fs_peak\":-18.98226,\"amplitude_fs_peak\":0.1124313,\"frequency_hz\":75.2,\"prominence_db\":95.45831},{\"amplitude_db_re_1_fs_peak\":-19.12135,\"amplitude_fs_peak\":0.1106452,\"frequency_hz\":30.1,\"prominence_db\":63.54811},{\"amplitude_db_re_1_fs_peak\":-21.47526,\"amplitude_fs_peak\":0.08437946,\"frequency_hz\":90.2,\"prominence_db\":67.06679},{\"amplitude_db_re_1_fs_peak\":-27.18006,\"amplitude_fs_peak\":0.0437519,\"frequency_hz\":105.3,\"prominence_db\":52.78575},{\"amplitude_db_re_1_fs_peak\":-27.432,\"amplitude_fs_peak\":0.04250107,\"frequency_hz\":60.1,\"prominence_db\":60.87123},{\"amplitude_db_re_1_fs_peak\":-27.7979,\"amplitude_fs_peak\":0.04074789,\"frequency_hz\":120.3,\"prominence_db\":60.05857},{\"amplitude_db_re_1_fs_peak\":-32.40158,\"amplitude_fs_peak\":0.02398396,\"frequency_hz\":54.1,\"prominence_db\":53.24724}],\"pearson_kurtosis_ac\":1.729911,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-6.691874,\"rms_fs\":0.4628138,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.2118118,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":51.84642,\"spectral_flatness\":7.629228e-05,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":124.6003}}],\"overview\":{\"height\":700,\"id\":\"R02.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R02\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R02.I001\",\"original_height\":700,\"original_sha256\":\"79a6d5e3ed729d4fb0c23cb4e9cd5671d3542584de3cdb6f4bfb9ca97ac162e3\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R02.I002\",\"original_height\":700,\"original_sha256\":\"19ba1d606d49d127017730cc98962b546ce77e16ecf2883a3399b0efa625d77a\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R02.I003\",\"original_height\":700,\"original_sha256\":\"9665c30fde0fa00e6f171742e77d74321eb0c52f6941e0ee9a556d46c2257c26\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R02.I004\",\"original_height\":700,\"original_sha256\":\"5fc7531ac8a6ce0e34776bc98dab900b6abc012231bf0babb3a630a7da8b364f\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R02.I005\",\"original_height\":700,\"original_sha256\":\"c69f63775b257de3e0c805f4e3797945a9cdc8e2570ace9a2e792fea372b5726\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R02.I006\",\"original_height\":700,\"original_sha256\":\"c7107a74cd5e493e3a1a6c465584eaf4ce59e0bb9c44601a1ea5bbc787c39914\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R02.I007\",\"original_height\":700,\"original_sha256\":\"184cf37841f2492352f21e676ac32ad2f0d2e04d5c939153efe0a26b5f79153c\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R02.I008\",\"original_height\":700,\"original_sha256\":\"e7fc8d70ba63f53a2964a3a85f3fc38f64f9ceb5ee8f81006c2e2512148057cd\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R02.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R02.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "007b19de58ff8ec10616deabd1cf0d9ba433c5b4b12e3717cb152bf1583aef01"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R03.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R03.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R03.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R03.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R03.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R03.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R03.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R03.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.4168344,\"autocorrelation\":{\"coefficient\":0.978874,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06671429},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-7.770449,\"fraction_of_welch_power\":0.9619183,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.1670918},{\"bin_count\":10,\"db_re_1_fs_squared\":-22.2139,\"fraction_of_welch_power\":0.03457748,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.006006345},{\"bin_count\":12,\"db_re_1_fs_squared\":-34.28283,\"fraction_of_welch_power\":0.002147337,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0003730071},{\"bin_count\":24,\"db_re_1_fs_squared\":-39.21874,\"fraction_of_welch_power\":0.0006891429,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":0.0001197088},{\"bin_count\":49,\"db_re_1_fs_squared\":-41.00918,\"fraction_of_welch_power\":0.0004563151,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":7.926504e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-45.93398,\"fraction_of_welch_power\":0.0001468199,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":2.550361e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-49.68227,\"fraction_of_welch_power\":6.193792e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":1.075904e-05},{\"bin_count\":122,\"db_re_1_fs_squared\":-63.42072,\"fraction_of_welch_power\":2.618851e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":4.549123e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":7.098208,\"dc_offset_fs\":0.0478369,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.5713218,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-17.95385,\"amplitude_fs_peak\":0.1265632,\"frequency_hz\":14.94949,\"prominence_db\":78.47021},{\"amplitude_db_re_1_fs_peak\":-21.83631,\"amplitude_fs_peak\":0.080944,\"frequency_hz\":44.94949,\"prominence_db\":72.46057},{\"amplitude_db_re_1_fs_peak\":-24.90231,\"amplitude_fs_peak\":0.05687014,\"frequency_hz\":60.0,\"prominence_db\":60.75792},{\"amplitude_db_re_1_fs_peak\":-27.90539,\"amplitude_fs_peak\":0.04024673,\"frequency_hz\":164.8485,\"prominence_db\":70.91519},{\"amplitude_db_re_1_fs_peak\":-28.38223,\"amplitude_fs_peak\":0.03809678,\"frequency_hz\":30.0,\"prominence_db\":60.57605},{\"amplitude_db_re_1_fs_peak\":-30.89991,\"amplitude_fs_peak\":0.02851048,\"frequency_hz\":149.899,\"prominence_db\":56.07696},{\"amplitude_db_re_1_fs_peak\":-32.59376,\"amplitude_fs_peak\":0.02345915,\"frequency_hz\":53.93939,\"prominence_db\":46.57836},{\"amplitude_db_re_1_fs_peak\":-32.7308,\"amplitude_fs_peak\":0.02309191,\"frequency_hz\":179.899,\"prominence_db\":51.10663}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-5.948511,\"amplitude_fs_peak\":0.5041671,\"frequency_hz\":45.0,\"prominence_db\":94.65623},{\"amplitude_db_re_1_fs_peak\":-14.40379,\"amplitude_fs_peak\":0.1904629,\"frequency_hz\":30.0,\"prominence_db\":81.16262},{\"amplitude_db_re_1_fs_peak\":-23.14945,\"amplitude_fs_peak\":0.06958692,\"frequency_hz\":75.0,\"prominence_db\":75.34498},{\"amplitude_db_re_1_fs_peak\":-24.80626,\"amplitude_fs_peak\":0.05750257,\"frequency_hz\":104.9,\"prominence_db\":75.39997},{\"amplitude_db_re_1_fs_peak\":-25.62413,\"amplitude_fs_peak\":0.05233513,\"frequency_hz\":60.0,\"prominence_db\":64.21219},{\"amplitude_db_re_1_fs_peak\":-26.05995,\"amplitude_fs_peak\":0.04977402,\"frequency_hz\":209.9,\"prominence_db\":82.67129},{\"amplitude_db_re_1_fs_peak\":-26.72028,\"amplitude_fs_peak\":0.04613028,\"frequency_hz\":89.9,\"prominence_db\":62.03396},{\"amplitude_db_re_1_fs_peak\":-28.48208,\"amplitude_fs_peak\":0.03766136,\"frequency_hz\":119.9,\"prominence_db\":70.23041}],\"pearson_kurtosis_ac\":1.892305,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-7.543903,\"rms_fs\":0.4195704,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.1737068,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":54.58978,\"spectral_flatness\":0.0001915861,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":160.3004}}],\"overview\":{\"height\":700,\"id\":\"R03.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R03\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R03.I001\",\"original_height\":700,\"original_sha256\":\"6d1238afcd5280f01d56d6f653dbbc848c3b9133867b1ff2cbb12152daee75ac\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R03.I002\",\"original_height\":700,\"original_sha256\":\"1562aad569b620f8eca3a92e3af80bcdc2f2f53934f8161d3ed43dbece9482fd\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R03.I003\",\"original_height\":700,\"original_sha256\":\"fdeacf70ae572a7142a4aa649273d3a4610525e9a72e106be7636467ac9dcb20\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R03.I004\",\"original_height\":700,\"original_sha256\":\"7e67dd9b20321029611d2e55c1559957329e862518da5d742a00cd964ac97565\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R03.I005\",\"original_height\":700,\"original_sha256\":\"9e574b490987118ac3eea549ca11e0a07a832e0c7b19b653d0de300529f5264f\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R03.I006\",\"original_height\":700,\"original_sha256\":\"77a49c75095a5c53eb0b1ab8851ca54097bacfa6e1469ace78478be6d4d58034\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R03.I007\",\"original_height\":700,\"original_sha256\":\"482324bf8df1a0f7ac7b443f78db57aaa8bb268f0ebca0c1a0e9ed52795c3fe2\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R03.I008\",\"original_height\":700,\"original_sha256\":\"92c699eb7dcc2ec18d94b60d08e0d99527623121d29d59dadf7b2554496b7636\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R03.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R03.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "073bb09af0d71d286f0c6b67181da94fb89f1542b6bf74d46be7c276ae3b8de3"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R04.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R04.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R04.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R04.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R04.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R04.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R04.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R04.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.397076,\"autocorrelation\":{\"coefficient\":0.9827836,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06683333},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-8.356681,\"fraction_of_welch_power\":0.924633,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.145993},{\"bin_count\":10,\"db_re_1_fs_squared\":-19.45409,\"fraction_of_welch_power\":0.07181723,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.01133943},{\"bin_count\":12,\"db_re_1_fs_squared\":-33.71555,\"fraction_of_welch_power\":0.002692048,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0004250551},{\"bin_count\":24,\"db_re_1_fs_squared\":-42.83293,\"fraction_of_welch_power\":0.0003298716,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":5.208437e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-44.41561,\"fraction_of_welch_power\":0.0002291272,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":3.617754e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-43.74596,\"fraction_of_welch_power\":0.0002673262,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":4.220891e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-53.38727,\"fraction_of_welch_power\":2.903422e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":4.584296e-06},{\"bin_count\":122,\"db_re_1_fs_squared\":-64.34589,\"fraction_of_welch_power\":2.328351e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":3.6763e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":7.551645,\"dc_offset_fs\":0.03028314,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.5172572,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-13.05608,\"amplitude_fs_peak\":0.2224313,\"frequency_hz\":29.89899,\"prominence_db\":65.89627},{\"amplitude_db_re_1_fs_peak\":-21.16952,\"amplitude_fs_peak\":0.08740255,\"frequency_hz\":44.84848,\"prominence_db\":57.16104},{\"amplitude_db_re_1_fs_peak\":-23.19257,\"amplitude_fs_peak\":0.06924232,\"frequency_hz\":59.89899,\"prominence_db\":59.74456},{\"amplitude_db_re_1_fs_peak\":-28.40751,\"amplitude_fs_peak\":0.0379861,\"frequency_hz\":74.84848,\"prominence_db\":58.10345},{\"amplitude_db_re_1_fs_peak\":-30.00676,\"amplitude_fs_peak\":0.03159818,\"frequency_hz\":164.5455,\"prominence_db\":70.90192},{\"amplitude_db_re_1_fs_peak\":-31.31264,\"amplitude_fs_peak\":0.02718741,\"frequency_hz\":89.79798,\"prominence_db\":58.26914},{\"amplitude_db_re_1_fs_peak\":-32.89304,\"amplitude_fs_peak\":0.02266461,\"frequency_hz\":15.05051,\"prominence_db\":42.09126},{\"amplitude_db_re_1_fs_peak\":-33.29048,\"amplitude_fs_peak\":0.02165089,\"frequency_hz\":28.88889,\"prominence_db\":10.0256}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[{\"delta_db\":-6.11472,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":0.3},{\"delta_db\":-7.692717,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.1},{\"delta_db\":7.352582,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.12},{\"delta_db\":-8.150261,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.3},{\"delta_db\":7.172565,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.32},{\"delta_db\":-6.225844,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.5},{\"delta_db\":6.112356,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":1.52},{\"delta_db\":-6.28905,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":2.1},{\"delta_db\":-7.13973,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":3.44},{\"delta_db\":-6.275808,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":6.34}],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-8.179339,\"amplitude_fs_peak\":0.3899716,\"frequency_hz\":44.9,\"prominence_db\":86.60733},{\"amplitude_db_re_1_fs_peak\":-9.5214,\"amplitude_fs_peak\":0.3341412,\"frequency_hz\":74.8,\"prominence_db\":82.18656},{\"amplitude_db_re_1_fs_peak\":-22.42974,\"amplitude_fs_peak\":0.07559849,\"frequency_hz\":104.7,\"prominence_db\":64.93048},{\"amplitude_db_re_1_fs_peak\":-22.84565,\"amplitude_fs_peak\":0.07206384,\"frequency_hz\":59.8,\"prominence_db\":51.0031},{\"amplitude_db_re_1_fs_peak\":-24.59902,\"amplitude_fs_peak\":0.05889103,\"frequency_hz\":89.8,\"prominence_db\":61.26975},{\"amplitude_db_re_1_fs_peak\":-26.1909,\"amplitude_fs_peak\":0.0490292,\"frequency_hz\":29.9,\"prominence_db\":56.513},{\"amplitude_db_re_1_fs_peak\":-27.96892,\"amplitude_fs_peak\":0.03995343,\"frequency_hz\":149.6,\"prominence_db\":72.44957},{\"amplitude_db_re_1_fs_peak\":-28.99291,\"amplitude_fs_peak\":0.03551033,\"frequency_hz\":209.4,\"prominence_db\":70.48656}],\"pearson_kurtosis_ac\":2.059304,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-7.99734,\"rms_fs\":0.3982291,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.1578929,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":65.85215,\"spectral_flatness\":0.0001142978,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":279.4007}}],\"overview\":{\"height\":700,\"id\":\"R04.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R04\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R04.I001\",\"original_height\":700,\"original_sha256\":\"4b14a18e2772c10a52fbb0bfdc0e056a35bee9b8532d7e43e8104d7918206332\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R04.I002\",\"original_height\":700,\"original_sha256\":\"7bb7c5fac45edaaead2f838e38665b866b4ad2f9881d67aa8cf4eb4741903fcd\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R04.I003\",\"original_height\":700,\"original_sha256\":\"dc615eddb36c0e2312e9fcdf3b22c50c0863ab2ae7722ed4d4c1fca0195b3b89\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R04.I004\",\"original_height\":700,\"original_sha256\":\"0032e674a19b704ae5ad54d30315fd7cf6d07890f05252c251ca91a8442e73af\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R04.I005\",\"original_height\":700,\"original_sha256\":\"1b2a0c98390cc38f3025c5aec848a9c643eb0122ed1fb8d30120fe846ef51f09\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R04.I006\",\"original_height\":700,\"original_sha256\":\"ee60c8ed6a493b4488e230f02b2f4fc920f5a2aa44040d74ec5d46f9bca16e6c\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R04.I007\",\"original_height\":700,\"original_sha256\":\"2e76e3915cd2132965405cc677f4d011d31dedaab05dd222639566bb63843f56\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R04.I008\",\"original_height\":700,\"original_sha256\":\"98809efcab128c366689f8c5d7acd44faad0f2e22a44d4fa59082b461922fed4\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R04.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R04.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "2c3e1d074e26509c483ea0d3bb02626e5d61f2049d5febb44e9ac306e994a442"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R05.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R05.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R05.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R05.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R05.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R05.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R05.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R05.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.4528503,\"autocorrelation\":{\"coefficient\":0.9717292,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06838095},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-7.064321,\"fraction_of_welch_power\":0.9586472,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.1965929},{\"bin_count\":10,\"db_re_1_fs_squared\":-21.11642,\"fraction_of_welch_power\":0.03770931,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.007733172},{\"bin_count\":12,\"db_re_1_fs_squared\":-32.67801,\"fraction_of_welch_power\":0.002632027,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0005397583},{\"bin_count\":24,\"db_re_1_fs_squared\":-41.09578,\"fraction_of_welch_power\":0.0003788896,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":7.770013e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-42.87987,\"fraction_of_welch_power\":0.0002512486,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":5.152438e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-41.5464,\"fraction_of_welch_power\":0.0003415471,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":7.004219e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-51.12882,\"fraction_of_welch_power\":3.760181e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":7.711127e-06},{\"bin_count\":122,\"db_re_1_fs_squared\":-63.45744,\"fraction_of_welch_power\":2.199618e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":4.51083e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":6.375288,\"dc_offset_fs\":0.05337744,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.6260185,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-20.5697,\"amplitude_fs_peak\":0.09365153,\"frequency_hz\":29.29293,\"prominence_db\":65.05309},{\"amplitude_db_re_1_fs_peak\":-23.0993,\"amplitude_fs_peak\":0.06998985,\"frequency_hz\":58.48485,\"prominence_db\":59.89725},{\"amplitude_db_re_1_fs_peak\":-26.14013,\"amplitude_fs_peak\":0.04931663,\"frequency_hz\":263.3333,\"prominence_db\":76.26475},{\"amplitude_db_re_1_fs_peak\":-28.18284,\"amplitude_fs_peak\":0.03898144,\"frequency_hz\":8.787879,\"prominence_db\":53.99314},{\"amplitude_db_re_1_fs_peak\":-28.46443,\"amplitude_fs_peak\":0.03773799,\"frequency_hz\":160.9091,\"prominence_db\":73.05952},{\"amplitude_db_re_1_fs_peak\":-28.48192,\"amplitude_fs_peak\":0.03766204,\"frequency_hz\":14.64646,\"prominence_db\":56.51436},{\"amplitude_db_re_1_fs_peak\":-29.8573,\"amplitude_fs_peak\":0.03214658,\"frequency_hz\":175.5556,\"prominence_db\":46.29127},{\"amplitude_db_re_1_fs_peak\":-31.20057,\"amplitude_fs_peak\":0.02754048,\"frequency_hz\":73.13131,\"prominence_db\":52.76336}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-4.329295,\"amplitude_fs_peak\":0.6074845,\"frequency_hz\":43.9,\"prominence_db\":88.02639},{\"amplitude_db_re_1_fs_peak\":-20.10815,\"amplitude_fs_peak\":0.09876257,\"frequency_hz\":73.1,\"prominence_db\":76.90007},{\"amplitude_db_re_1_fs_peak\":-22.71605,\"amplitude_fs_peak\":0.07314713,\"frequency_hz\":102.4,\"prominence_db\":79.03615},{\"amplitude_db_re_1_fs_peak\":-22.92379,\"amplitude_fs_peak\":0.0714185,\"frequency_hz\":58.5,\"prominence_db\":67.57059},{\"amplitude_db_re_1_fs_peak\":-26.56128,\"amplitude_fs_peak\":0.04698249,\"frequency_hz\":29.3,\"prominence_db\":64.83747},{\"amplitude_db_re_1_fs_peak\":-26.9247,\"amplitude_fs_peak\":0.0450573,\"frequency_hz\":307.3,\"prominence_db\":77.66657},{\"amplitude_db_re_1_fs_peak\":-28.10598,\"amplitude_fs_peak\":0.03932791,\"frequency_hz\":52.7,\"prominence_db\":59.99165},{\"amplitude_db_re_1_fs_peak\":-28.58046,\"amplitude_fs_peak\":0.0372372,\"frequency_hz\":204.8,\"prominence_db\":75.98122}],\"pearson_kurtosis_ac\":1.757317,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-6.820983,\"rms_fs\":0.4559853,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.2050733,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":56.62724,\"spectral_flatness\":0.0001232739,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":175.2004}}],\"overview\":{\"height\":700,\"id\":\"R05.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R05\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R05.I001\",\"original_height\":700,\"original_sha256\":\"2beaf40cec5e9ad8a40ded1caf3d529d2b323d517ff56cfe00f7dad559d91ce9\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R05.I002\",\"original_height\":700,\"original_sha256\":\"5c5e4c1ebaed8394c9096eab17650bba8191c820da35dd7e9cc7be382b452215\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R05.I003\",\"original_height\":700,\"original_sha256\":\"5e4f074ed4a6de323bb700485e6f466a80ee155f9e67409ccbf193610435b2ea\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R05.I004\",\"original_height\":700,\"original_sha256\":\"2842422b3f3f45d9dbd15ec702449f8ca5cfd2c86c717e00c4777a8ff7721531\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R05.I005\",\"original_height\":700,\"original_sha256\":\"a8d92d30137e1cd8389973eab048644a255d41e68ae406cba5e30994eb646999\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R05.I006\",\"original_height\":700,\"original_sha256\":\"560567aebb23ebdeb7731567ca992b1ad6d789c1bf6222edd56bc6f2881caeb8\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R05.I007\",\"original_height\":700,\"original_sha256\":\"31301fb2952b8d26ed37a74285448f3803e2ef6d0e27220d3993578ba23695e8\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R05.I008\",\"original_height\":700,\"original_sha256\":\"63542cc69ceaa3b011836ca9ab49dfb1aa84f506b8d9f1e1a40a41bf57a99758\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R05.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R05.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "0e6d814df02c84f2320bc396c98614b706c231e5c4ba2d303b4548f6174c5302"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R06.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R06.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R06.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R06.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R06.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R06.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R06.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R06.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.3371557,\"autocorrelation\":{\"coefficient\":0.9713644,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06688095},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-9.801764,\"fraction_of_welch_power\":0.9212219,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.1046703},{\"bin_count\":10,\"db_re_1_fs_squared\":-20.92553,\"fraction_of_welch_power\":0.07111935,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.008080665},{\"bin_count\":12,\"db_re_1_fs_squared\":-31.88367,\"fraction_of_welch_power\":0.005703928,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.000648087},{\"bin_count\":24,\"db_re_1_fs_squared\":-39.58004,\"fraction_of_welch_power\":0.000969474,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":0.0001101528},{\"bin_count\":49,\"db_re_1_fs_squared\":-41.88282,\"fraction_of_welch_power\":0.0005705037,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":6.482131e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-43.88448,\"fraction_of_welch_power\":0.0003598263,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":4.088389e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-52.28066,\"fraction_of_welch_power\":5.205644e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":5.914715e-06},{\"bin_count\":122,\"db_re_1_fs_squared\":-64.78894,\"fraction_of_welch_power\":2.921773e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":3.319753e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":8.987805,\"dc_offset_fs\":0.01609804,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.451649,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-17.83661,\"amplitude_fs_peak\":0.1282831,\"frequency_hz\":14.94949,\"prominence_db\":69.85572},{\"amplitude_db_re_1_fs_peak\":-19.2043,\"amplitude_fs_peak\":0.1095935,\"frequency_hz\":59.79798,\"prominence_db\":65.55122},{\"amplitude_db_re_1_fs_peak\":-22.03486,\"amplitude_fs_peak\":0.0791147,\"frequency_hz\":74.74747,\"prominence_db\":69.3219},{\"amplitude_db_re_1_fs_peak\":-24.5064,\"amplitude_fs_peak\":0.05952232,\"frequency_hz\":29.89899,\"prominence_db\":59.88753},{\"amplitude_db_re_1_fs_peak\":-33.83526,\"amplitude_fs_peak\":0.02033465,\"frequency_hz\":44.84848,\"prominence_db\":46.19187},{\"amplitude_db_re_1_fs_peak\":-34.03292,\"amplitude_fs_peak\":0.01987714,\"frequency_hz\":358.7879,\"prominence_db\":69.00649},{\"amplitude_db_re_1_fs_peak\":-34.45783,\"amplitude_fs_peak\":0.01892817,\"frequency_hz\":8.989899,\"prominence_db\":47.47525},{\"amplitude_db_re_1_fs_peak\":-35.87163,\"amplitude_fs_peak\":0.0160849,\"frequency_hz\":269.0909,\"prominence_db\":65.0054}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[{\"delta_db\":6.275236,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":0.6},{\"delta_db\":6.066427,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":3.68},{\"delta_db\":6.259617,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":3.88},{\"delta_db\":6.180613,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":4.68},{\"delta_db\":6.430164,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":4.88},{\"delta_db\":7.128897,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":6.02},{\"delta_db\":7.016151,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":6.22},{\"delta_db\":6.21239,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":6.42},{\"delta_db\":6.082333,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":7.56},{\"delta_db\":6.598029,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":8.36},{\"delta_db\":6.015414,\"kind\":\"level_change_candidate_not_regime_boundary\",\"time_seconds\":9.9}],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-9.46667,\"amplitude_fs_peak\":0.3362533,\"frequency_hz\":44.9,\"prominence_db\":92.66184},{\"amplitude_db_re_1_fs_peak\":-14.13747,\"amplitude_fs_peak\":0.1963932,\"frequency_hz\":29.9,\"prominence_db\":74.16378},{\"amplitude_db_re_1_fs_peak\":-18.94834,\"amplitude_fs_peak\":0.1128711,\"frequency_hz\":104.7,\"prominence_db\":80.60304},{\"amplitude_db_re_1_fs_peak\":-22.91583,\"amplitude_fs_peak\":0.07148395,\"frequency_hz\":59.8,\"prominence_db\":66.90022},{\"amplitude_db_re_1_fs_peak\":-24.48187,\"amplitude_fs_peak\":0.05969067,\"frequency_hz\":74.8,\"prominence_db\":68.94325},{\"amplitude_db_re_1_fs_peak\":-26.55629,\"amplitude_fs_peak\":0.0470095,\"frequency_hz\":119.6,\"prominence_db\":60.39354},{\"amplitude_db_re_1_fs_peak\":-32.48931,\"amplitude_fs_peak\":0.02374294,\"frequency_hz\":89.7,\"prominence_db\":57.18417},{\"amplitude_db_re_1_fs_peak\":-32.88511,\"amplitude_fs_peak\":0.0226853,\"frequency_hz\":53.8,\"prominence_db\":54.027}],\"pearson_kurtosis_ac\":2.579448,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-9.4335,\"rms_fs\":0.3375398,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.1136212,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":62.03571,\"spectral_flatness\":0.0002251444,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":172.0004}}],\"overview\":{\"height\":700,\"id\":\"R06.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R06\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R06.I001\",\"original_height\":700,\"original_sha256\":\"1c3ba85bcc8f260aed45db64f67960736944173122c171530055ba7217381199\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R06.I002\",\"original_height\":700,\"original_sha256\":\"76e1077fc205b0fbc5137b521a9746473fd5c553a2e377c681d6ecf169264201\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R06.I003\",\"original_height\":700,\"original_sha256\":\"485721fffe5d53ae6fa81a63000eceb7590a09579e6222e85e2092d5b0a0470b\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R06.I004\",\"original_height\":700,\"original_sha256\":\"094f64c5a038bb35e136a777f15a89e337716015995dd5a3ec2881592894f7b6\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R06.I005\",\"original_height\":700,\"original_sha256\":\"5e552e524cea15843402c80dc67054105c72f27576c71a38b8b6140fbc92c61f\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R06.I006\",\"original_height\":700,\"original_sha256\":\"6a07457e75863b50850549bd9a42ba5f4083cd3fb7cbd544d94e85986067ad1b\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R06.I007\",\"original_height\":700,\"original_sha256\":\"d5df8436a9c0a17e446f921cfa16f608f7d94e744f4ad1e126f0ae17fe3bf7ce\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R06.I008\",\"original_height\":700,\"original_sha256\":\"7ef32278be11a9f425938db13ef39bdec0a8184eb1a5faf866f352af257a0070\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R06.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R06.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "fb577b4a49e30fb0c1d60909fcdc68a6d6e0449289c6273b5238ae18b810c153"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R07.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R07.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R07.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R07.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R07.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R07.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R07.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R07.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.3808855,\"autocorrelation\":{\"coefficient\":0.9789574,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06538095},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-8.598001,\"fraction_of_welch_power\":0.9513319,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.138102},{\"bin_count\":10,\"db_re_1_fs_squared\":-21.67804,\"fraction_of_welch_power\":0.04680882,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.006795095},{\"bin_count\":12,\"db_re_1_fs_squared\":-38.46678,\"fraction_of_welch_power\":0.0009805148,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0001423384},{\"bin_count\":24,\"db_re_1_fs_squared\":-44.29785,\"fraction_of_welch_power\":0.000256063,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":3.717189e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-46.43054,\"fraction_of_welch_power\":0.0001567032,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":2.274813e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-42.42543,\"fraction_of_welch_power\":0.0003940845,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":5.720806e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-49.99828,\"fraction_of_welch_power\":6.891345e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":1.000396e-05},{\"bin_count\":122,\"db_re_1_fs_squared\":-63.56226,\"fraction_of_welch_power\":3.033239e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":4.403261e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":7.915768,\"dc_offset_fs\":0.02754103,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.5182889,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-18.5336,\"amplitude_fs_peak\":0.1183914,\"frequency_hz\":30.60606,\"prominence_db\":76.07429},{\"amplitude_db_re_1_fs_peak\":-19.99332,\"amplitude_fs_peak\":0.100077,\"frequency_hz\":15.35354,\"prominence_db\":74.22656},{\"amplitude_db_re_1_fs_peak\":-26.06022,\"amplitude_fs_peak\":0.04977245,\"frequency_hz\":168.3838,\"prominence_db\":75.389},{\"amplitude_db_re_1_fs_peak\":-27.0579,\"amplitude_fs_peak\":0.04437158,\"frequency_hz\":61.21212,\"prominence_db\":71.46985},{\"amplitude_db_re_1_fs_peak\":-27.70833,\"amplitude_fs_peak\":0.04117024,\"frequency_hz\":76.56566,\"prominence_db\":55.42865},{\"amplitude_db_re_1_fs_peak\":-28.63695,\"amplitude_fs_peak\":0.03699579,\"frequency_hz\":153.0303,\"prominence_db\":56.01587},{\"amplitude_db_re_1_fs_peak\":-29.15047,\"amplitude_fs_peak\":0.03487197,\"frequency_hz\":45.9596,\"prominence_db\":59.19953},{\"amplitude_db_re_1_fs_peak\":-33.64462,\"amplitude_fs_peak\":0.02078591,\"frequency_hz\":55.05051,\"prominence_db\":46.00508}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-6.238454,\"amplitude_fs_peak\":0.4876153,\"frequency_hz\":45.9,\"prominence_db\":94.55322},{\"amplitude_db_re_1_fs_peak\":-19.15108,\"amplitude_fs_peak\":0.1102671,\"frequency_hz\":76.5,\"prominence_db\":89.1751},{\"amplitude_db_re_1_fs_peak\":-21.72694,\"amplitude_fs_peak\":0.08196964,\"frequency_hz\":30.6,\"prominence_db\":68.60545},{\"amplitude_db_re_1_fs_peak\":-25.93003,\"amplitude_fs_peak\":0.05052407,\"frequency_hz\":214.3,\"prominence_db\":80.51811},{\"amplitude_db_re_1_fs_peak\":-27.49712,\"amplitude_fs_peak\":0.04218363,\"frequency_hz\":122.5,\"prominence_db\":73.07652},{\"amplitude_db_re_1_fs_peak\":-27.60121,\"amplitude_fs_peak\":0.04168114,\"frequency_hz\":107.1,\"prominence_db\":57.24025},{\"amplitude_db_re_1_fs_peak\":-27.98948,\"amplitude_fs_peak\":0.03985896,\"frequency_hz\":61.2,\"prominence_db\":69.34952},{\"amplitude_db_re_1_fs_peak\":-28.40634,\"amplitude_fs_peak\":0.03799119,\"frequency_hz\":199.0,\"prominence_db\":49.70509}],\"pearson_kurtosis_ac\":2.091688,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-8.361463,\"rms_fs\":0.3818799,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.145167,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":57.58516,\"spectral_flatness\":0.0001127362,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":140.6003}}],\"overview\":{\"height\":700,\"id\":\"R07.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R07\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R07.I001\",\"original_height\":700,\"original_sha256\":\"0f223cfd62caadab14501ce672d544a60348c9448800b0c4d1696c910a24d648\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R07.I002\",\"original_height\":700,\"original_sha256\":\"2d6355d1acf13e0ee32c17f9c745cfe0eaa01178f06f9fc1f26aba86429c04a6\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R07.I003\",\"original_height\":700,\"original_sha256\":\"0153531c4d6374bd4ca386e4b92c0085e06ccaba31dfc4d3119554d74230a74a\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R07.I004\",\"original_height\":700,\"original_sha256\":\"f8904f8861ea9600c59d20c08c146c5b46e77aaaac44f9c221e9d55bab0d8c73\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R07.I005\",\"original_height\":700,\"original_sha256\":\"b8f1ec35b54db194cbd46e4bcc6c8b129f8a439665f99c60ddc79a979315713b\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R07.I006\",\"original_height\":700,\"original_sha256\":\"5a71127034cc53b205adec27fd0809aacfc48382b88725f64367d88fa7bb73f9\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R07.I007\",\"original_height\":700,\"original_sha256\":\"7da9eb7a85fdb98533fd11dd36e9b2dfbb07750dc1afece5a964ff422a2597d7\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R07.I008\",\"original_height\":700,\"original_sha256\":\"c1a33e18d7764feb6be4e5de5095491ec0550f956b770aaa6cf26aad09785512\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R07.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R07.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "397cad6a1f6849e522a4c53705c862ac1c68a062a3fbcb06796dd4acd07ad402"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"R08.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"R08.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"R08.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"R08.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"R08.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"R08.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"R08.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"R08.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.4649467,\"autocorrelation\":{\"coefficient\":0.9798259,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.06721429},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-6.783347,\"fraction_of_welch_power\":0.9699501,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.2097323},{\"bin_count\":10,\"db_re_1_fs_squared\":-22.36376,\"fraction_of_welch_power\":0.0268354,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.005802618},{\"bin_count\":12,\"db_re_1_fs_squared\":-33.11184,\"fraction_of_welch_power\":0.002258914,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0004884449},{\"bin_count\":24,\"db_re_1_fs_squared\":-40.27605,\"fraction_of_welch_power\":0.0004339893,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":9.384152e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-43.66028,\"fraction_of_welch_power\":0.0001990929,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":4.304987e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-42.02342,\"fraction_of_welch_power\":0.0002902301,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":6.275645e-05},{\"bin_count\":195,\"db_re_1_fs_squared\":-52.02884,\"fraction_of_welch_power\":2.89868e-05,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":6.267815e-06},{\"bin_count\":122,\"db_re_1_fs_squared\":-61.52245,\"fraction_of_welch_power\":3.257163e-06,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":7.042963e-07}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":6.148494,\"dc_offset_fs\":0.05379251,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.6451456,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-21.02435,\"amplitude_fs_peak\":0.08887563,\"frequency_hz\":44.64646,\"prominence_db\":67.57687},{\"amplitude_db_re_1_fs_peak\":-21.65048,\"amplitude_fs_peak\":0.08269436,\"frequency_hz\":29.79798,\"prominence_db\":65.39372},{\"amplitude_db_re_1_fs_peak\":-24.64541,\"amplitude_fs_peak\":0.05857731,\"frequency_hz\":59.49495,\"prominence_db\":55.78602},{\"amplitude_db_re_1_fs_peak\":-31.80684,\"amplitude_fs_peak\":0.02568372,\"frequency_hz\":371.9192,\"prominence_db\":68.86892},{\"amplitude_db_re_1_fs_peak\":-32.03763,\"amplitude_fs_peak\":0.02501027,\"frequency_hz\":267.7778,\"prominence_db\":67.92591},{\"amplitude_db_re_1_fs_peak\":-32.7687,\"amplitude_fs_peak\":0.02299139,\"frequency_hz\":8.888889,\"prominence_db\":42.6463},{\"amplitude_db_re_1_fs_peak\":-33.14645,\"amplitude_fs_peak\":0.02201292,\"frequency_hz\":15.9596,\"prominence_db\":51.20414},{\"amplitude_db_re_1_fs_peak\":-33.19172,\"amplitude_fs_peak\":0.02189848,\"frequency_hz\":148.7879,\"prominence_db\":62.68095}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-4.741912,\"amplitude_fs_peak\":0.5793011,\"frequency_hz\":44.6,\"prominence_db\":93.44378},{\"amplitude_db_re_1_fs_peak\":-20.77222,\"amplitude_fs_peak\":0.09149322,\"frequency_hz\":74.4,\"prominence_db\":73.04234},{\"amplitude_db_re_1_fs_peak\":-20.81528,\"amplitude_fs_peak\":0.09104081,\"frequency_hz\":89.3,\"prominence_db\":68.97515},{\"amplitude_db_re_1_fs_peak\":-24.86212,\"amplitude_fs_peak\":0.05713392,\"frequency_hz\":29.8,\"prominence_db\":52.80211},{\"amplitude_db_re_1_fs_peak\":-25.39661,\"amplitude_fs_peak\":0.05372415,\"frequency_hz\":59.5,\"prominence_db\":66.52287},{\"amplitude_db_re_1_fs_peak\":-26.05281,\"amplitude_fs_peak\":0.04981495,\"frequency_hz\":104.2,\"prominence_db\":60.272},{\"amplitude_db_re_1_fs_peak\":-30.72146,\"amplitude_fs_peak\":0.02910228,\"frequency_hz\":416.6,\"prominence_db\":82.83535},{\"amplitude_db_re_1_fs_peak\":-31.50495,\"amplitude_fs_peak\":0.0265921,\"frequency_hz\":119.0,\"prominence_db\":55.24732}],\"pearson_kurtosis_ac\":1.697628,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-6.594189,\"rms_fs\":0.4680482,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.21623,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":54.30664,\"spectral_flatness\":0.000119414,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":143.7003}}],\"overview\":{\"height\":700,\"id\":\"R08.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"R08\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"R08.I001\",\"original_height\":700,\"original_sha256\":\"02560b378487bc3b5e059c421e98889d7afa25ef610ae8625b35d6c85d963d78\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"R08.I002\",\"original_height\":700,\"original_sha256\":\"240e7f556bc84efed6c0025ecb718179aebf3057b41b5e35a64ab3fadd2ad0ed\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"R08.I003\",\"original_height\":700,\"original_sha256\":\"6c8ccd89417b0f28edcdecbe42a70e210a6358e6e997cfd6f841fffbbcf3ae2c\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"R08.I004\",\"original_height\":700,\"original_sha256\":\"901e9551d6ade1782f636360b4e48790c455ce7864f8df519a0028c54da15aba\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"R08.I005\",\"original_height\":700,\"original_sha256\":\"ad4faa2daa1f5f57929e6e655324c11ba327556544523154578a94a33ae47fc4\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"R08.I006\",\"original_height\":700,\"original_sha256\":\"413013365db3cf81cda1154fa89ebb421459a071b4892b95d45f72cfd56f3434\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"R08.I007\",\"original_height\":700,\"original_sha256\":\"f985115b1d273b793bbb98f7ee7921dff4d516afa533c808e483507642409487\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"R08.I008\",\"original_height\":700,\"original_sha256\":\"e6f0aa09f2d8646531489e7f8ca909d2be13be2f799e45169ee5c18da3023ad4\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"R08.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "R08.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "d105a83883f57b0ebae1800f16798870bbdb638aa7cf0259093911adfd83fe50"
+        },
+        {
+          "text": "{\"channels\":[{\"channel\":1,\"intervals\":[{\"evidence_id\":\"Q01.C01.S0001\",\"images\":[{\"height\":700,\"id\":\"Q01.I002\",\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I003\",\"title\":\"FFT amplitude spectrum\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I004\",\"title\":\"Welch PSD\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I005\",\"title\":\"STFT spectrogram\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I006\",\"title\":\"Band power\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I007\",\"title\":\"Autocorrelation\",\"width\":1200},{\"height\":700,\"id\":\"Q01.I008\",\"title\":\"Envelope and modulation spectrum\",\"width\":1200}],\"measurements\":{\"ac_rms_fs\":0.4153669,\"autocorrelation\":{\"coefficient\":0.9886902,\"limitation\":\"A repeated waveform interval does not identify shaft RPM.\",\"normalization\":\"biased_lag_zero_energy\",\"strongest_positive_peak_lag_seconds\":0.03402381},\"bands\":[{\"bin_count\":3,\"db_re_1_fs_squared\":-8.945377,\"fraction_of_welch_power\":0.7392564,\"high_hz\":100,\"low_hz\":0.0,\"power_fs_squared\":0.127486},{\"bin_count\":10,\"db_re_1_fs_squared\":-13.51234,\"fraction_of_welch_power\":0.2582849,\"high_hz\":500,\"low_hz\":100,\"power_fs_squared\":0.04454164},{\"bin_count\":12,\"db_re_1_fs_squared\":-34.47493,\"fraction_of_welch_power\":0.002069378,\"high_hz\":1000,\"low_hz\":500,\"power_fs_squared\":0.0003568675},{\"bin_count\":24,\"db_re_1_fs_squared\":-43.5696,\"fraction_of_welch_power\":0.0002549016,\"high_hz\":2000,\"low_hz\":1000,\"power_fs_squared\":4.395818e-05},{\"bin_count\":49,\"db_re_1_fs_squared\":-47.01062,\"fraction_of_welch_power\":0.0001154174,\"high_hz\":4000,\"low_hz\":2000,\"power_fs_squared\":1.990391e-05},{\"bin_count\":98,\"db_re_1_fs_squared\":-56.29777,\"fraction_of_welch_power\":1.360052e-05,\"high_hz\":8000,\"low_hz\":4000,\"power_fs_squared\":2.345432e-06},{\"bin_count\":195,\"db_re_1_fs_squared\":-60.5211,\"fraction_of_welch_power\":5.143075e-06,\"high_hz\":16000,\"low_hz\":8000,\"power_fs_squared\":8.869315e-07},{\"bin_count\":122,\"db_re_1_fs_squared\":-73.64488,\"fraction_of_welch_power\":2.505213e-07,\"high_hz\":21000.0,\"low_hz\":16000,\"power_fs_squared\":4.320279e-08}],\"clipped_fraction\":0.0,\"clipped_samples\":0,\"constant\":false,\"crest_factor_db\":7.143946,\"dc_offset_fs\":0.04080985,\"duration_seconds\":10.0,\"envelope\":{\"band_hz\":null,\"excluded_edge_samples_each\":2100,\"filter\":null,\"limitation\":\"Broadband beating and filter/Hilbert edge effects can create modulation; this is not a bearing diagnosis or a calibrated modulation index.\",\"mean_envelope_fs\":0.5716841,\"modulation_peaks\":[{\"amplitude_db_re_1_fs_peak\":-16.46253,\"amplitude_fs_peak\":0.1502704,\"frequency_hz\":29.39394,\"prominence_db\":72.78422},{\"amplitude_db_re_1_fs_peak\":-22.2148,\"amplitude_fs_peak\":0.07749254,\"frequency_hz\":117.5758,\"prominence_db\":74.43902},{\"amplitude_db_re_1_fs_peak\":-28.57175,\"amplitude_fs_peak\":0.03727454,\"frequency_hz\":58.78788,\"prominence_db\":67.34253},{\"amplitude_db_re_1_fs_peak\":-33.54143,\"amplitude_fs_peak\":0.02103432,\"frequency_hz\":16.86869,\"prominence_db\":49.28147},{\"amplitude_db_re_1_fs_peak\":-33.68644,\"amplitude_fs_peak\":0.02068608,\"frequency_hz\":88.18182,\"prominence_db\":61.99804},{\"amplitude_db_re_1_fs_peak\":-36.99663,\"amplitude_fs_peak\":0.01413086,\"frequency_hz\":323.2323,\"prominence_db\":77.36986},{\"amplitude_db_re_1_fs_peak\":-37.51471,\"amplitude_fs_peak\":0.01331265,\"frequency_hz\":470.202,\"prominence_db\":70.55947},{\"amplitude_db_re_1_fs_peak\":-39.04397,\"amplitude_fs_peak\":0.01116353,\"frequency_hz\":121.9192,\"prominence_db\":37.45788}],\"spectrum\":{\"bin_spacing_hz\":0.1010101,\"equivalent_noise_bandwidth_hz\":0.1515152,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":415800,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"status\":\"available\",\"valid_samples\":415800},\"fft\":{\"bin_spacing_hz\":0.1,\"equivalent_noise_bandwidth_hz\":0.15,\"limitation\":\"Peak amplitude is exact for bin-centered isolated tones; leakage and scalloping affect off-bin or unresolved tones.\",\"samples\":420000,\"scaling\":\"one_sided_peak_amplitude_coherent_gain_corrected\",\"window\":\"periodic_hann\",\"zero_padding\":false},\"level_changes\":[],\"padding_samples\":0,\"peak_db_re_1_fs\":-0.4456953,\"peak_fs\":0.9499817,\"peaks\":[{\"amplitude_db_re_1_fs_peak\":-6.381603,\"amplitude_fs_peak\":0.4796449,\"frequency_hz\":88.2,\"prominence_db\":95.83355},{\"amplitude_db_re_1_fs_peak\":-18.55237,\"amplitude_fs_peak\":0.1181358,\"frequency_hz\":58.8,\"prominence_db\":77.48505},{\"amplitude_db_re_1_fs_peak\":-21.9372,\"amplitude_fs_peak\":0.08000917,\"frequency_hz\":205.7,\"prominence_db\":81.13704},{\"amplitude_db_re_1_fs_peak\":-29.1594,\"amplitude_fs_peak\":0.03483616,\"frequency_hz\":29.4,\"prominence_db\":67.76953},{\"amplitude_db_re_1_fs_peak\":-30.82313,\"amplitude_fs_peak\":0.02876363,\"frequency_hz\":176.3,\"prominence_db\":67.62803},{\"amplitude_db_re_1_fs_peak\":-33.03557,\"amplitude_fs_peak\":0.02229573,\"frequency_hz\":117.5,\"prominence_db\":66.08916},{\"amplitude_db_re_1_fs_peak\":-33.36875,\"amplitude_fs_peak\":0.02145667,\"frequency_hz\":105.0,\"prominence_db\":52.90935},{\"amplitude_db_re_1_fs_peak\":-35.30791,\"amplitude_fs_peak\":0.01716345,\"frequency_hz\":235.1,\"prominence_db\":58.84947}],\"pearson_kurtosis_ac\":1.816696,\"regime\":\"unverified_may_be_mixed\",\"rms_db_re_1_fs\":-7.589641,\"rms_fs\":0.4173668,\"segment\":1,\"silent\":false,\"spectral_preprocessing\":\"subtract_segment_mean; no_gain_normalization_or_resampling\",\"spectral_status\":\"available\",\"valid_samples\":420000,\"welch\":{\"bin_spacing_hz\":41.01562,\"covered_samples\":419840,\"equivalent_noise_bandwidth_hz\":61.52344,\"frame_count\":1637,\"frame_samples\":1024,\"hop_samples\":256,\"integrated_power_fs_squared\":0.1724516,\"overlapping_frames_are_not_independent\":true,\"spectral_centroid_hz\":91.64657,\"spectral_flatness\":2.514441e-05,\"tail_samples_not_in_complete_frame\":160,\"window\":\"periodic_hann\"},\"zero_crossings_per_second_ac\":178.1004}}],\"overview\":{\"height\":700,\"id\":\"Q01.I001\",\"title\":\"Complete recording | channel 1\",\"width\":1200}}],\"configuration\":{\"amplitude_db_max\":6.0,\"amplitude_db_min\":-120.0,\"autocorrelation_max_seconds\":0.1,\"envelope_band_hz\":null,\"envelope_max_hz\":500.0,\"envelope_trim_seconds\":0.05,\"fft_zoom_max_hz\":500.0,\"image_dpi\":120,\"image_height\":700,\"image_width\":1200,\"level_change_db\":6.0,\"level_frame_seconds\":0.02,\"max_channels\":8,\"max_decoded_samples\":40000000,\"max_file_bytes\":134217728,\"max_plot_segments\":1,\"max_segments\":128,\"peak_count\":8,\"peak_prominence_db\":8.0,\"psd_db_max\":0.0,\"psd_db_min\":-130.0,\"schema\":1,\"segment_seconds\":10.0,\"spectral_frame_samples\":1024,\"spectral_hop_samples\":256},\"coverage\":{\"all_generated_figures_included\":true,\"all_intervals_included\":true,\"note\":\"Detailed figures follow the DSP report's fixed time sampling. All interval measurements are included; unseen regimes are not inferred.\",\"plotted_segment_indices\":[1]},\"duration_seconds\":10.0,\"figure_layout\":\"Two-column sheet; each figure fits 600x350 via Lanczos resampling\",\"id\":\"Q01\",\"sample_rate_hz\":42000,\"schema\":\"modelmetis.complete-dsp-report/1\",\"source_processing\":\"derived_peak_normalized\",\"transmitted_figures\":[{\"components\":[{\"height\":350,\"id\":\"Q01.I001\",\"original_height\":700,\"original_sha256\":\"a36895c5e94b2ca54625b794506bd1d14fc6ee2ac8f44f468f7b7b2c93e803fc\",\"original_width\":1200,\"title\":\"Complete recording | channel 1\",\"width\":600,\"x\":0,\"y\":0},{\"height\":350,\"id\":\"Q01.I002\",\"original_height\":700,\"original_sha256\":\"75c9e3355f52083b334ec0980704fa2b47987b9b8f6ff4ce7fb97c6a9fb506d4\",\"original_width\":1200,\"title\":\"Waveform and levels | 0.000-10.000 s\",\"width\":600,\"x\":600,\"y\":0},{\"height\":350,\"id\":\"Q01.I003\",\"original_height\":700,\"original_sha256\":\"bb7a2560b72222581215650fe21e9baee57c635fbb8291c9417c564649e8b2ed\",\"original_width\":1200,\"title\":\"FFT amplitude spectrum\",\"width\":600,\"x\":0,\"y\":350},{\"height\":350,\"id\":\"Q01.I004\",\"original_height\":700,\"original_sha256\":\"10f28292692358baed921e785e602f4bd79f68a666e74cdfc5f4dddede4653ed\",\"original_width\":1200,\"title\":\"Welch PSD\",\"width\":600,\"x\":600,\"y\":350},{\"height\":350,\"id\":\"Q01.I005\",\"original_height\":700,\"original_sha256\":\"90048706168b16f64109a0bd861a71c1c02d73b46d0d1944aa3a579d5ed97a9f\",\"original_width\":1200,\"title\":\"STFT spectrogram\",\"width\":600,\"x\":0,\"y\":700},{\"height\":350,\"id\":\"Q01.I006\",\"original_height\":700,\"original_sha256\":\"6aeb9fd6a7ac054940a5a68960af243e72a1749a4fb1bfff9f41daad9eb7db45\",\"original_width\":1200,\"title\":\"Band power\",\"width\":600,\"x\":600,\"y\":700},{\"height\":350,\"id\":\"Q01.I007\",\"original_height\":700,\"original_sha256\":\"40232db6db638bc9ae5da8a9dad6f01aad84973d80eff3d505d8812e00a7ad6a\",\"original_width\":1200,\"title\":\"Autocorrelation\",\"width\":600,\"x\":0,\"y\":1050},{\"height\":350,\"id\":\"Q01.I008\",\"original_height\":700,\"original_sha256\":\"18bb3dc1a09a0beacef0e5cade9792f2ce5d8d6d77d055bb5e5d81c79eac842a\",\"original_width\":1200,\"title\":\"Envelope and modulation spectrum\",\"width\":600,\"x\":600,\"y\":1050}],\"height\":1400,\"id\":\"Q01.P001\",\"title\":\"Complete DSP figure sheet\",\"width\":1200}]}",
+          "type": "text"
+        },
+        {
+          "text": "Q01.P001",
+          "type": "text"
+        },
+        {
+          "type": "image",
+          "contact_sheet_sha256": "a83b4cfe95c3695ad73756c484d28eda19b8962c41e26f7820c376b1515dbf12"
+        }
+      ]
+    }
+  ],
+  "response_format": {
+    "json_schema": {
+      "name": "whole_report_similarity_v1",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "comparisons": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "condition_id": {
+                  "enum": [
+                    "C01",
+                    "C02",
+                    "C03",
+                    "C04",
+                    "C05",
+                    "C06",
+                    "C07",
+                    "C08"
+                  ],
+                  "type": "string"
+                },
+                "differences": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "similar": {
+                  "type": "boolean"
+                },
+                "similarities": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "condition_id",
+                "similar",
+                "similarities",
+                "differences",
+                "evidence_ids"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "condition_id": {
+            "enum": [
+              "C01",
+              "C02",
+              "C03",
+              "C04",
+              "C05",
+              "C06",
+              "C07",
+              "C08",
+              null
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "similar",
+              "different"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "outcome",
+          "condition_id",
+          "comparisons",
+          "explanation"
+        ],
+        "type": "object"
+      },
+      "strict": true
+    },
+    "type": "json_schema"
+  },
+  "reasoning_effort": "low",
+  "max_completion_tokens": 8192,
+  "contact_sheets": [
+    {
+      "sha256": "06aa281edad79e037868a3cea8fb09f2bba4858d6a7857dbcbee170f9119ff97",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R01.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "ef404c8e73c2be6810fc2ce54ea449b53bd864b25bae0712fcae20845cb647ca",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "88bac5cc263a7fa338fb0ede7927ca51dded3934013d6c3e11d77e64689655e8",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "44ba8833b212012cab76a8847490e3deab25fbe3338fe0c6abff5dce388e5cd2",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I004",
+          "title": "Welch PSD",
+          "original_sha256": "69265f86bc6c97fb6664b5aec0f7da6d717326f554be681c0d29af68f130134a",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "508d1cc76d78057d005dcc61ec0c383477bb18e00547c239fa7bb72fb0ce068d",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I006",
+          "title": "Band power",
+          "original_sha256": "e2af00ce2191fae9d60e1c188eedb11424f289831845043148546cf6f1a60ffb",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "ba01772001d8e2c7b84d8bb5324f9d0fd3c6822b0b361360d127c9daf03d5003",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R01.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "68ef707fbc3b4259fb3749db7f2f8a5fb1003645e0e0f3281d3e02ee68aea8e0",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "007b19de58ff8ec10616deabd1cf0d9ba433c5b4b12e3717cb152bf1583aef01",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R02.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "79a6d5e3ed729d4fb0c23cb4e9cd5671d3542584de3cdb6f4bfb9ca97ac162e3",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "19ba1d606d49d127017730cc98962b546ce77e16ecf2883a3399b0efa625d77a",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "9665c30fde0fa00e6f171742e77d74321eb0c52f6941e0ee9a556d46c2257c26",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I004",
+          "title": "Welch PSD",
+          "original_sha256": "5fc7531ac8a6ce0e34776bc98dab900b6abc012231bf0babb3a630a7da8b364f",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "c69f63775b257de3e0c805f4e3797945a9cdc8e2570ace9a2e792fea372b5726",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I006",
+          "title": "Band power",
+          "original_sha256": "c7107a74cd5e493e3a1a6c465584eaf4ce59e0bb9c44601a1ea5bbc787c39914",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "184cf37841f2492352f21e676ac32ad2f0d2e04d5c939153efe0a26b5f79153c",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R02.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "e7fc8d70ba63f53a2964a3a85f3fc38f64f9ceb5ee8f81006c2e2512148057cd",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "073bb09af0d71d286f0c6b67181da94fb89f1542b6bf74d46be7c276ae3b8de3",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R03.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "6d1238afcd5280f01d56d6f653dbbc848c3b9133867b1ff2cbb12152daee75ac",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "1562aad569b620f8eca3a92e3af80bcdc2f2f53934f8161d3ed43dbece9482fd",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "fdeacf70ae572a7142a4aa649273d3a4610525e9a72e106be7636467ac9dcb20",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I004",
+          "title": "Welch PSD",
+          "original_sha256": "7e67dd9b20321029611d2e55c1559957329e862518da5d742a00cd964ac97565",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "9e574b490987118ac3eea549ca11e0a07a832e0c7b19b653d0de300529f5264f",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I006",
+          "title": "Band power",
+          "original_sha256": "77a49c75095a5c53eb0b1ab8851ca54097bacfa6e1469ace78478be6d4d58034",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "482324bf8df1a0f7ac7b443f78db57aaa8bb268f0ebca0c1a0e9ed52795c3fe2",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R03.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "92c699eb7dcc2ec18d94b60d08e0d99527623121d29d59dadf7b2554496b7636",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "2c3e1d074e26509c483ea0d3bb02626e5d61f2049d5febb44e9ac306e994a442",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R04.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "4b14a18e2772c10a52fbb0bfdc0e056a35bee9b8532d7e43e8104d7918206332",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "7bb7c5fac45edaaead2f838e38665b866b4ad2f9881d67aa8cf4eb4741903fcd",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "dc615eddb36c0e2312e9fcdf3b22c50c0863ab2ae7722ed4d4c1fca0195b3b89",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I004",
+          "title": "Welch PSD",
+          "original_sha256": "0032e674a19b704ae5ad54d30315fd7cf6d07890f05252c251ca91a8442e73af",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "1b2a0c98390cc38f3025c5aec848a9c643eb0122ed1fb8d30120fe846ef51f09",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I006",
+          "title": "Band power",
+          "original_sha256": "ee60c8ed6a493b4488e230f02b2f4fc920f5a2aa44040d74ec5d46f9bca16e6c",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "2e76e3915cd2132965405cc677f4d011d31dedaab05dd222639566bb63843f56",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R04.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "98809efcab128c366689f8c5d7acd44faad0f2e22a44d4fa59082b461922fed4",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "0e6d814df02c84f2320bc396c98614b706c231e5c4ba2d303b4548f6174c5302",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R05.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "2beaf40cec5e9ad8a40ded1caf3d529d2b323d517ff56cfe00f7dad559d91ce9",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "5c5e4c1ebaed8394c9096eab17650bba8191c820da35dd7e9cc7be382b452215",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "5e4f074ed4a6de323bb700485e6f466a80ee155f9e67409ccbf193610435b2ea",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I004",
+          "title": "Welch PSD",
+          "original_sha256": "2842422b3f3f45d9dbd15ec702449f8ca5cfd2c86c717e00c4777a8ff7721531",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "a8d92d30137e1cd8389973eab048644a255d41e68ae406cba5e30994eb646999",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I006",
+          "title": "Band power",
+          "original_sha256": "560567aebb23ebdeb7731567ca992b1ad6d789c1bf6222edd56bc6f2881caeb8",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "31301fb2952b8d26ed37a74285448f3803e2ef6d0e27220d3993578ba23695e8",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R05.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "63542cc69ceaa3b011836ca9ab49dfb1aa84f506b8d9f1e1a40a41bf57a99758",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "fb577b4a49e30fb0c1d60909fcdc68a6d6e0449289c6273b5238ae18b810c153",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R06.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "1c3ba85bcc8f260aed45db64f67960736944173122c171530055ba7217381199",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "76e1077fc205b0fbc5137b521a9746473fd5c553a2e377c681d6ecf169264201",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "485721fffe5d53ae6fa81a63000eceb7590a09579e6222e85e2092d5b0a0470b",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I004",
+          "title": "Welch PSD",
+          "original_sha256": "094f64c5a038bb35e136a777f15a89e337716015995dd5a3ec2881592894f7b6",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "5e552e524cea15843402c80dc67054105c72f27576c71a38b8b6140fbc92c61f",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I006",
+          "title": "Band power",
+          "original_sha256": "6a07457e75863b50850549bd9a42ba5f4083cd3fb7cbd544d94e85986067ad1b",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "d5df8436a9c0a17e446f921cfa16f608f7d94e744f4ad1e126f0ae17fe3bf7ce",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R06.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "7ef32278be11a9f425938db13ef39bdec0a8184eb1a5faf866f352af257a0070",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "397cad6a1f6849e522a4c53705c862ac1c68a062a3fbcb06796dd4acd07ad402",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R07.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "0f223cfd62caadab14501ce672d544a60348c9448800b0c4d1696c910a24d648",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "2d6355d1acf13e0ee32c17f9c745cfe0eaa01178f06f9fc1f26aba86429c04a6",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "0153531c4d6374bd4ca386e4b92c0085e06ccaba31dfc4d3119554d74230a74a",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I004",
+          "title": "Welch PSD",
+          "original_sha256": "f8904f8861ea9600c59d20c08c146c5b46e77aaaac44f9c221e9d55bab0d8c73",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "b8f1ec35b54db194cbd46e4bcc6c8b129f8a439665f99c60ddc79a979315713b",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I006",
+          "title": "Band power",
+          "original_sha256": "5a71127034cc53b205adec27fd0809aacfc48382b88725f64367d88fa7bb73f9",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "7da9eb7a85fdb98533fd11dd36e9b2dfbb07750dc1afece5a964ff422a2597d7",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R07.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "c1a33e18d7764feb6be4e5de5095491ec0550f956b770aaa6cf26aad09785512",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "d105a83883f57b0ebae1800f16798870bbdb638aa7cf0259093911adfd83fe50",
+      "detail": "high",
+      "components": [
+        {
+          "id": "R08.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "02560b378487bc3b5e059c421e98889d7afa25ef610ae8625b35d6c85d963d78",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "240e7f556bc84efed6c0025ecb718179aebf3057b41b5e35a64ab3fadd2ad0ed",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "6c8ccd89417b0f28edcdecbe42a70e210a6358e6e997cfd6f841fffbbcf3ae2c",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I004",
+          "title": "Welch PSD",
+          "original_sha256": "901e9551d6ade1782f636360b4e48790c455ce7864f8df519a0028c54da15aba",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "ad4faa2daa1f5f57929e6e655324c11ba327556544523154578a94a33ae47fc4",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I006",
+          "title": "Band power",
+          "original_sha256": "413013365db3cf81cda1154fa89ebb421459a071b4892b95d45f72cfd56f3434",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "f985115b1d273b793bbb98f7ee7921dff4d516afa533c808e483507642409487",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "R08.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "e6f0aa09f2d8646531489e7f8ca909d2be13be2f799e45169ee5c18da3023ad4",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    },
+    {
+      "sha256": "a83b4cfe95c3695ad73756c484d28eda19b8962c41e26f7820c376b1515dbf12",
+      "detail": "high",
+      "components": [
+        {
+          "id": "Q01.I001",
+          "title": "Complete recording | channel 1",
+          "original_sha256": "a36895c5e94b2ca54625b794506bd1d14fc6ee2ac8f44f468f7b7b2c93e803fc",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I002",
+          "title": "Waveform and levels | 0.000-10.000 s",
+          "original_sha256": "75c9e3355f52083b334ec0980704fa2b47987b9b8f6ff4ce7fb97c6a9fb506d4",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I003",
+          "title": "FFT amplitude spectrum",
+          "original_sha256": "bb7a2560b72222581215650fe21e9baee57c635fbb8291c9417c564649e8b2ed",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I004",
+          "title": "Welch PSD",
+          "original_sha256": "10f28292692358baed921e785e602f4bd79f68a666e74cdfc5f4dddede4653ed",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I005",
+          "title": "STFT spectrogram",
+          "original_sha256": "90048706168b16f64109a0bd861a71c1c02d73b46d0d1944aa3a579d5ed97a9f",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I006",
+          "title": "Band power",
+          "original_sha256": "6aeb9fd6a7ac054940a5a68960af243e72a1749a4fb1bfff9f41daad9eb7db45",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I007",
+          "title": "Autocorrelation",
+          "original_sha256": "40232db6db638bc9ae5da8a9dad6f01aad84973d80eff3d505d8812e00a7ad6a",
+          "width": 600,
+          "height": 350
+        },
+        {
+          "id": "Q01.I008",
+          "title": "Envelope and modulation spectrum",
+          "original_sha256": "18bb3dc1a09a0beacef0e5cade9792f2ce5d8d6d77d055bb5e5d81c79eac842a",
+          "width": 600,
+          "height": 350
+        }
+      ]
+    }
+  ],
+  "source_request_sha256": "b93aa63e3f6a92958402a8316eed4eb1cea5a66223f84c0f6640474251a8e2ab",
+  "publication": "Exact transmitted text and schema. Each image part is replaced by its contact-sheet hash; every sheet cell is published at full resolution under media/."
+}

@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 shifts substantial energy into 500–1000 Hz (25.30%; peaks clustered at 934.8–984.2 Hz), whereas C01 has 7.13% there and instead lists stronger components near 169–193 Hz; this frequency redistribution explains residual mismatch.",
+          "Q01 is lower in digital RMS (0.1199 versus 0.1366 FS) and more impulsive/modulated (kurtosis 8.01 versus 3.62); its envelope harmonics start at 3.535 Hz versus 3.434 Hz, a small upward shift of about 3%, while both records cover 10 s at 44.1 kHz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Best spectral-shape match: the gain-centered Welch distance is 3.150 dB, well below C01's 5.943 dB nearest-other-reference distance; both figures show a low-frequency comb, a 4–8 kHz depression, and a persistent broad feature near 16 kHz.",
+          "Both have the same 5.3 Hz principal FFT line, the same 68.0 µs strongest autocorrelation lag, burst-like periodic envelopes, and broadly distributed power rather than the extreme low- or high-band concentration of other references."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "The gain-centered Welch distance is 10.596 dB, exceeding C02's 6.106 dB nearest-other-reference distance; Q01 has 54.29% of power from 500–4000 Hz versus only 0.67% for C02, so its spectral shape is substantially more mid-band-rich.",
+          "Although both contain 5.3 Hz, Q01 adds a dominant 934.8–984.2 Hz cluster and has a 68.0 µs autocorrelation peak, while C02's secondary low-frequency structure includes 8.2/8.7 Hz and its autocorrelation peak is 249.4 µs; Q01 also shows more regular envelope bursts over time."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10 s, 44.1 kHz records with the same 5.3 Hz leading FFT frequency and a persistent high-frequency feature around 16 kHz.",
+          "Both are unclipped, peak-normalized to 0.950 FS, and show low-frequency envelope modulation with approximately steady overall coverage across the full interval."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01's Welch distance to C03 is 7.822 dB versus C03's 3.038 dB nearest-reference separation; C03 is overwhelmingly below 100 Hz (94.13% power, centroid 638 Hz), whereas Q01 has only 20.19% below 100 Hz and a 3736 Hz centroid.",
+          "C03 has a very strong 5.3 Hz tone at 0.452 FS, smooth near-sinusoidal time evolution, 0.343 FS RMS, and 181.4 µs autocorrelation lag; Q01's 5.3 Hz tone is 0.0650 FS, waveform is impulsive, RMS is 0.1199 FS, and lag is 68.0 µs. Unknown gain limits absolute-level interpretation, but not these normalized shape and periodicity conflicts."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both share an exact reported 5.3 Hz principal component and exhibit repeating behavior throughout the same 10 s, 44.1 kHz acquisition.",
+          "Both show broadband/high-frequency content superposed on low-frequency periodic structure, including a feature near 16 kHz in the figures."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The Welch shape distance is 7.617 dB, much larger than C04's 3.038 dB nearest-other-reference distance; C04 concentrates 61.07% above 8 kHz, while Q01 has 17.67% there and instead places 54.29% in 500–4000 Hz.",
+          "C04 is led by 50.0 Hz and a 16005–16038 Hz line cluster with 249.4 µs autocorrelation lag; Q01 is led by 5.3 Hz plus a 934.8–984.2 Hz cluster with 68.0 µs lag. Thus the carrier/line structure is shifted to much lower frequencies in Q01 despite both retaining energy near 16 kHz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "R04.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both figures show a persistent broad feature around 16 kHz, low-frequency modulation, and no major regime boundary during the full 10 s interval.",
+          "Both are unclipped 44.1 kHz recordings normalized to the same 0.950 FS peak, with broadband envelopes and repeated waveform structure."
+        ]
+      }
+    ],
+    "condition_id": "C01",
+    "explanation": "Q01 is broadly similar to C01 (excess_hall_adhesive). C01 is the only reference supported by the distance ranking: 3.150 dB is markedly smaller than the 7.617–10.596 dB distances to C02–C04 and smaller than C01's 5.943 dB separation from its nearest known condition. Figures and measurements support the match through the common 5.3 Hz component, identical 68.0 µs autocorrelation lag, periodic burst envelope, low-frequency comb, 4–8 kHz trough, and approximately 16 kHz feature. Q01 nevertheless has a new/shifted approximately 942 Hz cluster, greater 500–4000 Hz power, slightly higher envelope spacing, and lower FS RMS; these prevent an exact match but do not outweigh the overall gain-centered pattern. All reports use identical 10 s duration, 44.1 kHz sampling, 0.1 Hz FFT spacing, and 43.07 Hz Welch spacing, so axis, coverage, and resolution differences do not explain the ranking; absolute FS levels remain gain-dependent.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "da6731e3e200d7e5aa6ce02a498e2b84d2b10eebb5623c4aecc16e0bc10cc0fa",
+  "source_response_sha256": "1a8234992f1144c00f29ac33c740a844ece7a229d28e4040d7c18c1b94c5270d",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

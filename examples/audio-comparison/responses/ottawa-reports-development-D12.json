@@ -1,0 +1,157 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is strongly periodic and line-dominated at 90.1 Hz with harmonics through 570.3 Hz, whereas C01 is broadband/irregular with a weaker 45.9 Hz line and much lower autocorrelation at its reported peak (0.905 versus 0.980).",
+          "Q01 allocates 31.70% of Welch power to 100–500 Hz versus 26.65% for C01, while C01 has much more power above 1 kHz; Q01 also has a startup envelope change near 0–1 s rather than C01's irregular burst near 6 s."
+        ],
+        "evidence_ids": [
+          "R01.C01.S0001",
+          "R01.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s, 42 kHz records are unclipped and show low-frequency spectral lines plus broadband high-frequency structure.",
+          "Their dominant frequencies are approximately related by a factor of two (45.9 versus 90.1 Hz), but applying that shift does not align C01's irregular harmonic and temporal pattern."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01's dominant 90.1 Hz line is approximately 2× C02's 45.1 Hz line, and its 180.1/270.1 Hz components correspond to shifted harmonics; in absolute frequency the spectra therefore do not align without a speed-like scaling.",
+          "After that shift, C02 remains more fundamental-dominated: 97.25% of power is below 100 Hz versus 67.28% in Q01, and C02's 45.1 Hz amplitude is 0.610 FS versus Q01's 90.1 Hz amplitude of 0.509 FS; gain is unknown."
+        ],
+        "evidence_ids": [
+          "R02.C01.S0001",
+          "R02.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are highly periodic, stationary-looking 10 s records with autocorrelation coefficients near 0.98 and stable horizontal STFT structure.",
+          "Both have a dominant tone followed by a harmonic/side-frequency family and no reported clipping or level-change candidates."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01 is shifted almost exactly upward by 2×: C03's 45.0, 30.0, 75.0, 104.9 and 209.9 Hz lines correspond to about 90.1, 60.0, 150.1, 210.1 and approximately 420 Hz, but relative strengths differ, especially Q01's strong 180.1 Hz line.",
+          "The shift moves substantial energy across the fixed 100 Hz boundary: Q01 has 67.28% below 100 Hz and 31.70% at 100–500 Hz, versus 96.19% and 3.46% for C03; Q01 also shows a startup rise absent from C03's steadier envelope."
+        ],
+        "evidence_ids": [
+          "R03.C01.S0001",
+          "R03.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "After allowing for the approximately 2× frequency shift, both show a dominant line, regularly related low-order components, strong periodic autocorrelation (0.980 versus 0.979), and sparse low-frequency spectra.",
+          "Their FS RMS levels are reasonably close despite unknown gain (0.387 for Q01 versus 0.420 for C03), with identical duration, sampling rate and 0.1 Hz FFT spacing."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Although doubling C04's frequencies maps 44.9→approximately90.1, 74.8→approximately150.1 and 104.7→approximately210.1 Hz, C04's 74.8 Hz component is nearly as strong as its fundamental (0.334 versus 0.390 FS), whereas Q01's 150.1 Hz component is only 0.0255 FS relative to its 0.509 FS fundamental.",
+          "C04 has 92.46%/7.18% power in 0–100/100–500 Hz versus Q01's 67.28%/31.70%; C04 also reports many short level-change candidates while Q01 reports none, though Q01 visibly ramps during roughly the first second."
+        ],
+        "evidence_ids": [
+          "R04.C01.S0001",
+          "R04.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have strong harmonic line structure, approximately 0.4 FS RMS, and persistent STFT bands over the common 10 s interval.",
+          "Their autocorrelation is strong (0.983 and 0.980), and several absolute lines align after an approximately 2× shift."
+        ]
+      },
+      {
+        "condition_id": "C05",
+        "differences": [
+          "The absolute line families differ by an approximately 2.05× shift (43.9→90.1 Hz); shifted components such as 58.5→approximately120 and 102.4→approximately210 Hz align, but C05 lacks Q01's comparably strong 180.1 Hz harmonic.",
+          "Q01 places 31.70% of power in 100–500 Hz versus 3.77% for C05 and has lower RMS (0.387 versus 0.456 FS); its envelope rises during startup, whereas C05 is comparatively steady."
+        ],
+        "evidence_ids": [
+          "R05.C01.S0001",
+          "R05.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are periodic, unclipped, line-dominated signals with no reported level-change candidates and autocorrelation coefficients of 0.980 and 0.972.",
+          "Both retain a low spectral centroid relative to the 21 kHz coverage, although Q01's is higher (104.9 versus 56.6 Hz) because of the frequency shift and stronger upper harmonics."
+        ]
+      },
+      {
+        "condition_id": "C06",
+        "differences": [
+          "Q01's family is shifted upward by approximately 2×: 44.9, 29.9, 104.7, 89.7 and 53.8 Hz in C06 map to about 90.1, 60.0, 210.1, 180.1 and 107.7 Hz in Q01; therefore absolute frequencies and fixed-band powers differ substantially.",
+          "Q01 has 67.28%/31.70% in 0–100/100–500 Hz versus C06's 92.12%/7.11%, and Q01 shows an early envelope buildup while C06 is more uniform with multiple candidate level changes; amplitudes also differ under unknown gain (0.387 versus 0.338 FS RMS)."
+        ],
+        "evidence_ids": [
+          "R06.C01.S0001",
+          "R06.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "After the approximately 2× shift, C06 provides the clearest correspondence of dominant and secondary spectral lines and their harmonic spacing; both also have modulation families at multiples/related offsets of roughly 15–30 Hz.",
+          "Both are strongly periodic over 10 s (autocorrelation 0.980 for Q01 and 0.971 for C06), unclipped, and measured with identical 42 kHz sampling and 0.1 Hz FFT resolution."
+        ]
+      },
+      {
+        "condition_id": "C07",
+        "differences": [
+          "Q01's 90.1 Hz dominant line is about 1.96× C07's 45.9 Hz line, but the shifted C07 family only partly aligns: 30.6→approximately60, 107.1→approximately210 and 214.3→approximately420 Hz, while Q01 has a much stronger 180.1 Hz component.",
+          "The frequency shift raises Q01's centroid to 104.9 Hz from 57.6 Hz and changes 0–100/100–500 Hz fractions from C07's 95.13%/4.68% to 67.28%/31.70%; Q01 also has startup evolution absent from C07's steadier record."
+        ],
+        "evidence_ids": [
+          "R07.C01.S0001",
+          "R07.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are highly periodic, unclipped records with autocorrelation near 0.98 and no reported level changes.",
+          "Both show persistent narrowband harmonic structure over the full 10 s and comparable FS RMS levels (0.387 versus 0.382)."
+        ]
+      },
+      {
+        "condition_id": "C08",
+        "differences": [
+          "Q01 is shifted upward by about 2.02× from C08's 44.6 Hz dominant line; some shifted lines align (29.8→approximately60, 89.3→approximately180, 104.2→approximately210), but Q01's relative harmonic ordering differs.",
+          "C08 is much more concentrated below 100 Hz (97.00% versus 67.28%), with centroid 54.3 versus 104.9 Hz; Q01 also exhibits a pronounced initial envelope rise, unlike C08's mostly steady envelope with a later mild swell."
+        ],
+        "evidence_ids": [
+          "R08.C01.S0001",
+          "R08.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have strong periodicity (autocorrelation 0.980), sparse line spectra, no clipping or reported level changes, and similar 10 s stationary portions.",
+          "Their RMS magnitudes are of the same order (0.387 versus 0.468 FS), but unknown acquisition gain prevents treating that difference as decisive."
+        ]
+      }
+    ],
+    "condition_id": "C06",
+    "explanation": "Q01 is broadly most similar to C06 (bowed_rotor): an approximately 2× frequency shift maps the principal and several secondary lines especially well while preserving strong periodicity and harmonic/modulation organization. C03 is also broadly similar after the same shift, but C06 has the better multi-line correspondence, notably near 60, 90, 108, 180 and 210 Hz in Q01. Fixed-band powers differ mainly because the shift moves components above 100 Hz, while startup evolution and unknown gain remain qualifications.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "6366bb9eb4864f840e0ea56dd47269a0fd4550f61857ffdba023711f0be5d1d7",
+  "source_response_sha256": "4401101749009906bf0b0a2bbd2d5e2118a721dc89c7e3ab3c52de383e0f603d",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

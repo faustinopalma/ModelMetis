@@ -1,0 +1,117 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Gain-centered Welch shape distance is 9.488009 dB, far above C01's calibrated 3.377359 dB threshold.",
+          "Q01 concentrates 79.92% of Welch power above 8 kHz, including 59.09% at 16–22.05 kHz, whereas C01 has 33.03% above 8 kHz and much more midband power; its centroid is therefore higher (13014 versus 5701 Hz).",
+          "The main high-frequency feature is shifted from 16034.6 Hz in C01 to a Q01 cluster around 16002.7–16173.7 Hz, with the strongest at 16167.8 Hz. This roughly +133 Hz displacement relative to C01's strongest line is much larger than the 0.1 Hz FFT spacing and changes alignment across Welch bins (43.07 Hz spacing), worsening shape correspondence.",
+          "Low-frequency structure differs: C01 is led by 5.3 Hz at -21.13 dB FS peak, while Q01 has 50 Hz at -23.90 dB and 7.7–8.6 Hz components near -30.7 dB. Their envelopes also emphasize different modulation frequencies: C01 includes 3.43, 17.27, 20.71 and 31.11 Hz, whereas Q01 includes 29.49, 112.02 and 141.52–162.12 Hz.",
+          "C01 shows more recurring waveform-level changes and a lower short-lag autocorrelation peak (0.8705 at 68.0 microseconds) than Q01 (0.9368 at 249.4 microseconds); the spectrograms and autocorrelation figures consequently show different periodic/time-evolution patterns."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "R01.I002",
+          "R01.I003",
+          "R01.I004",
+          "R01.I005",
+          "R01.I006",
+          "R01.I007",
+          "R01.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10 s, 44.1 kHz, peak-normalized, unclipped recordings with full 0–22.05 kHz coverage and identical FFT/Welch resolution, so their physical frequency axes are directly comparable.",
+          "Both contain a persistent narrow feature near 16 kHz and broadband, nonstationary-looking envelopes; their absolute peaks are both 0.94998 FS because of the declared peak normalization."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Gain-centered Welch distance is 6.913446 dB, above C03's calibrated 3.227635 dB threshold.",
+          "Q01 is more high-frequency weighted: 59.09% of power lies at 16–22.05 kHz versus 41.59% for C03, while 0–100 Hz falls from 32.41% in C03 to 17.81% in Q01. The centroid rises from 9927 to 13014 Hz and flatness falls from 0.0584 to 0.0255.",
+          "C03's strongest high-frequency line is 16024.8 Hz, while Q01's is 16167.8 Hz, a +143.0 Hz shift, although Q01 also has lines at 16002.7 and 16032.2 Hz. Thus part of the cluster overlaps within the 43.07 Hz Welch resolution, but the dominant line shifts by over three Welch bins and changes the detailed PSD shape.",
+          "The 50 Hz component is stronger in C03 (-19.53 versus -23.90 dB FS peak). Envelope periodicity differs: C03 is dominated by 13.23 Hz (-25.13 dB) with peaks mostly below 37 Hz, whereas Q01's strongest listed modulations include 29.49 Hz and prominent 112–162 Hz components.",
+          "Q01 has only two reported ≥6 dB level-change candidates (2.34 and 3.06 s), compared with twelve distributed across C03's interval, indicating different reported time evolution despite broadly steady full-record waveforms."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "R02.I002",
+          "R02.I003",
+          "R02.I004",
+          "R02.I005",
+          "R02.I006",
+          "R02.I007",
+          "R02.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a low-frequency component plus a persistent narrow high-frequency cluster near 16 kHz, with broadly noise-like waveforms and no simple resolved harmonic ladder.",
+          "Absolute levels are close despite unknown acquisition gain: RMS is 0.1945 FS for C03 and 0.1891 FS for Q01, mean envelope 0.2408 versus 0.2368 FS, and crest factor 13.78 versus 14.02 dB.",
+          "Their strongest positive autocorrelation peaks occur at the same reported lag, 0.0002494331 s, though coefficients differ (0.8940 versus 0.9368). Both cover the same 10 s at 44.1 kHz with identical spectral resolution."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "C04 is the nearest supplied reference by the required ranking, but its 6.351741 dB query distance still exceeds C04's calibrated 2.463183 dB threshold, so it cannot be selected.",
+          "Although both have substantial high-frequency content, Q01 places 59.09% at 16–22.05 kHz versus 18.93% for C04; C04 distributes much more power through 100–4000 Hz and has a much lower centroid (5701 versus 13014 Hz).",
+          "C04's principal high-frequency line is 16034.6 Hz, whereas Q01's strongest is 16167.8 Hz, a +133.2 Hz shift. This exceeds three 43.07 Hz Welch bins; Q01 does retain components at 16002.7 and 16032.2 Hz, but its shifted cluster and rising upper-band floor produce a different spectral shape.",
+          "The low-frequency and relative peak structures differ: C04 is dominated by 5.3 Hz (-21.13 dB), with lines at 51.8, 55.3, 169.2 and 193.4 Hz, whereas Q01 has 50 Hz (-23.90 dB), 7.7–8.6 Hz and mostly 16 kHz peaks. Q01 also has markedly higher zero-crossing rate (26891 versus 15317 s^-1).",
+          "Envelope peaks differ: C04 includes 3.43, 17.27, 20.71, 31.11 and 162.32 Hz, while Q01 emphasizes 29.49, 112.02, 141.52–153.33 and 162.12 Hz. C04 reports twelve level-change candidates across 10 s versus only two in Q01."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "R03.I002",
+          "R03.I003",
+          "R03.I004",
+          "R03.I005",
+          "R03.I006",
+          "R03.I007",
+          "R03.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a persistent narrow feature around 16 kHz over the full 10 s and broadband impulsive/noise-like waveforms rather than a clean harmonic series.",
+          "Both are unclipped and share the same 0.94998 FS normalized peak, 10 s duration, 44.1 kHz sampling rate, 0.1 Hz FFT spacing and 43.07 Hz Welch spacing, making frequency and duration comparisons direct.",
+          "Both have broadband envelopes with a modulation component near 162 Hz, although Q01 has additional strong modulation structure around 112–153 Hz."
+        ]
+      }
+    ],
+    "condition_id": null,
+    "explanation": "Outcome is different under the mandated calibrated spectral-shape rule. Ranking only the supplied references by query_distance_db gives C04 (6.351741 dB), C03 (6.913446 dB), then C01 (9.488009 dB). The nearest, C04, exceeds its condition-specific 2.463183 dB threshold; the other two also exceed their thresholds. Figures support rejection: Q01 has a distinctly stronger 16–22.05 kHz allocation, a 13.0 kHz centroid, a shifted approximately 16.17 kHz dominant line, and different envelope/time-evolution structure. Absolute FS levels are interpreted cautiously because gain is unknown and all sources are declared peak-normalized; sampling rate, duration, axes, coverage and spectral resolution are identical, so these discrepancies are not explained by acquisition bandwidth or resolution.",
+    "outcome": "different"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "b74962621b63a2f7daa23cb0f7d4dc11af24eb4eceb42fb10238423475fc8e1e",
+  "source_response_sha256": "1c52c1cb91d3fb74a71b21bd2811265342860c5c129f70e1ce47bf0995112868",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

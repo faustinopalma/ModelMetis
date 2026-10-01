@@ -1,0 +1,157 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is strongly periodic (autocorrelation 0.986 at 67.07 ms) with a dominant 89.5 Hz line, whereas C01 has broadband/noisy structure, autocorrelation 0.905 at only 0.381 ms, and a 45.9 Hz maximum.",
+          "Although both allocate about 27% to 100–500 Hz, Q01 has 70.7% below 100 Hz and much weaker >1 kHz power, versus C01's 68.3% below 100 Hz and substantial broadband/high-frequency ridges; the frequency concentration, envelope, and time evolution therefore differ."
+        ],
+        "evidence_ids": [
+          "R01.C01.S0001",
+          "R01.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10 s, 42 kHz, unclipped recordings with low-frequency-dominated spectra.",
+          "Their 100–500 Hz Welch fractions are close: 27.5% for Q01 and 26.6% for C01."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "The dominant component shifts from 45.1 Hz in C02 to 89.5 Hz in Q01—nearly a doubling—not a common translation of the full harmonic set: C02 emphasizes 30.1/45.1/75.2/90.2 Hz, while Q01 emphasizes 29.8/59.6/89.5 Hz plus 178.9–566.6 Hz lines.",
+          "Q01 places 27.5% in 100–500 Hz and 1.69% in 500–1000 Hz, far above C02's 2.53% and 0.169%; Q01 also shows a pronounced early envelope dip, unlike C02's nearly stationary envelope."
+        ],
+        "evidence_ids": [
+          "R02.C01.S0001",
+          "R02.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are highly periodic over the same 10 s/42 kHz coverage, with autocorrelation near 0.98 and approximately 67 ms recurrence.",
+          "Both have low crest factors and similar absolute levels (Q01 0.446 FS RMS; C02 0.463 FS RMS), subject to unknown acquisition gain."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01's dominant 89.5 Hz peak replaces C03's 45.0 Hz maximum; despite shared ≈15/30 Hz spacing, Q01 strongly favors the 6× component while C03 favors 3× and 2× components (45.0 and 30.0 Hz).",
+          "Q01 has much greater mid-band concentration (27.5% at 100–500 Hz; centroid 103.1 Hz) than C03 (3.46%; 54.6 Hz), and its envelope changes markedly during roughly 0–3 s."
+        ],
+        "evidence_ids": [
+          "R03.C01.S0001",
+          "R03.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show stable, narrow, approximately 15 Hz-spaced harmonic families and autocorrelation peaks near 66.7–67.1 ms.",
+          "Their overall digital levels are comparable (0.446 versus 0.420 FS RMS), with no clipping and identical duration, sampling rate, and 0.1 Hz FFT resolution."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The principal harmonic changes from 44.9 Hz in C04 to 89.5 Hz in Q01; this is approximately a 2× shift in the dominant order, while the underlying ≈14.9 Hz spacing remains aligned.",
+          "Q01 is more mid-band weighted: 100–500 Hz contributes 27.5% and the centroid is 103.1 Hz, versus 7.18% and 65.9 Hz for C04; Q01's early envelope dip is also broader than C04's shorter level fluctuations."
+        ],
+        "evidence_ids": [
+          "R04.C01.S0001",
+          "R04.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Both exhibit a rich ≈14.9 Hz harmonic comb, including aligned components near 29.8/29.9, 59.6/59.8, 89.5/89.8, and 209 Hz, with strong persistent low-frequency structure.",
+          "Both remain highly periodic across 10 s (67.07 versus 66.83 ms recurrence) and show stronger harmonic/mid-band content than most periodic references."
+        ]
+      },
+      {
+        "condition_id": "C05",
+        "differences": [
+          "Q01's dominant line is 89.5 Hz rather than C05's 43.9 Hz; the near-doubling changes harmonic-order emphasis even though both retain ≈14.6–14.9 Hz spacing.",
+          "Q01 allocates 27.5% to 100–500 Hz and 1.69% to 500–1000 Hz versus C05's 3.77% and 0.263%, and Q01 has a conspicuous early envelope depression absent from C05's steady trace."
+        ],
+        "evidence_ids": [
+          "R05.C01.S0001",
+          "R05.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are strongly periodic, unclipped, 10 s records with similar RMS levels (0.446 and 0.456 FS).",
+          "Both contain related low-frequency lines near 29, 59, and 89 Hz and broadly low-frequency-dominated Welch spectra."
+        ]
+      },
+      {
+        "condition_id": "C06",
+        "differences": [
+          "C06 is led by 44.9 and 29.9 Hz, whereas Q01 is led by 89.5 Hz; the dominant order shifts upward while the ≈15 Hz family spacing is retained.",
+          "Q01 has substantially higher 100–500 Hz power fraction (27.5% versus 7.11%), higher centroid (103.1 versus 62.0 Hz), and higher RMS (0.446 versus 0.338 FS); gain uncertainty limits absolute-level interpretation."
+        ],
+        "evidence_ids": [
+          "R06.C01.S0001",
+          "R06.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show ≈15 Hz-spaced harmonic and envelope-modulation components, including near 29.9 and 59.7 Hz.",
+          "Both have strong ≈67 ms periodicity and persistent spectral lines over the full 10 s interval."
+        ]
+      },
+      {
+        "condition_id": "C07",
+        "differences": [
+          "Q01's 89.5 Hz dominant line is almost twice C07's 45.9 Hz line; C07 emphasizes 30.6/45.9/76.5 Hz, while Q01 emphasizes 29.8/59.6/89.5 Hz and stronger higher harmonics.",
+          "Q01 has 27.5% of power at 100–500 Hz and centroid 103.1 Hz, versus 4.68% and 57.6 Hz for C07; Q01 also shows stronger slow envelope evolution."
+        ],
+        "evidence_ids": [
+          "R07.C01.S0001",
+          "R07.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are highly periodic and harmonic, with recurrence near 65–67 ms and no clipping.",
+          "Both include harmonically related lines around 30, 60, and 200–215 Hz over identical 10 s, 42 kHz coverage."
+        ]
+      },
+      {
+        "condition_id": "C08",
+        "differences": [
+          "The spectral maximum moves from 44.6 Hz in C08 to 89.5 Hz in Q01, approximately doubling the dominant frequency/order; Q01 also lacks C08's co-dominant 74.4/89.3 Hz balance because 89.5 Hz overwhelmingly dominates.",
+          "Q01 carries much more 100–500 Hz power (27.5% versus 2.68%) and has an early envelope dip, while C08 is comparatively steady except for a later mild amplitude rise."
+        ],
+        "evidence_ids": [
+          "R08.C01.S0001",
+          "R08.P001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have nearly identical recurrence (67.07 versus 67.21 ms), comparable RMS (0.446 versus 0.468 FS), low crest factor, and no clipping.",
+          "Both show narrow ≈14.9 Hz-related harmonics and persistent spectral structure across the same 10 s/42 kHz acquisition."
+        ]
+      }
+    ],
+    "condition_id": "C04",
+    "explanation": "Q01 best matches C04 (stator_winding): both preserve the same ≈14.9 Hz harmonic spacing, strong periodicity near 67 ms, and a comparatively rich harmonic spectrum. Q01 shifts dominant emphasis from C04's 44.9 Hz component to 89.5 Hz and has substantially more 100–500 Hz power, but this order/amplitude redistribution is better supported by C04's harmonic richness than by the more fundamental-dominated alternatives. Absolute FS levels are secondary because acquisition gain is unknown; duration, sampling rate, FFT resolution, and coverage are identical.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "3987b37ba67c951cad272255ec75609cd76d23398353c418075c46664f8e77f9",
+  "source_response_sha256": "7e6c7c882a93d2247a243107af0401c836f70c1274d033335737f6e8871f9887",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

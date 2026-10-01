@@ -1,0 +1,112 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 has much more mid-band power: 100–500 Hz 7.53%, 500–1000 Hz 25.30%, 1–2 kHz 12.32%, and 2–4 kHz 16.65%, versus C02's 0.16%, 0.21%, 0.33%, and 0.13%; C02 instead places 39.23% above 8 kHz versus Q01's 17.67% (Q01.C01.S0001, Q01.I006; R01.C01.S0001, R01.I006).",
+          "Absolute-frequency structure differs: both contain a 5.3 Hz FFT peak, but Q01's characteristic cluster is near 934.8–984.2 Hz with a 172.9 Hz line, whereas C02 emphasizes low-frequency peaks through 50.1 Hz and a broad feature near 16 kHz. Thus the shared 5.3 Hz component does not align the dominant spectral structures; the frequency shift into Q01's approximately 942 Hz cluster redistributes power toward 0.5–4 kHz (Q01.C01.S0001, Q01.I003–Q01.I005; R01.C01.S0001, R01.I003–R01.I005).",
+          "Q01 is more impulsively and regularly amplitude-modulated: its envelope peaks form an approximately 3.535 Hz series at 3.535, 7.071, 10.606, 14.141, and 17.677 Hz, while C02's envelope peaks are irregularly distributed, led by 2.929, 6.465, and 22.727 Hz. Q01 also has lower autocorrelation peak coefficient 0.813 at 68.0 µs versus 0.944 at 249.4 µs and visibly repeated bursts rather than C02's comparatively stationary texture (Q01.C01.S0001, Q01.I002, Q01.I007–Q01.I008; R01.C01.S0001, R01.I002, R01.I007–R01.I008).",
+          "Digital level differs despite identical peak normalization: Q01 RMS is 0.1199 FS and crest factor 17.98 dB versus 0.1580 FS and 15.58 dB for C02. Unknown acquisition gain prevents interpreting this as a physical-amplitude difference (Q01.C01.S0001; R01.C01.S0001)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008",
+          "R01.C01.S0001",
+          "R01.I002",
+          "R01.I003",
+          "R01.I004",
+          "R01.I005",
+          "R01.I006",
+          "R01.I007",
+          "R01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped, peak-normalized 10.0 s mono records at 44.1 kHz, with identical 0.1 Hz FFT and 43.066 Hz Welch-bin resolution, so their physical frequency axes and coverage are directly comparable (Q01.C01.S0001; R01.C01.S0001).",
+          "Both show persistent broadband content and a stable horizontal high-frequency feature around 16 kHz over the full interval, plus a 5.3 Hz FFT component (Q01.I003–Q01.I005; R01.I003–R01.I005)."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated: 94.13% of Welch power lies below 100 Hz, compared with 20.19% for Q01. Q01 instead concentrates 61.25% from 100 Hz to 4 kHz versus only 1.23% for C03 (Q01.C01.S0001, Q01.I006; R02.C01.S0001, R02.I006).",
+          "Both have a 5.3 Hz line, but it is much stronger in C03 at 0.452 FS peak than in Q01 at 0.0650 FS peak. Q01's main narrow cluster is near 942 Hz, whereas C03 has additional features around 1.84 kHz and several kHz plus a broad 16 kHz region. This absolute-frequency displacement produces Q01's elevated 0.5–4 kHz band powers and prevents harmonic-pattern alignment (Q01.C01.S0001, Q01.I003–Q01.I005; R02.C01.S0001, R02.I003–R02.I005).",
+          "Q01 shows a clear approximately 0.283 s burst repetition and envelope harmonic series at multiples of about 3.535 Hz; C03's waveform is more continuously periodic and its envelope peaks are not the same series, including 0.202, 1.717, 2.424, 16.970, and 43.232 Hz. Their strongest short-lag autocorrelation peaks also differ: 68.0 µs for Q01 versus 181.4 µs for C03 (Q01.C01.S0001, Q01.I002, Q01.I007–Q01.I008; R02.C01.S0001, R02.I002, R02.I007–R02.I008).",
+          "C03 has much higher digital RMS, 0.3434 FS versus 0.1199 FS, and lower crest factor, 8.84 versus 17.98 dB; gain is unknown, but the waveform/envelope evidence still indicates a continuous high-duty-cycle oscillation in C03 versus sharper periodic bursts in Q01 (Q01.C01.S0001; R02.C01.S0001)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008",
+          "R02.C01.S0001",
+          "R02.I002",
+          "R02.I003",
+          "R02.I004",
+          "R02.I005",
+          "R02.I006",
+          "R02.I007",
+          "R02.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped, peak-normalized 10.0 s mono records sampled at 44.1 kHz with identical spectral resolution and full-interval coverage (Q01.C01.S0001; R02.C01.S0001).",
+          "Both contain a 5.3 Hz FFT peak and persistent broadband/high-frequency structure near 16 kHz, with modulation continuing across the complete interval rather than a single isolated event (Q01.I002–Q01.I005; R02.I002–R02.I005)."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "C04 places 61.07% of power above 8 kHz, dominated by a narrow approximately 16.0 kHz complex, while Q01 places only 17.67% above 8 kHz and 61.25% from 100 Hz to 4 kHz. Q01's largest reported narrow cluster is instead 934.8–984.2 Hz (Q01.C01.S0001, Q01.I003–Q01.I006; R03.C01.S0001, R03.I003–R03.I006).",
+          "The dominant absolute-frequency complexes are displaced by roughly 15.1 kHz: about 0.94 kHz in Q01 versus 16.0 kHz in C04. This is not a small speed-related shift because it moves the feature across multiple physical bands and reverses the mid-band/high-band power balance; C04 also has a 50.0 Hz peak rather than Q01's reported low-frequency 5.3 Hz peak (Q01.C01.S0001, Q01.I003–Q01.I006; R03.C01.S0001, R03.I003–R03.I006).",
+          "Q01's envelope has a regular approximately 3.535 Hz harmonic sequence, whereas C04 is led by 13.232 and 23.131 Hz with other peaks at 3.333, 9.899, 16.465, 26.465, 33.030, and 36.364 Hz. Their autocorrelation differs in both lag and form: Q01 peaks at 68.0 µs with coefficient 0.813 and decaying fine oscillations, while C04 peaks at 249.4 µs with coefficient 0.894 and broader approximately 20 ms-scale oscillation (Q01.C01.S0001, Q01.I007–Q01.I008; R03.C01.S0001, R03.I007–R03.I008).",
+          "Q01 has repeated high-crest bursts and many recurring positive level-change candidates across 10 s; C04 is visually more noise-like and stationary, with fewer reported level changes. Q01 RMS is 0.1199 FS with 17.98 dB crest factor versus 0.1945 FS and 13.78 dB for C04, although unknown gain limits physical amplitude interpretation (Q01.C01.S0001, Q01.I002; R03.C01.S0001, R03.I002)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008",
+          "R03.C01.S0001",
+          "R03.I002",
+          "R03.I003",
+          "R03.I004",
+          "R03.I005",
+          "R03.I006",
+          "R03.I007",
+          "R03.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped, peak-normalized 10.0 s mono records at 44.1 kHz with the same FFT/Welch resolution and complete temporal coverage (Q01.C01.S0001; R03.C01.S0001).",
+          "Both show a persistent narrow high-frequency region near 16 kHz and broadband, modulated waveforms, and both have substantial power above 16 kHz relative to their 4–8 kHz troughs (Q01.I004–Q01.I006; R03.I004–R03.I006)."
+        ]
+      }
+    ],
+    "condition_id": null,
+    "explanation": "Different. Under the required calibrated rule, C04 is the nearest supplied condition at 7.61657 dB, followed by C03 at 7.822059 dB and C02 at 10.59642 dB (COMPARISON.WELCH). The nearest distance exceeds C04's 2.46318 dB threshold; indeed every distance exceeds its condition-specific threshold (C02 3.37736 dB, C03 3.22764 dB, C04 2.46318 dB). The figures and measurements support rejection: Q01 uniquely combines an approximately 0.94 kHz line cluster, strong 100 Hz–4 kHz power, and approximately 3.535 Hz periodic bursting, whereas C02 and C04 emphasize approximately 16 kHz structure and C03 is dominated below 100 Hz. All reports have matched 10 s duration, 44.1 kHz sampling, frequency axes, and analysis resolution, so these discrepancies are not attributable to coverage or sampling-rate differences; absolute FS levels remain gain-dependent.",
+    "outcome": "different"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "085d455ccce17ef58e01e14ab84aac70ee2a4543e79ad02d1f8630df151d433f",
+  "source_response_sha256": "8c10396aa5dcf7ef677e8e57d6d4c97428b997316b1a92b13a8cca69df013489",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

@@ -294,7 +294,10 @@ def test_publication_gate_limits_audio_and_avoids_task_slug_false_positive():
 
     audio = "examples/audio-comparison/media/" + "a" * 64 + ".wav"
     assert not findings(audio, b"fixture")
+    assert not findings(audio.replace("audio-comparison", "archive/pruning-candidate"), b"x")
     assert "forbidden_artifact_path" in findings("examples/unreviewed.wav", b"fixture")
+    assert "forbidden_artifact_path" in findings("examples/archive/media/" + "a" * 64 + ".wav",
+                                                  b"fixture")
     assert "forbidden_artifact_path" in findings("outputs/response.json", b"{}")
     assert not findings("docs/example.md", b"task-first-shot-unsupervised-anomaly-detection")
     assert "openai_token" in findings("config.json", ("sk-" + "A" * 30).encode())
@@ -310,3 +313,32 @@ def test_public_example_links_cannot_escape_snapshot(tmp_path):
     assert local_target(tmp_path, tmp_path / "index.html", "https://example.com") is None
     with pytest.raises(ValueError, match="escaping"):
         local_target(tmp_path, tmp_path / "index.html", "../private.json")
+
+
+def test_simple_method_outcomes_and_code_identity_ignore_line_endings(tmp_path):
+    import hashlib
+
+    from scripts.publish_simple_method import category, code_matches, example_cards
+
+    assert category("reserved", "C03", "C03") == "Correct class"
+    assert category("reserved", "C03", "different") == "False rejection"
+    assert category("development", "C02", "C04") == "Wrong class"
+    assert category("excluded", "different", "different") == "Correct rejection"
+    assert category("excluded", "different", "C04") == "Wrong acceptance"
+    source = tmp_path / "module.py"
+    source.write_bytes(b"value = 1\r\nother = 2\r\n")
+    assert code_matches(source, hashlib.sha256(b"value = 1\nother = 2\n").hexdigest())
+    assert code_matches(source, hashlib.sha256(b"value = 1\r\nother = 2\r\n").hexdigest())
+    assert not code_matches(source, hashlib.sha256(b"value = 2\n").hexdigest())
+    cases = [{"id": "jin-distances-reserved-T01", "category": "False rejection",
+              "direction": "review"}]
+    with pytest.raises((ValueError, KeyError)):
+        example_cards(cases)
+
+
+def test_simple_template_deep_links_are_opt_in():
+    source = (Path(__file__).resolve().parents[1]
+              / "scripts/templates/audio_comparison_simple.html").read_text(encoding="utf-8")
+    assert "if(!DATA.deepLinks)return 0;" in source
+    assert "if(DATA.deepLinks&&location.hash" in source
+    assert 'id="input-link-wrap" hidden' in source and 'id="case-note" hidden' in source

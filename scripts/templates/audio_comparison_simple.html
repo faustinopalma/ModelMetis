@@ -75,7 +75,7 @@ dialog img{max-height:80vh;object-fit:contain}a{overflow-wrap:anywhere}[hidden]{
   <p id="filter-count" aria-live="polite"></p>
   <p id="empty-state" role="status" hidden>No cases match this filter.</p>
   <div id="comparison-content">
-    <div class="outcome" id="decision-top" aria-live="polite"><h2 id="decision-outcome"></h2><p id="decision-values"></p><p id="case-context"></p><p class="repeat-warning" id="repeat-warning" hidden></p></div>
+    <div class="outcome" id="decision-top" aria-live="polite"><h2 id="decision-outcome"></h2><p id="decision-values"></p><p id="case-context"></p><p id="case-note" hidden></p><p class="repeat-warning" id="repeat-warning" hidden></p></div>
     <div class="diagram-control"><label for="diagram">Diagram</label><select id="diagram"></select></div>
     <div class="pair">
       <div class="pane" id="query-pane">
@@ -98,7 +98,7 @@ dialog img{max-height:80vh;object-fit:contain}a{overflow-wrap:anywhere}[hidden]{
     <div class="transport"><audio id="player" controls preload="metadata"></audio><span id="playing-label">Not playing</span><label><input type="checkbox" id="loop">Loop</label><label><input type="checkbox" id="alternate">A/B</label></div>
     <p id="notice" role="status"></p>
     <details id="guide-details"><summary>Diagram interpretation</summary><p id="diagram-guide"></p></details>
-    <details id="decision-details" hidden><summary>Recorded explanation</summary><p id="decision-explanation"></p><p><a id="raw-response">Raw response</a></p><p class="study-notice" id="display-scope"></p></details>
+    <details id="decision-details" hidden><summary>Recorded explanation</summary><p id="decision-explanation"></p><p><a id="raw-response">Raw response</a><span id="input-link-wrap" hidden> / <a id="model-input">Exact model input</a></span></p><p class="study-notice" id="display-scope"></p></details>
   </div>
 </main>
 <footer>Recorded AI decisions / Original audio / Publisher labels / Human intervention not executed / <span id="attribution"></span></footer>
@@ -177,9 +177,12 @@ function showCase(index){
   byId('decision-values').textContent='Correct class: '+label(dataset.references[correct.index])+' | Model: '+(model.index<0?'Other (no reference selected)':label(dataset.references[model.index]));
   byId('case-context').textContent=(item.attemptLabel?item.attemptLabel+' / ':'')+(item.correctClassExcluded?'Correct reference was withheld from the model; expected response: Other.':'All class references were supplied to the model.');
   byId('repeat-warning').textContent=item.repeatWarning||'';byId('repeat-warning').hidden=!item.repeatWarning;
+  byId('case-note').textContent=item.note||'';byId('case-note').hidden=!item.note;
+  if(DATA.deepLinks&&location.hash!=='#'+item.id)history.replaceState(null,'','#'+encodeURIComponent(item.id));
   byId('decision-details').hidden=!item.explanation;byId('decision-details').open=false;
   byId('decision-explanation').textContent=item.explanation||'';byId('display-scope').textContent=DATA.displayScope||'';
   if(item.responseLink)byId('raw-response').setAttribute('href',item.responseLink);else byId('raw-response').removeAttribute('href');
+  byId('input-link-wrap').hidden=!item.inputLink;if(item.inputLink)byId('model-input').setAttribute('href',item.inputLink);
   byId('attribution').textContent=item.dataset==='Jin'?'Linjie Jin / CC BY 4.0':'Mert Sehri and Patrick Dumond / CC BY 4.0';
   renderReference();
 }
@@ -213,7 +216,15 @@ player.onended=()=>{position=0;if(byId('alternate').checked)play(active==='query
 byId('alternate').onchange=()=>{if(byId('alternate').checked)byId('loop').checked=true;};
 document.addEventListener('keydown',event=>{if(!selectedCase()||event.target.closest('input,select,textarea,audio')||event.altKey||event.ctrlKey||event.metaKey||byId('image-dialog').open)return;if(event.key==='ArrowLeft'){event.preventDefault();byId('previous-reference').click();}if(event.key==='ArrowRight'){event.preventDefault();byId('next-reference').click();}if(event.key==='PageDown'){event.preventDefault();showCase(caseIndex+1);}if(event.key==='PageUp'){event.preventDefault();showCase(caseIndex-1);}});
 document.querySelectorAll('[data-zoom]').forEach(button=>button.onclick=()=>{const image=byId(button.dataset.zoom+'-image');if(image.hidden)return;byId('large-image').src=image.src;byId('image-title').textContent=image.alt;byId('image-dialog').showModal();});
-byId('close-image').onclick=()=>byId('image-dialog').close();showCase(0);
+byId('close-image').onclick=()=>byId('image-dialog').close();
+function linkedCase(){
+  if(!DATA.deepLinks)return 0;
+  const identifier=decodeURIComponent(location.hash.slice(1));const item=DATA.cases.find(entry=>entry.id===identifier);
+  if(!item){if(DATA.defaultCollection)byId('dataset').value=DATA.defaultCollection;if(DATA.defaultFilter)byId('case-filter').value=DATA.defaultFilter;return 0;}
+  byId('dataset').value=item.dataset;byId('case-filter').value='all';return visibleCases().indexOf(item);
+}
+if(DATA.deepLinks)window.addEventListener('hashchange',()=>{if(decodeURIComponent(location.hash.slice(1))!==displayedCaseId)showCase(linkedCase());});
+showCase(linkedCase());
 </script>
 </body>
 </html>

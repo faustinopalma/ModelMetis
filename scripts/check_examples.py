@@ -9,6 +9,8 @@ from urllib.parse import unquote, urlsplit
 
 from scripts.check_publication import findings
 
+COMPARISONS = {"audio-comparison/index.html": 48, "archive/pruning-candidate/index.html": 10}
+
 
 class PublicPage(HTMLParser):
     def __init__(self):
@@ -82,31 +84,57 @@ def verify(root):
             for target in parser.links:
                 local_target(root, path, target)
                 link_count += 1
-    comparison = [(path, parser) for path, parser in pages if parser.payload]
-    if len(comparison) != 1:
-        raise ValueError("Expected exactly one current comparison.")
-    path, parser = comparison[0]
-    payload = json.loads("".join(parser.payload))
-    for dataset in payload["datasets"]:
-        for record in [*dataset["references"], *dataset["queries"]]:
-            audio = local_target(root, path, record["audio"])
-            if hashlib.sha256(audio.read_bytes()).hexdigest() != record["audioHash"]:
-                raise ValueError("Audio provenance mismatch.")
-            for view, target in record["figures"].items():
-                figure = local_target(root, path, target)
-                if hashlib.sha256(figure.read_bytes()).hexdigest() != record["figureHashes"][view]:
-                    raise ValueError("Figure provenance mismatch.")
-    if len(payload["cases"]) != 10:
-        raise ValueError("The public comparison must retain eight primaries and two repeats.")
-    for case in payload["cases"]:
-        response = json.loads(local_target(root, path, case["responseLink"]).read_text("utf-8"))
-        if response["decision"]["explanation"] != case["explanation"]:
-            raise ValueError("Displayed explanation differs from published decision.")
-    outcomes = json.loads((root / "results/pruning-decisions.json").read_text("utf-8"))
+    comparisons = {path.relative_to(root.resolve()).as_posix(): parser
+                   for path, parser in pages if parser.payload}
+    if set(comparisons) != set(COMPARISONS):
+        raise ValueError("Expected the current comparison and the archived pruning review.")
+    decisions = {}
+    for name, parser in comparisons.items():
+        path = root.resolve() / name
+        payload = json.loads("".join(parser.payload))
+        for dataset in payload["datasets"]:
+            for record in [*dataset["references"], *dataset["queries"]]:
+                audio = local_target(root, path, record["audio"])
+                if hashlib.sha256(audio.read_bytes()).hexdigest() != record["audioHash"]:
+                    raise ValueError("Audio provenance mismatch.")
+                for view, target in record["figures"].items():
+                    figure = local_target(root, path, target)
+                    if (hashlib.sha256(figure.read_bytes()).hexdigest()
+                            != record["figureHashes"][view]):
+                        raise ValueError("Figure provenance mismatch.")
+        if len(payload["cases"]) != COMPARISONS[name]:
+            raise ValueError(f"Unexpected decision count in {name}.")
+        for case in payload["cases"]:
+            response = json.loads(local_target(root, path, case["responseLink"]).read_text("utf-8"))
+            if response["decision"]["explanation"] != case["explanation"]:
+                raise ValueError("Displayed explanation differs from published decision.")
+            if case.get("inputLink"):
+                model_input = json.loads(
+                    local_target(root, path, case["inputLink"]).read_text("utf-8"))
+                if model_input["source_request_sha256"] != response["source_request_sha256"]:
+                    raise ValueError("Published input and decision belong to different requests.")
+        decisions[name] = payload["cases"]
+    summary = json.loads((root / "results/simple-method-summary.json").read_text("utf-8"))
+    for collection in summary["collections"]:
+        cases = [case for case in decisions["audio-comparison/index.html"]
+                 if case["dataset"] == collection["collection"]]
+        counts = {}
+        for case in cases:
+            counts[case["category"]] = counts.get(case["category"], 0) + 1
+        expected = {key: value for key, value in collection.items()
+                    if key not in {"collection", "configuration", "decisions"}}
+        if counts != expected or len(cases) != collection["decisions"]:
+            raise ValueError("Displayed decisions differ from the published summary.")
+    attempts = json.loads((root / "results/simple-method-outcomes.json").read_text("utf-8"))
+    if len(attempts) != summary["http_attempts"] or len(attempts) != 68:
+        raise ValueError("The simple-method attempt record is incomplete.")
+    outcomes = json.loads((root / "archive/results/pruning-decisions.json").read_text("utf-8"))
     if len(outcomes) != 46 or len({row["name"] for row in outcomes}) != 46:
         raise ValueError("The crossed-study outcome set is incomplete.")
     return {"status": "passed", "files": len(entries), "audio_files": audio_count,
-            "comparison_decisions": 10, "crossed_decisions": 46, "html_links": link_count}
+            "comparison_decisions": {name: len(cases) for name, cases in decisions.items()},
+            "simple_method_attempts": len(attempts), "crossed_decisions": 46,
+            "html_links": link_count}
 
 
 if __name__ == "__main__":

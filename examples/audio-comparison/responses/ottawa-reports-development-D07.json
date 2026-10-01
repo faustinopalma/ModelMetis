@@ -1,0 +1,151 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is strongly periodic and line-dominated at 30.1-Hz spacing, led by 90.2 Hz with autocorrelation lag 33.238 ms; C01 is broadband/irregular, led by 45.9 Hz with only a 0.381-ms reported peak lag.",
+          "Band power and time evolution differ: Q01 has 70.90% below 100 Hz and 28.73% at 100–500 Hz with a slowly varying envelope, versus C01's 68.27%/26.65% but much larger high-frequency content and transient level changes near 2.1 s."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I003",
+          "R01.C01.S0001",
+          "R01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10-s, 42-kHz, unclipped peak-normalized recordings with low-frequency-dominant spectra."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01's complete line pattern is shifted upward by about 2×: 90.2/60.2/30.1 Hz versus 45.1/30.1/15.05-Hz-related structure, and its 33.238-ms recurrence is half C02's 66.500 ms; this is a genuine physical-frequency shift because duration, sampling rate and 0.1-Hz FFT resolution match.",
+          "The shift moves power upward: Q01 has 70.90% below 100 Hz and 28.73% at 100–500 Hz, versus 97.25% and 2.53%; Q01 RMS is 0.4209 FS versus 0.4628 FS, although unknown gain limits absolute-level interpretation."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I007",
+          "R02.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show stable, highly periodic harmonic waveforms with autocorrelation near 0.98 and no detected level changes.",
+          "Both have narrow low-frequency lines and modulation components on a roughly 15/30-Hz family, but Q01 is frequency-shifted upward."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01 is an approximately 2.00× frequency-shifted version: C03's 45.0, 30.0, 75.0, 104.9, 60.0 and 89.9-Hz lines correspond to Q01's 90.2, 60.2, 150.4, 210.6, 120.3 and 180.5 Hz within about 0.2–0.8 Hz; recurrence similarly halves from 66.714 to 33.238 ms.",
+          "Consequently Q01 redistributes power from below 100 Hz to 100–500 Hz (70.90%/28.73% versus 96.19%/3.46%) and raises centroid from 54.59 to 94.86 Hz; this follows the frequency shift rather than a different spectral pattern."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.P001",
+          "R03.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Relative harmonic ordering and envelope modulation align after 2× scaling: C03's 14.95, 30.0, 44.95 and 60.0 Hz map to Q01's 30.10, 60.20, 90.20 and 120.30 Hz.",
+          "Levels and temporal behavior are exceptionally close: RMS 0.4209 versus 0.4196 FS, autocorrelation 0.9818 versus 0.9789, no level changes, and stable 10-s spectrograms at the same 42-kHz sampling rate."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Although Q01's 90.2-Hz dominant line can be related to twice C04's 44.9 Hz, the relative structure does not match: C04 has a very strong 74.8-Hz component (0.3341 FS) while Q01 is instead dominated by the 90.2-Hz line (0.5098 FS) with 60.2 Hz secondary.",
+          "Q01 has 28.73% power at 100–500 Hz versus C04's 7.18%, and no level changes versus numerous C04 candidates; its 33.238-ms periodicity is also half C04's 66.833 ms."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I005",
+          "R04.C01.S0001",
+          "R04.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are low-frequency harmonic, approximately stationary 10-s recordings with comparable RMS (0.4209 versus 0.3982 FS)."
+        ]
+      },
+      {
+        "condition_id": "C05",
+        "differences": [
+          "Q01's dominant frequency is 90.2 Hz rather than 43.9 Hz and its recurrence is 33.238 rather than 68.381 ms; a roughly 2× shift aligns some lines, but C05's relative amplitudes do not reproduce Q01's strong 90.2/60.2-Hz ordering.",
+          "Frequency shifting explains Q01's much greater 100–500-Hz fraction (28.73% versus 3.77%) and higher centroid (94.86 versus 56.63 Hz); RMS is lower at 0.4209 versus 0.4560 FS, with gain unknown."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I003",
+          "R05.C01.S0001",
+          "R05.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have stable levels, high periodicity, narrow harmonic lines and no clipping over identical 10-s/42-kHz coverage."
+        ]
+      },
+      {
+        "condition_id": "C06",
+        "differences": [
+          "Q01 is shifted to roughly twice C06's repetition rate (33.238 versus 66.881 ms), but C06's prominent 44.9/29.9/104.7-Hz hierarchy does not map as completely as C03's; Q01 instead leads at 90.2 Hz and has strong 60.2 and 210.6 Hz.",
+          "Q01 has 28.73% at 100–500 Hz versus 7.11% for C06 and no level-change candidates versus eleven in C06; RMS also differs, 0.4209 versus 0.3375 FS, subject to unknown gain."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "R06.C01.S0001",
+          "R06.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both exhibit harmonic low-frequency spectra, strong autocorrelation (0.9818/0.9714) and envelope components related to approximately 15/30/60 Hz before accounting for the shift."
+        ]
+      },
+      {
+        "condition_id": "C07",
+        "differences": [
+          "Q01's 90.2-Hz fundamental-dominant pattern and 33.238-ms lag differ from C07's 45.9-Hz-dominant pattern and 65.381-ms lag; doubling C07 frequencies gives approximate but poorer alignment (for example 45.9→91.8 Hz rather than 90.2 Hz).",
+          "Q01 places 28.73% of power at 100–500 Hz versus 4.68% for C07 and has centroid 94.86 versus 57.59 Hz; this upward redistribution is consistent with Q01's approximately doubled frequencies."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I006",
+          "R07.C01.S0001",
+          "R07.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stationary, unclipped, strongly periodic harmonic signals with comparable RMS (0.4209 versus 0.3819 FS) and no detected level changes."
+        ]
+      },
+      {
+        "condition_id": "C08",
+        "differences": [
+          "Q01 repeats at twice the rate (33.238 versus 67.214 ms) and is dominated by 90.2 Hz rather than 44.6 Hz; doubling C08 gives 89.2 Hz, but secondary line ratios and envelope peaks do not align as precisely as C03.",
+          "Q01 has 70.90% below 100 Hz and 28.73% at 100–500 Hz versus C08's 97.00% and 2.68%; RMS differs by about 0.047 FS (0.4209 versus 0.4680), with acquisition gain unknown."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "Q01.I008",
+          "R08.C01.S0001",
+          "R08.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stable, narrowband harmonic recordings with autocorrelation near 0.98, no clipping and no detected level changes under identical duration, sampling and FFT resolution."
+        ]
+      }
+    ],
+    "condition_id": "C03",
+    "explanation": "Q01 best matches C03 (rotor_misalignment) after an approximately 2× physical frequency shift: the principal FFT lines, envelope harmonics and autocorrelation period scale together while RMS, periodicity strength and 10-s time evolution remain nearly unchanged. The shift also quantitatively explains Q01's transfer of power into 100–500 Hz and higher centroid; other references show only partial doubled-frequency correspondence and poorer relative-harmonic or temporal agreement.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "51dcbabcd68d4284a36a3f9a26c83666ca4c903ff372a760673888937ae406a8",
+  "source_response_sha256": "e5cc198e9f4528d0dc7adc94f99d5d555e3f19fc8017d7e52b2c723be1ca098b",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

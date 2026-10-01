@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is substantially more high-frequency weighted: 80.75% lies above 8 kHz versus 33.03% for C01, with centroids 13017 versus 5701 Hz; Q01 correspondingly lacks C01's stronger low/mid harmonic texture.",
+          "The main ultrasonic line shifts from 16034.6 Hz in C01 to 15987.0 Hz in Q01 (-47.6 Hz, resolved by the 0.1-Hz FFT and slightly larger than the 43.07-Hz Welch spacing); envelopes also differ, with Q01's strongest modulation at 16.36 Hz versus C01's 3.43 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "R01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10-s, 44.1-kHz records show a persistent near-16-kHz ridge plus low-frequency components, including 50-Hz-region content, across their FFT/PSD/STFT views.",
+          "Both are nonstationary broadband waveforms with repeated envelope fluctuations, no clipping, the same 0.95-FS peak, and moderate short-lag periodicity."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "C02 concentrates 59.72% below 100 Hz and only 39.23% above 8 kHz, whereas Q01 has 13.05% and 80.75%, respectively; their centroids are 6441 and 13017 Hz.",
+          "C02 is dominated by 5.3-Hz/8.2-Hz low-frequency lines, while Q01 is dominated by clustered 15987–16046-Hz lines and has stronger modulation at 16.36 and 58.99 Hz; this is not a small common frequency shift."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both use identical 10-s, 44.1-kHz coverage and resolution, are peak-normalized to 0.95 FS without clipping, and show approximately steady levels over the interval.",
+          "Both contain low-frequency components near 9 Hz and 50 Hz and strong short-lag repetition, with autocorrelation coefficients 0.944 for C02 and 0.920 for Q01."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated—94.13% below 100 Hz, centroid 638 Hz, and a 5.3-Hz peak at -6.89 dB FS—whereas Q01 has 13.05% below 100 Hz, centroid 13017 Hz, and a dominant 15987-Hz peak at -22.27 dB FS.",
+          "C03's visibly periodic slow waveform, smooth long-lag autocorrelation and mean envelope 0.471 FS differ from Q01's dense ultrasonic waveform, rapidly decaying/oscillatory correlation and 0.267-FS envelope; no plausible frequency shift aligns the dominant structures."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10-s records are unclipped and peak-normalized to 0.95 FS, so their absolute RMS difference—0.343 versus 0.216 FS—can be compared only in the declared digital scale, not as calibrated physical amplitude.",
+          "Both include persistent spectral lines and high autocorrelation peaks (0.969 and 0.920), although those periodicities occur on very different waveform and frequency structures."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01 is more high-frequency weighted: 80.75% above 8 kHz and centroid 13017 Hz versus C04's 61.07% and 9927 Hz; Q01 also has higher RMS, 0.216 versus 0.195 FS, despite equal 0.95-FS peaks and unknown acquisition gain.",
+          "The strongest ultrasonic line moves from 16024.8 Hz to 15987.0 Hz (-37.8 Hz): clearly resolved by the 0.1-Hz FFT but within one 43.07-Hz Welch bin; Q01 also has stronger envelope peaks at 16.36/58.99 Hz versus C04's leading 13.23 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Both show the same broad spectral pattern: a dominant persistent near-16-kHz ridge with clustered side components, secondary low-frequency lines near 9 and 50 Hz, depressed midband power, and broadband background.",
+          "Their 10-s, 44.1-kHz waveforms and envelopes remain broadly steady with intermittent peaks; periodicity is also close, sharing a 0.249-ms strongest autocorrelation lag and coefficients 0.894 versus 0.920."
+        ]
+      }
+    ],
+    "condition_id": "C04",
+    "explanation": "Q01 is broadly similar to C04 (tight_bearing). The gain-centered Welch distance ranks C04 first at 2.210 dB, substantially below C03 at 3.888 dB and below C04's 3.038-dB nearest-other-reference separation, supporting a specific match. C01 and C02 are much farther at 5.998 and 6.255 dB, while C03 conflicts strongly in absolute spectral distribution and time-domain periodicity. The figures and measurements support C04 through the persistent near-16-kHz ridge, low-frequency secondary lines, matching autocorrelation lag, similar envelope/time evolution, identical duration, sampling rate and resolution. The approximately -38-Hz ultrasonic shift and Q01's greater high-band power distinguish Q01 from C04 but do not overturn the overall pattern match; FS levels are interpreted only digitally because acquisition gain is unknown.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "8cbf989d78c932a2dd66557429d2c0ecd04df41b487a183b59399a399f9e2f4a",
+  "source_response_sha256": "891f1a401ff7a68ae6d788fe2c2ad74faeab184af4f97b7b92f43f3a1c7f4cef",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

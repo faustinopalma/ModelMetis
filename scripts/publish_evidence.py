@@ -99,7 +99,7 @@ def public_payload(payload, output):
                 "figures": record["figures"], "figure_sha256": record["figureHashes"],
                 "sample_rate": record["rate"], "duration_seconds": record["duration"],
             })
-    result["pageTitle"] = "ModelMetis / Audio comparison"
+    result["pageTitle"] = "ModelMetis / Archived pruning candidate"
     return result, records
 
 
@@ -242,14 +242,15 @@ def publish(source, output, refresh=False):
     page = page.replace('>Raw response</a>', '>Published decision</a>')
     page = page.replace(
         '<div class="header-actions"></div>',
-        '<div class="header-actions"><a href="../index.html">Results</a>'
+        '<div class="header-actions"><a href="../index.html">Archive</a>'
+        '<a href="../../index.html">Current method</a>'
         '<a href="https://github.com/faustinopalma/ModelMetis/blob/main/examples/'
-        'audio-comparison/README.md">Sources and scope</a></div>',
+        'archive/pruning-candidate/README.md">Sources and scope</a></div>',
     )
     page = page.replace(
         '<span id="attribution"></span>',
         '<span id="attribution"></span> / <a href="https://github.com/faustinopalma/'
-        'ModelMetis/blob/main/examples/audio-comparison/ATTRIBUTION.md">Attribution</a>',
+        'ModelMetis/blob/main/examples/archive/pruning-candidate/ATTRIBUTION.md">Attribution</a>',
     )
     (output / "index.html").write_text(page, encoding="utf-8")
     write_json(output / "provenance.json", {
@@ -266,7 +267,7 @@ def publish(source, output, refresh=False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Publish a curated, hash-bound audio review.")
+    parser = argparse.ArgumentParser(description="Publish the archived, hash-bound pruning review.")
     parser.add_argument("--source", type=Path, default=Path("outputs/audio-comparison-v15"))
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--results", action="store_true")

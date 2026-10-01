@@ -50,9 +50,9 @@ The 500-1,500 Hz carrier-envelope representation is useful for magnet fracture a
 
 Repeated-window stability is insufficient evidence of family stability. Jin Welch distance has a 0.70 dB median over sixteen same-acquisition window pairs, versus 2.85 dB for the median of class-level cross-direction distances. Bands and autocorrelation also change much more between directions than between windows of one recording. Aggregating those windows avoids counting them as independent directional replications.
 
-![Jin stability and held-out-direction recognition](../examples/results/jin-summary.png)
+![Jin stability and held-out-direction recognition](../examples/archive/results/jin-summary.png)
 
-![Jin stability by family](../examples/results/jin-families.png)
+![Jin stability by family](../examples/archive/results/jin-families.png)
 
 ## Ottawa Features Mostly Follow Regime Or Overlap Across Faults
 
@@ -79,9 +79,9 @@ For a concrete unstable pair, dominant-frequency W/B is 14.53 for bowed rotor ag
 
 The acquisition design permits a limited factor comparison: profile 1 unloaded versus profile 2 unloaded changes profile; profile 2 unloaded versus loaded changes load. The median across classes of profile-change distance divided by load-change distance is 4.33 for bands, 2.83 for dominant frequency, 2.75 for autocorrelation, 1.54 for Welch and 1.47 for STFT. Profile change exceeds load change in 7/8 classes for bands/ridge and 8/8 for autocorrelation/Welch/STFT. Cepstrum is more balanced at 0.94, but its fault-family overlap remains. These are one observed contrast per factor and class, not causal estimates or independently measured RPM effects.
 
-![Ottawa stability and held-out-profile recognition](../examples/results/ottawa-summary.png)
+![Ottawa stability and held-out-profile recognition](../examples/archive/results/ottawa-summary.png)
 
-![Ottawa stability by family](../examples/results/ottawa-families.png)
+![Ottawa stability by family](../examples/archive/results/ottawa-families.png)
 
 ## The Representation Defines What Was Tested
 
@@ -99,7 +99,7 @@ For Jin, retain a full-spectrum representation and cepstrum as candidate family 
 
 For Ottawa, prioritize matched pruning of dominant-frequency tracking, autocorrelation and band allocation from the classifier input, using their error-associated attribution and poor family stability together. Preserve these views in offline inspection as regime context. Keep the reference bank fixed during pruning, then test multi-regime reference coverage as a separate factor. Remove corresponding numerical evidence as well as panels; otherwise the ablation does not remove the information. Test a combined representation only on a separate acquisition split: choosing class-specific features after inspecting these outcomes would otherwise reuse evaluation information.
 
-The [registration](../examples/results/family-registration.json), [full results](../examples/results/family-separation.json), [Jin details](../examples/results/family-separation.json) and [Ottawa details](../examples/results/family-separation.json) retain physical definitions, available coordinates, group distances, all family comparisons and individual forced predictions. The generator verifies registered audio, dataset, protocol and extension evidence hashes. Features and four rendered figures are bound in the output manifest. No AI inference, threshold fitting, new reference labels or human enrichment was performed.
+The [registration](../examples/archive/results/family-registration.json), [full results](../examples/archive/results/family-separation.json), [Jin details](../examples/archive/results/family-separation.json) and [Ottawa details](../examples/archive/results/family-separation.json) retain physical definitions, available coordinates, group distances, all family comparisons and individual forced predictions. The generator verifies registered audio, dataset, protocol and extension evidence hashes. Features and four rendered figures are bound in the output manifest. No AI inference, threshold fitting, new reference labels or human enrichment was performed.
 
 ```powershell
 .\.venv\Scripts\python.exe -m scripts.dsp_family_separation --output outputs/dsp-family-separation-new

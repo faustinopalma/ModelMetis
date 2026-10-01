@@ -1,0 +1,115 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is much more high-frequency weighted: 81.60% of Welch power lies at 8–22.05 kHz versus 33.03% for C01, while 0–100 Hz is 13.91% versus 37.71%; its centroid is 13124.71 Hz versus 5701.40 Hz.",
+          "The dominant narrow high-frequency component shifts from 16034.6 Hz in C01 to 15982.7 Hz in Q01, a −51.9 Hz shift. This is resolvable by the 0.1 Hz FFT but only about 1.2 Welch bins at 43.07 Hz/bin; the figures nevertheless show materially different surrounding spectral shapes.",
+          "C01 has a dominant 5.3 Hz component at −21.13 dB FS peak and additional 51.8, 55.3, 169.2, 193.4 Hz lines; Q01 instead has 50.0 Hz at −24.15 dB and its reported peak set is dominated by the approximately 15.98–16.04 kHz cluster, so the relative harmonic/line structure differs.",
+          "Q01 has higher digital RMS, 0.2183 FS versus 0.1366 FS, and a stronger mean envelope, 0.2720 versus 0.1690 FS, although unknown acquisition gain prevents treating this alone as diagnostic. Its principal envelope modulation is 16.46 Hz, whereas C01 is led by 3.43 Hz.",
+          "The calibrated gain-centered Welch distance is 6.081 dB, exceeding C01's 3.377 dB threshold."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "R01.I002",
+          "R01.I003",
+          "R01.I004",
+          "R01.I005",
+          "R01.I006",
+          "R01.I007",
+          "R01.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stationary-looking 10 s, 44.1 kHz recordings with no clipping and a persistent narrow feature near 16 kHz across the STFT.",
+          "Both contain low-frequency lines near 50 Hz and broadband/envelope variability, and both use identical 0.1 Hz FFT and 43.07 Hz Welch-bin resolution, making their physical frequency axes directly comparable."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 allocates 81.60% of power to 8–22.05 kHz versus 39.23% for C02, but only 13.91% to 0–100 Hz versus 59.72%; the centroid correspondingly rises from 6441.00 to 13124.71 Hz.",
+          "C02's strongest reported line is 5.3 Hz at −18.08 dB FS peak, followed by 8.2 Hz and low-frequency lines, whereas Q01's strongest line is 15982.7 Hz at −23.29 dB and its next major line is 50.0 Hz. Thus Q01 lacks C02's dominant 5.3 Hz-centered relative harmonic pattern.",
+          "The approximately 16 kHz ridge is much more dominant in Q01. Its exact reported 15982.7 Hz carrier cannot be paired with a listed C02 FFT peak, although both Welch/STFT figures show energy near 16 kHz; any modest carrier shift is smaller than the broader mismatch in high/low-frequency balance.",
+          "Q01 has RMS 0.2183 FS versus 0.1580 FS and mean envelope 0.2720 versus 0.1981 FS. Q01's envelope peaks at 16.46, 49.49 and 32.93 Hz, unlike C02's leading 2.93, 6.46 and 22.73 Hz components.",
+          "Although their strongest positive autocorrelation lag is exactly the same reported value, 0.0002494331 s, Q01's autocorrelation figure is more densely oscillatory, consistent with its higher zero-crossing rate of 26954/s versus 15076/s. The calibrated distance is 6.235 dB, above C02's 3.624 dB threshold."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "R02.I002",
+          "R02.I003",
+          "R02.I004",
+          "R02.I005",
+          "R02.I006",
+          "R02.I007",
+          "R02.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped, approximately steady 10 s signals with persistent low-frequency content and a stable ridge near 16 kHz.",
+          "Both have similar kurtosis, 3.23 for C02 and 3.13 for Q01, and identical duration, sampling rate and spectral resolution."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Despite being the nearest spectral-shape reference, C03 is overwhelmingly low-frequency dominated: 94.13% of power is below 100 Hz versus 13.91% for Q01. Q01 instead places 81.60% at 8–22.05 kHz versus only 3.39% for C03; centroids are 13124.71 and 637.67 Hz respectively.",
+          "C03 has a dominant 5.3 Hz line at −6.89 dB FS peak and a strongly periodic waveform, while Q01 is dominated by a 15982.7 Hz line at −23.29 dB plus 50 Hz. This is a fundamental redistribution rather than a small frequency shift: shifting C03's 5.3 Hz pattern cannot account for Q01's approximately 16 kHz carrier and high-band dominance.",
+          "C03's autocorrelation evolves smoothly over 0–100 ms and its waveform shows a clear slow cycle; Q01's autocorrelation is rapidly oscillatory. Their reported strongest lags differ, 0.0001814 versus 0.0002494 s, and zero-crossing rates differ by nearly ninefold, 3022/s versus 26954/s.",
+          "C03 has higher RMS and envelope levels, 0.3434 and 0.4711 FS, versus 0.2183 and 0.2720 FS for Q01; gain is unknown, but crest factors also differ, 8.84 versus 12.77 dB. C03's leading envelope modulation is 2.42 Hz, while Q01's is 16.46 Hz.",
+          "The calibrated distance is the smallest at 3.916 dB, but it still exceeds C03's 3.228 dB acceptance threshold."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "R03.I002",
+          "R03.I003",
+          "R03.I004",
+          "R03.I005",
+          "R03.I006",
+          "R03.I007",
+          "R03.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both cover one complete, unclipped 10 s interval at 44.1 kHz and show persistent rather than transient spectral ridges over time.",
+          "Both contain some approximately 16 kHz energy and low-frequency components, but their relative prominence is reversed."
+        ]
+      }
+    ],
+    "condition_id": null,
+    "explanation": "Different. Ranking only the supplied references by gain-centered Welch query distance gives C03 (3.916 dB), C01 (6.081 dB), then C02 (6.235 dB). The nearest reference, C03, exceeds its calibrated 3.228 dB threshold, so the rule requires rejection rather than assignment. Figures and measurements support that decision: Q01 is dominated by a persistent approximately 15.98–16.04 kHz cluster and has 81.60% of power above 8 kHz, whereas C03 is dominated by 5.3 Hz and has 94.13% below 100 Hz. All reports share 10 s duration, 44.1 kHz sampling, and identical FFT/Welch resolution, so this discrepancy is not attributable to coverage or resolution; absolute FS amplitudes remain secondary because acquisition gain is unknown.",
+    "outcome": "different"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "9a5ffd1e69f510b578d691a7df68dc1f9fa4dfd9df2e82a2d4a7005084e07372",
+  "source_response_sha256": "d7f34660fa8b50a80f89ebc87492c54b6b9eacf77206cdb262ba88eab6dae480",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

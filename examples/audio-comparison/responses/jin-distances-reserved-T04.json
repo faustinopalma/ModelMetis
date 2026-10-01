@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Band allocation is much more top-heavy in Q01: 59.09% at 16–22.05 kHz and 17.81% below 100 Hz, versus C01's 18.93% and 37.71%; centroids are 13.014 versus 5.701 kHz.",
+          "C01 has a narrow carrier at 16034.6 Hz plus a dominant 5.3 Hz component; Q01's carrier cluster is shifted upward/broadened around 16002.7–16173.7 Hz and its low peak is 50 Hz, with different envelope modulation emphasis."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s, 44.1 kHz records show a persistent approximately 16 kHz ridge and broadband noisy waveform without clipping.",
+          "Both contain low-frequency periodic structure and high-frequency power, with equal 0.1 Hz FFT resolution and 43.07 Hz Welch bins."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 shifts the high-frequency ridge from C02's approximately 16.0 kHz region to a broader 16.00–16.17 kHz cluster; this raises centroid from 6.441 to 13.014 kHz and zero crossings from 15076 to 26891/s.",
+          "Q01 has less sub-100-Hz power (17.81% versus 59.72%) and more 16–22.05-kHz power (59.09% versus 24.64%); its strongest low line is 50.0 Hz rather than C02's 5.3 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I004"
+        ],
+        "similar": true,
+        "similarities": [
+          "This is the closest gain-centered Welch shape: 3.118 dB, about half C02's 6.106 dB nearest-other separation, supporting the same broad low-frequency-plus-16-kHz spectral pattern.",
+          "Both 10 s/44.1 kHz records have a persistent high-frequency ridge, autocorrelation peak at 0.249 ms, strong coefficients (0.944 and 0.937), noisy envelopes, and comparable FS RMS (0.158 and 0.189; gain unknown)."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency/tonal: 94.13% below 100 Hz, centroid 638 Hz, and a 5.3 Hz peak at 0.452 FS; Q01 has 17.81%, 13.014 kHz, and its strongest low line is 50 Hz at 0.0638 FS.",
+          "C03's waveform is strongly periodic with slow autocorrelation evolution and low zero-crossing rate (3022/s), whereas Q01 is noise-like with rapidly decaying oscillatory autocorrelation and 26891/s; a frequency shift cannot reconcile this bandwidth redistribution."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I007"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s/44.1 kHz records retain a persistent approximately 16 kHz spectral ridge and show no clipping.",
+          "Both include low-frequency components and broadband envelope variation, but these are secondary in Q01 and dominant in C03."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01's approximately 16 kHz carrier is shifted/broadened upward: strongest at 16167.8 Hz versus C04 at 16024.8 Hz (about +143 Hz), with multiple Q01 lines through 16173.7 Hz; this frequency shift changes harmonic/sideband alignment.",
+          "Q01 is more high-frequency weighted: 59.09% at 16–22.05 kHz and centroid 13.014 kHz versus 41.59% and 9.927 kHz; envelope peaks also move from mainly 3–36 Hz in C04 to strong 112–162 Hz terms in Q01."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a stationary noise-like 10 s waveform, a strong 50 Hz line, persistent approximately 16 kHz ridge, and closely matched FS RMS (0.1945 versus 0.1891) and crest factor (13.78 versus 14.02 dB).",
+          "Both use identical duration, 44.1 kHz sampling and spectral resolution, and share appreciable 8–22.05 kHz power with no clipping."
+        ]
+      }
+    ],
+    "condition_id": "C02",
+    "explanation": "Outcome is similar, best matching C02 (healthy). The gain-centered Welch ranking is decisive: C02 is nearest at 3.118 dB, while C04, C03 and C01 are 6.352, 6.913 and 9.488 dB. C02's query distance is also much smaller than its 6.106 dB nearest-other-reference distance. Figures and measurements support a common persistent high-frequency-ridge/noisy-envelope pattern and identical acquisition axes, although Q01 has an upward/broader carrier distribution, markedly more top-band power, and a 50 Hz rather than 5.3 Hz dominant low-frequency line. C04 matches absolute level and 50 Hz content better, but its spectral-shape distance is substantially worse; unknown acquisition gain makes the level agreement secondary.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "0de7972377985567727cbb4f3db6340ab89ef963a7938619fa279631267960fb",
+  "source_response_sha256": "bfdfa1290e6bbf5325036c2c61495f890bf7c522e9355ffb2a0500eba9d3a24a",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

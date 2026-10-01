@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ModelMetis / Archived variants</title>
+<script>
+(() => {
+  const param = new URLSearchParams(window.location.search).get("scoutTheme");
+  const theme = param || (window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+})();
+</script>
+<style>
+
+:root {
+  color-scheme: light;
+  --cp-bg: #f7f4ef;
+  --cp-bg-elevated: #fcfbf8;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede;
+  --cp-border-strong: #919191;
+  --cp-text: #242424;
+  --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f;
+  --cp-accent: #b11f4b;
+  --cp-accent-hover: #9a1a41;
+  --cp-accent-soft: rgba(177, 31, 75, 0.08);
+  --cp-accent-fg: #ffffff;
+  --cp-success: #16a34a;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+  --cp-panel: rgba(255, 255, 255, 0.86);
+  --cp-panel-strong: rgba(255, 255, 255, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.55);
+  --cp-highlight: rgba(177, 31, 75, 0.12);
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #3d3b3a;
+  --cp-bg-elevated: #343231;
+  --cp-surface: #292929;
+  --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747;
+  --cp-border-strong: #5f5f5f;
+  --cp-text: #dedede;
+  --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0;
+  --cp-accent: #fd8ea1;
+  --cp-accent-hover: #fb7b91;
+  --cp-accent-soft: rgba(253, 142, 161, 0.14);
+  --cp-accent-fg: #1a1a1a;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-overlay: rgba(41, 41, 41, 0.88);
+  --cp-panel: rgba(41, 41, 41, 0.72);
+  --cp-panel-strong: rgba(41, 41, 41, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.04);
+  --cp-highlight: rgba(253, 142, 161, 0.12);
+}
+* { box-sizing: border-box; letter-spacing: 0; }
+body { margin: 0; background: var(--cp-surface); color: var(--cp-text);
+  font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+header, main, footer { max-width: 1248px; margin: auto; padding: 24px; }
+header { border-bottom: 3px solid var(--cp-accent); }
+h1 { font-size: 30px; margin: 0 0 12px; } h2 { font-size: 22px; margin: 24px 0 12px; }
+h3 { font-size: 18px; } p { line-height: 1.5; max-width: 1050px; }
+.muted, figcaption { color: var(--cp-text-muted); }
+.metrics { display: flex; gap: 24px; flex-wrap: wrap; padding: 16px 0; }
+.metrics strong { display: block; font-size: 24px; }
+nav { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 12px; }
+a { color: var(--cp-link); } a:focus-visible { outline: 2px solid var(--cp-link); }
+section { margin: 24px 0; border-top: 1px solid var(--cp-border); padding-top: 8px; }
+figure { margin: 24px 0; } img { width: 100%; height: auto; display: block; }
+figcaption { padding: 10px 0; line-height: 1.5; }
+.table-scroll { overflow-x: auto; } table { border-collapse: collapse; width: 100%; }
+th, td { padding: 10px; border-bottom: 1px solid var(--cp-border); text-align: left; }
+th { background: var(--cp-surface-soft); } td { font-variant-numeric: tabular-nums; }
+details { border-top: 1px solid var(--cp-border); margin: 16px 0; padding: 16px 0; }
+summary { font-size: 19px; font-weight: 600; cursor: pointer; }
+code { font-family: Consolas, "Courier New", Courier, monospace; overflow-wrap: anywhere; }
+@media(max-width:600px) { header, main, footer { padding:16px; } h1 { font-size:26px; }
+  th, td { padding:8px; } .metrics { gap:16px; } }
+
+header,main,footer{max-width:1200px;padding:20px 24px}header{border-bottom:1px solid var(--cp-border)}
+h1{font-size:28px;margin:0}h2{font-size:20px;margin:0 0 12px}p{max-width:85ch}nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px}
+.status{border-left:4px solid var(--cp-accent);padding:8px 12px;background:var(--cp-accent-soft)}
+section{padding:24px 0;border-bottom:1px solid var(--cp-border)}table{width:100%;border-collapse:collapse}td,th{padding:10px;text-align:left;border-bottom:1px solid var(--cp-border);vertical-align:top}
+.table-scroll{overflow:auto}figure{margin:0}figure img{width:100%;height:auto;display:block}figcaption{font-size:13px;color:var(--cp-text-muted);padding:8px 0}
+.figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}a:focus-visible{outline:2px solid var(--cp-link);outline-offset:3px}details{margin-top:16px}summary{cursor:pointer}
+footer{font-size:13px;color:var(--cp-text-muted)}@media(max-width:720px){header,main,footer{padding:16px}.figures{grid-template-columns:1fr}h1{font-size:24px}}
+</style></head>
+<body>
+<header><h1>ModelMetis / Archived variants</h1><p class="status"><strong>These later variants are measured limits, not the current method.</strong> None improved safety over the simple reference comparison; none is approved.</p>
+<nav><a href="../index.html">Current method and results</a><a href="pruning-candidate/index.html">Archived pruning comparison</a><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/RESULTS.md">Results and limits</a><a href="https://github.com/faustinopalma/ModelMetis">Repository</a></nav></header>
+<main>
+<section><h2>Adaptive Class Memory Increased Wrong Assignments</h2><p>Aggregated class cards replaced individual references, and the adaptive arm added reviewed examples during a 72-acquisition Ottawa stream. Coverage rose mainly through wrong labels. The 32 reserved acquisitions remain unopened.</p>
+<div class="table-scroll"><table><thead><tr><th>Outcome on 72 stream acquisitions</th><th>Fixed memory</th><th>Adaptive memory</th></tr></thead><tbody>
+<tr><td>Correct automatic recognition</td><td>16</td><td>18</td></tr>
+<tr><td>Wrong automatic assignment</td><td>11</td><td>41</td></tr>
+<tr><td>Review required</td><td>45</td><td>13</td></tr>
+</tbody></table></div>
+<p><a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/DSP_MEMORY_RESULTS.md">Class-memory results, protocol and limits</a>. Raw memory-study artifacts remain local; only these aggregates are published.</p></section>
+<section><h2>Removing Diagram Types Did Not Pass The Safety Gate</h2><p>Four recordings, each tested with its class present and excluded, using the later 26-diagram input. These eight primary decisions are consumed development cases. The repeat evidence is reported separately.</p>
+<div class="table-scroll"><table><thead><tr><th>Observed outcome</th><th>Complete input</th><th>Three views removed</th></tr></thead><tbody>
+<tr><td>Correct primary decisions</td><td>5/8</td><td>6/8</td></tr>
+<tr><td>Correct recognition, class present</td><td>1/4</td><td>2/4</td></tr>
+<tr><td>False rejection, class present</td><td>3/4</td><td>2/4</td></tr>
+<tr><td>Correct rejection, class excluded</td><td>4/4</td><td>4/4</td></tr>
+<tr><td>D03 known-class pair of identical requests</td><td>Other / Other</td><td>Other / wrong C06</td></tr>
+</tbody></table></div>
+<p>The removed views are band power, autocorrelation and dominant-frequency tracking, including their explicit numerical evidence. The model still received 23 retained diagram types; the <a href="pruning-candidate/index.html">archived comparison</a> displays four essential views.</p>
+<details><summary>Complete crossed-study evidence</summary><p><a href="results/pruning-decisions.json">46 per-request outcomes</a> / <a href="results/pruning-summary.json">Factorial, regression and repeat comparisons</a> / <a href="pruning-candidate/provenance.json">Selected recording provenance</a></p><p>All 32 primary factorial decisions on D03/D07 remain Other across the eight removal combinations. Removing spectral kurtosis alone does not recover D07. Zero transport failures is not diagnostic correctness.</p></details></section>
+<section><h2>Class Stability Across Recording Conditions</h2><p>Full spectral representations separate the observed Jin groups, while Ottawa families overlap across operating profiles. These forced-label checks use acquisition groups, not independent machines.</p>
+<div class="figures"><figure><a href="results/jin-summary.png"><img src="results/jin-summary.png" alt="Jin within-family variability and correct labels with a whole direction withheld" loading="lazy"></a><figcaption>Jin: 24 windows grouped into 12 directional acquisitions.</figcaption></figure><figure><a href="results/ottawa-summary.png"><img src="results/ottawa-summary.png" alt="Ottawa within-family variability and correct labels with a whole profile withheld" loading="lazy"></a><figcaption>Ottawa: 24 acquisitions across three profile/load combinations.</figcaption></figure></div>
+<details><summary>Family-by-family separation</summary><div class="figures"><figure><img src="results/jin-families.png" alt="Jin within-family versus nearest-family distance ratios" loading="lazy"></figure><figure><img src="results/ottawa-families.png" alt="Ottawa within-family versus nearest-family distance ratios" loading="lazy"></figure></div><p><a href="results/family-separation.json">Full numeric results and predictions</a> / <a href="results/diagram-audit.json">Diagram attribution audit</a></p></details></section>
+<section><h2>Evidence Boundaries</h2><p>Publisher labels and model answers are visible. This is a review, not a blind human benchmark. State-of-the-art performance, human parity, independent-machine generalization and safe automatic acceptance are unestablished.</p><p><a href="https://github.com/faustinopalma/ModelMetis/blob/main/examples/archive/pruning-candidate/ATTRIBUTION.md">Audio attribution and modifications</a> / <a href="manifest.json">Archive hashes</a> / <a href="https://github.com/faustinopalma/ModelMetis/blob/main/docs/PUBLICATION.md">Publication and reproduction policy</a></p></section>
+</main><footer>Original audio sources: Linjie Jin; Mert Sehri and Patrick Dumond. Selected audio derivatives distributed under CC BY 4.0. No inference endpoint or credentials are required.</footer>
+</body></html>

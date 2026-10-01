@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Gain-centered Welch distance is 6.223 dB, slightly worse than C01's 5.943 dB nearest-other separation, so spectral-shape support is weak.",
+          "Q01 has 62.73% below 100 Hz versus 37.71% for C01 and shifts the high-frequency peak from 16034.6 Hz to 16156.3–16226.8 Hz, while adding strong 183.3 and 2019.6 Hz components."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have the same dominant 5.3 Hz line and a persistent ridge near 16 kHz over the full 10 s.",
+          "Both show broadband envelopes with low-frequency modulation and high positive short-lag autocorrelation (0.8705 versus 0.9351)."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Its 7.124 dB Welch distance is the largest query distance and exceeds C02's 6.106 dB nearest-other reference distance.",
+          "Q01 has stronger intermediate-band structure and shifted high-frequency lines at 16156.3–16226.8 Hz; C02 concentrates only 0.83% from 100–8000 Hz versus 3.80% for Q01."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.I004"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both contain an exact 5.3 Hz principal line and stable 10 s periodic activity without clipping.",
+          "Both allocate substantial power below 100 Hz and above 8 kHz and have the same reported strongest autocorrelation lag, 0.2494 ms."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Q01 is less low-frequency dominated: 62.73% below 100 Hz versus 94.13%, with centroid 5451.9 versus 637.7 Hz and RMS 0.262 versus 0.343 FS; unknown gain limits level interpretation.",
+          "Q01 adds prominent 183.3, 2019.6 and 16156.3–16226.8 Hz lines; its high-frequency ridge is shifted upward relative to C03's roughly 16 kHz ridge and carries much more power above 8 kHz (33.47% versus 3.39%)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I003"
+        ],
+        "similar": true,
+        "similarities": [
+          "This is the closest gain-centered spectral shape at 3.652 dB, narrowly ahead of C04 at 3.750 dB, and both share the exact dominant 5.3 Hz component.",
+          "Both figures show a strongly periodic, nearly stationary waveform and persistent low-frequency harmonic structure across the complete 10 s interval."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01 is dominated by 5.3 Hz at 0.2859 FS peak, whereas C04's leading low-frequency line is 50.0 Hz at 0.1056 FS; this is a fundamental-pattern change, not a small frequency shift.",
+          "C04 is more high-frequency weighted (61.07% above 8 kHz; centroid 9926.9 Hz) than Q01 (33.47%; 5451.9 Hz), and its 16024.8 Hz carrier is about 131.5 Hz below Q01's 16156.3 Hz line."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "R04.I007"
+        ],
+        "similar": false,
+        "similarities": [
+          "The 3.750 dB Welch distance is second-best, and both contain a persistent high-frequency ridge near 16 kHz throughout 10 s.",
+          "Both report the same 0.2494 ms strongest autocorrelation lag and broadband modulated envelopes, although their longer-lag autocorrelation shapes differ."
+        ]
+      }
+    ],
+    "condition_id": "C03",
+    "explanation": "Q01 is broadly most similar to C03 (magnet_fracture). The Welch ranking favors C03 by a small margin over C04, and the exact 5.3 Hz dominant component plus the visibly periodic 10 s evolution supports that choice. C04 mainly matches the high-frequency carrier and short-lag periodicity, but its 50 Hz low-frequency leader and much stronger >8 kHz allocation conflict. All reports use the same 44.1 kHz sampling rate, 10 s duration, 0.1 Hz FFT spacing and 43.07 Hz Welch spacing, so the cited absolute shifts are directly comparable; FS amplitudes remain gain-dependent despite identical peak normalization.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "96b5a06bab282c8ea4c05268a1860a41bc0ff4962c864075cd7b8e7c07f86936",
+  "source_response_sha256": "274193dfd5407f8455be567d5607e914402c98f425055a5c7e2af672866909f0",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

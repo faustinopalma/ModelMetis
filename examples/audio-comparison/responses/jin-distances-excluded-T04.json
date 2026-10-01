@@ -1,0 +1,67 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is substantially more top-heavy: 59.09% of Welch power is at 16–22.05 kHz versus 18.93% for C01, while C01 has more mid-band power and a lower centroid (5.70 versus 13.01 kHz).",
+          "The principal high-frequency feature shifts from 16.035 kHz in C01 to about 16.168 kHz in Q01 (+133 Hz), and their periodicity/envelopes differ: autocorrelation lags are 68.0 versus 249.4 µs and dominant modulation is 3.43 versus 29.49 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "R01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s, 44.1 kHz records show persistent broadband activity with a strong approximately 16 kHz ridge and low-frequency discrete components, including a 5–8 Hz component.",
+          "Both are unclipped, peak-normalized near 0.95 FS, and show broadly steady full-interval energy rather than a clear regime boundary."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated: 94.13% of its Welch power is below 100 Hz and its centroid is 638 Hz, whereas Q01 has only 17.81% below 100 Hz and a 13.01 kHz centroid.",
+          "C03 has a dominant 5.3 Hz tone at 0.452 FS and smooth long-period waveform evolution; Q01 instead has a much weaker 50 Hz tone at 0.0638 FS, strong approximately 16.17 kHz structure, and a shorter 249.4 µs autocorrelation peak versus 181.4 µs."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both cover 10 s at 44.1 kHz, are unclipped with 0.95 FS peaks, and retain visible low-frequency periodic content throughout the interval.",
+          "Both contain high-frequency energy near 16 kHz and broadband envelope modulation, although these are secondary in C03 and dominant in Q01."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Q01 places more power above 16 kHz (59.09% versus 41.59%) and less below 100 Hz (17.81% versus 32.41%), raising the centroid from 9.93 to 13.01 kHz and the zero-crossing rate from 20.63 to 26.89 kHz.",
+          "The main high-frequency ridge shifts upward from about 16.025 kHz to 16.168 kHz (+143 Hz); Q01 also emphasizes higher envelope modulations around 112–162 Hz, whereas C04 is strongest at 13.23 and 23.13 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Both have the same 249.4 µs strongest autocorrelation lag, closely matched RMS levels (0.1945 versus 0.1891 FS), crest factors (13.78 versus 14.02 dB), and noise-like stationary waveforms across the full 10 s.",
+          "Both spectra and spectrograms show a persistent narrow approximately 16 kHz ridge, a 50 Hz line, substantial 8–22.05 kHz power, and similar harmonic/sideband clusters around the high-frequency carrier."
+        ]
+      }
+    ],
+    "condition_id": "C04",
+    "explanation": "Q01 is broadly similar to C04 (tight_bearing). The gain-centered Welch ranking is C04 6.352 dB, C03 6.913 dB, then C01 9.488 dB. Although the C04 distance is not smaller than the 3.038 dB separation between C04 and its nearest other reference, the figures and measurements provide stronger physical support: nearly identical RMS, crest factor, duration, sampling rate, autocorrelation lag, and a persistent approximately 16 kHz carrier/ridge. The roughly +143 Hz carrier shift explains part of the spectral-shape distance and moves associated narrow structure on the absolute-frequency axis without destroying the overall pattern. C01 also has a 16 kHz ridge but differs materially in band distribution, centroid and periodicity; C03 is dominated by a 5.3 Hz oscillation and low-band power. Absolute FS levels are interpreted only as reported because acquisition gain is unknown.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "db828cfde58886316d2d38b3a39467b98b9044d34c3c2364eb208bbae695d8f9",
+  "source_response_sha256": "cf323e67c6dc66fce3f049441af55de6be1f8792402bf265bcd2197154b71cb2",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

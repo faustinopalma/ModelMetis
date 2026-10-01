@@ -1,0 +1,85 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is far from C01 in gain-centered Welch shape (9.556 dB); its 16–22.05 kHz share is 56.65% versus 18.93%, while 0–100 Hz is 20.96% versus 37.71%.",
+          "The dominant high-frequency line shifts from 16034.6 Hz to 16168.6 Hz (+134.0 Hz), and Q01 has a 0.249 ms correlation peak and strong 112–162 Hz envelope components versus C01's 0.068 ms peak and mainly lower-frequency modulation."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I005"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s, 44.1 kHz records show a persistent narrow ridge near 16 kHz over a broadband floor, with no clipping.",
+          "Both have fluctuating but broadly stationary envelopes and low-frequency spectral lines rather than a regime transition across the interval."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 moves the strongest low-frequency component from C02's 5.3 Hz to 9.2 Hz and places its high-frequency ridge near 16.17 kHz; this frequency shift changes exact harmonic/sideband alignment despite the similar overall shape.",
+          "Band allocation differs: Q01 has 56.65% in 16–22.05 kHz and 20.96% below 100 Hz, versus 24.64% and 59.72% for C02; its RMS is 0.1723 FS versus 0.1580 FS, but unknown gain limits amplitude interpretation."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I004"
+        ],
+        "similar": true,
+        "similarities": [
+          "C02 is the clear spectral-shape match: 3.016 dB from Q01, much smaller than C02's 6.106 dB nearest-other-reference distance and lower than every other query distance.",
+          "Both 10 s, 44.1 kHz records show a stable high-frequency ridge, broadband envelope fluctuations, and the same reported strongest autocorrelation lag of 0.249 ms; neither clips."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is overwhelmingly low-frequency dominated (94.13% below 100 Hz; centroid 638 Hz) with a strongly periodic waveform, whereas Q01 has 20.96% below 100 Hz, 77.08% above 8 kHz, and a 12.55 kHz centroid.",
+          "Their principal low-frequency lines differ, 5.3 Hz for C03 versus 9.2 Hz for Q01, and this is not a uniform shift that reconciles C03's low-band harmonic pattern with Q01's persistent ~16.17 kHz ridge and faster-decaying autocorrelation."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "Q01.C01.S0001",
+          "R03.I007"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are complete 10 s, 44.1 kHz, peak-normalized records with no clipping and visible low-frequency periodic content.",
+          "Both contain a persistent spectral feature near 16 kHz and broadband envelope variation, although that feature carries very different relative power."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The high-frequency cluster shifts from C04's 16024.8 Hz dominant line to Q01's 16168.6 Hz line (+143.8 Hz), so corresponding sidebands do not align; Q01 also lacks C04's dominant 50.0 Hz line.",
+          "Q01 is more top-band weighted (56.65% at 16–22.05 kHz versus 41.59%) and has high envelope peaks at 111.6–161.5 Hz, while C04's strongest modulation is 13.23 Hz; Welch-shape distance remains 6.399 dB."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "Q01.C01.S0001",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both show a stationary narrow high-frequency ridge around 16 kHz, substantial power above 8 kHz, broadband noisy waveforms, and no clipping over the same 10 s at 44.1 kHz.",
+          "Both report the same 0.249 ms strongest autocorrelation lag and comparable FS RMS levels (0.1945 for C04, 0.1723 for Q01), subject to unknown acquisition gain."
+        ]
+      }
+    ],
+    "condition_id": "C02",
+    "explanation": "Outcome is similar to C02 (healthy). The gain-centered Welch ranking is decisive: C02 is nearest at 3.016 dB, versus C04 6.399 dB, C03 6.945 dB, and C01 9.556 dB, and it is much closer than C02's 6.106 dB separation from other known conditions. Figures and measurements support the shared stationary high-frequency-ridge/broadband pattern and identical reported 0.249 ms periodicity. Q01 is not identical: its low-frequency structure is shifted upward and considerably more power lies above 16 kHz. Those frequency and band-power differences distinguish it from C02 but do not outweigh the closest overall spectral shape; C04 shares the ridge but has a stronger 50 Hz component, different envelope modulation, and a substantially larger shape distance.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "f898fbfea8e67f1349305a80d519f9f42a10e45b5d0622a35c61f7afcee92429",
+  "source_response_sha256": "fcb8214cd0a00fa260eaeda774d2a5a2565d5c9ee9550c9fcc4fd58e28d0a158",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

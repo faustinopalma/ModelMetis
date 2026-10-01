@@ -1,0 +1,145 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Gain-centered Welch shape distance is 9.549158 dB, well above C01's 3.377359 dB threshold; C01 is therefore not similar under the calibrated rule (COMPARISON.WELCH).",
+          "Q01 is more high-frequency weighted: 16–22.05 kHz contains 57.10% versus 18.93% in C01, its centroid is 12.807 versus 5.701 kHz, and its zero-crossing rate is 26622 versus 15317 s^-1. C01 instead has materially more 100–4000 Hz power (28.82% versus 0.996%) (Q01.C01.S0001, R01.C01.S0001; Q01.I004–I006, R01.I004–I006).",
+          "The principal ultrasonic feature shifts from 16034.6 Hz in C01 to a Q01 cluster around 16141–16171 Hz, approximately +107 to +136 Hz; this displacement and Q01's stronger upper-band continuum reduce binwise spectral agreement despite the shared ultrasonic ridge (Q01.C01.S0001, R01.C01.S0001; Q01.I003–I005, R01.I003–I005).",
+          "Envelope periodicity differs: C01's strongest modulation is 3.43 Hz and includes 17.27, 20.71 and 31.11 Hz, whereas Q01 is led by 29.39 Hz and has prominent 111.62–161.62 Hz components. Their autocorrelation peak lags also differ, 68.0 µs versus 249.4 µs (Q01.C01.S0001, R01.C01.S0001; Q01.I007–I008, R01.I007–I008)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "R01.I002",
+          "R01.I003",
+          "R01.I004",
+          "R01.I005",
+          "R01.I006",
+          "R01.I007",
+          "R01.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are 10 s, 44.1 kHz, single-channel, unclipped, peak-normalized recordings with identical FFT/Welch resolution and coverage, and both show persistent low-frequency structure plus a narrow ridge near 16 kHz across the interval (Q01.C01.S0001, R01.C01.S0001; Q01.I001–I005, R01.I001–I005).",
+          "Both have a 50 Hz-region component and broadly stationary noisy envelopes rather than a single isolated transient (Q01.C01.S0001, R01.C01.S0001; Q01.I002–I003, Q01.I008, R01.I002–I003, R01.I008)."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 has less sub-100-Hz power, 19.28% versus 59.72%, and more 16–22.05 kHz power, 57.10% versus 24.64%; accordingly its centroid and zero-crossing rate are higher (12.807 kHz and 26622 s^-1 versus 6.441 kHz and 15076 s^-1) (Q01.C01.S0001, R02.C01.S0001; Q01.I004–I006, R02.I004–I006).",
+          "Q01's leading low-frequency FFT line is 50.0 Hz at -24.12 dB FS peak, while C02 is led by 5.3 Hz at -18.08 dB FS peak and also has 8.2/8.7 Hz structure; this changes the absolute line and harmonic balance even though both retain low-frequency comb-like content (Q01.C01.S0001, R02.C01.S0001; Q01.I003, R02.I003).",
+          "The broadband-envelope spectra differ in detail: Q01 emphasizes 29.39 Hz and 111.62–161.62 Hz modulation, while C02's reported peaks are mainly 0.61–35.76 Hz. Absolute RMS also differs, 0.1953 versus 0.1580 FS RMS, but unknown acquisition gain and peak normalization make this secondary to shape (Q01.C01.S0001, R02.C01.S0001; Q01.I002, Q01.I008, R02.I002, R02.I008)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "R02.I002",
+          "R02.I003",
+          "R02.I004",
+          "R02.I005",
+          "R02.I006",
+          "R02.I007",
+          "R02.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": true,
+        "similarities": [
+          "C02 is the nearest supplied reference at 3.047581 dB, inside its calibrated 3.623526 dB threshold (COMPARISON.WELCH).",
+          "Both show the same broad spectral architecture: strong very-low-frequency content, weak midband troughs, renewed high-frequency energy, and a persistent narrow ultrasonic ridge near 16 kHz over the full 10 s. Their spectral flatness is nearly identical, 0.024995 for Q01 versus 0.024818 for C02 (Q01.C01.S0001, R02.C01.S0001; Q01.I003–I006, R02.I003–I006).",
+          "Both are 10 s at 44.1 kHz with identical 0.1 Hz FFT spacing and 43.066 Hz Welch spacing, no clipping, similar crest factors (13.74 versus 15.58 dB), and the same strongest autocorrelation lag of 249.4 µs; the waveform, envelope and STFT remain broadly stationary across the reported interval (Q01.C01.S0001, R02.C01.S0001; Q01.I001–I002, Q01.I005, Q01.I007–I008, R02.I001–I002, R02.I005, R02.I007–I008)."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "Gain-centered Welch distance is 6.935827 dB, above C03's 3.227635 dB threshold (COMPARISON.WELCH).",
+          "C03 is overwhelmingly low-frequency dominated: 94.13% below 100 Hz, centroid 637.7 Hz and zero-crossing rate 3022 s^-1, versus Q01's 19.28%, 12.807 kHz and 26622 s^-1. Q01 instead places 78.65% above 8 kHz versus only 3.39% for C03 (Q01.C01.S0001, R03.C01.S0001; Q01.I004–I006, R03.I004–I006).",
+          "C03 has a dominant 5.3 Hz line at -6.89 dB FS peak and a strongly periodic, nearly sinusoidal waveform; Q01's leading reported line is 50.0 Hz at -24.12 dB with a noisy high-frequency-dominated waveform. Thus the absolute fundamental/harmonic pattern is not a modest shift but a different balance (Q01.C01.S0001, R03.C01.S0001; Q01.I002–I003, R03.I002–I003).",
+          "C03's autocorrelation remains a smooth long-period oscillation and peaks at 181.4 µs, whereas Q01 decays in rapidly oscillating lobes and peaks at 249.4 µs. C03's envelope modulation is mainly below 45 Hz, unlike Q01's strong 111.62–161.62 Hz components (Q01.C01.S0001, R03.C01.S0001; Q01.I007–I008, R03.I007–I008)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "R03.I002",
+          "R03.I003",
+          "R03.I004",
+          "R03.I005",
+          "R03.I006",
+          "R03.I007",
+          "R03.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped 10 s recordings at 44.1 kHz with identical processing resolution and show persistent spectral lines over the full interval, including energy near the 16 kHz region (Q01.C01.S0001, R03.C01.S0001; Q01.I003–I005, R03.I003–I005).",
+          "Both contain low-frequency peaks and nonconstant broadband envelopes, but their relative prominence and periodicity are substantially different (Q01.C01.S0001, R03.C01.S0001; Q01.I003, Q01.I008, R03.I003, R03.I008)."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "Gain-centered Welch distance is 6.385052 dB, above C04's stricter 2.463183 dB threshold (COMPARISON.WELCH).",
+          "The narrow ultrasonic cluster shifts upward from approximately 16005–16038 Hz in C04 to 16141–16171 Hz in Q01, about +103 to +166 Hz (principal peaks 16024.8 versus 16165.6 Hz, +140.8 Hz). At 0.1 Hz FFT resolution this is a resolved displacement, and it penalizes equal-bin spectral matching even though the ridge morphology is similar (Q01.C01.S0001, R04.C01.S0001; Q01.I003–I005, R04.I003–I005).",
+          "Q01 is more top-heavy: 57.10% lies at 16–22.05 kHz versus 41.59% for C04, while C04 has more below 100 Hz (32.41% versus 19.28%) and at 1–2 kHz (3.18% versus 0.35%). Centroids are 12.807 versus 9.927 kHz (Q01.C01.S0001, R04.C01.S0001; Q01.I004–I006, R04.I004–I006).",
+          "Q01's strongest 50 Hz line is weaker (-24.12 versus -19.53 dB FS peak), and its envelope emphasizes 29.39 and 111.62–161.62 Hz, whereas C04 is led by 13.23 and 23.13 Hz. Q01 also has fewer reported ≥6 dB level-change candidates (6 versus 12), indicating somewhat steadier measured level evolution (Q01.C01.S0001, R04.C01.S0001; Q01.I002–I003, Q01.I008, R04.I002–I003, R04.I008)."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R04.C01.S0001",
+          "R04.I002",
+          "R04.I003",
+          "R04.I004",
+          "R04.I005",
+          "R04.I006",
+          "R04.I007",
+          "R04.I008",
+          "Q01.C01.S0001",
+          "Q01.I002",
+          "Q01.I003",
+          "Q01.I004",
+          "Q01.I005",
+          "Q01.I006",
+          "Q01.I007",
+          "Q01.I008"
+        ],
+        "similar": false,
+        "similarities": [
+          "Q01 and C04 are extremely close in absolute digital level despite unknown gain: RMS is 0.19530 versus 0.19451 FS, crest factor 13.740 versus 13.775 dB, and both peak at 0.94998 FS without clipping (Q01.C01.S0001, R04.C01.S0001; Q01.I002, R04.I002).",
+          "Both share a 50 Hz line, a persistent narrow ridge near 16 kHz, strong power above 8 kHz, noisy stationary waveforms, and the same strongest autocorrelation lag of 249.4 µs over identical 10 s/44.1 kHz coverage (Q01.C01.S0001, R04.C01.S0001; Q01.I001–I007, R04.I001–I007)."
+        ]
+      }
+    ],
+    "condition_id": "C02",
+    "explanation": "Outcome is similar to C02 (healthy). The calibrated decision ranks only query_distance_db: C02 is nearest at 3.047581 dB and is within its 3.623526 dB threshold. C01, C03 and C04 are farther and each exceeds its own threshold. Figures and measurements support C02's shared low/mid/high spectral architecture and stationary 16 kHz-region ridge, while C04 is the closest visual/absolute-level alternative but is rejected because its ridge is about 141 Hz lower and its gain-centered distance is 6.385052 dB, well outside 2.463183 dB. All reports have matched 10 s duration, 44.1 kHz sampling, physical axes and spectral resolution, so the observed frequency shifts are not attributable to differing sampling or coverage; absolute FS levels are secondary because acquisition gain is unknown (COMPARISON.WELCH; Q01.C01.S0001; R01.C01.S0001; R02.C01.S0001; R03.C01.S0001; R04.C01.S0001).",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "cabc78561d5a4aa861137d5b6f09a5ae10eb85cfd1a310159d6ad85ef5ddd65c",
+  "source_response_sha256": "fb7d2ab7e36e6c66e3e3940e7fbaf6ec117dbae30832305ebee029851e05da8c",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

@@ -1,0 +1,157 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 redistributes power upward: 39.1% below 100 Hz and 48.2% at 100–500 Hz, versus 68.3% and 26.6% in C01; centroid rises from 212.5 to 369.8 Hz, with Q01 peaks at 92.0/109.8/219.6/452.0 Hz rather than 45.9/85.9/211.7 Hz.",
+          "Q01 is less periodic (autocorrelation 0.688 at 64.05 ms versus 0.905 at 0.381 ms) and its envelope modulation is centered differently, although both remain broadband/noisy."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R01.C01.S0001",
+          "Q01.P001",
+          "R01.P001"
+        ],
+        "similar": true,
+        "similarities": [
+          "Closest overall match: both have nearly identical full-scale RMS (0.2426 versus 0.2407), crest factor (11.86 versus 11.93 dB), relatively high spectral flatness (0.00397 versus 0.00307), and irregular broadband waveforms rather than the strongly tonal periodic form of C02–C08.",
+          "Both 10 s, 42 kHz records show broad low-frequency-dominant spectra with persistent horizontal high-frequency components and modest time-varying envelopes; equal duration, sampling rate, 0.1 Hz FFT spacing and full-band coverage make the observed upward frequency shift directly comparable."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 lacks C02's dominant 45.1 Hz component (0.6105 FS peak) and orderly 15.0 Hz-spaced harmonic family; its strongest peaks instead occur at 92.0, 109.8, 219.6 and 452.0 Hz, so this is not a simple uniform frequency shift.",
+          "C02 is much more periodic and low-band concentrated (autocorrelation 0.979 at 66.5 ms; 97.25% below 100 Hz) than Q01 (0.688 at 64.05 ms; 39.06% below 100 Hz), while Q01 has much greater 100–4000 Hz power."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R02.C01.S0001",
+          "Q01.P001",
+          "R02.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are stationary over most of the same 10 s/42 kHz coverage and have a roughly 64–67 ms reported positive autocorrelation-peak lag.",
+          "Both contain low-frequency components near 30 and 60 Hz and show broadband envelope modulation, but their relative harmonic strengths differ strongly."
+        ]
+      },
+      {
+        "condition_id": "C03",
+        "differences": [
+          "C03 is led by 45.0 Hz at 0.5042 FS with a strong 30.0 Hz component and a coherent 15 Hz-related series; Q01 is led by 92.0/109.8 Hz near 0.12 FS plus 219.6/452.0 Hz, not a consistently shifted copy of that series.",
+          "C03 has 96.19% of Welch power below 100 Hz, centroid 54.6 Hz and autocorrelation 0.979; Q01 has only 39.06% below 100 Hz, centroid 369.8 Hz and autocorrelation 0.688."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R03.C01.S0001",
+          "Q01.P001",
+          "R03.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10 s records contain components near 30, 60, 90–110 and about 210–220 Hz and are broadly stable in the STFT.",
+          "Their strongest positive autocorrelation lags are fairly close (64.05 versus 66.71 ms), despite very different correlation strength and waveform regularity."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "C04 has dominant 44.9 and 74.8 Hz peaks (0.3900 and 0.3341 FS) and a regular low-order family, whereas Q01's leading peaks are 92.0, 109.8, 219.6 and 452.0 Hz; no single frequency scaling aligns all relative harmonics.",
+          "Q01 is substantially broader and less periodic: 48.22% lies at 100–500 Hz and autocorrelation is 0.688, versus 7.18% and 0.983 for C04; C04 also has many transient level-change candidates while Q01 has only two near the end."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R04.C01.S0001",
+          "Q01.P001",
+          "R04.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both use identical 10 s, 42 kHz acquisition and show persistent spectral bands throughout the interval.",
+          "Both include components around 30, 60, 90–110 and roughly 210–220 Hz, but with markedly different rankings and amplitudes."
+        ]
+      },
+      {
+        "condition_id": "C05",
+        "differences": [
+          "C05 is dominated by 43.9 Hz at 0.6075 FS with weaker 29.3/58.5/73.1/102.4 Hz lines; Q01 instead has comparable 92.0 and 109.8 Hz peaks near 0.12 FS and strong 219.6/452.0 Hz lines, inconsistent with a uniform frequency shift.",
+          "C05 places 95.86% of power below 100 Hz and has autocorrelation 0.972 at 68.38 ms; Q01 places 39.06% there and has 0.688 at 64.05 ms, with much stronger mid-band broadband energy."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R05.C01.S0001",
+          "Q01.P001",
+          "R05.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are broadly steady 10 s records without clipping and have envelope peaks in low-frequency and higher-modulation regions.",
+          "Both show low-frequency lines near 30 and 60 Hz plus energy around 100–220 Hz, though their relative structure differs."
+        ]
+      },
+      {
+        "condition_id": "C06",
+        "differences": [
+          "C06's principal 44.9/29.9/104.7 Hz pattern and 15 Hz-related modulation peaks do not align with Q01's 92.0/109.8/219.6/452.0 Hz hierarchy under one frequency shift.",
+          "C06 is strongly periodic and low-band dominated (autocorrelation 0.971; 92.12% below 100 Hz), unlike Q01 (0.688; 39.06% below 100 Hz); Q01 also has a higher centroid, 369.8 versus 62.0 Hz."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R06.C01.S0001",
+          "Q01.P001",
+          "R06.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both have lower FS RMS than most tonal references (0.2426 for Q01 and 0.3375 for C06) and relatively elevated crest factors (11.86 and 8.99 dB).",
+          "Both display some amplitude variation across 10 s and share components near 30, 60 and about 105–110 Hz."
+        ]
+      },
+      {
+        "condition_id": "C07",
+        "differences": [
+          "C07 is dominated by 45.9 Hz at 0.4876 FS with a coherent 30.6/61.2/76.5 Hz family; Q01's strongest components are 92.0/109.8/219.6/452.0 Hz, and doubling selected C07 frequencies does not align the complete harmonic pattern.",
+          "C07 has 95.13% below 100 Hz, centroid 57.6 Hz and autocorrelation 0.979; Q01 has 39.06%, 369.8 Hz and 0.688, respectively, indicating much broader, less periodic energy."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R07.C01.S0001",
+          "Q01.P001",
+          "R07.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both contain nearly coincident 30.6/30.7 and 61.2/61.3 Hz components and have reported autocorrelation-peak lags near 64–65 ms.",
+          "Both are mostly time-stationary across the common 10 s interval, with no clipping and only modest envelope evolution."
+        ]
+      },
+      {
+        "condition_id": "C08",
+        "differences": [
+          "C08 has a dominant 44.6 Hz line at 0.5793 FS and secondary 29.8/59.5/74.4/89.3/104.2 Hz components; Q01 instead emphasizes 92.0/109.8/219.6/452.0 Hz, so the absolute-frequency displacement is selective rather than a common speed shift.",
+          "C08 is highly periodic and overwhelmingly below 100 Hz (autocorrelation 0.980; 96.995% power), whereas Q01 is weakly periodic (0.688) and has 48.22% at 100–500 Hz plus 11.72% above 500 Hz."
+        ],
+        "evidence_ids": [
+          "Q01.C01.S0001",
+          "R08.C01.S0001",
+          "Q01.P001",
+          "R08.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both are unclipped, broadly steady 10 s/42 kHz records and show low-frequency components near 30, 60, 90 and 105–110 Hz.",
+          "Both envelopes contain low-frequency modulation and isolated high modulation peaks, but Q01's strongest modulation is shifted to 17.9 Hz rather than C08's 44.6 Hz."
+        ]
+      }
+    ],
+    "condition_id": "C01",
+    "explanation": "Q01 best matches C01 (healthy): their RMS, crest factor, spectral flatness and irregular broadband time-frequency character are closely aligned, unlike the strongly periodic, sub-100-Hz-dominated C02–C08 references. Q01 is shifted toward higher frequencies and has more 100–4000 Hz power, but this changes the detailed peaks and centroid without replacing the shared broadband/non-tonal overall pattern; unknown acquisition gain limits absolute-level interpretation.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "564fb3505bcd4da3e7c3933cf394191c9fc9e2528255969a1d56bd547f3b19c7",
+  "source_response_sha256": "bfbe6c79ca957c6a8c81f9cae4145f793a2c783cf0cc17368a69e9832c84998c",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

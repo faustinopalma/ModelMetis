@@ -17,6 +17,262 @@ def sine(frequency=1000, amplitude=0.1, seconds=1.0, rate=16000):
     return amplitude * np.sin(2 * np.pi * frequency * clock)
 
 
+def ottawa_memory_records():
+    from modelmetis.dsp_memory import CLASSES, fingerprint
+
+    return [{"id": fingerprint(f"{condition}:{profile}:{load}")[:16],
+             "group_id": f"{condition}:{profile}:{load}",
+             "audio_sha256": fingerprint(f"audio:{condition}:{profile}:{load}"),
+             "condition_id": condition, "profile": profile, "load": load}
+            for condition in CLASSES for profile in range(1, 9) for load in (0, 1)]
+
+
+def test_memory_partition_preserves_acquisitions_and_reserves_whole_profiles():
+    from modelmetis.dsp_memory import partition
+
+    records = ottawa_memory_records()
+    result = partition(records)
+    assert {role: len(identifiers) for role, identifiers in result.items()} == {
+        "seed": 24, "stream": 72, "evaluation": 32,
+    }
+    assert result == partition(list(reversed(records)))
+    lookup = {record["id"]: record for record in records}
+    assert {lookup[identifier]["profile"] for identifier in result["evaluation"]} == {5, 7}
+    assert not (set(result["seed"]) & set(result["stream"]))
+    assert not ((set(result["seed"]) | set(result["stream"])) & set(result["evaluation"]))
+
+
+@pytest.mark.parametrize("field", ["id", "group_id", "audio_sha256"])
+def test_memory_partition_rejects_duplicate_or_resegmented_acquisitions(field):
+    from modelmetis.dsp_memory import partition
+
+    records = ottawa_memory_records()
+    records[1][field] = records[0][field]
+    with pytest.raises(ValueError, match="Duplicate acquisition"):
+        partition(records)
+
+
+def test_memory_review_is_delayed_versioned_and_never_relabels_first_decision():
+    from modelmetis.dsp_memory import (
+        apply_review,
+        initial_state,
+        partition,
+        record_decision,
+        score_state,
+    )
+
+    records = ottawa_memory_records()
+    split = partition(records)
+    truth = {record["id"]: record["condition_id"] for record in records}
+    labels = {identifier: truth[identifier] for identifier in split["seed"]}
+    for arm in ("fixed", "adaptive"):
+        initial = initial_state(split, labels, arm)
+        query = split["stream"][0]
+        decision = {"decision": "review", "condition_id": None, "candidates": ["C01"]}
+        with pytest.raises(ValueError, match="Oracle access"):
+            apply_review(initial, split, query, truth[query])
+        first = record_decision(initial, split, query, "summary", decision, "request", "reply")
+        assert first["stage"] == "retrieval"
+        with pytest.raises(ValueError, match="Oracle access"):
+            apply_review(first, split, query, truth[query])
+        second = record_decision(first, split, query, "retrieval", decision, "detail", "reply")
+        updated = apply_review(second, split, query, truth[query])
+        assert updated["position"] == 1 and updated["reviews"] == 1
+        assert len(updated["bank"]) == (25 if arm == "adaptive" else 24)
+        assert updated["version"] == (1 if arm == "adaptive" else 0)
+        assert len(initial["events"]) == 0 and len(second["events"]) == 2
+        score = score_state(updated, split, truth)
+        assert score["review_required"] == 1 and score["correct_automatic"] == 0
+        assert score["total_labels_revealed"] == 25
+        with pytest.raises(ValueError, match="Oracle access"):
+            apply_review(updated, split, split["evaluation"][0], "C01")
+
+
+def test_memory_confident_errors_do_not_trigger_oracle_and_review_budget_stops_updates():
+    from modelmetis.dsp_memory import (
+        REVIEW_BUDGET,
+        apply_review,
+        initial_state,
+        partition,
+        record_decision,
+        score_state,
+    )
+
+    records = ottawa_memory_records()
+    split = partition(records)
+    truth = {record["id"]: record["condition_id"] for record in records}
+    state = initial_state(split, {identifier: truth[identifier] for identifier in split["seed"]},
+                          "adaptive")
+    first = split["stream"][0]
+    wrong = "C02" if truth[first] == "C01" else "C01"
+    state = record_decision(state, split, first, "summary",
+                            {"decision": "accept", "condition_id": wrong}, "request", "reply")
+    with pytest.raises(ValueError, match="Oracle access"):
+        apply_review(state, split, first, truth[first])
+    for query in split["stream"][1:REVIEW_BUDGET + 2]:
+        decision = {"decision": "review", "condition_id": None, "candidates": []}
+        state = record_decision(state, split, query, "summary", decision, "request", "reply")
+        state = record_decision(state, split, query, "retrieval", decision, "detail", "reply")
+        if state["stage"] == "human":
+            state = apply_review(state, split, query, truth[query])
+    score = score_state(state, split, truth)
+    assert score["wrong_automatic"] == 1 and score["correct_automatic"] == 0
+    assert score["human_reviews"] == 16 and score["bank_size"] == 40
+    assert score["review_required"] == 17
+    assert state["events"][-1]["human_status"] == "budget_exhausted"
+
+
+def test_memory_decision_requires_actual_class_and_query_citations():
+    from modelmetis.dsp_memory import validate_decision
+
+    decision = {"decision": "accept", "condition_id": "C01", "candidates": ["C01"],
+                "evidence": ["C01.CARD", "Q01.REPORT"], "explanation": "Matching curves."}
+    allowed = {"C01.CARD", "Q01.REPORT"}
+    validate_decision(decision, allowed, "Q01.REPORT")
+    decision["candidates"] = []
+    validate_decision(decision, allowed, "Q01.REPORT")
+    decision["evidence"] = ["C01.CARD", "Q99.REPORT"]
+    with pytest.raises(ValueError, match="bound query"):
+        validate_decision(decision, allowed, "Q01.REPORT")
+
+
+def test_memory_analysis_uses_whole_acquisition_and_rejects_short_windows(tmp_path):
+    from scripts.dsp_memory_experiment import analyze_recording
+
+    source = tmp_path / "whole.wav"
+    sf.write(source, sine(seconds=10, rate=42000), 42000, subtype="PCM_16")
+    arrays, metrics = analyze_recording(source)
+    assert metrics["valid_samples"] == 420000 and metrics["duration_seconds"] == 10
+    assert len(arrays["welch_shape"]) == 513
+    assert np.isfinite(arrays["cepstrum_y"]).all()
+    sf.write(source, sine(seconds=1, rate=42000), 42000, subtype="PCM_16")
+    with pytest.raises(ValueError, match="whole, mono"):
+        analyze_recording(source)
+
+
+def test_memory_runner_prepares_blind_requests_retrieves_known_only_and_keeps_journal(
+    tmp_path, monkeypatch,
+):
+    import json
+
+    from modelmetis.dsp_memory import partition
+    from scripts import dsp_memory_experiment as runner
+
+    source, output = tmp_path / "source", tmp_path / "experiment"
+    runner.put(source / "sealed/references.json", [])
+    runner.put(source / "audit.json", {})
+    records = ottawa_memory_records()
+    for record in records:
+        record["wav"] = "not-an-inference-field.wav"
+    monkeypatch.setattr(runner, "inventory", lambda _: records)
+    frequencies = np.linspace(0, 21000, 513)
+    arrays = {"welch_frequencies": frequencies, "welch_shape": np.zeros(513),
+              "fft_frequencies": frequencies, "fft_amplitude": np.full(513, 0.1),
+              "stft_times": np.linspace(0.1, 9.9, 12), "stft_psd": np.ones((513, 12)),
+              "cepstrum_x": np.linspace(0.001, 0.1, 12), "cepstrum_y": np.zeros(12)}
+
+    def fake_features(output, record, permitted):
+        assert record["id"] in permitted
+        assert record["id"] not in partition(records)["evaluation"]
+        return arrays, {"duration_seconds": 10}
+
+    monkeypatch.setattr(runner, "features", fake_features)
+    assert runner.prepare(source, output)["model_calls"] == 0
+    fixed = runner.next_request(output, "fixed")
+    adaptive = runner.next_request(output, "adaptive")
+    assert (fixed / "request.json").read_bytes() == (adaptive / "request.json").read_bytes()
+    assert runner.next_request(output, "adaptive") == adaptive
+    contract = runner.read_json(adaptive / "contract.json")
+    body = runner.read_json(adaptive / "request.json")
+    from jsonschema import ValidationError, validate
+
+    schema = body["response_format"]["json_schema"]["schema"]
+    assert schema["properties"]["evidence"]["items"]["enum"] == contract["evidence_ids"]
+    with pytest.raises(ValidationError):
+        validate({"decision": "accept", "condition_id": "C01", "candidates": ["C01"],
+                  "evidence": [contract["query_evidence"] + ": explanation is not an ID"],
+                  "explanation": "Format regression fixture."}, schema)
+    text_parts = [json.loads(part["text"]) for part in body["messages"][1]["content"]
+                  if part["type"] == "text"]
+    query = next(part for part in text_parts if part.get("evidence_id") ==
+                 contract["query_evidence"])
+    assert "condition_id" not in query and "wav" not in query
+    assert "not-an-inference-field" not in json.dumps(body)
+    split = runner.read_json(output / "partition.json")
+    assert set(contract["known_ids"]) == set(split["seed"])
+    with pytest.raises(ValueError, match="Oracle remains sealed"):
+        runner.review(output, "adaptive")
+    with pytest.raises(ValueError, match="Complete both"):
+        runner.evaluate_stream(output)
+    decision = {"decision": "review", "condition_id": None, "candidates": ["C01", "C02"],
+                "evidence": ["C01.CARD", contract["query_evidence"]],
+                "explanation": "Offline fixture, not model evidence."}
+    response = tmp_path / "fixture-response.json"
+    runner.put(response, {"model": runner.RETURNED_MODEL, "choices": [{"finish_reason": "stop",
+                        "message": {"content": json.dumps(decision)}}]})
+    assert runner.submit(output, "adaptive", response)["stage"] == "retrieval"
+    detail = runner.next_request(output, "adaptive")
+    retrieved = runner.read_json(detail / "contract.json")["retrieved_ids"]
+    assert len(retrieved) == 4 and set(retrieved).issubset(split["seed"])
+    assert runner.submit(output, "adaptive", response)["stage"] == "human"
+    runner.review(output, "adaptive")
+    state = runner.status(output)["arms"]
+    assert state["adaptive"]["bank_size"] == 25 and state["adaptive"]["reviews"] == 1
+    assert state["fixed"]["bank_size"] == 24 and state["fixed"]["completed"] == 0
+    journal = sorted((output / "states/adaptive").glob("*.json"))
+    assert len(journal) == 4
+    assert runner.read_json(journal[1])["state"]["events"][0]["decision"] == decision
+    (adaptive / "response.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError, match="raw response changed"):
+        runner.status(output)
+
+
+@pytest.mark.parametrize("http_status", [200, 429])
+def test_memory_live_transport_sends_bound_bytes_once_and_never_persists_token(
+    tmp_path, monkeypatch, http_status,
+):
+    import json
+
+    import httpx
+
+    from scripts import dsp_memory_inference as live
+
+    settings = {"deployment": "registered-model", "max_completion_tokens": 8192,
+                "reasoning_effort": "low", "expected_capacity": 100,
+                "subscription": "subscription", "endpoint": "https://example.openai.azure.com",
+                "prices_usd_per_million": {"input": 1, "cached_input": 0.1, "output": 2}}
+    decision = {"decision": "accept", "condition_id": "C01", "candidates": ["C01"],
+                "evidence": ["C01.CARD", "Q01.REPORT"], "explanation": "Synthetic fixture."}
+    response_body = {"model": live.experiment.RETURNED_MODEL,
+                     "choices": [{"finish_reason": "stop",
+                                  "message": {"content": json.dumps(decision)}}],
+                     "usage": {"prompt_tokens": 100, "completion_tokens": 10}}
+    live.experiment.put(tmp_path / "request.json", {key: settings[key] for key in
+                        ("max_completion_tokens", "reasoning_effort")} |
+                        {"model": settings["deployment"]})
+    payload = (tmp_path / "request.json").read_bytes()
+    live.experiment.put(tmp_path / "contract.json", {
+        "request_sha256": live.digest(tmp_path / "request.json"),
+        "evidence_ids": decision["evidence"], "query_evidence": "Q01.REPORT"})
+    monkeypatch.setattr(live.dsp_inference, "verify_target", lambda _: {"sku": {"capacity": 100}})
+    monkeypatch.setattr(live.dsp_inference, "azure_json",
+                        lambda *_: {"accessToken": "fixture-secret"})
+    seen = []
+
+    def handler(request):
+        seen.append(request.content)
+        assert request.headers["Authorization"] == "Bearer fixture-secret"
+        return httpx.Response(http_status, json=response_body)
+
+    result = live.execute_request(tmp_path, settings, lambda **kwargs:
+                                  httpx.Client(transport=httpx.MockTransport(handler), **kwargs))
+    assert result["status"] == ("completed" if http_status == 200 else "technical_failure")
+    assert result["http_attempts"] == 1 and seen == [payload]
+    with pytest.raises(FileExistsError):
+        live.execute_request(tmp_path, settings)
+    assert all("fixture-secret" not in path.read_text("utf-8") for path in tmp_path.glob("*.json"))
+
+
 def test_fft_coherent_gain_amplitude_resolution_and_level_change():
     frequencies, amplitude, parameters = fft_spectrum(sine(), 16000)
     assert frequencies[np.argmax(amplitude)] == 1000

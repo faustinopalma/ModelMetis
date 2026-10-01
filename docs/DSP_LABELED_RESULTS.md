@@ -1,22 +1,22 @@
-# Labeled DSP Comparison Results
+# Labeled DSP Comparison Record
 
-**The complete known-match-or-different requirement remains unmet.** On Jin, adding explicit spectral distances to full DSP reports produced 11/12 correct known labels and 2/4 correct excluded-class rejections. A class-calibrated replay produced 9/12 and 4/4 respectively. Ottawa produced 4/16 correct labels. The useful signal is spectral separability on Jin; reliable simultaneous recognition and rejection requires broader representative labeled acquisitions and a fresh evaluation set.
+**This is the technical record behind [Results](RESULTS.md): the complete known-match-or-different requirement remains unmet.** Configuration B, full DSP reports plus explicit spectral distances, produced 11/12 correct known labels and 2/4 correct excluded-class rejections on Jin. Configuration C, a class-calibrated replay, produced 9/12 and 4/4. Configuration A, reports only, produced 4/16 on Ottawa. The [method](METHOD.md) defines the configurations. The useful signal is spectral separability on Jin; reliable simultaneous recognition and rejection requires broader representative labeled acquisitions and a fresh evaluation set.
 
 The separate [offline multi-reference replay](DSP_OFFLINE_RESULTS.md) evaluates deterministic forced-label controls on previously consumed Jin inputs, without further AI calls. Its baseline achieves 12/12, while added representations achieve 9-12/12; acceptance/rejection remains unmeasured there. These results do not alter the historical decisions, gates or costs below.
 
 ## Inspect Every Input And Answer
 
-Open `outputs/dsp-labeled-results-v1/index.html` for the expected label, actual prediction and outcome of every request. Each row links to its complete reports, exact prompt, transmitted JSON, image derivatives and raw model response. The index also links to both reference-audio galleries and case lists. Source WAV copies match the registered hashes; embedded playback uses the same bytes. Outputs, source mappings and credential caches remain local and ignored by Git.
+The [public comparison](../examples/audio-comparison/README.md) contains audio, all model-facing figures, exact transmitted text and parsed decisions for the 48 configuration-B, configuration-C and Ottawa decisions; the [outcome record](../examples/results/simple-method-outcomes.json) lists all 68 attempts with hashes. The local index `outputs/dsp-labeled-results-v1/index.html` additionally links each attempt's complete reports, transmitted JSON with embedded images and raw service response. Source mappings and credential caches remain local and ignored by Git.
 
 ## Correctness Is Measured Against Publisher Labels
 
 | Dataset and method | Evaluation scope | Correct known label | Wrong known label | False rejection | Correct excluded-class rejection | Wrong acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| Ottawa, report comparison | Development | 4/16 | 12/16 | 0/16 | Unmeasured | Unmeasured |
-| Jin, report comparison | Development | 5/8 | 3/8 | 0/8 | Unmeasured | Unmeasured |
-| Jin, reports plus numerical distances | Development | 8/8 | 0/8 | 0/8 | Unmeasured | Unmeasured |
-| Jin, reports plus numerical distances | Reserved direction within this run | 11/12 | 0/12 | 1/12 | 2/4 | 2/4 |
-| Jin, class-calibrated rule | Exploratory replay after inspecting the reserved result | 9/12 | 0/12 | 3/12 | 4/4 | 0/4 |
+| Ottawa, A: report comparison | Development | 4/16 | 12/16 | 0/16 | Unmeasured | Unmeasured |
+| Jin, A: report comparison | Development | 5/8 | 3/8 | 0/8 | Unmeasured | Unmeasured |
+| Jin, B: reports plus numerical distances | Development | 8/8 | 0/8 | 0/8 | Unmeasured | Unmeasured |
+| Jin, B: reports plus numerical distances | Reserved direction within this run | 11/12 | 0/12 | 1/12 | 2/4 | 2/4 |
+| Jin, C: class-calibrated rule | Exploratory replay after inspecting the reserved result | 9/12 | 0/12 | 3/12 | 4/4 | 0/4 |
 
 All 64 completed classifications have valid reference-specific and query-specific citations; this is an integrity check. Correctness in the table comes from the returned label or rejection compared with publisher truth. Four additional technical failures produced no usable decision: one image-count rejection, two token-rate rejections and one completion truncated after 4,096 reasoning tokens.
 
@@ -75,4 +75,4 @@ Initial full reports exceeded the service's 50-image limit. Lossless pairs reduc
 .\.venv\Scripts\python.exe -m scripts.evaluate_dsp_similarity evaluate --output outputs/dsp-jin-new --round 01 --phase development
 ```
 
-Registration and reporting are local operations. `run` submits paid requests and requires the existing pinned endpoint and a valid Entra session. Existing attempted bundles are preserved. Repeating consumed data provides replay evidence; a fresh confirmation claim requires fresh acquisitions. Prompt-source cleanup changes reusable wording while historical request JSON retains the exact transmitted text.
+Registration and reporting are local operations. `run` submits paid requests and requires the existing pinned endpoint and a valid Entra session. Existing attempted bundles are preserved. Repeating consumed data provides replay evidence; a fresh confirmation claim requires fresh acquisitions. Prompt-source cleanup changes reusable wording while historical request JSON retains the exact transmitted text. The committed runner and validator are later versions; [registered code](../registered/simple-method/README.md) preserves the recovered recorded versions.

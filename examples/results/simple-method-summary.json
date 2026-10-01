@@ -1,0 +1,368 @@
+{
+  "method": "One deterministic DSP report per known condition plus one unknown report; the model compares them and returns a known condition or different.",
+  "configurations": {
+    "A": "Reports only",
+    "B": "Reports plus Welch spectral distances",
+    "C": "Calibrated distance rule (exploratory replay)"
+  },
+  "collections": [
+    {
+      "collection": "Jin: reports + distances",
+      "configuration": "B",
+      "decisions": 16,
+      "Correct class": 11,
+      "False rejection": 1,
+      "Correct rejection": 2,
+      "Wrong acceptance": 2
+    },
+    {
+      "collection": "Ottawa: reports only",
+      "configuration": "A",
+      "decisions": 16,
+      "Correct class": 4,
+      "Wrong class": 12
+    },
+    {
+      "collection": "Jin: calibrated replay",
+      "configuration": "C",
+      "decisions": 16,
+      "Correct class": 9,
+      "False rejection": 3,
+      "Correct rejection": 4
+    }
+  ],
+  "outcome_counts": [
+    {
+      "dataset": "Jin",
+      "configuration": "A",
+      "phase": "development",
+      "category": "correct_label",
+      "count": 5
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "A",
+      "phase": "development",
+      "category": "wrong_label",
+      "count": 3
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "B",
+      "phase": "development",
+      "category": "correct_label",
+      "count": 8
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "B",
+      "phase": "excluded",
+      "category": "correct_rejection",
+      "count": 2
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "B",
+      "phase": "excluded",
+      "category": "wrong_acceptance",
+      "count": 2
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "B",
+      "phase": "reserved",
+      "category": "correct_label",
+      "count": 11
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "B",
+      "phase": "reserved",
+      "category": "false_rejection",
+      "count": 1
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "C",
+      "phase": "excluded",
+      "category": "correct_rejection",
+      "count": 4
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "C",
+      "phase": "reserved",
+      "category": "correct_label",
+      "count": 9
+    },
+    {
+      "dataset": "Jin",
+      "configuration": "C",
+      "phase": "reserved",
+      "category": "false_rejection",
+      "count": 3
+    },
+    {
+      "dataset": "Ottawa",
+      "configuration": "A",
+      "phase": "development",
+      "category": "correct_label",
+      "count": 4
+    },
+    {
+      "dataset": "Ottawa",
+      "configuration": "A",
+      "phase": "development",
+      "category": "wrong_label",
+      "count": 12
+    }
+  ],
+  "http_attempts": 68,
+  "completed_decisions": 64,
+  "technical_failures": 4,
+  "numerical_controls": {
+    "dsp-jin-v1": {
+      "development_nearest_above_0_hz": "8/8",
+      "development_nearest_above_2000_hz": "7/8",
+      "development_nearest_above_500_hz": "8/8",
+      "reserved_forced_nearest_recount": "12/12"
+    },
+    "dsp-ottawa-v2": {
+      "development_nearest_above_0_hz": "2/16",
+      "development_nearest_above_2000_hz": "3/16",
+      "development_nearest_above_500_hz": "2/16"
+    }
+  },
+  "calibration": {
+    "calibration_queries": [
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "D06",
+      "D07",
+      "D08"
+    ],
+    "candidates": [
+      {
+        "cases": 16,
+        "correct": 16,
+        "factor": 1.0
+      },
+      {
+        "cases": 16,
+        "correct": 16,
+        "factor": 1.05
+      },
+      {
+        "cases": 16,
+        "correct": 16,
+        "factor": 1.1
+      },
+      {
+        "cases": 16,
+        "correct": 16,
+        "factor": 1.2
+      },
+      {
+        "cases": 16,
+        "correct": 15,
+        "factor": 1.25
+      },
+      {
+        "cases": 16,
+        "correct": 13,
+        "factor": 1.5
+      }
+    ],
+    "selected": {
+      "cases": 16,
+      "correct": 16,
+      "factor": 1.2
+    },
+    "selection": "Maximize correctness, then largest margin among fixed candidates",
+    "source": "Eight labeled left-direction development windows",
+    "thresholds_db": {
+      "C01": 3.377358922812773,
+      "C02": 3.6235257394278104,
+      "C03": 3.2276350937472915,
+      "C04": 2.463183458475547
+    }
+  },
+  "references": {
+    "Jin": [
+      {
+        "condition_id": "C01",
+        "label": "excess_hall_adhesive",
+        "source_acquisition": "b2f10m_01.wav at 0 s",
+        "direction": "front"
+      },
+      {
+        "condition_id": "C02",
+        "label": "healthy",
+        "source_acquisition": "nf10m.wav at 0 s",
+        "direction": "front"
+      },
+      {
+        "condition_id": "C03",
+        "label": "magnet_fracture",
+        "source_acquisition": "b1f10m_01.wav at 0 s",
+        "direction": "front"
+      },
+      {
+        "condition_id": "C04",
+        "label": "tight_bearing",
+        "source_acquisition": "b3f10m_01.wav at 0 s",
+        "direction": "front"
+      }
+    ],
+    "Ottawa": [
+      {
+        "condition_id": "C01",
+        "label": "healthy",
+        "source_acquisition": "H_H_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C02",
+        "label": "rotor_unbalance",
+        "source_acquisition": "R_U_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C03",
+        "label": "rotor_misalignment",
+        "source_acquisition": "R_M_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C04",
+        "label": "stator_winding",
+        "source_acquisition": "S_W_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C05",
+        "label": "voltage_unbalance",
+        "source_acquisition": "V_U_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C06",
+        "label": "bowed_rotor",
+        "source_acquisition": "B_R_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C07",
+        "label": "broken_rotor_bars",
+        "source_acquisition": "K_A_1_0",
+        "profile": 1,
+        "load": 0
+      },
+      {
+        "condition_id": "C08",
+        "label": "faulty_bearing",
+        "source_acquisition": "F_B_1_0",
+        "profile": 1,
+        "load": 0
+      }
+    ]
+  },
+  "code_binding": {
+    "files": [
+      {
+        "use": "dsp-ottawa-v1 registration runner",
+        "sha256": "2ac6780860b21e54d3502f7589e408a4cbac9e1a451e7e55a53e354f9c76810b",
+        "repository_file": "registered/simple-method/evaluate_dsp_similarity.2ac67808.py"
+      },
+      {
+        "use": "dsp-ottawa-v1 round-01 similarity module",
+        "sha256": "fb79c3c668f1382c88976a45a4fe2a5bb7adb0e23c3675ffce700859c8a4a132",
+        "repository_file": "registered/simple-method/dsp_similarity.fb79c3c6.py"
+      },
+      {
+        "use": "model transport helpers",
+        "sha256": "3059185d884d2a2d31c8814419513e5942ff179f9ec0ffbb185e29e9e54ffb85",
+        "repository_file": "src/modelmetis/dsp_inference.py"
+      },
+      {
+        "use": "dsp-ottawa-v1 round-02 similarity module",
+        "sha256": "9723e9f6afc371fc2a4c774c4096bada7c2592b5b220d11857ebddacaf2d660c",
+        "repository_file": null
+      },
+      {
+        "use": "dsp-ottawa-v1 round-03 similarity module",
+        "sha256": "9723e9f6afc371fc2a4c774c4096bada7c2592b5b220d11857ebddacaf2d660c",
+        "repository_file": null
+      },
+      {
+        "use": "dsp-ottawa-v2 registration runner",
+        "sha256": "3e091303743a15f7c86c26c1fc1d83193c3ee804cc1c69d0b7095fc7840913d2",
+        "repository_file": "registered/simple-method/evaluate_dsp_similarity.3e091303.py"
+      },
+      {
+        "use": "dsp-ottawa-v2 round-01 similarity module",
+        "sha256": "195c8f1cd5671096dc447992d8df80767c8466e2e7e1c6d4471cf3d96b072dd4",
+        "repository_file": null
+      },
+      {
+        "use": "dsp-ottawa-v2 round-02 similarity module",
+        "sha256": "195c8f1cd5671096dc447992d8df80767c8466e2e7e1c6d4471cf3d96b072dd4",
+        "repository_file": null
+      },
+      {
+        "use": "dsp-jin-v1 registration runner",
+        "sha256": "e5279d81e7932c75d2526e361dae8abb1055037da79bbe16161211f272788737",
+        "repository_file": "registered/simple-method/evaluate_dsp_similarity.e5279d81.py"
+      },
+      {
+        "use": "dsp-jin-v1 round-01 similarity module",
+        "sha256": "195c8f1cd5671096dc447992d8df80767c8466e2e7e1c6d4471cf3d96b072dd4",
+        "repository_file": null
+      },
+      {
+        "use": "dsp-jin-v1 round-02 similarity module",
+        "sha256": "a2fc5dc495cf3f604aefc555b9faea8a06821bf03adc73a5b6b11c5c23656b82",
+        "repository_file": "registered/simple-method/dsp_similarity.a2fc5dc4.py"
+      },
+      {
+        "use": "dsp-jin-v1 round-03 similarity module",
+        "sha256": "a2fc5dc495cf3f604aefc555b9faea8a06821bf03adc73a5b6b11c5c23656b82",
+        "repository_file": "registered/simple-method/dsp_similarity.a2fc5dc4.py"
+      },
+      {
+        "use": "DSP report decoder",
+        "sha256": "5fef9a7978ca5612828f26273e7a2f8ef79fa2db2448cc337a15f90e81952061",
+        "repository_file": "src/modelmetis/visual_audio.py"
+      },
+      {
+        "use": "DSP report dsp",
+        "sha256": "f1c090b28666b26692602920dd0491a228b7f7afbbbee128c8a8f6ea590dbec1",
+        "repository_file": "src/modelmetis/dsp.py"
+      },
+      {
+        "use": "DSP report report",
+        "sha256": "98ed6f1895db300fbab8cc01945eb33d08c3614ea3e2eba4e90fcfd97c67a0b2",
+        "repository_file": "src/modelmetis/dsp_report.py"
+      }
+    ],
+    "meaning": "Repository file whose content, up to line endings, has the recorded hash. Null means that exact version was not preserved; the exact transmitted requests and responses remain the evidence."
+  },
+  "limits": [
+    "Previously consumed public recordings; no fresh or blind final evaluation.",
+    "Jin reserved windows come from four right-microphone acquisitions, three windows each.",
+    "Ottawa uses eight motors; motor identity can be confounded with condition.",
+    "Configuration C was designed after inspecting configuration B's reserved result.",
+    "Configuration C thresholds use eight additional labeled left-microphone windows.",
+    "Excluded-class tests remove a known reference; they are not new fault mechanisms.",
+    "Forced nearest-reference distance alone labels all Jin reserved windows correctly; an added model benefit is not demonstrated."
+  ]
+}

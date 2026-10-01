@@ -1,22 +1,38 @@
 # ModelMetis
 
-**Audio fault classification is not yet reliable enough for autonomous diagnosis.** ModelMetis investigates how foundation models use signal-processing evidence, when they assign a wrong condition, and whether removing misleading inputs improves recognition without sacrificing safe abstention.
+**A multimodal model can recognize a machine condition by comparing the signal-processing report of an unknown recording with reports of recordings whose condition is known, provided the references represent that condition.** With reports plus spectral distances it recognized 11 of 12 reserved Jin motor windows and correctly rejected 2 of 4 tests whose class was missing. With one reference per class recorded under another operating profile, it recognized only 4 of 16 Ottawa motor acquisitions. This is research evidence, not an approved diagnostic.
 
-Start with the [interactive audio comparison](https://faustinopalma.github.io/ModelMetis/audio-comparison/), the [evidence explorer](https://faustinopalma.github.io/ModelMetis/) or the [measured results](docs/RESULTS.md). The same static pages are included under [examples](examples/README.md) and work locally without an account, backend or model call.
+[Open the method and results page](https://faustinopalma.github.io/ModelMetis/) or [listen to every recorded decision](https://faustinopalma.github.io/ModelMetis/audio-comparison/) beside its references.
 
-## Inspect The Evidence
+## How The Method Works
 
-The current public snapshot includes sixteen attributed audio excerpts, paired DSP figures, ten recorded decisions from the tested pruning candidate, the complete forty-six-decision crossed-study matrix and family-separation comparisons. It deliberately includes the unsafe repeat, successful recognition and correct rejection. The candidate remains unapproved; no state-of-the-art or human-parity claim is made.
+1. **Measure.** Each ten-second recording becomes a deterministic DSP report: seven diagrams of the interval, a complete-recording overview and their numerical measurements.
+2. **Supply references.** One report per known condition, from a recording selected before testing.
+3. **Compare.** The model compares the unknown report with every reference and must cite evidence from both.
+4. **Decide or abstain.** It names the best-supported known condition, or answers `different`, which sends the case to a person.
 
-| Question | Read or run |
+The model never receives audio; the audio is published so people can listen. References are part of the method: each must resemble its condition as it will be recorded, and a label whose recordings behave very differently needs one reference per acoustic family or operating regime. The [method](docs/METHOD.md) explains inputs, abstention, reference selection and failure modes.
+
+## What The Recorded Experiments Show
+
+| Data | Configuration | Class present | Class excluded |
+| --- | --- | --- | --- |
+| Jin, 12 reserved right-microphone windows | Reports plus Welch distances | 11/12 correct, 1 false rejection | 2/4 correctly rejected, 2 wrong acceptances |
+| Same Jin windows, exploratory replay | Calibrated distance rule | 9/12 correct, 3 false rejections | 4/4 correctly rejected |
+| Ottawa, 16 profile-2 acquisitions | Reports only | 4/16 correct, 12 wrong classes | Not tested |
+
+Rows are separate configurations; do not combine them. Forced nearest distance alone also labels all 12 Jin windows correctly, so the model's added accuracy is unproven. The failures have recognizable causes: references that miss an operating regime, references that lie close together and explanations that override the numbers. [Results](docs/RESULTS.md) give denominators, distances, six inspectable decisions and limits. Later variants with more diagrams, fewer diagrams or adaptive class memory did not improve safety and are [archived](docs/RESULTS.md#later-variants-are-archived-limits).
+
+## Find What You Need
+
+| Need | Go to |
 | --- | --- |
-| What worked, failed and remains uncertain? | [Results](docs/RESULTS.md) |
-| What evidence did the model receive, and what did it choose? | [Audio comparison](examples/audio-comparison/README.md) |
-| Which representations remain stable within a family? | [Family separation](docs/DSP_FAMILY_SEPARATION.md) |
-| Does removing error-associated evidence help? | [Pruning strategy](docs/DSP_PRUNING_PROTOCOL.md) and [measured effects](docs/DSP_PRUNING_RESULTS.md) |
-| Can these results be called state of the art? | [Benchmark and human-baseline status](docs/DSP_BENCHMARK_STATUS.md) |
-| How do I verify or reproduce the work? | [Supported commands](scripts/README.md) |
-| What may be redistributed? | [Publication policy](docs/PUBLICATION.md) and [audio attribution](examples/audio-comparison/ATTRIBUTION.md) |
+| Understand the method | [Method](docs/METHOD.md) |
+| Check measured results and limits | [Results](docs/RESULTS.md) |
+| Listen to and inspect recorded decisions | [Public examples](examples/README.md) |
+| Verify or reproduce the evidence | [Reproduction guide](scripts/README.md) |
+| Find any other document | [Documentation map](docs/README.md) |
+| Reuse the audio | [Attribution](examples/audio-comparison/ATTRIBUTION.md) and [publication policy](docs/PUBLICATION.md) |
 
 ## Verify Without Cloud Access
 
@@ -39,12 +55,12 @@ Some integrated browsers block external WAV files on `file://`; HTTP avoids that
 
 ## Scope And Boundaries
 
-The experiments use public motor/engine recordings and publisher condition labels. Small acquisition counts, shared physical machines, changed recording regimes and potential benchmark exposure limit generalization. Correct schema, valid citations and successful requests are technical checks; they are not proof of diagnostic correctness. False rejections, wrong assignments and unavailable evidence are reported separately.
+The experiments use two public motor datasets, publisher condition labels and few acquisitions. The recordings were used in earlier project experiments, physical machines recur and recording regimes change, so the numbers do not establish general reliability, state of the art or human parity. Published scores from other models use different sensors, splits or label budgets; they are declared reference points, not comparable results. Valid citations and successful requests are technical checks, not proof of correctness.
 
-The public examples are consumed, truth-visible review material. They cannot serve as blind human trials or clean final model evaluation. Complete source archives, credentials, runtime caches, unselected requests and intermediate runs remain excluded. Public audio derivatives retain their source CC BY 4.0 attribution; no blanket software license is implied by those dataset terms.
+The public examples are truth-visible review material, not blind human trials or a clean final evaluation. Complete source archives, credentials, runtime caches, unselected requests and intermediate runs remain excluded. Public audio derivatives retain their source CC BY 4.0 attribution; no blanket software license is implied by those dataset terms.
 
 ## Develop Or Explore Further
 
-[Documentation map](docs/README.md) separates methods, datasets, evidence, implementation and archived studies. [Maintainer state](docs/CONTEXT.md) records the next development gates without duplicating result tables. The [local API](apps/api/README.md) and [console](apps/console/README.md) are separate prototypes, not the public static demonstration or an approved diagnostic service.
+The [documentation map](docs/README.md) separates method, results, examples, reproduction and archived studies. [Maintainer state](docs/CONTEXT.md) records development gates and data boundaries. The [local API](apps/api/README.md) and [console](apps/console/README.md) are separate prototypes, not the public demonstration or an approved diagnostic service.
 
-Earlier teacher/specialist, encoder and cross-drone studies remain in the [experiment archive](docs/EXPERIMENTS.md). Their negative and limited positive findings motivated the current DSP work; they are not a shared benchmark leaderboard. The original [idea](idea.txt) and [diagram](ModelMetis.png) are preserved.
+Earlier teacher/specialist, encoder and cross-drone studies remain in the [experiment archive](docs/EXPERIMENTS.md); their findings motivated the DSP work and are not a shared leaderboard. The original [idea](idea.txt) and [diagram](ModelMetis.png) are preserved.

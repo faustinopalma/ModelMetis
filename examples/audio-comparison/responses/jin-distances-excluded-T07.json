@@ -1,0 +1,67 @@
+{
+  "decision": {
+    "comparisons": [
+      {
+        "condition_id": "C01",
+        "differences": [
+          "Q01 is much more low-frequency dominated: 0–100 Hz is 60.97% versus 37.71%, while Q01 lacks C01’s relatively strong 8–16 kHz share (9.44% versus 14.09%).",
+          "The high-frequency carrier shifts from 16034.6 Hz in C01 to clusters near 16160.9/16231.6 Hz in Q01 (about +126/+197 Hz, well above 0.1-Hz FFT resolution), and periodicity differs: autocorrelation lag 0.249 ms versus 0.068 ms."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R01.C01.S0001",
+          "R01.P001",
+          "Q01.C01.S0001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both 10-s, 44.1-kHz records show persistent low-frequency structure plus a narrow, time-stable high-frequency band around 16 kHz, with no clipping.",
+          "Both have a 5.3-Hz dominant low-frequency line and broadband envelopes with low-rate modulation, although their detailed harmonic and modulation peaks differ."
+        ]
+      },
+      {
+        "condition_id": "C02",
+        "differences": [
+          "Q01 has stronger absolute digital level (0.2098 versus 0.1580 FS RMS) and more midband power, including 100–500 Hz at 1.09% versus 0.16%; unknown acquisition gain prevents treating level alone as diagnostic.",
+          "Q01’s high-frequency energy is concentrated around 16161/16232 Hz, whereas C02’s figure shows a broader feature near 16 kHz; Q01 also has distinct 183.8-Hz content and 70.7/178.5-Hz envelope peaks absent from C02’s reported leading peaks."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R02.C01.S0001",
+          "R02.P001",
+          "Q01.P001"
+        ],
+        "similar": false,
+        "similarities": [
+          "Both share the same 5.3-Hz principal line, 0.249-ms autocorrelation peak, high autocorrelation (0.9445 and 0.9469), and broadly steady 10-s temporal evolution.",
+          "Their band-power balance is close at the extremes: 0–100 Hz contributes 59.72% versus 60.97%, and 16–22.05 kHz contributes 24.64% versus 26.59%."
+        ]
+      },
+      {
+        "condition_id": "C04",
+        "differences": [
+          "The narrow high-frequency cluster is shifted upward from approximately 16005–16038 Hz in C04 to 16160–16232 Hz in Q01, a +123 to +227-Hz displacement that changes absolute line alignment but preserves the carrier-region pattern.",
+          "Q01 is more low-frequency weighted (60.97% below 100 Hz versus 32.41%) and less high-frequency weighted (36.03% above 8 kHz versus 61.07%); its centroid is consequently 5854 versus 9927 Hz."
+        ],
+        "evidence_ids": [
+          "COMPARISON.WELCH",
+          "R03.C01.S0001",
+          "R03.P001",
+          "Q01.C01.S0001"
+        ],
+        "similar": true,
+        "similarities": [
+          "C04 is the strongest gain-centered spectral-shape match: 3.717 dB, far below its 5.943-dB nearest-other-reference separation and below Q01’s distances to C01/C02 (6.416/7.061 dB); both figures show persistent low-frequency components and a narrow ~16-kHz carrier cluster.",
+          "Both have 10-s duration, 44.1-kHz sampling, identical 0.1-Hz FFT resolution, no clipping, similar RMS/crest behavior (0.1945/0.2098 FS RMS; 13.78/13.12 dB), the same 0.249-ms autocorrelation lag, and low-rate broadband-envelope modulation."
+        ]
+      }
+    ],
+    "condition_id": "C04",
+    "explanation": "Q01 is broadly similar to C04 (tight_bearing). The spectral-shape distance gives a clear ranking advantage to C04, and the figures support the same overall low-frequency-plus-narrow-high-frequency-carrier pattern with steady evolution and matching periodicity. The principal conflict is an upward carrier shift of roughly 0.12–0.23 kHz and a substantially different low/high band-power balance. C02 matches Q01 more closely in extreme-band fractions and the 5.3-Hz line, but its much worse 7.061-dB shape distance and less similar carrier detail make it secondary. Absolute FS levels are supporting only because acquisition gain is unknown.",
+    "outcome": "similar"
+  },
+  "model": "gpt-5.6-sol-2026-07-09",
+  "source_request_sha256": "c8e40bd016e20bf6a416ffdeeb6e86ff1a37df5c32889063a7219a08e0ae457a",
+  "source_response_sha256": "1c5124efe3283380fac4aecca73472fe327c8d374b2cbcafa91d1de7e0ba425a",
+  "publication": "Exact parsed decision; transport identifiers and cloud metadata omitted."
+}

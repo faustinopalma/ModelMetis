@@ -1,8 +1,8 @@
-# Whole-Report DSP Similarity
+# Whole-Report DSP Similarity Contract
 
-The labeled experiments show useful recognition on Jin and an unresolved recognition/rejection tradeoff. Numerical comparison evidence raised Jin development recognition from 5/8 to 8/8 and achieved 11/12 correct labels on the reserved direction, with 2/4 correct excluded-class rejections. A calibrated replay improved rejection to 4/4 while recognition fell to 9/12. Ottawa recognition was 4/16. The combined acceptance criteria remain unmet; see [the labeled results](DSP_LABELED_RESULTS.md).
+**This document owns the technical contract of the simple method: request folders, identifiers, admission limits and the one-attempt rule.** The [method](METHOD.md) explains the approach and [Results](RESULTS.md) own the measured outcomes. Below, the first single-request example illustrates the contract; it is not a scored result.
 
-The workflow generates one deterministic DSP report per WAV, supplies N labeled reference reports and one unknown report, and returns a matching known condition or `different`. The local result index is `outputs/dsp-labeled-results-v1/index.html`; reference audio is available under `outputs/dsp-jin-v1/reference-audio` and `outputs/dsp-ottawa-v1/reference-audio`.
+The workflow generates one deterministic DSP report per WAV, supplies N labeled reference reports and one unknown report, and returns a matching known condition or `different`. The labeled campaigns are recorded in [the labeled results record](DSP_LABELED_RESULTS.md).
 
 The separate [offline multi-reference report](DSP_OFFLINE_PROTOCOL.md) adds physical-resolution shape comparisons, reference/acquisition/regime aggregation, per-band contributions and temporal variability without any model call. It produces uncalibrated rankings, not `similar`/`different` decisions, and does not change this historical AI contract. Its progressive human-enrichment workflow is a proposed protocol requiring a new registration.
 

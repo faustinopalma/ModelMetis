@@ -1,14 +1,15 @@
 # Public Evidence Snapshot
 
-Use the [hosted version](https://faustinopalma.github.io/ModelMetis/) or the repository's [local static-server quick start](../README.md#verify-without-cloud-access). [index.html](index.html) contains selected results and [audio-comparison/index.html](audio-comparison/index.html) contains the latest candidate review. No application backend, package installation or model credentials are required; HTTP also avoids integrated-browser restrictions on local WAV files.
+**Start with the [method and results page](index.html), then [listen to the recorded decisions](audio-comparison/index.html).** Everything here is static: no backend, package installation, model call or credential is needed. The hosted copy is at https://faustinopalma.github.io/ModelMetis/.
 
 | Evidence | Contents |
 | --- | --- |
-| [Audio comparison](audio-comparison/README.md) | Sixteen excerpts, paired plots, eight primary decisions and two repeats |
-| [Crossed outcomes](results/pruning-decisions.json) | Forty-six outcomes with request/response hashes |
-| [Crossed summary](results/pruning-summary.json) | Factorial, regression, targeted-removal and repeat comparisons |
-| [Family separation](results/family-separation.json) | Within/between-family metrics and forced-label outcomes |
-| [Diagram attribution](results/diagram-audit.json) | Reference-only surveys and the eight paired audited decisions |
-| [Manifest](manifest.json) | Snapshot file hashes |
+| [Simple-method comparison](audio-comparison/README.md) | 40 attributed ten-second excerpts, eight full-resolution DSP figures per excerpt, 48 recorded decisions with exact model inputs |
+| [Simple-method summary](results/simple-method-summary.json) | Per-configuration counts, numerical controls, calibration, references, code binding and limits |
+| [All simple-method attempts](results/simple-method-outcomes.json) | 68 recorded HTTP attempts, including four technical failures, with request/response hashes |
+| [Archived variants](archive/index.html) | Pruning candidate review, crossed-study outcomes, family separation, diagram attribution and class-memory aggregates |
+| [Manifest](manifest.json) | Hash of every published file |
 
-[Results](../docs/RESULTS.md) owns interpretation; [publication policy](../docs/PUBLICATION.md) owns release boundaries. This is consumed, truth-visible evidence, not an untouched evaluation set. Run `python -m scripts.check_examples` from the repository root to verify it.
+Run `python -m scripts.check_examples` from the repository root to verify hashes, links, audio and the displayed decisions. For local browsing, serve this folder over HTTP: `python -m http.server 8000 --bind 127.0.0.1 --directory examples`. Some integrated browsers block WAV playback from `file://` pages.
+
+These recordings were used during development and labels are visible. They support inspection of recorded evidence, not blind human testing or clean final evaluation. [Results](../docs/RESULTS.md) own the interpretation; [publication policy](../docs/PUBLICATION.md) owns the release boundary.
