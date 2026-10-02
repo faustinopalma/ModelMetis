@@ -9,9 +9,10 @@ Use the [hosted comparison](https://faustinopalma.github.io/ModelMetis/audio-com
 ```console
 python -m scripts.check_examples
 python -m scripts.check_publication
+python -m scripts.ottawa_geometry
 ```
 
-The first command checks committed evidence, hashes and links. The second checks the Git index, including credential patterns and restrictions on local artifacts. Neither accesses Azure or the source archives.
+The first command checks committed evidence, hashes and links. The second checks the Git index, including credential patterns and restrictions on local artifacts. The third recomputes the Ottawa distance geometry reported in [Results](../docs/RESULTS.md) from the published family-separation record. None accesses Azure or the source archives.
 
 ## Set Up Numerical Reproduction
 
@@ -42,6 +43,7 @@ The simple method's local evidence lives in `outputs/dsp-jin-v1`, `outputs/dsp-o
 | Regenerate the public simple-method snapshot | `python -m scripts.publish_simple_method --output outputs/public-simple-new` | Re-validates registrations, request/receipt/response hashes, decisions, contact-sheet figures and the documented counts |
 | Regenerate the archived pruning snapshot | `python -m scripts.publish_evidence --output outputs/public-archive-new/archive/pruning-candidate --results` | Re-validates the pruning, family and attribution evidence |
 | Reseal an assembled snapshot | `python -m scripts.publish_simple_method --seal examples` | Rewrites a manifest after deliberate replacement; reseal nested folders first |
+| Rebuild the speed-normalization record | `python -m scripts.publish_speed_summary --output outputs/speed-normalization-summary.json` | Aggregates `outputs/speed-normalized-v1` and `outputs/order-tools-check-v1`; compare with the published record |
 
 The runner [evaluate_dsp_similarity.py](evaluate_dsp_similarity.py) registers datasets, builds rounds, submits requests and evaluates them; its `run` action is the only paid step. [Registered code](../registered/simple-method/README.md) preserves the exact runner and validator versions recorded by the experiments. The committed runner is the final version and can produce different request bytes. A new campaign therefore needs a new registration and output folder and cannot reuse consumed recordings as fresh evidence.
 

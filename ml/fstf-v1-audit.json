@@ -1,0 +1,36 @@
+{
+ "files": 36,
+ "recordings_per_class_and_setup": {
+  "Inner race fault | stethoscope": 3,
+  "Outer race fault | stethoscope": 3,
+  "Ball fault | stethoscope": 3,
+  "Healthy bearing | stethoscope": 3,
+  "Looseness fault | stethoscope": 3,
+  "Combined faults (Inner, outer, ball) | stethoscope": 3,
+  "Inner race fault | air": 3,
+  "Outer race fault | air": 3,
+  "Ball fault | air": 3,
+  "Healthy bearing | air": 3,
+  "Looseness fault | air": 3,
+  "Combined faults (Inner, outer, ball) | air": 3
+ },
+ "samples": {
+  "882001": 18,
+  "573301": 3,
+  "749701": 3,
+  "88201": 3,
+  "441001": 9
+ },
+ "nonfinite": [],
+ "duplicate_signal_groups": 0,
+ "rms_ac": [
+  0.032976779267296315,
+  0.2902087314780069
+ ],
+ "source": {
+  "dataset": "n9y9c7xrz3",
+  "version": 1,
+  "folder_prefix": ""
+ },
+ "publisher_sha256_verified_files": 36
+}

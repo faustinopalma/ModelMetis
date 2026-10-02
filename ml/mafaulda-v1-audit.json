@@ -1,0 +1,340 @@
+{
+  "dataset": "MAFAULDA, SpectraQuest MFS-ABVT, Universidade Federal do Rio de Janeiro",
+  "source": "https://www02.smt.ufrj.br/~offshore/mfs/page_01.html",
+  "archive": {
+    "name": "full.zip",
+    "bytes": 12896655242,
+    "sha256": "fc62677c000b7a3e79db88502a542df23b8bf797454a9ebad520ad9d3a915cc7"
+  },
+  "license": "No license statement on the publisher page; reuse rights unresolved.",
+  "files": 1951,
+  "ok": 1951,
+  "malformed": [],
+  "nonfinite": [],
+  "wrong_length": [],
+  "family_counts": {
+    "horizontal-misalignment": 197,
+    "imbalance": 333,
+    "normal": 49,
+    "overhang": 513,
+    "underhang": 558,
+    "vertical-misalignment": 301
+  },
+  "published_counts": {
+    "normal": 49,
+    "imbalance": 333,
+    "horizontal-misalignment": 197,
+    "vertical-misalignment": 301,
+    "underhang": 558,
+    "overhang": 513
+  },
+  "cells": [
+    {
+      "family": "bearing-ball_fault",
+      "position": "overhang",
+      "severity": "0g",
+      "files": 49
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "overhang",
+      "severity": "20g",
+      "files": 25
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "overhang",
+      "severity": "35g",
+      "files": 20
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "overhang",
+      "severity": "6g",
+      "files": 43
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "underhang",
+      "severity": "0g",
+      "files": 50
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "underhang",
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "underhang",
+      "severity": "35g",
+      "files": 38
+    },
+    {
+      "family": "bearing-ball_fault",
+      "position": "underhang",
+      "severity": "6g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "overhang",
+      "severity": "0g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "overhang",
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "overhang",
+      "severity": "35g",
+      "files": 41
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "overhang",
+      "severity": "6g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "underhang",
+      "severity": "0g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "underhang",
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "underhang",
+      "severity": "35g",
+      "files": 42
+    },
+    {
+      "family": "bearing-cage_fault",
+      "position": "underhang",
+      "severity": "6g",
+      "files": 48
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "overhang",
+      "severity": "0g",
+      "files": 49
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "overhang",
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "overhang",
+      "severity": "35g",
+      "files": 41
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "overhang",
+      "severity": "6g",
+      "files": 49
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "underhang",
+      "severity": "0g",
+      "files": 49
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "underhang",
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "underhang",
+      "severity": "35g",
+      "files": 37
+    },
+    {
+      "family": "bearing-outer_race",
+      "position": "underhang",
+      "severity": "6g",
+      "files": 49
+    },
+    {
+      "family": "horizontal-misalignment",
+      "position": null,
+      "severity": "0.5mm",
+      "files": 50
+    },
+    {
+      "family": "horizontal-misalignment",
+      "position": null,
+      "severity": "1.0mm",
+      "files": 49
+    },
+    {
+      "family": "horizontal-misalignment",
+      "position": null,
+      "severity": "1.5mm",
+      "files": 49
+    },
+    {
+      "family": "horizontal-misalignment",
+      "position": null,
+      "severity": "2.0mm",
+      "files": 49
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "10g",
+      "files": 48
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "15g",
+      "files": 48
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "20g",
+      "files": 49
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "25g",
+      "files": 47
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "30g",
+      "files": 47
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "35g",
+      "files": 45
+    },
+    {
+      "family": "imbalance",
+      "position": null,
+      "severity": "6g",
+      "files": 49
+    },
+    {
+      "family": "normal",
+      "position": null,
+      "severity": null,
+      "files": 49
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "0.51mm",
+      "files": 51
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "0.63mm",
+      "files": 50
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "1.27mm",
+      "files": 50
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "1.40mm",
+      "files": 50
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "1.78mm",
+      "files": 50
+    },
+    {
+      "family": "vertical-misalignment",
+      "position": null,
+      "severity": "1.90mm",
+      "files": 50
+    }
+  ],
+  "duplicate_microphone_groups": 0,
+  "filename_rotation_hz_normal": {
+    "count": 49,
+    "min": 12.288,
+    "max": 61.44
+  },
+  "fault_to_nearest_normal_filename_hz": {
+    "count": 1902,
+    "median": 0.20479999999999876,
+    "p95": 0.6143999999999998,
+    "max": 1.024000000000001,
+    "exact": 443
+  },
+  "missing_rotation": [],
+  "tachometer_estimator_failures_by_folder": {
+    "overhang/ball_fault/0g": 1,
+    "overhang/ball_fault/20g": 1,
+    "overhang/ball_fault/6g": 7,
+    "underhang/ball_fault/0g": 13,
+    "underhang/ball_fault/20g": 19,
+    "underhang/ball_fault/35g": 10,
+    "underhang/ball_fault/6g": 19
+  },
+  "microphone_peak_over_5_by_folder": {
+    "imbalance/20g": 6,
+    "imbalance/25g": 2,
+    "imbalance/30g": 37,
+    "imbalance/35g": 38,
+    "overhang/cage_fault/35g": 1,
+    "underhang/cage_fault/20g": 37,
+    "underhang/cage_fault/35g": 32,
+    "underhang/cage_fault/6g": 14
+  },
+  "microphone_peak_values_over_5": {
+    "204.12": 45,
+    "126.92": 2,
+    "112.88": 1
+  },
+  "tachometer_over_filename": {
+    "count": 1951,
+    "quantiles": [
+      0.9664,
+      0.973,
+      0.9766,
+      0.9822,
+      18.9315
+    ]
+  },
+  "microphone_rms_ac": {
+    "min": 0.08510354798699803,
+    "median": 0.16961176728456748,
+    "max": 41.85603270894951
+  },
+  "microphone_constant": [],
+  "elapsed_seconds": null
+}

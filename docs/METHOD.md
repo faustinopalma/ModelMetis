@@ -36,6 +36,21 @@ The original audio is published beside the reports, so a person can listen to an
 
 The Welch distance is the root-mean-square difference, in decibels, between two Welch power spectra after each is converted to decibels and centered on its mean. Centering removes a constant gain difference; microphone frequency response, position and operating regime still change the shape. Configuration C's thresholds were the largest observed development distance per class times 1.2, fitted on eight additional labeled windows. A forced nearest-distance rule is also recorded as a numerical control, so the model's contribution can be compared with numbers alone.
 
+## Speed-Normalized Reports Align References Recorded At Other Speeds
+
+When references and query run at different shaft speeds, every recording can pass through the [known-speed tool](../tools/audio_order_known/README.md), which resamples the audio to its own shaft rotation and reports original hertz figures beside order spectra, a time-order map, an angular envelope spectrum, a cycle average and angular autocorrelation. Rotation-locked components then sit at the same order in every report, while resonances stay visible in hertz. Without a speed measurement, the [estimated-base tool](../tools/audio_order_estimated/README.md) finds the base frequency from harmonic peaks, with acceptance thresholds calibrated on the machine. On 72 MAFAULDA cases these reports gave the best recognition measured so far; the comparison with the other arms is in the [difference screen](DIFFERENCE_SCREEN.md).
+
+## Controlled Test Benches Give Directly Comparable Recordings
+
+The method compares a test recording with references, so it performs best when both are recorded in the same conditions. Industrial benches set speed, load and microphone position in advance, which gives each test a reference from the same regime; speed normalization covers any residual speed difference.
+
+| Deployment | Sequence | Output |
+| --- | --- | --- |
+| End-of-line quality assessment | The motor arrives at an automated bench, runs through regimes fixed in advance, and fixed microphones record its noise at each regime | Pass, a named defect with its evidence, or review |
+| Vehicle diagnostics in service | The vehicle is placed in standard conditions, such as idle and set engine speeds, and recorded with a fixed microphone setup | The recognized condition with its diagrams, or a case flagged for inspection |
+
+Each deployment needs one reference recording per condition and regime, the speed set-point or a tachometer signal, a fixed microphone position and a review step for `different` answers. References of good units and of known defects are recorded on the same bench before testing.
+
 ## The Answer Must Be Traceable
 
 The response contains one comparison per reference, with short similarities, differences and evidence identifiers, then either `similar` with one condition or `different` with none. A validator checks that every reference is compared and that each comparison cites real identifiers from both the reference and the unknown. This makes every answer traceable to supplied evidence; correctness is scored separately against publisher labels.

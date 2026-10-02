@@ -1,6 +1,6 @@
 # Public Audio Datasets For Motor Fault Classification
 
-**Ottawa v2, AI Mechanic v1, Jin v1 and drone v1 are audited development sources. None establishes heavy-vehicle diagnostic performance or a representative independent-machine benchmark.** Other entries below are publisher-reported unless an archive audit is stated. Dataset rights are distinct from paper and code licenses.
+**Ottawa v2, AI Mechanic v1, Jin v1, drone v1, MAFAULDA, UORED v5 and FSTF v1 are audited development sources. None establishes heavy-vehicle diagnostic performance or a representative independent-machine benchmark.** MAFAULDA, UORED and FSTF each supply separate acquisitions per class, so references and tests can come from different recordings; UORED alone separates them by physical bearing. Other entries below are publisher-reported unless an archive audit is stated. Dataset rights are distinct from paper and code licenses.
 
 ## Audited Sources
 
@@ -10,6 +10,9 @@
 | [AI Mechanic v1](https://www.kaggle.com/datasets/eoinedge/ai-mechanic-engine-condition-audio-fault-finding), Eoin / AI Mechanic | 19 usable training-source recordings, four conditions, one BMW M54b25 | Apache-2.0 | One vehicle, unknown session dependence; 15 constant recordings excluded |
 | [Jin v1](https://data.mendeley.com/datasets/9dpmkgpncw/1), Linjie Jin | Twelve PCB-microphone files, four conditions, three directions | CC BY 4.0 | Unit/session independence unknown; healthy/fault encoding differs |
 | [Drone v1](https://zenodo.org/records/7779574), Yi, Choi and Lee | Three drones, nine conditions, six maneuvers, 324,000 half-second clips | CC BY 4.0 | Three heterogeneous devices; original-take lineage unresolved; shared noise mixtures |
+| [MAFAULDA](https://www02.smt.ufrj.br/~offshore/mfs/page_01.html), UFRJ Signals, Multimedia, and Telecommunications Laboratory | 1,951 five-second 50 kHz acquisitions on one SpectraQuest rig: normal, imbalance, two misalignments, three bearing defects in two positions, 49 speeds | No license statement found | One rig and one defective bearing per defect type; microphone spikes concentrated in some classes |
+| [UORED-VAFCLS v5](https://data.mendeley.com/datasets/y2px5tg92h/5), Mert Sehri and Patrick Dumond | 60 ten-second 42 kHz acquisitions: 20 bearings, each healthy, developing and faulty; five bearings per defect type | CC BY 4.0 | One speed regime; ball-defect states recorded without load, their healthy states at 400 N |
+| [FSTF bearing sound v1](https://data.mendeley.com/datasets/n9y9c7xrz3/1), Abdelbaset Ait Ben Ahmed | 36 smartphone recordings at 44.1 kHz: six conditions, three speeds, with and without stethoscope | CC BY 4.0 | One bearing per condition; recordings last 2-20 s |
 
 Protocols and diagnostic scores are maintained in [Experiment History](EXPERIMENTS.md).
 
@@ -61,13 +64,40 @@ The aggregate (`ml/drone-v1-audit.json`; local-only) retains archive fingerprint
 
 Two body-mounted RODE Wireless Go2 microphones recorded six maneuvers in an anechoic chamber with tethered drones. The 48 kHz signal was downsampled to 16 kHz, segmented to 0.5 s and mixed with five campus-noise locations at 10-15 dB SNR. The paper randomly splits each drone's constructed data 60/20/20. Published results therefore do not establish held-out-drone or source-recording-disjoint transfer. The paper license is CC BY-NC-ND; dataset rights are CC BY 4.0.
 
+## MAFAULDA Audit
+
+**Every MAFAULDA fault acquisition has a normal acquisition within 1.024 Hz of the same nominal rotation frequency, which suits same-regime differences; all come from one rig.** The 12,896,655,242-byte `full.zip` has SHA-256 `fc62677c000b7a3e79db88502a542df23b8bf797454a9ebad520ad9d3a915cc7`. All 1,951 CSV members passed their ZIP CRC, contain 250,000 finite rows of eight columns and match the publisher's counts per family. No two microphone signals are identical.
+
+| Family | Acquisitions | Settings |
+| --- | --- | --- |
+| Normal | 49 | 12.288-61.44 Hz in 1.024 Hz steps |
+| Imbalance | 333 | 6-35 g |
+| Horizontal misalignment | 197 | 0.5-2.0 mm |
+| Vertical misalignment | 301 | 0.51-1.90 mm |
+| Underhang bearing: ball, cage, outer race | 558 | 0-35 g added imbalance |
+| Overhang bearing: ball, cage, outer race | 513 | 0-35 g added imbalance |
+
+Archive folders name the bearing defects ball, cage and outer race; the publisher page text names outer track, rolling elements and inner track. The folder names define the labels here. Each file name is the nominal rotation frequency in Hz; 443 of 1,902 fault files share a normal's exact value and the median gap is 0.205 Hz. The tachometer measures a median 0.977 times the nominal value. A simple edge detector fails on 70 ball-defect files, whose tachometer signal carries extra edges; their nominal frequency remains available.
+
+Microphone AC RMS has median 0.170 and 95th percentile 1.59 in the recorded units. 167 files have microphone peaks above 5, against typical peaks near 0.7: they belong to imbalance 20-35 g (83), underhang cage defect (83) and one overhang cage file. 45 of them peak at exactly 204.12, a likely acquisition limit. Because these spikes follow the class, they must be checked or removed before the microphone is used as class evidence. The source page states no license. Aggregate: [ml/mafaulda-v1-audit.json](../ml/mafaulda-v1-audit.json).
+
+## UORED Audit
+
+**UORED v5 supports tests on bearings never used as references, with each bearing's own healthy recording as its normal.** All 60 MATLAB files matched the publisher SHA-256. Each holds 420,000 finite rows: accelerometer, microphone, speed, load and a fifth channel. Bearings 1-5 carry inner-race, 6-10 outer-race, 11-15 ball and 16-20 cage defects; each bearing has healthy, developing and faulty recordings. No two microphone signals are identical.
+
+Speed and load are stored as one nonzero sample per file. Speeds span 1,700-2,190 rpm across bearings; within a bearing, 37 of 40 later states match the healthy speed within 20 rpm, and three differ by 70-310 rpm (O_7_2, C_16_2, C_17_2). Ball-defect developing and faulty states were recorded at 0 N while their healthy states were recorded at 400 N, so load changes with the ball class. Microphone signals use 132-2,479 distinct values per file and AC RMS 0.006-0.18. The fifth channel holds implausible values in C_16_1 and C_17_2. Aggregate: [ml/uored-v5-audit.json](../ml/uored-v5-audit.json).
+
+## FSTF Audit
+
+**FSTF v1 gives one SKF 6004 bearing per condition, recorded at three speeds with and without a stethoscope: separate acquisitions, few units.** All 36 MATLAB files matched the publisher SHA-256 and contain finite single-channel signals at the stated 44.1 kHz. Conditions are inner race, outer race, ball, healthy, looseness and combined defects. Durations range from 2 s (outer race without stethoscope) to 20 s. Healthy recordings without stethoscope use only 845-1,747 distinct values. No two signals are identical. Aggregate: [ml/fstf-v1-audit.json](../ml/fstf-v1-audit.json).
+
 ## Ottawa Audit
 
 The v2 archive has 1,386,524,669 bytes and SHA-256 `9c5e67145400e3806c4deb9df28cf41f2ccae22b9a7c5f1e8ee1b1a4d38c0907`. It contains 128 MAT/CSV acquisition pairs and a time CSV. All pairs matched at absolute tolerance 1e-6, relative tolerance zero. MAT arrays have 420,000 finite rows and five columns: microphone in column 2, accelerometers in 1/3/4 and temperature in 5. Only the microphone was exported as mono 42 kHz PCM16 with peak normalization to 0.95.
 
 Actual filename codes are `H_H` healthy, `R_U` rotor unbalance, `R_M` rotor misalignment, `S_W` stator winding, `V_U` voltage unbalance, `B_R` bowed rotor, `K_A` broken rotor bars and `F_B` faulty bearing. Each class has 16 acquisitions across eight speed profiles and two loads. CSV/MAT copies are duplicate representations; canonical acoustic hashes were unique.
 
-The equipment comprises eight D396 Marathon Electric three-phase motors with induced faults and a PCB 130F20 microphone. Drive-frequency settings must not be treated as shaft RPM without verification. The split uses profile 1 for development (16), 2-7 for training (96) and 8 for final evaluation (16). It measures operating-condition transfer within the same motor population. [Audit](../ml/ottawa-v1-audit.json); [simulation](../ml/README.md).
+The equipment comprises eight D396 Marathon Electric three-phase motors with induced faults and a PCB 130F20 microphone. Profiles are drive frequencies: 1-4 constant at 15, 30, 45 and 60 Hz; 5 and 6 increasing from 15 to 45 Hz and from 30 to 60 Hz; 7 and 8 decreasing from 45 to 15 Hz and from 60 to 30 Hz. Load 0 is unloaded and load 1 loaded. Drive-frequency settings must not be treated as shaft RPM without verification. The split uses profile 1 for development (16), 2-7 for training (96) and 8 for final evaluation (16). It measures operating-condition transfer within the same motor population. [Audit](../ml/ottawa-v1-audit.json); [simulation](../ml/README.md).
 
 ## AI Mechanic Audit
 
@@ -101,9 +131,10 @@ These tasks and metrics are not interchangeable. Supervised laboratory separabil
 | [UMFDD v1](https://data.mendeley.com/datasets/3bz24t6tf4/1) | 8.06 GB listed, aggregated public/experimental signals | CC BY 4.0; includes consumed Ottawa data. Measurement-unit normalization does not establish independent machines. |
 | [IM-VACD v2](https://data.mendeley.com/datasets/yc8yhg5xjd/2) | Eight D396 motors, three phones and mounting variants; nominal 42 kHz, ten seconds | CC BY 4.0; repeated faults across units and relationship to Ottawa hardware unverified. |
 | [AHU acoustic-mirror bearings](https://github.com/Lab-of-AMFD/AHU-Parabolic-Acoustic-Mirror-Bearing-Dataset) | Nine fault combinations, simultaneous direct/mirror audio, 20 kHz, 25 seconds, three speeds | No explicit data license found; repeated specimens, sessions and healthy counts unaudited. |
-| [MAFAULDA](https://www02.smt.ufrj.br/~offshore/mfs/page_01.html) | 1,951 five-second 50 kHz recordings; Shure SM81 microphone in CSV column 8; normal, imbalance, misalignment and bearing damage | Original reuse license unresolved. Bearing subcategory descriptions conflict and some runs combine faults. Same-rig recordings. |
+| [HB-bearing](https://ieee-dataport.org/documents/hb-bearing-fault-dataset) | 13,500 four-second 16 kHz files: normal, inner, outer, ball, cage; 1,200 rpm, port background noise, several motors running | IEEE login required; license and number of physical units unverified. |
+| [Multi-condition ball-bearing acoustics](https://www.sciencedirect.com/science/article/pii/S2352340926004701) | Normal, cage fracture, inner and outer pitting, compound pitting; three speeds and three loads | Article access failed (HTTP 403); units, rights and archive unverified. |
 | [SUBF v2.0](https://www.kaggle.com/datasets/sumairaziz/subf-v2-0-dataset-bearing-faults-sound-data) | BOYA BY-M1, 10 kHz, 6,480 ten-second segments across normal/inner-race/outer-race conditions | CC BY-NC-SA 4.0; bearing/session grouping unverified. V1 is vibration and cannot substitute for audio. [Paper](https://doi.org/10.1016/j.dsp.2024.104776). |
-| [IDMT-ISA-ELECTRIC-ENGINE](https://zenodo.org/records/7551261) | Three motors, 2,378 mono 44.1 kHz WAVs: good 774, heavy load 815, broken 789 | CC BY-NC-ND 4.0; heavy load is an operating state, not necessarily a fault. |
+| [IDMT-ISA-ELECTRIC-ENGINE](https://zenodo.org/records/7551261) | Audited archive (MD5 matches Zenodo): 30 long mono 44.1 kHz recordings, one clean training and nine background-noise test recordings per state, plus 2,378 three-second cuts | CC BY-NC-ND 4.0. Each state is one engine in both partitions (engine 1 good, engine 2 broken, engine 3 heavy load), so state and engine coincide; heavy load is an operating state. |
 | [OtoMobile](https://zenodo.org/records/3382945) | 65 clips, twelve automobile issues, mechanic-informed diagnoses | Restricted files, educational/research use; business clearance unverified. |
 | [Squirrel-Cage Motor Diagnosis](https://github.com/MatPiech/motor-fault-diagnosis) | 16 kHz microphone JSON plus thermal/IMU data | Dataset CC BY-NC-ND 4.0; code MIT does not license the data. |
 

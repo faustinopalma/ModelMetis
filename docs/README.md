@@ -25,10 +25,11 @@
 
 ## Other Directions And Earlier Studies
 
-The first six rows explored other inputs and reference representations after the simple method; the last row preceded it. All keep their protocols, measurements and findings.
+The first seven rows explored other inputs and reference representations after the simple method; the last row preceded it. All keep their protocols, measurements and findings.
 
 | Variant | Protocol | Measured result |
 | --- | --- | --- |
+| Difference from the same-regime healthy normal and speed-normalized reports | [Difference protocol](DIFFERENCE_PROTOCOL.md) | [Difference screen](DIFFERENCE_SCREEN.md) |
 | Offline multi-reference representations | [Offline protocol](DSP_OFFLINE_PROTOCOL.md) | [Offline results](DSP_OFFLINE_RESULTS.md) |
 | All 26 diagrams | [Extensions](DSP_EXTENSIONS.md) | [Extensions](DSP_EXTENSIONS.md) |
 | Diagram attribution | [Attribution audit](DSP_DIAGRAM_AUDIT.md) | [Attribution audit](DSP_DIAGRAM_AUDIT.md) |

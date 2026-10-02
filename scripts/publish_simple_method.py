@@ -555,7 +555,7 @@ def build(output):
     index = template.replace("__THEME__", THEME).replace("__BASE_STYLE__", STYLE)
     index = index.replace("__RESULT_ROWS__", results_table(summaries))
     index = index.replace("__EXAMPLES__", example_cards(cases))
-    (output / "index.html").write_text(index, encoding="utf-8")
+    (output / "simple-method.html").write_text(index, encoding="utf-8")
     seal(comparison)
     print(json.dumps({"output": str(output), "decisions": len(cases), "collections": summaries},
                      indent=2))

@@ -1,0 +1,486 @@
+{
+ "files": 60,
+ "shapes": {
+  "[420000, 5]": 60
+ },
+ "nonfinite": [],
+ "bearings_with_all_three_states": 20,
+ "bearings_per_fault_class": {
+  "outer_race": 5,
+  "ball": 5,
+  "cage": 5,
+  "inner_race": 5
+ },
+ "healthy_only_bearings": [],
+ "speed_rpm_values": {
+  "1796.0": 3,
+  "1709.0": 3,
+  "1720.0": 5,
+  "1725.0": 3,
+  "1736.0": 3,
+  "1780.0": 5,
+  "1800.0": 7,
+  "1785.0": 3,
+  "1819.0": 3,
+  "1778.0": 2,
+  "1790.0": 4,
+  "1789.0": 2,
+  "1799.0": 2,
+  "1818.0": 3,
+  "1880.0": 2,
+  "1948.0": 2,
+  "1792.0": 1,
+  "1795.0": 1,
+  "2190.0": 1,
+  "1945.0": 1,
+  "1722.0": 1,
+  "1700.0": 1,
+  "1730.0": 1,
+  "1767.0": 1
+ },
+ "load_n_values_by_class": {
+  "healthy": {
+   "400.0": 20
+  },
+  "inner_race": {
+   "400.0": 10
+  },
+  "outer_race": {
+   "400.0": 10
+  },
+  "ball": {
+   "0.0": 10
+  },
+  "cage": {
+   "400.0": 10
+  }
+ },
+ "microphone_distinct_values": [
+  132,
+  2479
+ ],
+ "microphone_rms_ac": [
+  0.006075398884789383,
+  0.1815667104935994
+ ],
+ "duplicate_microphone_groups": 0,
+ "column5_mean_range": [
+  -62460305937.88604,
+  43.13884991111428
+ ],
+ "healthy_to_later_state": [
+  {
+   "bearing": 1,
+   "class": "inner_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 1,
+   "class": "inner_race",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 2,
+   "class": "inner_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 2,
+   "class": "inner_race",
+   "state": "faulty",
+   "speed_delta_rpm": -10.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 3,
+   "class": "inner_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 3,
+   "class": "inner_race",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 4,
+   "class": "inner_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 4,
+   "class": "inner_race",
+   "state": "faulty",
+   "speed_delta_rpm": 3.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 5,
+   "class": "inner_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 5,
+   "class": "inner_race",
+   "state": "faulty",
+   "speed_delta_rpm": -4.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 6,
+   "class": "outer_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 6,
+   "class": "outer_race",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 7,
+   "class": "outer_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 7,
+   "class": "outer_race",
+   "state": "faulty",
+   "speed_delta_rpm": 310.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 8,
+   "class": "outer_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 8,
+   "class": "outer_race",
+   "state": "faulty",
+   "speed_delta_rpm": -3.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 9,
+   "class": "outer_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 9,
+   "class": "outer_race",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 10,
+   "class": "outer_race",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 10,
+   "class": "outer_race",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 11,
+   "class": "ball",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 11,
+   "class": "ball",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 12,
+   "class": "ball",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 12,
+   "class": "ball",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 13,
+   "class": "ball",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 13,
+   "class": "ball",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 14,
+   "class": "ball",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 14,
+   "class": "ball",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 15,
+   "class": "ball",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 15,
+   "class": "ball",
+   "state": "faulty",
+   "speed_delta_rpm": 2.0,
+   "load_change": [
+    400.0,
+    0.0
+   ]
+  },
+  {
+   "bearing": 16,
+   "class": "cage",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 16,
+   "class": "cage",
+   "state": "faulty",
+   "speed_delta_rpm": -80.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 17,
+   "class": "cage",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 17,
+   "class": "cage",
+   "state": "faulty",
+   "speed_delta_rpm": -70.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 18,
+   "class": "cage",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 18,
+   "class": "cage",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 19,
+   "class": "cage",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 19,
+   "class": "cage",
+   "state": "faulty",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 20,
+   "class": "cage",
+   "state": "developing",
+   "speed_delta_rpm": 0.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  },
+  {
+   "bearing": 20,
+   "class": "cage",
+   "state": "faulty",
+   "speed_delta_rpm": -11.0,
+   "load_change": [
+    400.0,
+    400.0
+   ]
+  }
+ ],
+ "abs_speed_delta_rpm": {
+  "median": 0.0,
+  "max": 310.0,
+  "over_20_rpm": 3,
+  "pairs": 40
+ },
+ "load_differs_from_healthy": 10,
+ "source": {
+  "dataset": "y2px5tg92h",
+  "version": 5,
+  "folder_prefix": "3_MatLab"
+ },
+ "publisher_sha256_verified_files": 60
+}

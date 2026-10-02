@@ -1,0 +1,121 @@
+{
+  "dataset": "MAFAULDA machinery fault database, microphone channel; 10 conditions (normal, imbalance, two misalignments, three bearing defects in two positions); one reference per condition at a speed 1.0-2.0 times the query's; 167 recordings with microphone spikes excluded",
+  "model": "GPT-5.6 Sol 2026-07-09, low reasoning effort, same prompt and decision schema as the simple method",
+  "model_cases": "72 seeded cases: 2 queries for each of 9 fault classes at speed ratios 1.0, 1.1, 1.3 and 2.0",
+  "model_results": [
+    {
+      "arm": "reports",
+      "description": "Reports only",
+      "correct": {
+        "all": "27/72",
+        "x1": "10/18",
+        "x1.1": "9/18",
+        "x1.3": "6/18",
+        "x2": "2/18"
+      }
+    },
+    {
+      "arm": "speed",
+      "description": "Reports plus stated speed and an order-axis figure",
+      "correct": {
+        "all": "33/72",
+        "x1": "9/18",
+        "x1.1": "14/18",
+        "x1.3": "8/18",
+        "x2": "2/18"
+      }
+    },
+    {
+      "arm": "matched",
+      "description": "Reference recordings resampled to the query speed",
+      "correct": {
+        "all": "29/72",
+        "x1": "10/18",
+        "x1.1": "11/18",
+        "x1.3": "6/18",
+        "x2": "2/18"
+      }
+    },
+    {
+      "arm": "normalized_known",
+      "description": "Speed-normalized reports, measured shaft speed",
+      "correct": {
+        "all": "40/72",
+        "x1": "13/18",
+        "x1.1": "10/18",
+        "x1.3": "9/18",
+        "x2": "8/18"
+      }
+    },
+    {
+      "arm": "normalized_estimated",
+      "description": "Speed-normalized reports, base frequency estimated from audio",
+      "correct": {
+        "all": "31/72",
+        "x1": "12/18",
+        "x1.1": "10/18",
+        "x1.3": "5/18",
+        "x2": "4/18"
+      }
+    }
+  ],
+  "numeric_queries": "400 seeded fault queries, each compared at every ratio where all ten references exist",
+  "numeric_results": [
+    {
+      "method": "raw",
+      "description": "Nearest Welch spectrum in hertz",
+      "correct": {
+        "x1": "246/387",
+        "x1.1": "78/343",
+        "x1.3": "49/287",
+        "x1.6": "29/224",
+        "x2": "21/160"
+      }
+    },
+    {
+      "method": "tool_known_100",
+      "description": "Nearest order spectrum, 0-100 orders, measured shaft speed",
+      "correct": {
+        "x1": "217/387",
+        "x1.1": "213/343",
+        "x1.3": "137/287",
+        "x1.6": "104/224",
+        "x2": "73/160"
+      }
+    }
+  ],
+  "estimator_check": {
+    "ottawa": {
+      "recordings": 32,
+      "accepted": 30,
+      "within_3_percent": 29,
+      "ratios": {
+        "1": 30
+      }
+    },
+    "uored": {
+      "recordings": 60,
+      "accepted": 1,
+      "within_3_percent": 0,
+      "ratios": {
+        "4": 1
+      }
+    },
+    "mafaulda": {
+      "recordings": 895,
+      "accepted": 798,
+      "within_3_percent": 797,
+      "ratios": {
+        "1": 797,
+        "0.5": 1
+      }
+    }
+  },
+  "chance": "1 in 10",
+  "sources": [
+    "scripts/speed_normalized_experiment.py",
+    "scripts/order_tools_check.py",
+    "tools/audio_order_known",
+    "tools/audio_order_estimated"
+  ]
+}

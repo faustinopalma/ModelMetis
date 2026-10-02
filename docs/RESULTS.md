@@ -1,6 +1,6 @@
-# The Simple Method Recognizes Jin Conditions; Ottawa Shows Which References To Add Next
+# The Method Recognizes Conditions In Matched Regimes, And Speed Normalization Carries It Across Speeds
 
-**With DSP reports plus Welch distances, the model recognized 11 of 12 reserved Jin windows and correctly set aside 2 of 4 cases whose condition had no reference; with reports only, it recognized 4 of 16 Ottawa profile-2 acquisitions.** An exploratory calibrated replay on the same Jin inputs shifted the balance toward review: 9 of 12 recognized and 4 of 4 set aside. Each configuration keeps its own counts. Nearest Welch distance alone also labels all 12 reserved Jin windows, so the next comparisons measure what the model adds beyond these numbers.
+**With DSP reports plus Welch distances, the model recognized 11 of 12 reserved Jin windows and correctly set aside 2 of 4 cases whose condition had no reference. On the MAFAULDA rig, whose references run at 1.0-2.0 times the test speed, speed-normalized reports recognized 40 of 72 cases against 27 of 72 before normalization.** With reports only, the model recognized 4 of 16 Ottawa profile-2 acquisitions recorded at twice the reference drive frequency. An exploratory calibrated replay on the same Jin inputs shifted the balance toward review: 9 of 12 recognized and 4 of 4 set aside. Each configuration keeps its own counts. Nearest Welch distance alone also labels all 12 reserved Jin windows, so the next comparisons measure what the model adds beyond these numbers. Production benches fix speed and load in advance, which places every test in the matched-regime condition.
 
 [Listen to every decision](https://faustinopalma.github.io/ModelMetis/audio-comparison/) beside its references, or inspect the [local snapshot](../examples/README.md). The [method](METHOD.md) defines inputs, decisions and reference selection; the [labeled-results record](DSP_LABELED_RESULTS.md) keeps dataset, calibration and attempt details.
 
@@ -33,9 +33,33 @@ The magnet-fracture and tight-bearing references lie only 3.04 dB apart, closer 
 
 The healthy excluded-class test T04 shows a second pattern. Its nearest remaining reference, tight bearing, was 6.35 dB away. The model acknowledged that this exceeded the 3.04 dB reference separation, then accepted tight bearing because level, crest factor and a 16 kHz ridge looked similar. T01 at 7.62 dB and T10 at 3.92 dB were set aside, so configuration B applied its distance guidance case by case; aligning explanations with the numbers is part of the current work.
 
-## Ottawa Shows That References Must Match The Operating Profile
+## Ottawa Recordings Follow Speed And Load More Closely Than Fault
 
-On Ottawa the model always named a class. It recognized both healthy acquisitions, one stator-winding and one bowed-rotor acquisition; its twelve wrong answers were seven stator winding, four bowed rotor and one rotor misalignment. Nearest Welch distance alone labels 2 of 16 correctly, 3 of 16 using only bins above 2 kHz, so profile-2 recordings lie nearer other classes' profile-1 references. The [family analysis](DSP_FAMILY_SEPARATION.md) finds Ottawa classes overlapping across profiles in every tested representation. References for each operating profile and load come next.
+On Ottawa the model always named a class. It recognized both healthy acquisitions, one stator-winding and one bowed-rotor acquisition; its twelve wrong answers were seven stator winding, four bowed rotor and one rotor misalignment. Four measured properties of the recordings explain this result. Read beside its references, each query supports the model's choice about as well as its labeled class.
+
+1. **References and queries run at different speeds.** The publisher defines each profile by drive frequency: profiles 1-4 hold 15, 30, 45 and 60 Hz, and profiles 5-8 ramp between those values. References come from profile 1 at 15 Hz and queries from profile 2 at 30 Hz, so every rotation-locked line in a query sits near twice the frequency of the matching reference line.
+2. **Each query lies almost equally close to all eight references.** For every query, the eight Welch distances span 1.14-2.71 dB and the nearest reference leads the second by 0.00-0.36 dB. Nearest distance names bowed rotor for 14 of 16 queries and labels 2 of 16 correctly, 3 of 16 using only bins above 2 kHz. In the Jin table above, three of four classes lead the next reference by 1.6 dB or more.
+3. **Load alone also mixes the classes.** At the same 30 Hz speed, the nearest acquisition recorded at the other load belongs to the same class in 7 of 16 cases with the same Welch distance, and in 4 or 5 of 16 with cepstrum, relative-floor Welch or STFT quantiles. In these microphone recordings, each fault's signature is small compared with the change between operating states.
+4. **Each condition is one motor.** The publisher describes eight motors with artificially induced faults and supplies one acquisition per condition, profile and load. Every class therefore rests on a single unit, and motor identity travels with the condition.
+
+The published scores verified for this dataset combine accelerometers with the microphone ([Selective Embedding preprint](https://arxiv.org/abs/2507.13399), Table 3). Two directions follow from these measurements: references recorded at each speed and load, and representations that subtract the healthy recording of the same regime, defined in the [difference protocol](DIFFERENCE_PROTOCOL.md). The [family analysis](DSP_FAMILY_SEPARATION.md) extends the comparison to 24 representations. Recompute items 2 and 3 from the published [family-separation record](../examples/archive/results/family-separation.json):
+
+```powershell
+python -m scripts.ottawa_geometry
+```
+
+## Speed Normalization Carries Recognition Across Speed Changes
+
+MAFAULDA records one rig in 10 conditions (normal, imbalance, two misalignments and three bearing defects in two positions) at many shaft speeds, with a tachometer. Its 72 model cases, fixed with a seed before any call, pair each fault query with one reference per condition recorded at 1.0, 1.1, 1.3 or 2.0 times the query's speed. Guessing scores about 1 in 10.
+
+| Configuration | x1.0 | x1.1 | x1.3 | x2.0 | All |
+| --- | --- | --- | --- | --- | --- |
+| Reports only | 10/18 | 9/18 | 6/18 | 2/18 | 27/72 |
+| Reports plus stated speed and an order figure | 9/18 | 14/18 | 8/18 | 2/18 | 33/72 |
+| Speed-normalized reports, measured speed | **13/18** | 10/18 | **9/18** | **8/18** | **40/72** |
+| Speed-normalized reports, base estimated from audio | 12/18 | 10/18 | 5/18 | 4/18 | 31/72 |
+
+Speed-normalized reports come from the [known-speed tool](../tools/audio_order_known/README.md): every reference and query is resampled to its own shaft rotation, so rotation-locked tones share one order axis, and the hertz figures stay beside the order figures. Against reports only, the paired gains and losses are +20/-7 (p = 0.02). Without a model, the nearest order spectrum up to the 100th order recognizes 213/343 queries at x1.1 and 73/160 at x2, against 78/343 and 21/160 for the hertz spectrum; at equal speed the hertz spectrum separates 246/387 by itself. The [speed study](DIFFERENCE_SCREEN.md) records every arm, the numerical checks on UORED, Ottawa and FSTF, and the estimator calibration; the [published record](../examples/results/speed-normalization-summary.json) keeps the aggregate counts.
 
 ## Inspect Six Recorded Decisions
 
@@ -52,7 +76,7 @@ Each link opens the audio, all eight figures and the recorded explanation; the e
 
 ## Scope Of The Current Evidence
 
-- **Data.** Both public datasets were studied earlier in the project. Fresh recordings and blind listening comparisons are the next validation steps.
+- **Data.** Jin and Ottawa were studied earlier in the project; the six MAFAULDA arms were designed in sequence on the same 72 cases. Fresh recordings, a bench pilot and blind listening comparisons are the next validation steps.
 - **Machines.** The 12 reserved Jin windows come from four acquisitions, three windows each, and original healthy and fault files use PCM16 and FLOAT encodings respectively. Ottawa motors recur across profiles, so motor identity and class can coincide.
 - **New faults.** Excluded-class tests withhold a known reference; genuinely new fault mechanisms are a separate future test.
 - **Model and numbers.** Forced nearest distance labels the reserved Jin windows as well as the model. The model adds cited, inspectable explanations and the option to send a case to review; the next comparisons measure its contribution to accuracy.
